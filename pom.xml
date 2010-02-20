@@ -257,6 +257,9 @@
                 <configuration>
                     <tarLongFileMode>gnu</tarLongFileMode>
                     <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
+                    <descriptors>
+                        <descriptor>src/assemble/project.xml</descriptor>
+                    </descriptors>
                 </configuration>
             </plugin>
 
