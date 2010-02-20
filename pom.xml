@@ -52,10 +52,6 @@
         <disableJavaDocs>false</disableJavaDocs>
         <disableDeploy>false</disableDeploy>
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
-
-        <scm.repo.url>https://kenai.com/hg/thesefoolishthings~superpom-src</scm.repo.url>
-        <scm.repo.readonly.url>http://kenai.com/hg/thesefoolishthings~superpom-src</scm.repo.readonly.url>
-        <scm.repo.browse.url>http://kenai.com/projects/thesefoolishthings/sources/src/show</scm.repo.browse.url>
     </properties>
 
     <scm>
@@ -476,6 +472,8 @@
                                         <argument>-p</argument>
                                         <argument>${project.build.directory}/dummy-hg-repo</argument>
                                         <argument>${project.build.directory}/target-maven-repo</argument>
+                                        <!-- FIXME: this shoulnd't be needed, but strangely the effective POM contains the artifactId -->
+                                        <argument>${project.build.directory}/dummy-hg-repo/${artifactId}</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
