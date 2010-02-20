@@ -51,7 +51,15 @@
         <breakBuildOnIncompatibleAPIChanges>false</breakBuildOnIncompatibleAPIChanges>
         <disableJavaDocs>false</disableJavaDocs>
         <disableDeploy>false</disableDeploy>
+
+        <hg.repo.url>https://kenai.com/hg/thesefoolishthings~superpom-src</hg.repo.url>
     </properties>
+
+    <scm>
+        <connection>scm:hg:http://kenai.com/hg/thesefoolishthings~src</connection>
+        <developerConnection>scm:hg:${hg.repo.url}</developerConnection>
+        <url>http://kenai.com/projects/thesefoolishthings/sources/src/show</url>
+    </scm>
 
     <repositories>
         <repository>
