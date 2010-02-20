@@ -51,14 +51,17 @@
         <breakBuildOnIncompatibleAPIChanges>false</breakBuildOnIncompatibleAPIChanges>
         <disableJavaDocs>false</disableJavaDocs>
         <disableDeploy>false</disableDeploy>
+        <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
 
-        <hg.repo.url>https://kenai.com/hg/thesefoolishthings~superpom-src</hg.repo.url>
+        <scm.repo.url>https://kenai.com/hg/thesefoolishthings~superpom-src</scm.repo.url>
+        <scm.repo.readonly.url>http://kenai.com/hg/thesefoolishthings~superpom-src</scm.repo.readonly.url>
+        <scm.repo.browse.url>http://kenai.com/projects/thesefoolishthings/sources/src/show</scm.repo.browse.url>
     </properties>
 
     <scm>
-        <connection>scm:hg:http://kenai.com/hg/thesefoolishthings~src</connection>
-        <developerConnection>scm:hg:${hg.repo.url}</developerConnection>
-        <url>http://kenai.com/projects/thesefoolishthings/sources/src/show</url>
+        <connection>scm:hg:${scm.repo.readonly.url}</connection>
+        <developerConnection>scm:hg:${scm.repo.effective.url}</developerConnection>
+        <url>${scm.repo.browse.url}</url>
     </scm>
 
     <repositories>
@@ -258,6 +261,7 @@
                     <tarLongFileMode>gnu</tarLongFileMode>
                     <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
                     <descriptors>
+                        <descriptor>src/assemble/bin.xml</descriptor>
                         <descriptor>src/assemble/project.xml</descriptor>
                     </descriptors>
                 </configuration>
@@ -432,7 +436,7 @@
             <properties>
                 <buildNumber />
                 <buildNumberSep />
-                <hg.repo.url>file://${project.build.directory}/dummy-hg-repo</hg.repo.url>
+                <scm.repo.effective.url>file://${project.build.directory}/dummy-hg-repo</scm.repo.effective.url>
                 <skipTests>true</skipTests>
                 <altDeploymentRepository>release-repo-hudson::default::${staging.mvn.repo.url}</altDeploymentRepository>
             </properties>
