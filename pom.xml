@@ -471,8 +471,7 @@
                                     <arguments>
                                         <argument>-p</argument>
                                         <argument>${project.build.directory}/dummy-hg-repo</argument>
-                                        <argument>${project.build.directory}/target-maven-repo</argument>
-                                        <!-- FIXME: this shoulnd't be needed, but strangely the effective POM contains the artifactId -->
+                                        <!-- FIXME: strangely the effective POM contains the artifactId -->
                                         <argument>${project.build.directory}/dummy-hg-repo/${artifactId}</argument>
                                     </arguments>
                                 </configuration>
@@ -486,7 +485,8 @@
                                 <inherited>false</inherited>
                                 <configuration>
                                     <executable>hg</executable>
-                                    <workingDirectory>${project.build.directory}/dummy-hg-repo</workingDirectory>
+                                   <!-- FIXME: strangely the effective POM contains the artifactId -->
+                                    <workingDirectory>${project.build.directory}/dummy-hg-repo/${artifactId}</workingDirectory>
                                     <arguments>
                                         <argument>init</argument>
                                     </arguments>
