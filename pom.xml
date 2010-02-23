@@ -471,8 +471,6 @@
                                     <arguments>
                                         <argument>-p</argument>
                                         <argument>${project.build.directory}/dummy-hg-repo</argument>
-                                        <!-- FIXME: strangely the effective POM contains the artifactId -->
-                                        <argument>${project.build.directory}/dummy-hg-repo/${artifactId}</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
@@ -485,8 +483,7 @@
                                 <inherited>false</inherited>
                                 <configuration>
                                     <executable>hg</executable>
-                                   <!-- FIXME: strangely the effective POM contains the artifactId -->
-                                    <workingDirectory>${project.build.directory}/dummy-hg-repo/${artifactId}</workingDirectory>
+                                    <workingDirectory>${project.build.directory}/dummy-hg-repo</workingDirectory>
                                     <arguments>
                                         <argument>init</argument>
                                     </arguments>
