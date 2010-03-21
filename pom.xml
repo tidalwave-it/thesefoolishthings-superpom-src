@@ -48,7 +48,7 @@
         <buildNumberSep>.</buildNumberSep>
         <testFailureIgnore>false</testFailureIgnore>
         <revision.stamp>.revision</revision.stamp>
-        <breakBuildOnIncompatibleAPIChanges>false</breakBuildOnIncompatibleAPIChanges>
+        <stableAPI>false</stableAPI>
         <disableJavaDocs>false</disableJavaDocs>
         <disableDeploy>false</disableDeploy>
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
@@ -178,6 +178,11 @@
                     <artifactId>maven-release-plugin</artifactId>
                     <version>2.0-beta-9</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.0</version>
+                </plugin>
 
                 <!--
                 <plugin>
@@ -217,13 +222,17 @@
                     <artifactId>clirr-maven-plugin</artifactId>
                     <version>2.2.2</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>javancss-maven-plugin</artifactId>
+                    <version>2.0</version>
+                </plugin>
 
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
                     <version>2.0.1</version>
                 </plugin>
-
             </plugins>
         </pluginManagement>
 
@@ -351,7 +360,7 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
                 <configuration>
-                    <failOnError>${breakBuildOnIncompatibleAPIChanges}</failOnError>
+                    <failOnError>${stableAPI}</failOnError>
                 </configuration>
             </plugin>
         </plugins>
@@ -726,6 +735,23 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
+                    <tags>
+                        <tag>
+                            <name>stable</name>
+                            <placement>t</placement>
+                            <head>Status: stable API</head>
+                        </tag>
+                        <tag>
+                            <name>draft</name>
+                            <placement>t</placement>
+                            <head>Status: draft API</head>
+                        </tag>
+                        <tag>
+                            <name>experimental</name>
+                            <placement>t</placement>
+                            <head>Status: experimental API</head>
+                        </tag>
+                    </tags>
                     <docfilessubdirs>true</docfilessubdirs>
                     <excludePackageNames>*.impl:*.impl.*</excludePackageNames>
                     <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
@@ -742,6 +768,10 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </reporting>
