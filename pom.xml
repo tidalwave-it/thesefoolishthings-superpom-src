@@ -49,6 +49,7 @@
         <testFailureIgnore>false</testFailureIgnore>
         <revision.stamp>.revision</revision.stamp>
         <stableAPI>false</stableAPI>
+        <stableAPIVersion>(,${project.version})</stableAPIVersion>
         <disableJavaDocs>false</disableJavaDocs>
         <disableDeploy>false</disableDeploy>
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
@@ -361,6 +362,9 @@
                 <artifactId>clirr-maven-plugin</artifactId>
                 <configuration>
                     <failOnError>${stableAPI}</failOnError>
+                    <comparisonVersion>${stableAPIVersion}</comparisonVersion>
+                    <logResults>true</logResults>
+                    <minSeverity>info</minSeverity>
                 </configuration>
             </plugin>
         </plugins>
