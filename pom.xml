@@ -44,8 +44,8 @@
         <bundle.namespace>${project.groupId}.${project.artifactId}</bundle.namespace>
         <testReportsDirectory>${project.build.directory}/surefire-reports/plain</testReportsDirectory>
         <staging.mvn.repo.url>file://${project.build.directory}/target-maven-repo</staging.mvn.repo.url>
-        <buildNumber>unknown</buildNumber>
-        <buildNumberSep>.</buildNumberSep>
+        <!-- changeSet>unknown</changeSet -->
+        <changeSetSep>.</changeSetSep>
         <testFailureIgnore>false</testFailureIgnore>
         <revision.stamp>.revision</revision.stamp>
         <stableAPI>false</stableAPI>
@@ -123,8 +123,8 @@
             </extension>
         </extensions>
 
-        <!-- For buildNumber to be properly evaluated by assembly:assembly, use also the validate goal -->
-        <finalName>${project.artifactId}-${project.version}${buildNumberSep}${buildNumber}</finalName>
+        <!-- For changeSet to be properly evaluated by assembly:assembly, use also the validate goal -->
+        <finalName>${project.artifactId}-${project.version}${changeSetSep}${changeSet}</finalName>
 
         <!-- ***********************************************************************************************************
         *
@@ -227,6 +227,11 @@
 
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>buildnumber-maven-plugin</artifactId>
+                    <version>1.0-beta-4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>1.1.1</version>
                 </plugin>
@@ -317,8 +322,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Retrieves the 4th build number from Subversion revision. -->
-<!--
+            <!-- Retrieves the Mercurial changeset. -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
@@ -326,7 +330,7 @@
                     <execution>
                         <phase>validate</phase>
                         <goals>
-                            <goal>create</goal>
+                            <goal>hgchangeset</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -335,7 +339,7 @@
                     <doUpdate>false</doUpdate>
                 </configuration>
             </plugin>
--->
+
             <!-- Executes tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -510,8 +514,8 @@
         <profile>
             <id>release</id>
             <properties>
-                <buildNumber />
-                <buildNumberSep />
+                <changeSet />
+                <changeSetSep />
                 <scm.repo.effective.url>file://${project.build.directory}/dummy-hg-repo</scm.repo.effective.url>
                 <skipTests>true</skipTests>
                 <altDeploymentRepository>release-repo-hudson::default::${staging.mvn.repo.url}</altDeploymentRepository>
@@ -760,8 +764,8 @@
         <profile>
             <id>deploy-extra-artifacts</id>
             <properties>
-                <buildNumber />
-                <buildNumberSep />
+                <changeSet />
+                <changeSetSep />
                 <altDeploymentRepository>release-repo-hudson::default::${staging.mvn.repo.url}</altDeploymentRepository>
             </properties>
             <build>
