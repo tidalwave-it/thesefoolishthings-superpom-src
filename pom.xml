@@ -322,24 +322,6 @@
                 </configuration>
             </plugin>
 
-            <!-- Retrieves the Mercurial changeset. -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>hgchangeset</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <doCheck>false</doCheck>
-                    <doUpdate>false</doUpdate>
-                </configuration>
-            </plugin>
-
             <!-- Executes tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -650,6 +632,36 @@
                                 </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <activation>
+                <file>
+                   <exists>.hg</exists>
+                </file>
+            </activation>
+            <id>get-changeset-id</id>
+            <build>
+                <plugins>
+                    <!-- Retrieves the Mercurial changeset. -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>buildnumber-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>hgchangeset</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <doCheck>false</doCheck>
+                            <doUpdate>false</doUpdate>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
