@@ -45,7 +45,6 @@
         <testReportsDirectory>${project.build.directory}/surefire-reports/plain</testReportsDirectory>
         <staging.mvn.repo.url>file://${project.build.directory}/target-maven-repo</staging.mvn.repo.url>
         <!-- changeSet>unknown</changeSet -->
-        <changeSetSep>.</changeSetSep>
         <testFailureIgnore>false</testFailureIgnore>
         <revision.stamp>.revision</revision.stamp>
         <stableAPI>false</stableAPI>
@@ -124,7 +123,7 @@
         </extensions>
 
         <!-- For changeSet to be properly evaluated by assembly:assembly, use also the validate goal -->
-        <finalName>${project.artifactId}-${project.version}${changeSetSep}${changeSet}</finalName>
+        <finalName>${project.artifactId}-${project.version}.${changeSet}</finalName>
 
         <!-- ***********************************************************************************************************
         *
@@ -495,15 +494,16 @@
 
         <profile>
             <id>release</id>
+
             <properties>
-                <changeSet />
-                <changeSetSep />
                 <scm.repo.effective.url>file://${project.build.directory}/dummy-hg-repo</scm.repo.effective.url>
                 <skipTests>true</skipTests>
                 <altDeploymentRepository>release-repo-hudson::default::${staging.mvn.repo.url}</altDeploymentRepository>
             </properties>
 
             <build>
+                <finalName>${project.artifactId}-${project.version}</finalName>
+
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
@@ -775,12 +775,13 @@
 
         <profile>
             <id>deploy-extra-artifacts</id>
+
             <properties>
-                <changeSet />
-                <changeSetSep />
                 <altDeploymentRepository>release-repo-hudson::default::${staging.mvn.repo.url}</altDeploymentRepository>
             </properties>
+
             <build>
+                <finalName>${project.artifactId}-${project.version}</finalName>
                 <plugins>
                     <!-- Attaches the extra artifacts prepared during the release process by the assembly plugin -->
                     <plugin>
