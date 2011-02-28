@@ -282,6 +282,12 @@
                     <artifactId>maven-graph-plugin</artifactId>
                     <version>1.6</version>
                 </plugin>
+
+                <plugin>
+                    <groupId>com.mycila.maven-license-plugin</groupId>
+                    <artifactId>maven-license-plugin</artifactId>
+                    <version>1.9.0</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -418,6 +424,41 @@
                         </exclusions>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <configuration>
+                    <header>${basedir}/src/header/header.txt</header>
+                    <strictCheck>true</strictCheck>
+                    <failIfMissing>true</failIfMissing>
+                    <aggregate>true</aggregate>
+                    <properties>
+                        <description>${project.description}</description>
+                        <url>${project.url}</url>
+                        <inceptionYear>${project.inceptionYear}</inceptionYear>
+                        <scm>${scm.repo.url}</scm>
+                    </properties>
+                    <excludes>
+                        <exclude>LICENSE.txt</exclude>
+                    </excludes>
+                    <encoding>UTF-8</encoding>
+                    <headerDefinitions>
+                        <headerDefinition>${project.basedir}/src/header/javadoc.xml</headerDefinition>
+                        <headerDefinition>${project.basedir}/src/header/xml.xml</headerDefinition>
+                    </headerDefinitions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check-headers</id>
+                        <phase>verify</phase>
+                        <inherited>false</inherited>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
