@@ -440,12 +440,17 @@
                         <inceptionYear>${project.inceptionYear}</inceptionYear>
                         <scm>${scm.repo.url}</scm>
                     </properties>
+                    <!-- includes>
+                        <include>**/pom.xml</include>
+                    </includes -->
                     <excludes>
-                        <exclude>LICENSE.txt</exclude>
+                        <exclude>**/LICENSE.txt</exclude>
                         <exclude>.hgignore</exclude>
                         <exclude>.hgtags</exclude>
                         <exclude>**/*.revision</exclude>
+                        <exclude>**/*.mf</exclude>
                         <exclude>**/*.form</exclude>
+                        <exclude>**/META-INF/**/*.*</exclude>
                     </excludes>
                     <encoding>UTF-8</encoding>
                     <headerDefinitions>
@@ -530,7 +535,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-checkstyle-plugin</artifactId>
                         <configuration>
-                            <configLocation>config/sun_checks.xml</configLocation>
+                            <configLocation>${project.basedir}/src/checkstyle/checkstyle.xml</configLocation>
                         </configuration>
                     </plugin>
                 </plugins>
