@@ -442,6 +442,10 @@
                     </properties>
                     <excludes>
                         <exclude>LICENSE.txt</exclude>
+                        <exclude>.hgignore</exclude>
+                        <exclude>.hgtags</exclude>
+                        <exclude>**/*.revision</exclude>
+                        <exclude>**/*.form</exclude>
                     </excludes>
                     <encoding>UTF-8</encoding>
                     <headerDefinitions>
