@@ -467,6 +467,7 @@
                     <headerDefinitions>
                         <headerDefinition>${project.basedir}/src/header/javadoc.xml</headerDefinition>
                         <headerDefinition>${project.basedir}/src/header/xml.xml</headerDefinition>
+                        <headerDefinition>${project.basedir}/src/header/script.xml</headerDefinition>
                     </headerDefinitions>
                 </configuration>
             </plugin>
