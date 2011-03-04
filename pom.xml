@@ -225,6 +225,16 @@
                     <artifactId>maven-jarsigner-plugin</artifactId>
                     <version>1.2</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.1.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>1.4</version>
+                </plugin>
 
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -386,6 +396,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
+                    <localCheckout>true</localCheckout>
+                    <!-- pushChanges>false</pushChanges --> <!-- doesn't work! -->
                     <preparationGoals>clean install verify</preparationGoals>
                     <goals>clean install javadoc:javadoc assembly:assembly deploy</goals>
                     <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}"</arguments>
@@ -607,8 +619,12 @@
 
             <build>
                 <finalName>${project.artifactId}-${project.version}</finalName>
-
                 <plugins>
+                    <!-- Cleans and initializes the dummy local hg repo that will be the target of the push performed during release
+                         Up to Maven 2.2.1 these executions were marked inherited=false to prevent them from happening in children poms;
+                         but since Maven 3 they won't be inherited from the superpom at all. The minor drawback without inheritance=false
+                         is that the dummy repo is created for each children module.
+                         This step would be unnecessary if pushChanges=false worked... -->
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
@@ -619,7 +635,6 @@
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
-                                <inherited>false</inherited>
                                 <configuration>
                                     <executable>rm</executable>
                                     <arguments>
@@ -635,7 +650,6 @@
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
-                                <inherited>false</inherited>
                                 <configuration>
                                     <executable>mkdir</executable>
                                     <arguments>
@@ -650,7 +664,6 @@
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
-                                <inherited>false</inherited>
                                 <configuration>
                                     <executable>hg</executable>
                                     <workingDirectory>${project.build.directory}/dummy-hg-repo</workingDirectory>
@@ -812,7 +825,6 @@
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
-                                <inherited>false</inherited>
                                 <configuration>
                                     <executable>hg</executable>
                                     <arguments>
@@ -838,11 +850,9 @@
                                 <goals>
                                     <goal>merge-maven-repos</goal>
                                 </goals>
-                                <inherited>false</inherited>
                             </execution>
                         </executions>
                     </plugin>
-
                 </plugins>
             </build>
         </profile>
@@ -861,7 +871,6 @@
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
-                                <inherited>false</inherited>
                                 <configuration>
                                     <!-- FIXME: would be better to strip local changes -->
                                     <executable>rm</executable>
@@ -881,6 +890,7 @@
             <id>deploy-extra-artifacts</id>
 
             <properties>
+                <staging.mvn.repo.url>file://${project.build.directory}/../../target-maven-repo</staging.mvn.repo.url>
                 <altDeploymentRepository>release-repo-hudson::default::${staging.mvn.repo.url}</altDeploymentRepository>
             </properties>
 
@@ -894,7 +904,6 @@
                         <executions>
                             <execution>
                                 <id>attach-artifacts</id>
-                                <inherited>false</inherited>
                                 <phase>initialize</phase>
                                 <goals>
                                     <goal>attach-artifact</goal>
