@@ -405,6 +405,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
+                <!-- Configuration must be replicated in reporting section -->
                 <configuration>
                     <failOnError>${stableAPI}</failOnError>
                     <comparisonVersion>${stableAPIVersion}</comparisonVersion>
@@ -420,7 +421,7 @@
                     <inputEncoding>UTF-8</inputEncoding>
                     <outputEncoding>UTF-8</outputEncoding>
                 </configuration>
-                <!-- Works around http://jira.codehaus.org/browse/MSITE-459 -->
+                <!-- Works around http://jira.codehaus.org/browse/MSITE-459 TODO: issue is marked fixed, try to remove it -->
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>
@@ -434,6 +435,57 @@
                         </exclusions>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <!-- Configuration must be replicated in reporting section -->
+                <configuration>
+                    <tags>
+                        <tag>
+                            <name>stable</name>
+                            <placement>t</placement>
+                            <head>Status: stable API</head>
+                        </tag>
+                        <tag>
+                            <name>it.tidalwave.javadoc.stable</name>
+                            <placement>t</placement>
+                            <head>Status: stable API</head>
+                        </tag>
+                        <tag>
+                            <name>draft</name>
+                            <placement>t</placement>
+                            <head>Status: draft API</head>
+                        </tag>
+                        <tag>
+                            <name>it.tidalwave.javadoc.draft</name>
+                            <placement>t</placement>
+                            <head>Status: draft API</head>
+                        </tag>
+                        <tag>
+                            <name>experimental</name>
+                            <placement>t</placement>
+                            <head>Status: experimental API</head>
+                        </tag>
+                        <tag>
+                            <name>it.tidalwave.javadoc.experimental</name>
+                            <placement>t</placement>
+                            <head>Status: experimental API</head>
+                        </tag>
+                    </tags>
+                    <docfilessubdirs>true</docfilessubdirs>
+                    <excludePackageNames>*.impl:*.impl.*</excludePackageNames>
+                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                    <docletArtifact>
+                        <groupId>org.umlgraph</groupId>
+                        <artifactId>doclet</artifactId>
+                        <version>5.1</version>
+                    </docletArtifact>
+                    <additionalparam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</additionalparam>
+                    <useStandardDocletOptions>true</useStandardDocletOptions> 
+                    <skip>${disableJavaDocs}</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -840,6 +892,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
                 <version>2.5</version> 
+                <!-- Configuration must be replicated in build section -->
                 <configuration>
                     <tags>
                         <tag>
@@ -886,17 +939,27 @@
                     <skip>${disableJavaDocs}</skip>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
                 <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
                 <version>2.3</version>
+                <!-- Configuration must be replicated in build section -->
+                <configuration>
+                    <failOnError>${stableAPI}</failOnError>
+                    <comparisonVersion>${stableAPIVersion}</comparisonVersion>
+                    <logResults>true</logResults>
+                    <minSeverity>info</minSeverity>
+                </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>javancss-maven-plugin</artifactId>
                 <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
                 <version>2.0</version>
+                <!-- Configuration must be replicated in build section -->
             </plugin>
         </plugins>
     </reporting>
