@@ -285,6 +285,11 @@
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>1.2</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>wagon-maven-plugin</artifactId>
+                    <version>1.0-beta-3</version>
+                </plugin>
 
                 <plugin>
                     <groupId>org.apache.felix</groupId>
