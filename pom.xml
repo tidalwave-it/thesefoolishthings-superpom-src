@@ -830,10 +830,10 @@
                         </configuration>
                         <executions>
                             <execution>
-                                <id>merge-repo</id>
+                                <id>publish-repo</id>
                                 <phase>initialize</phase>
                                 <goals>
-                                    <goal>merge-maven-repos</goal>
+                                    <goal>copy</goal>
                                 </goals>
                             </execution>
                         </executions>
