@@ -53,6 +53,8 @@
         <disableDeploy>false</disableDeploy>
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
         <release.profiles>release</release.profiles>
+
+        <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
     </properties>
 
     <scm>
@@ -368,6 +370,14 @@
                     </systemProperties -->
                     <argLine>-Xmx768M</argLine>
                     <testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>${tft.mainClass}</mainClass>
                 </configuration>
             </plugin>
 
