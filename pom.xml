@@ -55,6 +55,8 @@
         <release.profiles>release</release.profiles>
 
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
+        <tft.javac.source>1.6</tft.javac.source>
+        <tft.javac.target>1.6</tft.javac.target>
     </properties>
 
     <scm>
@@ -331,8 +333,8 @@
                 <configuration>
                     <debug>true</debug>
                     <optimize>true</optimize>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>${tft.javac.source}</source>
+                    <target>${tft.javac.target}</target>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
                     <!-- Workaround for http://jira.codehaus.org/browse/MCOMPILER-98 -->
