@@ -58,6 +58,7 @@
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
+        <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
     </properties>
 
     <scm>
@@ -549,7 +550,7 @@
                         <!-- There are more recent versions, but not in the Maven Central Repo! -->
                         <version>5.1</version>
                     </docletArtifact>
-                    <additionalparam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</additionalparam>
+                    <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
                     <useStandardDocletOptions>true</useStandardDocletOptions> 
                     <skip>${disableJavaDocs}</skip>
                 </configuration>
@@ -999,7 +1000,7 @@
                         <!-- There are more recent versions, but not in the Maven Central Repo! -->
                         <version>5.1</version>
                     </docletArtifact>
-                    <additionalparam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</additionalparam>
+                    <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
                     <useStandardDocletOptions>true</useStandardDocletOptions> 
                     <skip>${disableJavaDocs}</skip>
                 </configuration>
