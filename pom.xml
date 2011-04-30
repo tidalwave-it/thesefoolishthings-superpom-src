@@ -837,6 +837,25 @@
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>wagon-maven-plugin</artifactId>
+                        <configuration>
+                            <source>${staging.mvn.repo.url}</source>
+                            <target>${project.distributionManagement.repository.url}</target>
+                            <targetId>${project.distributionManagement.repository.id}</targetId>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>publish-repo</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
                         <executions>
                             <execution>
@@ -851,25 +870,6 @@
                                         <argument>push</argument>
                                     </arguments>
                                 </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>wagon-maven-plugin</artifactId>
-                        <configuration>
-                            <source>${staging.mvn.repo.url}</source>
-                            <target>${project.distributionManagement.repository.url}</target>
-                            <targetId>${project.distributionManagement.repository.id}</targetId>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>merge-repo</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>merge-maven-repos</goal>
-                                </goals>
                             </execution>
                         </executions>
                     </plugin>
