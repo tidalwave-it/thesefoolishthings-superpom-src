@@ -58,45 +58,46 @@
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
-        
-                    <tft.maven-android-plugin.version>2.5.2</tft.maven-android-plugin.version>
-                    <tft.maven-antrun-plugin.version>1.6</tft.maven-antrun-plugin.version>
-                    <tft.maven-assembly-plugin.version>2.2.1</tft.maven-assembly-plugin.version>
-                    <tft.maven-bundle-plugin.version>2.0.1</tft.maven-bundle-plugin.version>
-                    <tft.maven-checkstyle-plugin.version>2.6</tft.maven-checkstyle-plugin.version>
-                    <tft.maven-clean-plugin.version>2.4.1</tft.maven-clean-plugin.version>
-                    <tft.maven-compiler-plugin.version>2.3.2</tft.maven-compiler-plugin.version>
-                    <tft.maven-dependency-plugin.version>2.2</tft.maven-dependency-plugin.version>
-                    <tft.maven-deploy-plugin.version>2.5</tft.maven-deploy-plugin.version>
-                    <tft.maven-gpg-plugin.version>1.1</tft.maven-gpg-plugin.version>
-                    <tft.maven-graph-plugin.version>1.6</tft.maven-graph-plugin.version>
-                    <tft.maven-install-plugin.version>2.3.1</tft.maven-install-plugin.version>
-                    <tft.maven-jar-plugin.version>2.3.1</tft.maven-jar-plugin.version>
-                    <tft.maven-jarsigner-plugin.version>1.2</tft.maven-jarsigner-plugin.version>
-                    <tft.maven-javadoc-plugin.version>2.5</tft.maven-javadoc-plugin.version>  <!-- 2.6, 2.6.1 and 2.7 are broken with http://jira.codehaus.org/browse/MJAVADOC-275 -->
-                    <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
-                    <tft.maven-pmd-plugin.version>2.5</tft.maven-pmd-plugin.version>
-                    <tft.maven-release-plugin.version>2.1</tft.maven-release-plugin.version>
-                    <tft.maven-resources-plugin.version>2.5</tft.maven-resources-plugin.version>
-                    <tft.maven-scm-plugin.version>1.4</tft.maven-scm-plugin.version>
-                    <tft.maven-shade-plugin.version>1.4</tft.maven-shade-plugin.version>
-                    <tft.maven-site-plugin.version>2.2</tft.maven-site-plugin.version> <!-- 3.0-beta-3 miserably fails with -->
-                    <tft.maven-source-plugin.version>2.1.2</tft.maven-source-plugin.version>
-                    <tft.maven-surefire-plugin.version>2.7.2</tft.maven-surefire-plugin.version>
-
-                    <tft.build-helper-maven-plugin.version>1.5</tft.build-helper-maven-plugin.version>
-                    <tft.buildnumber-maven-plugin.version>1.0-beta-4</tft.buildnumber-maven-plugin.version>
-                    <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version>
-                    <tft.cobertura-maven-plugin.version>2.4</tft.cobertura-maven-plugin.version>
-                    <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
-                    <tft.findbugs-maven-plugin.version>2.3</tft.findbugs-maven-plugin.version> <!-- FIXME: 2.3.1 seems to be broken -->
-                    <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
-                    <tft.nbm-maven-plugin.version>3.5</tft.nbm-maven-plugin.version>                    
-                    <tft.versions-maven-plugin.version>1.2</tft.versions-maven-plugin.version>
-                    <tft.wagon-maven-plugin.version>1.0-beta-3</tft.wagon-maven-plugin.version>
-                    
         <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
         <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
+    
+        <!--==== Plugin Versions ==================================================================================-->
+            
+        <tft.maven-android-plugin.version>2.5.2</tft.maven-android-plugin.version>
+        <tft.maven-antrun-plugin.version>1.6</tft.maven-antrun-plugin.version>
+        <tft.maven-assembly-plugin.version>2.2.1</tft.maven-assembly-plugin.version>
+        <tft.maven-bundle-plugin.version>2.0.1</tft.maven-bundle-plugin.version>
+        <tft.maven-checkstyle-plugin.version>2.6</tft.maven-checkstyle-plugin.version>
+        <tft.maven-clean-plugin.version>2.4.1</tft.maven-clean-plugin.version>
+        <tft.maven-compiler-plugin.version>2.3.2</tft.maven-compiler-plugin.version>
+        <tft.maven-dependency-plugin.version>2.2</tft.maven-dependency-plugin.version>
+        <tft.maven-deploy-plugin.version>2.5</tft.maven-deploy-plugin.version>
+        <tft.maven-gpg-plugin.version>1.1</tft.maven-gpg-plugin.version>
+        <tft.maven-graph-plugin.version>1.6</tft.maven-graph-plugin.version>
+        <tft.maven-install-plugin.version>2.3.1</tft.maven-install-plugin.version>
+        <tft.maven-jar-plugin.version>2.3.1</tft.maven-jar-plugin.version>
+        <tft.maven-jarsigner-plugin.version>1.2</tft.maven-jarsigner-plugin.version>
+        <tft.maven-javadoc-plugin.version>2.5</tft.maven-javadoc-plugin.version>  <!-- 2.6, 2.6.1 and 2.7 are broken with http://jira.codehaus.org/browse/MJAVADOC-275 -->
+        <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
+        <tft.maven-pmd-plugin.version>2.5</tft.maven-pmd-plugin.version>
+        <tft.maven-release-plugin.version>2.1</tft.maven-release-plugin.version>
+        <tft.maven-resources-plugin.version>2.5</tft.maven-resources-plugin.version>
+        <tft.maven-scm-plugin.version>1.4</tft.maven-scm-plugin.version>
+        <tft.maven-shade-plugin.version>1.4</tft.maven-shade-plugin.version>
+        <tft.maven-site-plugin.version>2.2</tft.maven-site-plugin.version> <!-- 3.0-beta-3 miserably fails with -->
+        <tft.maven-source-plugin.version>2.1.2</tft.maven-source-plugin.version>
+        <tft.maven-surefire-plugin.version>2.7.2</tft.maven-surefire-plugin.version>
+
+        <tft.build-helper-maven-plugin.version>1.5</tft.build-helper-maven-plugin.version>
+        <tft.buildnumber-maven-plugin.version>1.0-beta-4</tft.buildnumber-maven-plugin.version>
+        <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version>
+        <tft.cobertura-maven-plugin.version>2.4</tft.cobertura-maven-plugin.version>
+        <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
+        <tft.findbugs-maven-plugin.version>2.3</tft.findbugs-maven-plugin.version> <!-- FIXME: 2.3.1 seems to be broken -->
+        <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
+        <tft.nbm-maven-plugin.version>3.5</tft.nbm-maven-plugin.version>                    
+        <tft.versions-maven-plugin.version>1.2</tft.versions-maven-plugin.version>
+        <tft.wagon-maven-plugin.version>1.0-beta-3</tft.wagon-maven-plugin.version>                
     </properties>
 
     <scm>
