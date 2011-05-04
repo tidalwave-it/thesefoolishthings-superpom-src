@@ -58,6 +58,46 @@
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
+        <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
+        <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
+    
+        <!--==== Plugin Versions ==================================================================================-->
+            
+        <tft.maven-android-plugin.version>2.9.0-beta-4</tft.maven-android-plugin.version>
+        <tft.maven-antrun-plugin.version>1.6</tft.maven-antrun-plugin.version>
+        <tft.maven-assembly-plugin.version>2.2.1</tft.maven-assembly-plugin.version>
+        <tft.maven-bundle-plugin.version>2.0.1</tft.maven-bundle-plugin.version>
+        <tft.maven-checkstyle-plugin.version>2.6</tft.maven-checkstyle-plugin.version>
+        <tft.maven-clean-plugin.version>2.4.1</tft.maven-clean-plugin.version>
+        <tft.maven-compiler-plugin.version>2.3.2</tft.maven-compiler-plugin.version>
+        <tft.maven-dependency-plugin.version>2.2</tft.maven-dependency-plugin.version>
+        <tft.maven-deploy-plugin.version>2.5</tft.maven-deploy-plugin.version>
+        <tft.maven-gpg-plugin.version>1.1</tft.maven-gpg-plugin.version>
+        <tft.maven-graph-plugin.version>1.6</tft.maven-graph-plugin.version>
+        <tft.maven-install-plugin.version>2.3.1</tft.maven-install-plugin.version>
+        <tft.maven-jar-plugin.version>2.3.1</tft.maven-jar-plugin.version>
+        <tft.maven-jarsigner-plugin.version>1.2</tft.maven-jarsigner-plugin.version>
+        <tft.maven-javadoc-plugin.version>2.5</tft.maven-javadoc-plugin.version>  <!-- 2.6, 2.6.1 and 2.7 are broken with http://jira.codehaus.org/browse/MJAVADOC-275 -->
+        <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
+        <tft.maven-pmd-plugin.version>2.5</tft.maven-pmd-plugin.version>
+        <tft.maven-release-plugin.version>2.1</tft.maven-release-plugin.version>
+        <tft.maven-resources-plugin.version>2.5</tft.maven-resources-plugin.version>
+        <tft.maven-scm-plugin.version>1.4</tft.maven-scm-plugin.version>
+        <tft.maven-shade-plugin.version>1.4</tft.maven-shade-plugin.version>
+        <tft.maven-site-plugin.version>2.2</tft.maven-site-plugin.version> <!-- 3.0-beta-3 miserably fails with -->
+        <tft.maven-source-plugin.version>2.1.2</tft.maven-source-plugin.version>
+        <tft.maven-surefire-plugin.version>2.7.2</tft.maven-surefire-plugin.version>
+
+        <tft.build-helper-maven-plugin.version>1.5</tft.build-helper-maven-plugin.version>
+        <tft.buildnumber-maven-plugin.version>1.0-beta-4</tft.buildnumber-maven-plugin.version>
+        <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version>
+        <tft.cobertura-maven-plugin.version>2.4</tft.cobertura-maven-plugin.version>
+        <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
+        <tft.findbugs-maven-plugin.version>2.3</tft.findbugs-maven-plugin.version> <!-- FIXME: 2.3.1 seems to be broken -->
+        <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
+        <tft.nbm-maven-plugin.version>3.5</tft.nbm-maven-plugin.version>                    
+        <tft.versions-maven-plugin.version>1.2</tft.versions-maven-plugin.version>
+        <tft.wagon-maven-plugin.version>1.0-beta-3</tft.wagon-maven-plugin.version>                
     </properties>
 
     <scm>
@@ -140,184 +180,177 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.3.2</version>
+                    <version>${tft.maven-compiler-plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <!-- Remember: version must be copied into the reporting section because of http://jira.codehaus.org/browse/MSITE-443 -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <!-- 2.6, 2.6.1 and 2.7 are broken with http://jira.codehaus.org/browse/MJAVADOC-275 -->
-                    <version>2.5</version> 
+                    <version>${tft.maven-javadoc-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.2.1</version>
+                    <version>${tft.maven-assembly-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.7.2</version>
+                    <version>${tft.maven-surefire-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.3.1</version>
+                    <version>${tft.maven-jar-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-pmd-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>${tft.maven-pmd-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>${tft.maven-checkstyle-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
-                    <version>1.6</version>
+                    <version>${tft.maven-antrun-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>${tft.maven-deploy-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>2.1</version>
+                    <version>${tft.maven-release-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.1</version>
+                    <version>${tft.maven-gpg-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
-                    <version>1.4</version>
+                    <version>${tft.maven-shade-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>2.4.1</version>
+                    <version>${tft.maven-clean-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>2.3.1</version>
+                    <version>${tft.maven-install-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>${tft.maven-resources-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <!-- 3.0-beta-3 miserably fails with -->
-                    <version>2.2</version>
+                    <artifactId>maven-site-plugin</artifactId>                    
+                    <version>${tft.maven-site-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.2</version>
+                    <version>${tft.maven-dependency-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jarsigner-plugin</artifactId>
-                    <version>1.2</version>
+                    <version>${tft.maven-jarsigner-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>2.1.2</version>
+                    <version>${tft.maven-source-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-scm-plugin</artifactId>
-                    <version>1.4</version>
+                    <version>${tft.maven-scm-plugin.version}</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>buildnumber-maven-plugin</artifactId>
-                    <version>1.0-beta-4</version>
+                    <version>${tft.buildnumber-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <!-- Version 1.2 breaks the generation of .revision -->
-                    <version>1.1.1</version>
+                    <version>${tft.exec-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>nbm-maven-plugin</artifactId>
-                    <version>3.5</version>
+                    <version>${tft.nbm-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>cobertura-maven-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>${tft.cobertura-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
-                    <!-- FIXME: 2.3.1 seems to be broken -->
-                    <version>2.3</version>
+                    <version>${tft.findbugs-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>1.5</version>
+                    <version>${tft.build-helper-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <!-- Remember: version must be copied into the reporting section because of http://jira.codehaus.org/browse/MSITE-443 -->
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>clirr-maven-plugin</artifactId>
-                    <version>2.3</version>
+                    <version>${tft.clirr-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <!-- Remember: version must be copied into the reporting section because of http://jira.codehaus.org/browse/MSITE-443 -->
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>javancss-maven-plugin</artifactId>
-                    <version>2.0</version>
+                    <version>${tft.javancss-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
-                    <version>1.2</version>
+                    <version>${tft.versions-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>wagon-maven-plugin</artifactId>
-                    <version>1.0-beta-3</version>
+                    <version>${tft.wagon-maven-plugin.version}</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>2.0.1</version>
+                    <version>${tft.maven-bundle-plugin.version}</version>
                 </plugin>
 
                 <plugin>
                     <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                     <artifactId>maven-android-plugin</artifactId>
-                    <version>2.5.2</version>
+                    <version>${tft.maven-android-plugin.version}</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.fusesource.mvnplugins</groupId>
                     <artifactId>maven-graph-plugin</artifactId>
-                    <version>1.6</version>
+                    <version>${tft.maven-graph-plugin.version}</version>
                 </plugin>
 
                 <plugin>
                     <groupId>com.mycila.maven-license-plugin</groupId>
                     <artifactId>maven-license-plugin</artifactId>
-                    <version>1.9.0</version>
+                    <version>${tft.maven-license-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -546,10 +579,9 @@
                     <docletArtifact>
                         <groupId>org.umlgraph</groupId>
                         <artifactId>doclet</artifactId>
-                        <!-- There are more recent versions, but not in the Maven Central Repo! -->
-                        <version>5.1</version>
+                        <version>${tft.UmlGraphDoc.version}</version>
                     </docletArtifact>
-                    <additionalparam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</additionalparam>
+                    <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
                     <useStandardDocletOptions>true</useStandardDocletOptions> 
                     <skip>${disableJavaDocs}</skip>
                 </configuration>
@@ -836,6 +868,25 @@
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>wagon-maven-plugin</artifactId>
+                        <configuration>
+                            <source>${staging.mvn.repo.url}</source>
+                            <target>${project.distributionManagement.repository.url}</target>
+                            <targetId>${project.distributionManagement.repository.id}</targetId>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>publish-repo</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
                         <executions>
                             <execution>
@@ -850,25 +901,6 @@
                                         <argument>push</argument>
                                     </arguments>
                                 </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>wagon-maven-plugin</artifactId>
-                        <configuration>
-                            <source>${staging.mvn.repo.url}</source>
-                            <target>${project.distributionManagement.repository.url}</target>
-                            <targetId>${project.distributionManagement.repository.id}</targetId>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>merge-repo</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>merge-maven-repos</goal>
-                                </goals>
                             </execution>
                         </executions>
                     </plugin>
@@ -955,7 +987,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
-                <version>2.5</version> 
+                <version>${tft.maven-javadoc-plugin.version}</version> 
                 <!-- Configuration must be replicated in build section -->
                 <configuration>
                     <tags>
@@ -996,10 +1028,9 @@
                     <docletArtifact>
                         <groupId>org.umlgraph</groupId>
                         <artifactId>doclet</artifactId>
-                        <!-- There are more recent versions, but not in the Maven Central Repo! -->
-                        <version>5.1</version>
+                        <version>${tft.UmlGraphDoc.version}</version>
                     </docletArtifact>
-                    <additionalparam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</additionalparam>
+                    <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
                     <useStandardDocletOptions>true</useStandardDocletOptions> 
                     <skip>${disableJavaDocs}</skip>
                 </configuration>
@@ -1009,7 +1040,7 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
                 <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
-                <version>2.3</version>
+                <version>${tft.clirr-maven-plugin.version}</version>
                 <!-- Configuration must be replicated in build section -->
                 <configuration>
                     <failOnError>${stableAPI}</failOnError>
@@ -1023,7 +1054,7 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>javancss-maven-plugin</artifactId>
                 <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
-                <version>2.0</version>
+                <version>${tft.javancss-maven-plugin.version}</version>
                 <!-- Configuration must be replicated in build section -->
             </plugin>
         </plugins>
