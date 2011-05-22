@@ -54,6 +54,7 @@
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
         <release.profiles>release</release.profiles>
 
+        <tft.maven.requiredVersion>3.0.2</tft.maven.requiredVersion>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
@@ -72,6 +73,7 @@
         <tft.maven-compiler-plugin.version>2.3.2</tft.maven-compiler-plugin.version>
         <tft.maven-dependency-plugin.version>2.2</tft.maven-dependency-plugin.version>
         <tft.maven-deploy-plugin.version>2.5</tft.maven-deploy-plugin.version>
+        <tft.maven-enforcer-plugin.version>1.0</tft.maven-enforcer-plugin.version>
         <tft.maven-gpg-plugin.version>1.1</tft.maven-gpg-plugin.version>
         <tft.maven-graph-plugin.version>1.6</tft.maven-graph-plugin.version>
         <tft.maven-install-plugin.version>2.3.1</tft.maven-install-plugin.version>
@@ -94,6 +96,7 @@
         <tft.cobertura-maven-plugin.version>2.4</tft.cobertura-maven-plugin.version>
         <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
         <tft.findbugs-maven-plugin.version>2.3</tft.findbugs-maven-plugin.version> <!-- FIXME: 2.3.1 seems to be broken -->
+        <tft.gmaven-plugin>1.0 </tft.gmaven-plugin>
         <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
         <tft.nbm-maven-plugin.version>3.5</tft.nbm-maven-plugin.version>                    
         <tft.versions-maven-plugin.version>1.2</tft.versions-maven-plugin.version>
@@ -107,7 +110,7 @@
     </scm>
 
     <prerequisites>
-        <maven>3.0.2</maven>
+        <maven>${tft.maven.requiredVersion}</maven>
     </prerequisites>
 
     <repositories>
@@ -314,6 +317,11 @@
                     <version>${tft.clirr-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.codehaus.groovy.maven</groupId>
+                    <artifactId>gmaven-plugin</artifactId>
+                    <version>${tft.gmaven-plugin}</version>
+                </plugin>
+                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>javancss-maven-plugin</artifactId>
                     <version>${tft.javancss-maven-plugin.version}</version>
@@ -465,6 +473,27 @@
                     <cluster>${netbeans.cluster}</cluster>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${tft.maven-enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>${tft.maven.requiredVersion}</version>
+                                </requireMavenVersion>
+                            </rules>    
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>        
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
