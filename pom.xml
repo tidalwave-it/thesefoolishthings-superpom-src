@@ -54,7 +54,7 @@
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
         <release.profiles>release</release.profiles>
 
-        <tft.maven.requiredVersion>3.0.2</tft.maven.requiredVersion>
+        <tft.maven.requiredVersion>3.0</tft.maven.requiredVersion> <!-- FIXME: should be 3.0.2, but Hudson always reports 3.0 -->
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
