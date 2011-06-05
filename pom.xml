@@ -59,6 +59,9 @@
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
+        <tft.junit.version>4.7</tft.junit.version>
+        <tft.mockito.version>1.8.2</tft.mockito.version>
+        <tft.hamcrest-matchers.version>1.1</tft.hamcrest-matchers.version>
         <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
         <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
     
@@ -101,6 +104,7 @@
         <tft.nbm-maven-plugin.version>3.5</tft.nbm-maven-plugin.version>                    
         <tft.versions-maven-plugin.version>1.2</tft.versions-maven-plugin.version>
         <tft.wagon-maven-plugin.version>1.0-beta-3</tft.wagon-maven-plugin.version>                
+        <tft.webdav-jackrabbit.version>1.0-beta-7</tft.webdav-jackrabbit.version>
     </properties>
 
     <scm>
@@ -146,17 +150,17 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.7</version>
+                <version>${tft.junit.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
-                <version>1.8.2</version>
+                <version>${tft.mockito.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-library</artifactId>
-                <version>1.1</version>
+                <version>${tft.hamcrest-matchers.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -166,7 +170,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>1.0-beta-7</version>
+                <version>${tft.webdav-jackrabbit.version}</version>
             </extension>
         </extensions>
 
