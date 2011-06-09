@@ -1,0 +1,1098 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>it.tidalwave.thesefoolishthings</groupId>
+    <artifactId>superpom</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.22</version>
+    <name>TheseFoolishThings - SuperPOM</name>
+    <url>http://thesefoolishthings.kenai.com</url>
+    <description>TheseFoolishThings</description>
+    <organization>
+        <name>Tidalwave s.a.s.</name>
+        <url>http://www.tidalwave.it</url>
+    </organization>
+    <inceptionYear>2010</inceptionYear>
+
+    <developers>
+        <developer>
+            <name>Fabrizio Giudici</name>
+            <email>fabrizio.giudici@tidalwave.it</email>
+            <url>http://www.tidalwave.it/people</url>
+            <organization>Tidalwave s.a.s.</organization>
+            <organizationUrl>http://www.tidalwave.it</organizationUrl>
+            <roles>
+                <role>manager</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>Apache-2.0</name>
+            <url>http://www.opensource.org/licenses/apache2.0.php</url>
+            <comments>Apache License 2.0</comments>
+        </license>
+    </licenses>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <bundle.namespace>${project.groupId}.${project.artifactId}</bundle.namespace>
+        <testReportsDirectory>${project.build.directory}/surefire-reports/plain</testReportsDirectory>
+        <staging.mvn.repo.url>file://${project.build.directory}/target-maven-repo</staging.mvn.repo.url>
+        <!-- changeSet>unknown</changeSet -->
+        <testFailureIgnore>false</testFailureIgnore>
+        <revision.stamp>.revision</revision.stamp>
+        <stableAPI>false</stableAPI>
+        <stableAPIVersion>(,${project.version})</stableAPIVersion>
+        <disableJavaDocs>false</disableJavaDocs>
+        <disableDeploy>false</disableDeploy>
+        <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
+        <release.profiles>release</release.profiles>
+
+        <tft.maven.requiredVersion>3.0</tft.maven.requiredVersion> <!-- FIXME: should be 3.0.2, but Hudson always reports 3.0 -->
+        <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
+        <tft.javac.source>1.6</tft.javac.source>
+        <tft.javac.target>1.6</tft.javac.target>
+        <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
+        <tft.junit.version>4.7</tft.junit.version>
+        <tft.mockito.version>1.8.2</tft.mockito.version>
+        <tft.hamcrest-matchers.version>1.1</tft.hamcrest-matchers.version>
+        <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
+        <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
+    
+        <!--==== Plugin Versions ==================================================================================-->
+            
+        <tft.maven-android-plugin.version>2.9.0-beta-4</tft.maven-android-plugin.version>
+        <tft.maven-antrun-plugin.version>1.6</tft.maven-antrun-plugin.version>
+        <tft.maven-assembly-plugin.version>2.2.1</tft.maven-assembly-plugin.version>
+        <tft.maven-bundle-plugin.version>2.0.1</tft.maven-bundle-plugin.version>
+        <tft.maven-checkstyle-plugin.version>2.6</tft.maven-checkstyle-plugin.version>
+        <tft.maven-clean-plugin.version>2.4.1</tft.maven-clean-plugin.version>
+        <tft.maven-compiler-plugin.version>2.3.2</tft.maven-compiler-plugin.version>
+        <tft.maven-dependency-plugin.version>2.2</tft.maven-dependency-plugin.version>
+        <tft.maven-deploy-plugin.version>2.5</tft.maven-deploy-plugin.version>
+        <tft.maven-enforcer-plugin.version>1.0</tft.maven-enforcer-plugin.version>
+        <tft.maven-gpg-plugin.version>1.1</tft.maven-gpg-plugin.version>
+        <tft.maven-graph-plugin.version>1.6</tft.maven-graph-plugin.version>
+        <tft.maven-install-plugin.version>2.3.1</tft.maven-install-plugin.version>
+        <tft.maven-jar-plugin.version>2.3.1</tft.maven-jar-plugin.version>
+        <tft.maven-jarsigner-plugin.version>1.2</tft.maven-jarsigner-plugin.version>
+        <tft.maven-javadoc-plugin.version>2.5</tft.maven-javadoc-plugin.version>  <!-- 2.6, 2.6.1 and 2.7 are broken with http://jira.codehaus.org/browse/MJAVADOC-275 -->
+        <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
+        <tft.maven-pmd-plugin.version>2.5</tft.maven-pmd-plugin.version>
+        <tft.maven-release-plugin.version>2.1</tft.maven-release-plugin.version>
+        <tft.maven-resources-plugin.version>2.5</tft.maven-resources-plugin.version>
+        <tft.maven-scm-plugin.version>1.4</tft.maven-scm-plugin.version>
+        <tft.maven-shade-plugin.version>1.4</tft.maven-shade-plugin.version>
+        <tft.maven-site-plugin.version>2.2</tft.maven-site-plugin.version> <!-- 3.0-beta-3 miserably fails with -->
+        <tft.maven-source-plugin.version>2.1.2</tft.maven-source-plugin.version>
+        <tft.maven-surefire-plugin.version>2.7.2</tft.maven-surefire-plugin.version>
+
+        <tft.build-helper-maven-plugin.version>1.5</tft.build-helper-maven-plugin.version>
+        <tft.buildnumber-maven-plugin.version>1.0-beta-4</tft.buildnumber-maven-plugin.version>
+        <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version>
+        <tft.cobertura-maven-plugin.version>2.4</tft.cobertura-maven-plugin.version>
+        <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
+        <tft.findbugs-maven-plugin.version>2.3</tft.findbugs-maven-plugin.version> <!-- FIXME: 2.3.1 seems to be broken -->
+        <tft.gmaven-plugin>1.0 </tft.gmaven-plugin>
+        <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
+        <tft.nbm-maven-plugin.version>3.5</tft.nbm-maven-plugin.version>                    
+        <tft.versions-maven-plugin.version>1.2</tft.versions-maven-plugin.version>
+        <tft.wagon-maven-plugin.version>1.0-beta-3</tft.wagon-maven-plugin.version>                
+        <tft.webdav-jackrabbit.version>1.0-beta-7</tft.webdav-jackrabbit.version>
+    </properties>
+
+    <scm>
+        <connection>scm:hg:${scm.repo.readonly.url}</connection>
+        <developerConnection>scm:hg:${scm.repo.effective.url}</developerConnection>
+        <url>${scm.repo.browse.url}</url>
+    </scm>
+
+    <prerequisites>
+        <maven>${tft.maven.requiredVersion}</maven>
+    </prerequisites>
+
+    <repositories>
+        <repository>
+            <id>snapshots-oss.sonatype.org</id>
+            <name>Sonatype Snapshots Repository</name>
+            <url>http://oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>staging-oss.sonatype.org</id>
+            <name>Sonatype Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots-oss.sonatype.org</id>
+            <name>Sonatype Snapshot Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--==== Testing ======================================================================================-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${tft.junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${tft.mockito.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-library</artifactId>
+                <version>${tft.hamcrest-matchers.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>${tft.webdav-jackrabbit.version}</version>
+            </extension>
+        </extensions>
+
+        <!-- For changeSet to be properly evaluated by assembly:assembly, use also the validate goal -->
+        <finalName>${project.artifactId}-${project.version}.${changeSet}</finalName>
+
+        <!-- ***********************************************************************************************************
+        *
+        * We want reproducible builds, so all Maven plugins have explicit version numbers.
+        *
+        ************************************************************************************************************ -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${tft.maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${tft.maven-javadoc-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${tft.maven-assembly-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${tft.maven-surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${tft.maven-jar-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>${tft.maven-pmd-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${tft.maven-checkstyle-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${tft.maven-antrun-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${tft.maven-deploy-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${tft.maven-release-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>${tft.maven-gpg-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${tft.maven-shade-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${tft.maven-clean-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${tft.maven-install-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${tft.maven-resources-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>                    
+                    <version>${tft.maven-site-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${tft.maven-dependency-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jarsigner-plugin</artifactId>
+                    <version>${tft.maven-jarsigner-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${tft.maven-source-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>${tft.maven-scm-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>buildnumber-maven-plugin</artifactId>
+                    <version>${tft.buildnumber-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${tft.exec-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>nbm-maven-plugin</artifactId>
+                    <version>${tft.nbm-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <version>${tft.cobertura-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>${tft.findbugs-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>${tft.build-helper-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>clirr-maven-plugin</artifactId>
+                    <version>${tft.clirr-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.groovy.maven</groupId>
+                    <artifactId>gmaven-plugin</artifactId>
+                    <version>${tft.gmaven-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>javancss-maven-plugin</artifactId>
+                    <version>${tft.javancss-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${tft.versions-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>wagon-maven-plugin</artifactId>
+                    <version>${tft.wagon-maven-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>${tft.maven-bundle-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                    <artifactId>maven-android-plugin</artifactId>
+                    <version>${tft.maven-android-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.fusesource.mvnplugins</groupId>
+                    <artifactId>maven-graph-plugin</artifactId>
+                    <version>${tft.maven-graph-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.mycila.maven-license-plugin</groupId>
+                    <artifactId>maven-license-plugin</artifactId>
+                    <version>${tft.maven-license-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <!-- ***********************************************************************************************************
+        *
+        *
+        *
+        ************************************************************************************************************ -->
+        <plugins>
+            <!-- Compiler -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <debug>true</debug>
+                    <optimize>true</optimize>
+                    <source>${tft.javac.source}</source>
+                    <target>${tft.javac.target}</target>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                    <fork>true</fork>
+                    <compilerArgument>
+                        ${tft.javac.xlint}
+                    </compilerArgument>
+                </configuration>
+            </plugin>
+
+            <!-- Assembler to produce final artifacts. -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <tarLongFileMode>gnu</tarLongFileMode>
+                    <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
+                    <descriptors>
+                        <descriptor>src/assemble/bin.xml</descriptor>
+                        <descriptor>src/assemble/project.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+
+            <!-- Executes tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <reportsDirectory>${testReportsDirectory}</reportsDirectory>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <!-- systemProperties>
+                        <property>
+                        </property>
+                    </systemProperties -->
+                    <argLine>-Xmx768M</argLine>
+                    <testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>${tft.mainClass}</mainClass>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <useDefaultManifestFile>true</useDefaultManifestFile> <!-- required since nbm-plugin 3.0-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>${disableDeploy}</skip>
+                </configuration>
+            </plugin>
+
+            <!-- Configures the release process, calling the assembly to include extra artifacts in deploy -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <localCheckout>true</localCheckout>
+                    <!-- pushChanges>false</pushChanges --> <!-- doesn't work! -->
+                    <preparationGoals>clean install verify</preparationGoals>
+                    <goals>clean install javadoc:javadoc assembly:assembly deploy</goals>
+                    <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}"</arguments>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>nbm-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <descriptor>src/main/nbm/module.xml</descriptor>
+                    <brandingToken>${netbeans.brandingToken}</brandingToken>
+                    <cluster>${netbeans.cluster}</cluster>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${tft.maven-enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>${tft.maven.requiredVersion}</version>
+                                </requireMavenVersion>
+                            </rules>    
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>        
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>clirr-maven-plugin</artifactId>
+                <!-- Configuration must be replicated in reporting section -->
+                <configuration>
+                    <failOnError>${stableAPI}</failOnError>
+                    <comparisonVersion>${stableAPIVersion}</comparisonVersion>
+                    <logResults>true</logResults>
+                    <minSeverity>info</minSeverity>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <inputEncoding>UTF-8</inputEncoding>
+                    <outputEncoding>UTF-8</outputEncoding>
+                </configuration>
+                <!-- Works around http://jira.codehaus.org/browse/MSITE-459 TODO: issue is marked fixed, try to remove it -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-xhtml</artifactId>
+                        <version>1.1.2</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>commons-logging</groupId>
+                                <artifactId>commons-logging</artifactId>
+                            </exclusion>
+                        </exclusions>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <configuration>
+                    <header>${basedir}/src/header/header.txt</header>
+                    <strictCheck>true</strictCheck>
+                    <failIfMissing>true</failIfMissing>
+                    <aggregate>true</aggregate>
+                    <properties>
+                        <description>${project.description}</description>
+                        <url>${project.url}</url>
+                        <inceptionYear>${project.inceptionYear}</inceptionYear>
+                        <scm>${scm.repo.url}</scm>
+                    </properties>
+                    <!-- includes>
+                        <include>**/pom.xml</include>
+                    </includes -->
+                    <excludes>
+                        <exclude>**/LICENSE.txt</exclude>
+                        <exclude>.hgignore</exclude>
+                        <exclude>.hgtags</exclude>
+                        <exclude>**/*.revision</exclude>
+                        <exclude>**/*.mf</exclude>
+                        <exclude>**/*.form</exclude>
+                        <exclude>**/META-INF/**/*.*</exclude>
+                    </excludes>
+                    <encoding>UTF-8</encoding>
+                    <headerDefinitions>
+                        <headerDefinition>${project.basedir}/src/header/javadoc.xml</headerDefinition>
+                        <headerDefinition>${project.basedir}/src/header/xml.xml</headerDefinition>
+                        <headerDefinition>${project.basedir}/src/header/script.xml</headerDefinition>
+                    </headerDefinitions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <!-- Configuration must be replicated in reporting section -->
+                <configuration>
+                    <tags>
+                        <tag>
+                            <name>stable</name>
+                            <placement>t</placement>
+                            <head>Status: stable API</head>
+                        </tag>
+                        <tag>
+                            <name>it.tidalwave.javadoc.stable</name>
+                            <placement>t</placement>
+                            <head>Status: stable API</head>
+                        </tag>
+                        <tag>
+                            <name>draft</name>
+                            <placement>t</placement>
+                            <head>Status: draft API</head>
+                        </tag>
+                        <tag>
+                            <name>it.tidalwave.javadoc.draft</name>
+                            <placement>t</placement>
+                            <head>Status: draft API</head>
+                        </tag>
+                        <tag>
+                            <name>experimental</name>
+                            <placement>t</placement>
+                            <head>Status: experimental API</head>
+                        </tag>
+                        <tag>
+                            <name>it.tidalwave.javadoc.experimental</name>
+                            <placement>t</placement>
+                            <head>Status: experimental API</head>
+                        </tag>
+                    </tags>
+                    <docfilessubdirs>true</docfilessubdirs>
+                    <excludePackageNames>*.impl:*.impl.*</excludePackageNames>
+                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                    <docletArtifact>
+                        <groupId>org.umlgraph</groupId>
+                        <artifactId>doclet</artifactId>
+                        <version>${tft.UmlGraphDoc.version}</version>
+                    </docletArtifact>
+                    <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
+                    <useStandardDocletOptions>true</useStandardDocletOptions> 
+                    <skip>${disableJavaDocs}</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>metrics</id>
+            <properties>
+                <testReportsDirectory>${project.build.directory}/surefire-reports/cobertura</testReportsDirectory>
+            </properties>
+            <build>
+                <plugins>
+                    <!-- Cobertura -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>cobertura-maven-plugin</artifactId>
+                        <configuration>
+                            <formats>
+                                <format>xml</format>
+                                <format>html</format>
+                            </formats>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>cobertura</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <reporting>
+                <plugins>
+                    <!-- FindBugs -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>findbugs-maven-plugin</artifactId>
+                        <configuration>
+                            <xmlOutput>true</xmlOutput>
+                            <findbugsXmlOutput>true</findbugsXmlOutput>
+                            <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+                            <effort>Max</effort>
+                            <threshold>Low</threshold>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                    </plugin>
+
+                    <!-- PMD -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <configuration>
+                            <linkXref>true</linkXref>
+                            <sourceEncoding>utf-8</sourceEncoding>
+                            <minimumTokens>100</minimumTokens>
+                            <targetJdk>1.6</targetJdk>
+                        </configuration>
+                    </plugin>
+
+                    <!-- CheckStyle -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <configuration>
+                            <configLocation>${project.basedir}/src/checkstyle/checkstyle.xml</configLocation>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </reporting>
+        </profile>
+
+        <profile>
+            <id>release</id>
+
+            <properties>
+                <scm.repo.effective.url>file://${project.build.directory}/dummy-hg-repo</scm.repo.effective.url>
+                <skipTests>true</skipTests>
+                <altDeploymentRepository>release-repo-hudson::default::${staging.mvn.repo.url}</altDeploymentRepository>
+            </properties>
+
+            <build>
+                <finalName>${project.artifactId}-${project.version}</finalName>
+                <plugins>
+                    <!-- Cleans and initializes the dummy local hg repo that will be the target of the push performed during release
+                         Up to Maven 2.2.1 these executions were marked inherited=false to prevent them from happening in children poms;
+                         but since Maven 3 they won't be inherited from the superpom at all. The minor drawback without inheritance=false
+                         is that the dummy repo is created for each children module.
+                         This step would be unnecessary if pushChanges=false worked... -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>clean-release-dirs</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>rm</executable>
+                                    <arguments>
+                                        <argument>-rf</argument>
+                                        <argument>${project.build.directory}/dummy-hg-repo</argument>
+                                        <argument>${project.build.directory}/target-maven-repo</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>create-release-dirs</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>mkdir</executable>
+                                    <arguments>
+                                        <argument>-p</argument>
+                                        <argument>${project.build.directory}/dummy-hg-repo</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>init-dummy-hg-repo</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>hg</executable>
+                                    <workingDirectory>${project.build.directory}/dummy-hg-repo</workingDirectory>
+                                    <arguments>
+                                        <argument>init</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>generate-revision-id</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>create-id</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>hg</executable>
+                                    <arguments>
+                                        <argument>log</argument>
+                                        <argument>--limit</argument>
+                                        <argument>1</argument>
+                                        <argument>--template</argument>
+                                        <argument>REVISION: {tags} {node|short}\n</argument>
+                                    </arguments>
+                                    <outputFile>${revision.stamp}</outputFile>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>show-revision</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>hg</executable>
+                                    <arguments>
+                                        <argument>log</argument>
+                                        <argument>--limit</argument>
+                                        <argument>1</argument>
+                                        <argument>--template</argument>
+                                        <argument>REVISION: {tags} {node|short}\n</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <activation>
+                <file>
+                   <exists>.hg</exists>
+                </file>
+            </activation>
+            <id>get-changeset-id</id>
+            <build>
+                <plugins>
+                    <!-- Retrieves the Mercurial changeset. -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>buildnumber-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>hgchangeset</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <doCheck>false</doCheck>
+                            <doUpdate>false</doUpdate>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>show-revision-id</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>show-revision</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>cat</executable>
+                                    <arguments>
+                                        <argument>${revision.stamp}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>release-commit</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>wagon-maven-plugin</artifactId>
+                        <configuration>
+                            <source>${staging.mvn.repo.url}</source>
+                            <target>${project.distributionManagement.repository.url}</target>
+                            <targetId>${project.distributionManagement.repository.id}</targetId>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>publish-repo</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>push-hg</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>hg</executable>
+                                    <arguments>
+                                        <argument>push</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>release-cancel</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>strip-hg</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- FIXME: would be better to strip local changes -->
+                                    <executable>rm</executable>
+                                    <arguments>
+                                        <argument>-rf</argument>
+                                        <argument>.hg</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>deploy-extra-artifacts</id>
+
+            <properties>
+                <staging.mvn.repo.url>file://${project.build.directory}/../../target-maven-repo</staging.mvn.repo.url>
+                <altDeploymentRepository>release-repo-hudson::default::${staging.mvn.repo.url}</altDeploymentRepository>
+            </properties>
+
+            <build>
+                <finalName>${project.artifactId}-${project.version}</finalName>
+                <plugins>
+                    <!-- Attaches the extra artifacts prepared during the release process by the assembly plugin -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-artifacts</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}-project.tar.gz</file>
+                                    <type>tar.gz</type>
+                                    <classifier>project</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}-bin.tar.gz</file>
+                                    <type>tar.gz</type>
+                                    <classifier>bin</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
+                <version>${tft.maven-javadoc-plugin.version}</version> 
+                <!-- Configuration must be replicated in build section -->
+                <configuration>
+                    <tags>
+                        <tag>
+                            <name>stable</name>
+                            <placement>t</placement>
+                            <head>Status: stable API</head>
+                        </tag>
+                        <tag>
+                            <name>it.tidalwave.javadoc.stable</name>
+                            <placement>t</placement>
+                            <head>Status: stable API</head>
+                        </tag>
+                        <tag>
+                            <name>draft</name>
+                            <placement>t</placement>
+                            <head>Status: draft API</head>
+                        </tag>
+                        <tag>
+                            <name>it.tidalwave.javadoc.draft</name>
+                            <placement>t</placement>
+                            <head>Status: draft API</head>
+                        </tag>
+                        <tag>
+                            <name>experimental</name>
+                            <placement>t</placement>
+                            <head>Status: experimental API</head>
+                        </tag>
+                        <tag>
+                            <name>it.tidalwave.javadoc.experimental</name>
+                            <placement>t</placement>
+                            <head>Status: experimental API</head>
+                        </tag>
+                    </tags>
+                    <docfilessubdirs>true</docfilessubdirs>
+                    <excludePackageNames>*.impl:*.impl.*</excludePackageNames>
+                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                    <docletArtifact>
+                        <groupId>org.umlgraph</groupId>
+                        <artifactId>doclet</artifactId>
+                        <version>${tft.UmlGraphDoc.version}</version>
+                    </docletArtifact>
+                    <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
+                    <useStandardDocletOptions>true</useStandardDocletOptions> 
+                    <skip>${disableJavaDocs}</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>clirr-maven-plugin</artifactId>
+                <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
+                <version>${tft.clirr-maven-plugin.version}</version>
+                <!-- Configuration must be replicated in build section -->
+                <configuration>
+                    <failOnError>${stableAPI}</failOnError>
+                    <comparisonVersion>${stableAPIVersion}</comparisonVersion>
+                    <logResults>true</logResults>
+                    <minSeverity>info</minSeverity>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
+                <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
+                <version>${tft.javancss-maven-plugin.version}</version>
+                <!-- Configuration must be replicated in build section -->
+            </plugin>
+        </plugins>
+    </reporting>
+
+</project>
+
+
