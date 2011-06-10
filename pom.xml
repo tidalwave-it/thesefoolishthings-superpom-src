@@ -430,6 +430,12 @@
                     </systemProperties -->
                     <argLine>-Xmx${tft.test.maxMemory}</argLine>
                     <testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>${tft.test.listeners}</value>
+                        </property>
+                    </properties>
                 </configuration>
             </plugin>
 
