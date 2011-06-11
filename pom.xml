@@ -42,10 +42,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bundle.namespace>${project.groupId}.${project.artifactId}</bundle.namespace>
-        <testReportsDirectory>${project.build.directory}/surefire-reports/plain</testReportsDirectory>
         <staging.mvn.repo.url>file://${project.build.directory}/target-maven-repo</staging.mvn.repo.url>
         <!-- changeSet>unknown</changeSet -->
-        <testFailureIgnore>false</testFailureIgnore>
+        <testFailureIgnore>false</testFailureIgnore> <!-- backward compatibility, to be dropped -->
         <revision.stamp>.revision</revision.stamp>
         <stableAPI>false</stableAPI>
         <stableAPIVersion>(,${project.version})</stableAPIVersion>
@@ -59,11 +58,13 @@
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
-        <tft.junit.version>4.7</tft.junit.version>
         <tft.testng.version>6.0.1</tft.testng.version>
-        <tft.test.maxMemory>768M</tft.test.maxMemory>
+        <tft.junit.version>4.7</tft.junit.version>
         <tft.mockito.version>1.8.2</tft.mockito.version>
         <tft.hamcrest-matchers.version>1.1</tft.hamcrest-matchers.version>
+        <tft.test.maxMemory>768M</tft.test.maxMemory>
+        <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/plain</tft.test.reportsDirectory>
+        <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
         <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
         <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
     
@@ -93,7 +94,7 @@
         <tft.maven-shade-plugin.version>1.4</tft.maven-shade-plugin.version>
         <tft.maven-site-plugin.version>2.2</tft.maven-site-plugin.version> <!-- 3.0-beta-3 miserably fails with -->
         <tft.maven-source-plugin.version>2.1.2</tft.maven-source-plugin.version>
-        <tft.maven-surefire-plugin.version>2.7.2</tft.maven-surefire-plugin.version>
+        <tft.maven-surefire-plugin.version>2.8.1</tft.maven-surefire-plugin.version>
 
         <tft.build-helper-maven-plugin.version>1.5</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.0-beta-4</tft.buildnumber-maven-plugin.version>
@@ -420,7 +421,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <reportsDirectory>${testReportsDirectory}</reportsDirectory>
+                    <reportsDirectory>${tft.test.reportsDirectory}</reportsDirectory>
                     <includes>
                         <include>**/*Test.java</include>
                     </includes>
@@ -429,7 +430,8 @@
                         </property>
                     </systemProperties -->
                     <argLine>-Xmx${tft.test.maxMemory}</argLine>
-                    <testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
+                    <testFailureIgnore>${tft.test.failureIgnore}</testFailureIgnore>
+                    <runOrder>alphabetical</runOrder>
                     <properties>
                         <property>
                             <name>listener</name>
@@ -644,7 +646,7 @@
         <profile>
             <id>metrics</id>
             <properties>
-                <testReportsDirectory>${project.build.directory}/surefire-reports/cobertura</testReportsDirectory>
+                <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/cobertura</tft.test.reportsDirectory>
             </properties>
             <build>
                 <plugins>
