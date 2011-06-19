@@ -102,7 +102,7 @@
         <tft.build-helper-maven-plugin.version>1.5</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.0-beta-4</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version>
-        <tft.cobertura-maven-plugin.version>2.4</tft.cobertura-maven-plugin.version>
+        <tft.cobertura-maven-plugin.version>2.5.1</tft.cobertura-maven-plugin.version>
         <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
         <tft.findbugs-maven-plugin.version>2.3</tft.findbugs-maven-plugin.version> <!-- FIXME: 2.3.1 seems to be broken -->
         <tft.gmaven-plugin>1.0 </tft.gmaven-plugin>
@@ -680,10 +680,20 @@
 
             <reporting>
                 <plugins>
+                    <!-- Cobertura -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>cobertura-maven-plugin</artifactId>
+                        <!-- version must be replicated here -->
+                        <version>${tft.cobertura-maven-plugin.version}</version>
+                    </plugin>
+
                     <!-- FindBugs -->
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>findbugs-maven-plugin</artifactId>
+                        <!-- version must be replicated here -->
+                        <version>${tft.findbugs-maven-plugin.version}</version>
                         <configuration>
                             <xmlOutput>true</xmlOutput>
                             <findbugsXmlOutput>true</findbugsXmlOutput>
@@ -698,6 +708,8 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
+                        <!-- version must be replicated here -->
+                        <version>${tft.maven-pmd-plugin.version}</version>
                         <configuration>
                             <linkXref>true</linkXref>
                             <sourceEncoding>utf-8</sourceEncoding>
@@ -710,6 +722,8 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-checkstyle-plugin</artifactId>
+                        <!-- version must be replicated here -->
+                        <version>${tft.maven-checkstyle-plugin.version}</version>
                         <configuration>
                             <configLocation>${project.basedir}/src/checkstyle/checkstyle.xml</configLocation>
                         </configuration>
