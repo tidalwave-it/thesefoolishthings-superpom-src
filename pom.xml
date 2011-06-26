@@ -67,6 +67,7 @@
         <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/plain</tft.test.reportsDirectory>
         <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
         <!-- tft.test.listeners></tft.test.listeners -->
+        <tft.clirr.skip>false</tft.clirr.skip>
         <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
         <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
     
@@ -537,6 +538,7 @@
                 <artifactId>clirr-maven-plugin</artifactId>
                 <!-- Configuration must be replicated in reporting section -->
                 <configuration>
+                    <skip>${tft.clirr.skip}</skip>
                     <failOnError>${stableAPI}</failOnError>
                     <comparisonVersion>${stableAPIVersion}</comparisonVersion>
                     <logResults>true</logResults>
@@ -1123,6 +1125,7 @@
                 <version>${tft.clirr-maven-plugin.version}</version>
                 <!-- Configuration must be replicated in build section -->
                 <configuration>
+                    <skip>${tft.clirr.skip}</skip>
                     <failOnError>${stableAPI}</failOnError>
                     <comparisonVersion>${stableAPIVersion}</comparisonVersion>
                     <logResults>true</logResults>
