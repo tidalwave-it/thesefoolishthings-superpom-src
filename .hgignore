@@ -1,3 +1,5 @@
 target
 .repository
 .revision
+.project
+.settings
