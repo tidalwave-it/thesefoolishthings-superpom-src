@@ -167,6 +167,11 @@
                 <artifactId>lombok</artifactId>
                 <version>${tft.lombok.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${tft.aspectjrt.version}</version> 
+            </dependency>
 
             <!--==== Testing ======================================================================================-->
             <dependency>
