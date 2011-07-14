@@ -73,6 +73,8 @@
         <tft.jetty.scanIntervalSeconds>4</tft.jetty.scanIntervalSeconds>
         <tft.jetty.stopKey>${project.groupId}:${project.artifactId}</tft.jetty.stopKey>        
 
+        <tft.gwt.version>2.1.1</tft.gwt.version>
+
         <!-- tft.test.listeners></tft.test.listeners -->
         <tft.clirr.skip>false</tft.clirr.skip>
         <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
@@ -117,6 +119,7 @@
         <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
         <tft.findbugs-maven-plugin.version>2.3</tft.findbugs-maven-plugin.version> <!-- FIXME: 2.3.1 seems to be broken -->
         <tft.gmaven-plugin>1.0 </tft.gmaven-plugin>
+        <tft.gwt-maven-plugin.version>2.1.0-1</tft.gwt-maven-plugin.version>
         <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
         <tft.nbm-maven-plugin.version>3.5</tft.nbm-maven-plugin.version>                    
         <tft.tomcat-maven-plugin.version>1.1</tft.tomcat-maven-plugin.version>
@@ -372,6 +375,11 @@
                     <groupId>org.codehaus.groovy.maven</groupId>
                     <artifactId>gmaven-plugin</artifactId>
                     <version>${tft.gmaven-plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>gwt-maven-plugin</artifactId>
+                    <version>${tft.gwt-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -1245,6 +1253,49 @@
                                 </configuration>
                             </execution>
                         </executions>                
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    <!--================================================================================================================
+    
+    This profile compiles custom Vaadin widgets into GWT components.
+    
+    =================================================================================================================-->
+        <profile>
+            <id>vaadin-compile-widgetset</id>
+            <build>
+                <plugins>
+              <!-- Compile custom GWT components or widget dependencies with the GWT compiler -->
+                    <plugin>  
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>gwt-maven-plugin</artifactId>
+                        <configuration>
+                            <webappDirectory>src/main/webapp/VAADIN/widgetsets</webappDirectory>
+                            <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+                            <runTarget>${project.artifactId}</runTarget>
+                            <soyc>false</soyc>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.google.gwt</groupId>
+                                <artifactId>gwt-dev</artifactId>
+                                <version>${tft.gwt.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>com.google.gwt</groupId>
+                                <artifactId>gwt-user</artifactId>
+                                <version>${tft.gwt.version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
