@@ -66,11 +66,12 @@
         <tft.test.maxMemory>768M</tft.test.maxMemory>
         <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/plain</tft.test.reportsDirectory>
         <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
+        <tft.aspectjrt.version>1.6.11</tft.aspectjrt.version>
         <!-- tft.test.listeners></tft.test.listeners -->
         <tft.clirr.skip>false</tft.clirr.skip>
         <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
         <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
-    
+ 
         <!--==== Plugin Versions ==================================================================================-->
             
         <tft.maven-android-plugin.version>2.9.0-beta-4</tft.maven-android-plugin.version>
@@ -90,6 +91,7 @@
         <tft.maven-jar-plugin.version>2.3.1</tft.maven-jar-plugin.version>
         <tft.maven-jarsigner-plugin.version>1.2</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>2.5</tft.maven-javadoc-plugin.version>  <!-- 2.6, 2.6.1 and 2.7 are broken with http://jira.codehaus.org/browse/MJAVADOC-275 -->
+        <tft.maven-jetty-plugin.version>6.1.24</tft.maven-jetty-plugin.version>
         <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
         <tft.maven-pmd-plugin.version>2.5</tft.maven-pmd-plugin.version>
         <tft.maven-release-plugin.version>2.2</tft.maven-release-plugin.version>
@@ -101,6 +103,7 @@
         <tft.maven-source-plugin.version>2.1.2</tft.maven-source-plugin.version>
         <tft.maven-surefire-plugin.version>2.8.1</tft.maven-surefire-plugin.version>
 
+        <tft.aspectj-maven-plugin.version>1.3.1</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>1.5</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.0-beta-4</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version>
@@ -110,6 +113,8 @@
         <tft.gmaven-plugin>1.0 </tft.gmaven-plugin>
         <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
         <tft.nbm-maven-plugin.version>3.5</tft.nbm-maven-plugin.version>                    
+        <tft.tomcat-maven-plugin.version>1.1</tft.tomcat-maven-plugin.version>
+        <tft.vaadin-maven-plugin.version>1.0.2</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>1.2</tft.versions-maven-plugin.version>
         <tft.wagon-maven-plugin.version>1.0-beta-3</tft.wagon-maven-plugin.version>                
         <tft.webdav-jackrabbit.version>1.0-beta-7</tft.webdav-jackrabbit.version>
@@ -314,6 +319,11 @@
 
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>${tft.aspectj-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
                     <artifactId>buildnumber-maven-plugin</artifactId>
                     <version>${tft.buildnumber-maven-plugin.version}</version>
                 </plugin>
@@ -359,6 +369,11 @@
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>tomcat-maven-plugin</artifactId>
+                    <version>${tft.tomcat-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>${tft.versions-maven-plugin.version}</version>
                 </plugin>
@@ -397,6 +412,18 @@
                     <artifactId>maven-license-plugin</artifactId>
                     <version>${tft.maven-license-plugin.version}</version>
                 </plugin>
+
+                <plugin>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>vaadin-maven-plugin</artifactId>
+                    <version>${tft.vaadin-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.mortbay.jetty</groupId>
+                    <artifactId>maven-jetty-plugin</artifactId>
+                    <version>${tft.maven-jetty-plugin.version}</version>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
