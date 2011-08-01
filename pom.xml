@@ -90,30 +90,30 @@
         <tft.maven-checkstyle-plugin.version>2.6</tft.maven-checkstyle-plugin.version>
         <tft.maven-clean-plugin.version>2.4.1</tft.maven-clean-plugin.version>
         <tft.maven-compiler-plugin.version>2.3.2</tft.maven-compiler-plugin.version>
-        <tft.maven-dependency-plugin.version>2.2</tft.maven-dependency-plugin.version>
-        <tft.maven-deploy-plugin.version>2.5</tft.maven-deploy-plugin.version>
-        <tft.maven-enforcer-plugin.version>1.0</tft.maven-enforcer-plugin.version>
-        <tft.maven-gpg-plugin.version>1.1</tft.maven-gpg-plugin.version>
-        <tft.maven-graph-plugin.version>1.6</tft.maven-graph-plugin.version>
+        <tft.maven-dependency-plugin.version>2.3</tft.maven-dependency-plugin.version>
+        <tft.maven-deploy-plugin.version>2.6</tft.maven-deploy-plugin.version>
+        <tft.maven-enforcer-plugin.version>1.0.1</tft.maven-enforcer-plugin.version>
+        <tft.maven-gpg-plugin.version>1.3</tft.maven-gpg-plugin.version>
+        <tft.maven-graph-plugin.version>1.15</tft.maven-graph-plugin.version>
         <tft.maven-install-plugin.version>2.3.1</tft.maven-install-plugin.version>
         <tft.maven-jar-plugin.version>2.3.1</tft.maven-jar-plugin.version>
         <tft.maven-jarsigner-plugin.version>1.2</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>2.8</tft.maven-javadoc-plugin.version>  
-        <tft.maven-jetty-plugin.version>6.1.24</tft.maven-jetty-plugin.version>
+        <tft.maven-jetty-plugin.version>7.0.0.pre5</tft.maven-jetty-plugin.version>
         <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
         <tft.maven-pmd-plugin.version>2.5</tft.maven-pmd-plugin.version>
-        <tft.maven-release-plugin.version>2.1</tft.maven-release-plugin.version>
+        <tft.maven-release-plugin.version>2.1</tft.maven-release-plugin.version> <!-- 2.2 is broken: http://jira.codehaus.org/browse/MRELEASE-695 -->
         <tft.maven-replacer-plugin.version>1.3.8</tft.maven-replacer-plugin.version>
         <tft.maven-resources-plugin.version>2.5</tft.maven-resources-plugin.version>
-        <tft.maven-scm-plugin.version>1.4</tft.maven-scm-plugin.version>
+        <tft.maven-scm-plugin.version>1.5</tft.maven-scm-plugin.version>
         <tft.maven-shade-plugin.version>1.4</tft.maven-shade-plugin.version>
         <tft.maven-site-plugin.version>2.2</tft.maven-site-plugin.version> <!-- 3.0-beta-3 miserably fails with -->
         <tft.maven-source-plugin.version>2.1.2</tft.maven-source-plugin.version>
-        <tft.maven-surefire-plugin.version>2.8.1</tft.maven-surefire-plugin.version>
+        <tft.maven-surefire-plugin.version>2.9</tft.maven-surefire-plugin.version>
 
         <tft.aspectj-maven-plugin.version>1.3.1</tft.aspectj-maven-plugin.version>
-        <tft.build-helper-maven-plugin.version>1.5</tft.build-helper-maven-plugin.version>
-        <tft.buildnumber-maven-plugin.version>1.0-beta-4</tft.buildnumber-maven-plugin.version>
+        <tft.build-helper-maven-plugin.version>1.7</tft.build-helper-maven-plugin.version>
+        <tft.buildnumber-maven-plugin.version>1.0</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version>
         <tft.cobertura-maven-plugin.version>2.5.1</tft.cobertura-maven-plugin.version>
         <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
@@ -122,7 +122,7 @@
         <tft.gwt-maven-plugin.version>2.1.0-1</tft.gwt-maven-plugin.version>
         <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
         <tft.nbm-maven-plugin.version>3.5</tft.nbm-maven-plugin.version>                    
-        <tft.nexus-maven-plugin.version>1.7</tft.nexus-maven-plugin.version>                    
+        <tft.nexus-maven-plugin.version>1.9.2.1</tft.nexus-maven-plugin.version>                    
         <tft.tomcat-maven-plugin.version>1.1</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>1.0.2</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>1.2</tft.versions-maven-plugin.version>
@@ -554,11 +554,11 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <localCheckout>true</localCheckout>
-                    <!-- pushChanges>false</pushChanges --> <!-- doesn't work! -->
+                    <!-- pushChanges>false</pushChanges --> <!-- doesn't work! NOTE: should have been fixed with scm-plugin 1.5 -->
                     <preparationGoals>clean install verify</preparationGoals>
                     <goals>clean install javadoc:javadoc assembly:assembly deploy</goals>
                     <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}"</arguments>
-                    <!-- tagNameFormat>@{project.version}</tagNameFormat broken, see http://jira.codehaus.org/browse/MRELEASE-695 -->
+                    <!-- tagNameFormat>@{project.version}</tagNameFormat broken, see http://jira.codehaus.org/browse/MRELEASE-695 NOTE: should have been fixed with 2.2 -->
                 </configuration>
             </plugin>
 
