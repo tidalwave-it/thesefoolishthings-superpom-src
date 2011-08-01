@@ -479,6 +479,28 @@
                     <revisionOnScmFailure>unknown</revisionOnScmFailure>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>print-build-properties</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <echo>Java Version ${java.version}</echo>
+                                <!-- These two are needed by Hudson -->
+                                <echo>REVISION ${buildNumber}</echo>
+                                <echo file="${revision.stamp}">REVISION ${buildNumber}${line.separator}</echo>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
  
             <!-- Compiler -->
             <plugin>
@@ -912,55 +934,6 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>generate-revision-id</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>create-id</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <executable>hg</executable>
-                                    <arguments>
-                                        <argument>log</argument>
-                                        <argument>--limit</argument>
-                                        <argument>1</argument>
-                                        <argument>--template</argument>
-                                        <argument>REVISION: {tags} {node|short}\n</argument>
-                                    </arguments>
-                                    <outputFile>${revision.stamp}</outputFile>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>show-revision</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <executable>hg</executable>
-                                    <arguments>
-                                        <argument>log</argument>
-                                        <argument>--limit</argument>
-                                        <argument>1</argument>
-                                        <argument>--template</argument>
-                                        <argument>REVISION: {tags} {node|short}\n</argument>
-                                    </arguments>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
