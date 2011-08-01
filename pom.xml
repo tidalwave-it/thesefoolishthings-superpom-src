@@ -99,7 +99,7 @@
         <tft.maven-jar-plugin.version>2.3.1</tft.maven-jar-plugin.version>
         <tft.maven-jarsigner-plugin.version>1.2</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>2.8</tft.maven-javadoc-plugin.version>  
-        <tft.maven-jetty-plugin.version>7.0.0.pre5</tft.maven-jetty-plugin.version>
+        <tft.maven-jetty-plugin.version>6.1.24</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
         <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
         <tft.maven-pmd-plugin.version>2.5</tft.maven-pmd-plugin.version>
         <tft.maven-release-plugin.version>2.1</tft.maven-release-plugin.version> <!-- 2.2 tagNameFormat broken, see http://jira.codehaus.org/browse/MRELEASE-695 -->
