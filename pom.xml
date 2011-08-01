@@ -44,7 +44,7 @@
         <bundle.namespace>${project.groupId}.${project.artifactId}</bundle.namespace>
         <staging.mvn.repo.url>file://${project.build.directory}/target-maven-repo</staging.mvn.repo.url>
         <testFailureIgnore>false</testFailureIgnore> <!-- backward compatibility, to be dropped -->
-        <tft.description.stamp>.description</tft.description.stamp>
+        <tft.descriptionStamp>.description</tft.descriptionStamp>
         <stableAPI>false</stableAPI>
         <stableAPIVersion>(,${project.version})</stableAPIVersion>
         <disableJavaDocs>false</disableJavaDocs>
@@ -479,27 +479,6 @@
                     <revisionOnScmFailure>unknown</revisionOnScmFailure>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>print-build-properties</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target>
-                                <!-- These two are needed by Hudson -->
-                                <echo>DESCRIPTION: ${buildNumber} (${java.version})</echo>
-                                <echo file="${tft.description.stamp}">REVISION: ${buildNumber} (${java.version})${line.separator}DESCRIPTION: ${buildNumber} (${java.version})${line.separator}</echo>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
  
             <!-- Compiler -->
             <plugin>
@@ -761,6 +740,71 @@
 
     <profiles>
         <profile>
+            <id>generate-description-stamp</id>
+            <activation>
+                <file>
+                    <missing>.description</missing> <!-- can't use a property here -->
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>generate-and-print-build-properties</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target> 
+                                        <echo file="${tft.descriptionStamp}">REVISION: ${buildNumber} (${java.version})${line.separator}DESCRIPTION: ${buildNumber} (${java.version})${line.separator}</echo>
+                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
+                                        <echo>${tft.description}</echo>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>print-description-stamp</id>
+            <activation>
+                <file>
+                    <exists>.description</exists> <!-- can't use a property here -->
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>print-build-properties</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target> 
+                                        <loadfile property="tft.xxx" srcFile="${tft.descriptionStamp}"/>
+                                        <echo>${tft.xxx}</echo>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
             <id>metrics</id>
             <properties>
                 <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/cobertura</tft.test.reportsDirectory>
@@ -959,29 +1003,7 @@
 
         <profile>
             <id>show-revision-id</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>show-revision</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                                <configuration>
-                                    <executable>cat</executable>
-                                    <arguments>
-                                        <argument>${tft.description.stamp}</argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
+            <!-- FIXME: legacy until you remove it from Hudson -->
         </profile>
 
         <profile>
