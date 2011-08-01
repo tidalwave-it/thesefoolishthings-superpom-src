@@ -44,7 +44,7 @@
         <bundle.namespace>${project.groupId}.${project.artifactId}</bundle.namespace>
         <staging.mvn.repo.url>file://${project.build.directory}/target-maven-repo</staging.mvn.repo.url>
         <testFailureIgnore>false</testFailureIgnore> <!-- backward compatibility, to be dropped -->
-        <revision.stamp>.revision</revision.stamp>
+        <tft.description.stamp>.description</tft.description.stamp>
         <stableAPI>false</stableAPI>
         <stableAPIVersion>(,${project.version})</stableAPIVersion>
         <disableJavaDocs>false</disableJavaDocs>
@@ -492,10 +492,9 @@
                         </goals>
                         <configuration>
                             <target>
-                                <echo>Java Version ${java.version}</echo>
                                 <!-- These two are needed by Hudson -->
-                                <echo>REVISION ${buildNumber}</echo>
-                                <echo file="${revision.stamp}">REVISION ${buildNumber}${line.separator}</echo>
+                                <echo>DESCRIPTION: ${buildNumber} (${java.version})</echo>
+                                <echo file="${tft.description.stamp}">REVISION ${buildNumber} (${java.version})${line.separator}</echo>
                             </target>
                         </configuration>
                     </execution>
@@ -971,7 +970,7 @@
                                 <configuration>
                                     <executable>cat</executable>
                                     <arguments>
-                                        <argument>${revision.stamp}</argument>
+                                        <argument>${tft.description.stamp}</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
