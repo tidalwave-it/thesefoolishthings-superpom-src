@@ -494,7 +494,7 @@
                             <target>
                                 <!-- These two are needed by Hudson -->
                                 <echo>DESCRIPTION: ${buildNumber} (${java.version})</echo>
-                                <echo file="${tft.description.stamp}">REVISION ${buildNumber} (${java.version})${line.separator}</echo>
+                                <echo file="${tft.description.stamp}">REVISION: ${buildNumber} (${java.version})${line.separator}DESCRIPTION: ${buildNumber} (${java.version})${line.separator}</echo>
                             </target>
                         </configuration>
                     </execution>
