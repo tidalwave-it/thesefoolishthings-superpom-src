@@ -599,7 +599,7 @@
                     <preparationGoals>clean install verify</preparationGoals>
                     <goals>clean install javadoc:javadoc assembly:assembly deploy</goals>
                     <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}"</arguments>
-                    <!-- tagNameFormat>@{project.version}</tagNameFormat broken, see http://jira.codehaus.org/browse/MRELEASE-695 NOTE: should have been fixed with 2.2 -->
+                    <!-- tagNameFormat>@{project.version}</tagNameFormat broken, see http://jira.codehaus.org/browse/MRELEASE-695 NOTE: should have been fixed with 2.2.1 -->
                 </configuration>
             </plugin>
 
@@ -951,6 +951,10 @@
                <!-- Mercurial has got .hg only in the root dir, so modules won't find it. -->
                <tft.buildNumber.getRevisionOnlyOnce>true</tft.buildNumber.getRevisionOnlyOnce>
             </properties>
+        </profile>
+
+        <profile>
+            <id>generate-revision-id</id> <!-- FIXME: legacy until you remove it from Hudson -->
         </profile>
 
         <profile>
