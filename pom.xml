@@ -43,7 +43,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bundle.namespace>${project.groupId}.${project.artifactId}</bundle.namespace>
         <staging.mvn.repo.url>file://${project.build.directory}/target-maven-repo</staging.mvn.repo.url>
-        <!-- changeSet>unknown</changeSet -->
         <testFailureIgnore>false</testFailureIgnore> <!-- backward compatibility, to be dropped -->
         <revision.stamp>.revision</revision.stamp>
         <stableAPI>false</stableAPI>
@@ -77,6 +76,7 @@
 
         <!-- tft.test.listeners></tft.test.listeners -->
         <tft.clirr.skip>false</tft.clirr.skip>
+        <tft.buildNumber.getRevisionOnlyOnce>false</tft.buildNumber.getRevisionOnlyOnce>
         <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
         <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
  
@@ -222,7 +222,7 @@
         </extensions>
 
         <!-- For changeSet to be properly evaluated by assembly:assembly, use also the validate goal -->
-        <finalName>${project.artifactId}-${project.version}.${changeSet}</finalName>
+        <finalName>${project.artifactId}-${project.version}.${buildNumber}</finalName>
 
         <!-- ***********************************************************************************************************
         *
@@ -460,6 +460,26 @@
         *
         ************************************************************************************************************ -->
         <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <getRevisionOnlyOnce>${tft.buildNumber.getRevisionOnlyOnce}</getRevisionOnlyOnce>
+                    <revisionOnScmFailure>unknown</revisionOnScmFailure>
+                </configuration>
+            </plugin>
+ 
             <!-- Compiler -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -949,33 +969,16 @@
         </profile>
 
         <profile>
+            <id>mercurial</id>
             <activation>
                 <file>
                    <exists>.hg</exists>
                 </file>
             </activation>
-            <id>get-changeset-id</id>
-            <build>
-                <plugins>
-                    <!-- Retrieves the Mercurial changeset. -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>buildnumber-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>hgchangeset</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <doCheck>false</doCheck>
-                            <doUpdate>false</doUpdate>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+               <!-- Mercurial has got .hg only in the root dir, so modules won't find it. -->
+               <tft.buildNumber.getRevisionOnlyOnce>true</tft.buildNumber.getRevisionOnlyOnce>
+            </properties>
         </profile>
 
         <profile>
