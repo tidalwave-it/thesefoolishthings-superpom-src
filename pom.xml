@@ -6,7 +6,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.4.1-SNAPSHOT</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://thesefoolishthings.kenai.com</url>
     <description>TheseFoolishThings</description>
@@ -466,6 +466,19 @@
         *
         ************************************************************************************************************ -->
         <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>.</directory>
+                            <includes>
+                                <include>${tft.descriptionStamp}</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
