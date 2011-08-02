@@ -760,9 +760,10 @@
                                 </goals>
                                 <configuration>
                                     <target> 
-                                        <echo file="${tft.descriptionStamp}">REVISION: ${buildNumber} (${java.version})${line.separator}DESCRIPTION: ${buildNumber} (${java.version})${line.separator}</echo>
+                                        <echo file="${tft.descriptionStamp}">REVISION: ${buildNumber}${line.separator}DESCRIPTION: ${buildNumber}${line.separator}</echo>
                                         <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
                                         <echo>${tft.description}</echo>
+                                        <echo>Java Version: ${java.version}</echo>
                                     </target>
                                 </configuration>
                             </execution>
@@ -793,8 +794,9 @@
                                 </goals>
                                 <configuration>
                                     <target> 
-                                        <loadfile property="tft.xxx" srcFile="${tft.descriptionStamp}"/>
-                                        <echo>${tft.xxx}</echo>
+                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
+                                        <echo>${tft.description}</echo>
+                                        <echo>Java Version: ${java.version}</echo>
                                     </target>
                                 </configuration>
                             </execution>
