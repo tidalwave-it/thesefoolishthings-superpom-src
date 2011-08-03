@@ -467,20 +467,6 @@
         ************************************************************************************************************ -->
         <plugins>
             <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>.</directory>
-                            <includes>
-                                <include>${tft.descriptionStamp}</include>
-                            </includes>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
                 <executions>
@@ -499,44 +485,6 @@
                 </configuration>
             </plugin>
  
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>generate-and-print-build-description</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target> 
-                                <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="maven.plugin.classpath" />
-                                <if>
-                                     <not>
-                                         <resourceexists>
-                                             <file file="${tft.descriptionStamp}"/>
-                                         </resourceexists>
-                                     </not>
-                                     <then>
-                                          <echo file="${tft.descriptionStamp}">REVISION: ${buildNumber}${line.separator}DESCRIPTION: ${buildNumber}${line.separator}</echo>
-                                     </then>
-                                </if>
-                                <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
-                                <echo>${tft.description}</echo>
-                                <echo>Java Version: ${java.version}</echo>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>ant-contrib</groupId>
-                        <artifactId>ant-contrib</artifactId>
-                        <version>20020829</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
 
             <!-- Compiler -->
             <plugin>
@@ -991,12 +939,60 @@
         </profile>
 
         <profile>
-            <id>generate-revision-id</id> <!-- FIXME: legacy until you remove it from Hudson -->
+            <id>generate-revision-id</id> 
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>generate-and-print-build-description</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target> 
+                                        <echo file="${tft.descriptionStamp}">REVISION: ${buildNumber}${line.separator}DESCRIPTION: ${buildNumber}${line.separator}</echo>
+                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
+                                        <echo>${tft.description}</echo>
+                                        <echo>Java Version: ${java.version}</echo>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
 
         <profile>
             <id>show-revision-id</id>
-            <!-- FIXME: legacy until you remove it from Hudson -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>print-build-description</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target> 
+                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
+                                        <echo>${tft.description}</echo>
+                                        <echo>Java Version: ${java.version}</echo>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
 
         <profile>
