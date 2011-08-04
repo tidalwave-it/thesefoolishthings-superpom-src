@@ -926,19 +926,6 @@
         </profile>
 
         <profile>
-            <id>mercurial</id>
-            <activation>
-                <file>
-                   <exists>.hg</exists>
-                </file>
-            </activation>
-            <properties>
-               <!-- Mercurial has got .hg only in the root dir, so modules won't find it. -->
-               <tft.buildNumber.getRevisionOnlyOnce>true</tft.buildNumber.getRevisionOnlyOnce>
-            </properties>
-        </profile>
-
-        <profile>
             <id>generate-revision-id</id> 
             <build>
                 <plugins>
