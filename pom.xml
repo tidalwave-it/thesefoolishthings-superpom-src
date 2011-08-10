@@ -82,7 +82,7 @@
         <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
  
         <!--==== Plugin Versions ==================================================================================-->
-            
+           
         <tft.maven-android-plugin.version>2.9.0-beta-4</tft.maven-android-plugin.version>
         <tft.maven-antrun-plugin.version>1.6</tft.maven-antrun-plugin.version>
         <tft.maven-archetype-plugin.version>2.0-alpha-5</tft.maven-archetype-plugin.version>
@@ -111,6 +111,7 @@
         <tft.maven-site-plugin.version>2.2</tft.maven-site-plugin.version> <!-- 3.0-beta-3 miserably fails with -->
         <tft.maven-source-plugin.version>2.1.2</tft.maven-source-plugin.version>
         <tft.maven-surefire-plugin.version>2.9</tft.maven-surefire-plugin.version>
+        <tft.maven-war-plugin.version>2.1.1</tft.maven-war-plugin.version>
 
         <tft.aspectj-maven-plugin.version>1.3.1</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>1.7</tft.build-helper-maven-plugin.version>
@@ -332,6 +333,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-scm-plugin</artifactId>
                     <version>${tft.maven-scm-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${tft.maven-war-plugin.version}</version>
                 </plugin>
 
                 <plugin>
