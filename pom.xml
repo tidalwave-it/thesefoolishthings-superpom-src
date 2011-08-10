@@ -75,6 +75,7 @@
         <tft.gwt.version>2.1.1</tft.gwt.version>
 
         <!-- tft.test.listeners></tft.test.listeners -->
+        <tft.javadoc.excludePackageNames>*.impl:*.impl.*</tft.javadoc.excludePackageNames>
         <tft.clirr.skip>false</tft.clirr.skip>
         <tft.buildNumber.getRevisionOnlyOnce>false</tft.buildNumber.getRevisionOnlyOnce>
         <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
@@ -729,7 +730,7 @@
                         </tag>
                     </tags>
                     <docfilessubdirs>true</docfilessubdirs>
-                    <excludePackageNames>*.impl:*.impl.*</excludePackageNames>
+                    <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
                     <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
                     <docletArtifact>
                         <groupId>org.umlgraph</groupId>
@@ -1329,7 +1330,7 @@
                         </tag>
                     </tags>
                     <docfilessubdirs>true</docfilessubdirs>
-                    <excludePackageNames>*.impl:*.impl.*</excludePackageNames>
+                    <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
                     <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
                     <docletArtifact>
                         <groupId>org.umlgraph</groupId>
