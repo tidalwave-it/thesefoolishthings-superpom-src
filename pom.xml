@@ -74,6 +74,8 @@
 
         <tft.gwt.version>2.1.1</tft.gwt.version>
 
+        <tft.scm>hg</tft.scm>
+
         <!-- tft.test.listeners></tft.test.listeners -->
         <tft.javadoc.excludePackageNames>*.impl:*.impl.*</tft.javadoc.excludePackageNames>
         <tft.clirr.skip>false</tft.clirr.skip>
@@ -137,8 +139,8 @@
     </properties>
 
     <scm>
-        <connection>scm:hg:${scm.repo.readonly.url}</connection>
-        <developerConnection>scm:hg:${scm.repo.effective.url}</developerConnection>
+        <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
+        <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
     </scm>
 
