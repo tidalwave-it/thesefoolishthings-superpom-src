@@ -837,6 +837,11 @@
             </reporting>
         </profile>
 
+    <!--================================================================================================================
+    
+    This profile is activated during a release.
+    
+    =================================================================================================================-->
         <profile>
             <id>release</id>
 
@@ -907,6 +912,11 @@
             </build>
         </profile>
 
+    <!--================================================================================================================
+    
+    This profile signs the build artifacts.
+    
+    =================================================================================================================-->
         <profile>
             <id>release-sign-artifacts</id>
             <activation>
@@ -934,6 +944,11 @@
             </build>
         </profile>
 
+    <!--================================================================================================================
+    
+    This profile stores the current build description and Java version into a local file.
+    
+    =================================================================================================================-->
         <profile>
             <id>generate-revision-id</id> 
             <build>
@@ -963,6 +978,11 @@
             </build>
         </profile>
 
+    <!--================================================================================================================
+    
+    This profile prints the current build description and Java version - used for Hudson builds.
+    
+    =================================================================================================================-->
         <profile>
             <id>show-revision-id</id>
             <build>
@@ -991,6 +1011,11 @@
             </build>
         </profile>
 
+    <!--================================================================================================================
+    
+    This profile commits local artifacts after a successful staged release and pushes Mercurial changes.
+    
+    =================================================================================================================-->
         <profile>
             <id>release-commit</id>
             <build>
@@ -1037,6 +1062,12 @@
             </build>
         </profile>
 
+    <!--================================================================================================================
+    
+    This profile is executed when a staged release is canceled. BEWARE: it strips the local HG repository! It has been
+    designed to work with Hudson.
+    
+    =================================================================================================================-->
         <profile>
             <id>release-cancel</id>
             <build>
@@ -1066,6 +1097,11 @@
             </build>
         </profile>
 
+    <!--================================================================================================================
+    
+    This profile deploys the extra artifacts xxx-bin.tar.gz and xxx-project.tar.gz.
+    
+    =================================================================================================================-->
         <profile>
             <id>deploy-extra-artifacts</id>
 
@@ -1187,7 +1223,7 @@
             </activation>
             <build>        
                 <plugins>        
-                <!-- Will be no more needed when http://jira.codehaus.org/browse/MASPECTJ-9 is available -->
+                <!-- Will be no more needed when http://jira.codehaus.org/browse/MASPECTJ-9 is fixed -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
@@ -1213,15 +1249,14 @@
                                 <configuration>
                                     <target>
                                         <taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties"
-                                    classpathref="maven.plugin.classpath" />
-                                        <iajc
-                                    destDir="${project.build.directory}/classes"
-                                    inpath="${project.build.directory}/classes"
-                                    source="${tft.javac.source}"
-                                    target="${tft.javac.target}"
-                                    aspectPath="${org.springframework:spring-aspects:jar}"
-                                    classpathRef="maven.compile.classpath"
-                                    Xlint="ignore" />
+                                                 classpathref="maven.plugin.classpath" />
+                                        <iajc destDir="${project.build.directory}/classes"
+                                              inpath="${project.build.directory}/classes"
+                                              source="${tft.javac.source}"
+                                              target="${tft.javac.target}"
+                                              aspectPath="${org.springframework:spring-aspects:jar}"
+                                              classpathRef="maven.compile.classpath"
+                                              Xlint="ignore" />
                                     </target>
                                 </configuration>
                             </execution>
@@ -1234,15 +1269,14 @@
                                 <configuration>
                                     <target>
                                         <taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties"
-                                    classpathref="maven.plugin.classpath" />
-                                        <iajc
-                                    destDir="${project.build.directory}/test-classes"
-                                    inpath="${project.build.directory}/test-classes"
-                                    source="${tft.javac.source}"
-                                    target="${tft.javac.target}"
-                                    aspectPath="${org.springframework:spring-aspects:jar}"
-                                    classpathRef="maven.compile.classpath"
-                                    Xlint="ignore" />
+                                                 classpathref="maven.plugin.classpath" />
+                                        <iajc destDir="${project.build.directory}/test-classes"
+                                              inpath="${project.build.directory}/test-classes"
+                                              source="${tft.javac.source}"
+                                              target="${tft.javac.target}"
+                                              aspectPath="${org.springframework:spring-aspects:jar}"
+                                              classpathRef="maven.compile.classpath"
+                                              Xlint="ignore" />
                                     </target>
                                 </configuration>
                             </execution>
