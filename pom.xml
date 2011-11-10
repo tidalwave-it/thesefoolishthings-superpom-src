@@ -57,6 +57,9 @@
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
+        <tft.javac.debug>true</tft.javac.debug>
+        <tft.javac.optimize>true</tft.javac.optimize>
+        <tft.release.localCheckout>true</tft.release.localCheckout>            
         <tft.lombok.version>0.10.2</tft.lombok.version>
         <tft.testng.version>6.0.1</tft.testng.version>
         <tft.junit.version>4.7</tft.junit.version>
@@ -494,13 +497,12 @@
                 </configuration>
             </plugin>
  
-
             <!-- Compiler -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <debug>true</debug>
-                    <optimize>true</optimize>
+                    <debug>${tft.javac.debug}</debug>
+                    <optimize>${tft.javac.optimize}</optimize>
                     <source>${tft.javac.source}</source>
                     <target>${tft.javac.target}</target>
                     <showDeprecation>true</showDeprecation>
@@ -588,7 +590,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
-                    <localCheckout>true</localCheckout>
+                    <localCheckout>{tft.release.localCheckout}</localCheckout>
                     <!-- pushChanges>false</pushChanges --> <!-- doesn't work! NOTE: should have been fixed with scm-plugin 1.5 -->
                     <preparationGoals>clean install verify</preparationGoals>
                     <goals>clean install javadoc:javadoc assembly:assembly deploy</goals>
