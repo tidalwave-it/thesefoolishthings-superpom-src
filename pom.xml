@@ -57,7 +57,7 @@
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
-        <tft.lombok.version>0.10.0-RC1</tft.lombok.version>
+        <tft.lombok.version>0.10.2</tft.lombok.version>
         <tft.testng.version>6.0.1</tft.testng.version>
         <tft.junit.version>4.7</tft.junit.version>
         <tft.mockito.version>1.8.2</tft.mockito.version>
