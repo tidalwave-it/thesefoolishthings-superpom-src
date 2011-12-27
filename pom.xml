@@ -60,7 +60,7 @@
         <tft.javac.debug>true</tft.javac.debug>
         <tft.javac.optimize>true</tft.javac.optimize>
         <tft.release.localCheckout>true</tft.release.localCheckout>            
-        <tft.lombok.version>0.10.2</tft.lombok.version>
+        <tft.lombok.version>0.10.6</tft.lombok.version>
         <tft.testng.version>6.1.1</tft.testng.version>
         <tft.junit.version>4.7</tft.junit.version>
         <tft.mockito.version>1.8.2</tft.mockito.version>
