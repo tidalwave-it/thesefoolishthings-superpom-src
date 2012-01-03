@@ -71,6 +71,8 @@
 
         <tft.aspectjrt.version>1.6.11</tft.aspectjrt.version>
 
+        <tft.jarbundler.version>2.2.0</tft.jarbundler.version>
+
         <tft.jetty.stopPort>9966</tft.jetty.stopPort>
         <tft.jetty.scanIntervalSeconds>4</tft.jetty.scanIntervalSeconds>
         <tft.jetty.stopKey>${project.groupId}:${project.artifactId}</tft.jetty.stopKey>        
@@ -1326,6 +1328,72 @@
                                 <version>${tft.gwt.version}</version>
                             </dependency>
                         </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    <!--================================================================================================================
+
+    This profile configures the jarbundler for the build. Create an empty file in src/config/activate-appbundle-profile
+    to activate it.
+
+    =================================================================================================================-->
+        <profile>
+            <id>appbundle</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-appbundle-profile</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>             
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>create-app-bundle</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <taskdef name="jarbundler" 
+                                         classname="net.sourceforge.jarbundler.JarBundler" 
+                                         classpath="src/main/app-resources/jarbundler-${tft.jarbundler.version}.jar" />
+    
+                                        <mkdir dir="${project.build.directory}/appbundle"/>
+                                        <unjar src="${project.build.directory}/${project.artifactId}-${project.version}.${buildNumber}.zip" 
+                                       dest="${project.build.directory}/appbundle"/>
+
+                                        <jarbundler dir="${project.build.directory}"
+                                            jar="${project.build.directory}/appbundle/${netbeans.cluster}/platform/lib/boot.jar" 
+                                            name="${tft.appbundle.name}"
+                                            mainclass="dummy"
+                                            jvmversion="${tft.javac.target}+"
+                                            showplist="false"
+                                            build="${project.version}"
+                                            bundleId="${project.groupId}"
+                                            icon="${tft.appbundle.name}.icns"
+                                            shortname="${tft.appbundle.name}"
+                                            signature="${tft.appbundle.signature}"
+                                            stubfile="src/main/app-resources/${netbeans.cluster}"
+                                            version="${project.version}">
+
+                                            <javafileset dir="${project.build.directory}/appbundle">
+                                                <include name="**/*" />
+                                            </javafileset>
+
+                                        </jarbundler>
+
+                                        <chmod file="${project.build.directory}/${tft.appbundle.name}.app/Contents/Resources/Java/${netbeans.cluster}/bin/${netbeans.cluster}" 
+                                       perm="ugo+rx"/>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
