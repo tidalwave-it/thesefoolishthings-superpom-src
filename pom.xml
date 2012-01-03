@@ -1390,7 +1390,7 @@
                                         </jarbundler>
 
                                         <chmod file="${project.build.directory}/${tft.appbundle.name}.app/Contents/Resources/Java/${netbeans.cluster}/bin/${netbeans.cluster}" 
-                                       perm="ugo+rx"/>
+                                               perm="ugo+rx"/>
                                     </target>
                                 </configuration>
                             </execution>
