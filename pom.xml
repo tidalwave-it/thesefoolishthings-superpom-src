@@ -1370,8 +1370,8 @@
 
                                         <jarbundler dir="${project.build.directory}"
                                                     jar="${project.build.directory}/appbundle/${netbeans.cluster}/platform/lib/boot.jar" 
-                                                    name="${tft.appbundle.name}"
                                                     mainclass="dummy"
+                                                    name="${tft.appbundle.name}"
                                                     jvmversion="${tft.javac.target}+"
                                                     showplist="false"
                                                     build="${project.version}"
@@ -1391,7 +1391,52 @@
 
                                         <chmod file="${project.build.directory}/${tft.appbundle.name}.app/Contents/Resources/Java/${netbeans.cluster}/bin/${netbeans.cluster}" 
                                                perm="ugo+rx"/>
+
+                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
+                                            <arg value="create"/> 
+                                            <arg value="-noanyowners"/> 
+                                            <arg value="-imagekey"/> 
+                                            <arg value="zlib-level=9"/> 
+                                            <arg value="-srcfolder"/> 
+                                            <arg value="${tft.appbundle.name}.app"/> 
+                                            <arg value="${tft.appbundle.name}.dmg"/>
+                                        </exec>
+
+                                        <exec dir="${project.build.directory}" os="Linux" executable="mkisofs">
+                                            <arg value="-V"/> 
+                                            <arg value="${tft.appbundle.name}"/>
+                                            <arg value="-r"/>
+                                            <arg value="-apple"/>
+                                            <arg value="-o"/>
+                                            <arg value="${tft.appbundle.name}.dmg"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
+                                        </exec>
+
+                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg"
+                                              destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz"/>
                                     </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-app-bundle</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${project.build.directory}/${tft.appbundle.name}.dmg.gz</file>
+                                            <type>dmg.gz</type>
+                                            <classifier>executable</classifier>
+                                        </artifact>
+                                    </artifacts>
                                 </configuration>
                             </execution>
                         </executions>
