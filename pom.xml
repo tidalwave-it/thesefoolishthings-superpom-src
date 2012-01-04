@@ -1365,7 +1365,7 @@
                                                  classpath="src/main/app-resources/jarbundler-${tft.jarbundler.version}.jar" />
     
                                         <mkdir dir="${project.build.directory}/appbundle"/>
-                                        <unjar src="${project.build.directory}/${project.artifactId}-${project.version}.${buildNumber}.zip" 
+                                        <unjar src="${project.build.directory}/${project.build.finalName}.zip" 
                                                dest="${project.build.directory}/appbundle"/>
 
                                         <jarbundler dir="${project.build.directory}"
