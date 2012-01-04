@@ -1343,7 +1343,7 @@
             <id>appbundle</id>
             <activation>
                 <file>
-                    <exists>src/config/activate-appbundle-profile</exists>
+                    <exists>src/config/activate-netbeans-platform-appbundle-profile</exists>
                 </file>
             </activation>
             <build>
@@ -1396,7 +1396,7 @@
                                             <arg value="create"/> 
                                             <arg value="-noanyowners"/> 
                                             <arg value="-imagekey"/> 
-                                            <arg value="zlib-level=9"/> 
+                                            <arg value="zlib-level=1"/> 
                                             <arg value="-srcfolder"/> 
                                             <arg value="${tft.appbundle.name}.app"/> 
                                             <arg value="${tft.appbundle.name}.dmg"/>
@@ -1405,10 +1405,20 @@
                                         <exec dir="${project.build.directory}" os="Linux" executable="mkisofs">
                                             <arg value="-V"/> 
                                             <arg value="${tft.appbundle.name}"/>
+                                            <arg value="-U"/>
+                                            <arg value="-f"/>
+                                            <arg value="-D"/>
+                                            <arg value="-l"/>
+                                            <arg value="-L"/>
+                                            <arg value="-allow-multidot"/>
+                                            <arg value="-max-iso9660-filenames"/>
+                                            <arg value="-relaxed-filenames"/>
+                                            <arg value="-no-iso-translate"/>
                                             <arg value="-r"/>
-                                            <arg value="-apple"/>
                                             <arg value="-o"/>
                                             <arg value="${tft.appbundle.name}.dmg"/>
+                                            <arg value="-root"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
                                             <arg value="${tft.appbundle.name}.app"/>
                                         </exec>
 
