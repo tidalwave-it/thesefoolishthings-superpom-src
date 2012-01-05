@@ -1364,29 +1364,38 @@
                                                  classname="net.sourceforge.jarbundler.JarBundler" 
                                                  classpath="src/main/app-resources/jarbundler-${tft.jarbundler.version}.jar" />
     
-                                        <mkdir dir="${project.build.directory}/appbundle"/>
+                                        <mkdir dir="${project.build.directory}/appbundle/java"/>
+                                        <mkdir dir="${project.build.directory}/appbundle/resources"/>
+                                        <mkdir dir="${project.build.directory}/appbundle/executables"/>
+
                                         <unjar src="${project.build.directory}/${project.build.finalName}.zip" 
-                                               dest="${project.build.directory}/appbundle"/>
+                                               dest="${project.build.directory}/appbundle/java"/>
 
                                         <jarbundler dir="${project.build.directory}"
-                                                    jar="${project.build.directory}/appbundle/${netbeans.cluster}/platform/lib/boot.jar" 
+                                                    jar="${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib/boot.jar" 
                                                     mainclass="dummy"
                                                     name="${tft.appbundle.name}"
+                                                    shortname="${tft.appbundle.name}"
+                                                    signature="${tft.appbundle.signature}"
+                                                    icon="src/main/app-resources/${netbeans.cluster}.icns"
                                                     jvmversion="${tft.javac.target}+"
                                                     showplist="false"
                                                     build="${project.version}"
                                                     bundleId="${project.groupId}"
-                                                    icon="src/main/app-resources/${netbeans.cluster}.icns"
-                                                    shortname="${tft.appbundle.name}"
-                                                    signature="${tft.appbundle.signature}"
                                                     stubfile="src/main/app-resources/${netbeans.cluster}"
                                                     version="${project.version}">
                                             <javafileset dir="src/main/app-resources">
                                                 <include name="**/*.icns" />
                                             </javafileset>
-                                            <javafileset dir="${project.build.directory}/appbundle">
+                                            <javafileset dir="${project.build.directory}/appbundle/java">
                                                 <include name="**/*" />
                                             </javafileset>
+                                            <resourcefileset dir="${project.build.directory}/appbundle/resources">
+                                                <include name="**/*" />
+                                            </resourcefileset>
+                                            <execfileset dir="${project.build.directory}/appbundle/executables">
+                                                <include name="**/*" />
+                                            </execfileset>
                                         </jarbundler>
 
                                         <chmod file="${project.build.directory}/${tft.appbundle.name}.app/Contents/Resources/Java/${netbeans.cluster}/bin/${netbeans.cluster}" 
