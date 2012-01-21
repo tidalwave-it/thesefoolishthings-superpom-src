@@ -43,8 +43,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bundle.namespace>${project.groupId}.${project.artifactId}</bundle.namespace>
         <staging.mvn.repo.url>file://${project.build.directory}/target-maven-repo</staging.mvn.repo.url>
+
+        <!-- Deprecated properties replaced by tft.* ones -->
         <testFailureIgnore>false</testFailureIgnore> <!-- backward compatibility, to be dropped -->
-        <tft.descriptionStamp>.description</tft.descriptionStamp>
         <stableAPI>false</stableAPI>
         <stableAPIVersion>(,${project.version})</stableAPIVersion>
         <disableJavaDocs>false</disableJavaDocs>
@@ -52,6 +53,7 @@
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
         <release.profiles>release</release.profiles>
 
+        <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.maven.requiredVersion>3.0.3</tft.maven.requiredVersion> 
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.javac.source>1.6</tft.javac.source>
@@ -59,6 +61,13 @@
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
         <tft.javac.debug>true</tft.javac.debug>
         <tft.javac.optimize>true</tft.javac.optimize>
+        <tft.javac.showDeprecation>true</tft.javac.showDeprecation>
+        <tft.javac.showWarnings>true</tft.javac.showWarnings>
+        <tft.javac.fork>true</tft.javac.fork>
+        <tft.stableAPI>${stableAPI}</tft.stableAPI>
+        <tft.stableAPIVersion>${stableAPIVersion}</tft.stableAPIVersion>
+        <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
+        <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
         <tft.release.localCheckout>true</tft.release.localCheckout>            
         <tft.lombok.version>0.10.6</tft.lombok.version>
         <tft.testng.version>6.1.1</tft.testng.version>
@@ -68,6 +77,8 @@
         <tft.test.maxMemory>768M</tft.test.maxMemory>
         <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/plain</tft.test.reportsDirectory>
         <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
+
+        <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
 
         <tft.aspectjrt.version>1.6.11</tft.aspectjrt.version>
 
@@ -132,7 +143,7 @@
         <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
         <tft.jaxb2-maven-plugin.version>1.3</tft.jaxb2-maven-plugin.version>
         <tft.nbm-maven-plugin.version>3.6</tft.nbm-maven-plugin.version>                    
-        <tft.nexus-maven-plugin.version>1.9.2.1</tft.nexus-maven-plugin.version>                    
+        <tft.nexus-maven-plugin.version>1.9.2.4</tft.nexus-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>1.1</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>1.0.2</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>1.2</tft.versions-maven-plugin.version>
@@ -140,7 +151,6 @@
         <tft.webdav-jackrabbit.version>1.0-beta-7</tft.webdav-jackrabbit.version>
 
         <tft.archetype-packaging.version>2.0-alpha-5</tft.archetype-packaging.version>
-
     </properties>
 
     <scm>
@@ -498,7 +508,7 @@
                     <revisionOnScmFailure>unknown</revisionOnScmFailure>
                 </configuration>
             </plugin>
- 
+
             <!-- Compiler -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -507,9 +517,9 @@
                     <optimize>${tft.javac.optimize}</optimize>
                     <source>${tft.javac.source}</source>
                     <target>${tft.javac.target}</target>
-                    <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
-                    <fork>true</fork>
+                    <showDeprecation>${tft.javac.showDeprecation}</showDeprecation>
+                    <showWarnings>${tft.javac.showWarnings}</showWarnings>
+                    <fork>${tft.javac.fork}</fork>
                     <compilerArgument>
                         ${tft.javac.xlint}
                     </compilerArgument>
@@ -583,7 +593,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
-                    <skip>${disableDeploy}</skip>
+                    <skip>${tft.disableDeploy}</skip>
                 </configuration>
             </plugin>
 
@@ -609,6 +619,7 @@
                     <descriptor>src/main/nbm/module.xml</descriptor>
                     <brandingToken>${netbeans.brandingToken}</brandingToken>
                     <cluster>${netbeans.cluster}</cluster>
+                    <useOSGiDependencies>${tft.netbeans.useOSGiDependencies}</useOSGiDependencies>
                 </configuration>
             </plugin>
 
@@ -639,8 +650,8 @@
                 <!-- Configuration must be replicated in reporting section -->
                 <configuration>
                     <skip>${tft.clirr.skip}</skip>
-                    <failOnError>${stableAPI}</failOnError>
-                    <comparisonVersion>${stableAPIVersion}</comparisonVersion>
+                    <failOnError>${tft.stableAPI}</failOnError>
+                    <comparisonVersion>${tft.stableAPIVersion}</comparisonVersion>
                     <logResults>true</logResults>
                     <minSeverity>info</minSeverity>
                 </configuration>
@@ -751,7 +762,7 @@
                     </docletArtifact>
                     <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
                     <useStandardDocletOptions>true</useStandardDocletOptions> 
-                    <skip>${disableJavaDocs}</skip>
+                    <skip>${tft.disableJavaDocs}</skip>
                 </configuration>
             </plugin>
         </plugins>
@@ -1528,7 +1539,7 @@
                     </docletArtifact>
                     <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
                     <useStandardDocletOptions>true</useStandardDocletOptions> 
-                    <skip>${disableJavaDocs}</skip>
+                    <skip>${tft.disableJavaDocs}</skip>
                 </configuration>
             </plugin>
 
@@ -1540,8 +1551,8 @@
                 <!-- Configuration must be replicated in build section -->
                 <configuration>
                     <skip>${tft.clirr.skip}</skip>
-                    <failOnError>${stableAPI}</failOnError>
-                    <comparisonVersion>${stableAPIVersion}</comparisonVersion>
+                    <failOnError>${tft.stableAPI}</failOnError>
+                    <comparisonVersion>${tft.stableAPIVersion}</comparisonVersion>
                     <logResults>true</logResults>
                     <minSeverity>info</minSeverity>
                 </configuration>
