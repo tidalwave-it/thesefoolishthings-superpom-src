@@ -84,6 +84,7 @@
 
         <tft.jarbundler.version>2.2.0</tft.jarbundler.version>
 
+        <tft.jetty.port>8080</tft.jetty.port>
         <tft.jetty.stopPort>9966</tft.jetty.stopPort>
         <tft.jetty.scanIntervalSeconds>4</tft.jetty.scanIntervalSeconds>
         <tft.jetty.stopKey>${project.groupId}:${project.artifactId}</tft.jetty.stopKey>        
@@ -109,8 +110,9 @@
         <tft.maven-checkstyle-plugin.version>2.6</tft.maven-checkstyle-plugin.version>
         <tft.maven-clean-plugin.version>2.4.1</tft.maven-clean-plugin.version>
         <tft.maven-compiler-plugin.version>2.3.2</tft.maven-compiler-plugin.version>
-        <tft.maven-dependency-plugin.version>2.3</tft.maven-dependency-plugin.version>
+        <tft.maven-dependency-plugin.version>2.4</tft.maven-dependency-plugin.version>
         <tft.maven-deploy-plugin.version>2.6</tft.maven-deploy-plugin.version>
+        <tft.maven-doap-plugin.version>1.1</tft.maven-doap-plugin.version>
         <tft.maven-enforcer-plugin.version>1.0.1</tft.maven-enforcer-plugin.version>
         <tft.maven-gpg-plugin.version>1.3</tft.maven-gpg-plugin.version>
         <tft.maven-graph-plugin.version>1.15</tft.maven-graph-plugin.version>
@@ -137,7 +139,7 @@
         <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version>
         <tft.cobertura-maven-plugin.version>2.5.1</tft.cobertura-maven-plugin.version>
         <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
-        <tft.findbugs-maven-plugin.version>2.3.2</tft.findbugs-maven-plugin.version> 
+        <tft.findbugs-maven-plugin.version>2.4.0</tft.findbugs-maven-plugin.version> 
         <tft.gmaven-plugin>1.0</tft.gmaven-plugin>
         <tft.gwt-maven-plugin.version>2.1.0-1</tft.gwt-maven-plugin.version>
         <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
@@ -335,6 +337,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>${tft.maven-dependency-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-doap-plugin</artifactId>
+                    <version>${tft.maven-doap-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -602,7 +609,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
-                    <localCheckout>{tft.release.localCheckout}</localCheckout>
+                    <localCheckout>${tft.release.localCheckout}</localCheckout>
                     <!-- pushChanges>false</pushChanges --> <!-- doesn't work! NOTE: should have been fixed with scm-plugin 1.5 -->
                     <preparationGoals>clean install verify</preparationGoals>
                     <goals>clean install source:test-jar javadoc:javadoc assembly:assembly deploy</goals>
@@ -1206,6 +1213,12 @@
                         <groupId>org.mortbay.jetty</groupId>
                         <artifactId>maven-jetty-plugin</artifactId>
                         <configuration>
+                        <connectors>
+                            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                                <port>${tft.jetty.port}</port>
+                                <maxIdleTime>60000</maxIdleTime>
+                            </connector>
+                        </connectors>
                             <stopPort>${tft.jetty.stopPort}</stopPort>
                             <stopKey>${tft.jetty.stopKey}</stopKey>
                             <scanIntervalSeconds>${tft.jetty.scanIntervalSeconds}</scanIntervalSeconds>
