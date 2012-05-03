@@ -559,7 +559,7 @@
                         <property>
                         </property>
                     </systemProperties -->
-                    <argLine>-Xmx${tft.test.maxMemory}</argLine>
+                    <argLine>-Xmx${tft.test.maxMemory} ${tft.test.vmOptions}</argLine>
                     <testFailureIgnore>${tft.test.failureIgnore}</testFailureIgnore>
                     <runOrder>alphabetical</runOrder>
                     <!-- properties> FIXME: doesn't work if left empty -> crashes surefire
