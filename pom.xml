@@ -79,6 +79,12 @@
         <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
         <tft.test.vmOptions></tft.test.vmOptions>
 
+        <tft.embedded-jre-groupId>it.tidalwave.jre</tft.embedded-jre-groupId>
+        <tft.embedded-jre-artifactId>it-tidalwave-jre7</tft.embedded-jre-artifactId>
+        <tft.embedded-jre-version>1.7.0_04-1</tft.embedded-jre-version>
+        <tft.embedded-jre-classifier>macosx-intel</tft.embedded-jre-classifier>
+        <tft.embedded-jre-directory>jre-1.7.0_04</tft.embedded-jre-directory>
+
         <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
 
         <tft.aspectjrt.version>1.6.11</tft.aspectjrt.version>
@@ -1375,6 +1381,23 @@
                 <plugins>             
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>unpack-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <excludeTransitive>true</excludeTransitive>
+                                    <outputDirectory>${project.build.directory}/appbundle/java</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
                             <execution>
@@ -1392,10 +1415,10 @@
                                         <mkdir dir="${project.build.directory}/appbundle/java"/>
                                         <mkdir dir="${project.build.directory}/appbundle/resources"/>
                                         <mkdir dir="${project.build.directory}/appbundle/executables"/>
-
-                                        <unjar src="${project.build.directory}/${project.build.finalName}.zip" 
-                                               dest="${project.build.directory}/appbundle/java"/>
-
+<!--
+                                        <copy file="myfile.txt" 
+                                              todir="../some/other/dir"/>
+-->
                                         <jarbundler dir="${project.build.directory}"
                                                     jar="${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib/boot.jar" 
                                                     mainclass="dummy"
@@ -1489,6 +1512,50 @@
             </build>
         </profile>
         
+    <!--================================================================================================================
+
+    This profile embeds the JRE for Mac OS X.
+
+    =================================================================================================================-->
+        <profile>
+            <id>macosx-embedjre</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-macosx-embedjre-profile</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>embed-jre</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>${tft.embedded-jre-groupId}</groupId>
+                                            <artifactId>${tft.embedded-jre-artifactId}</artifactId>
+                                            <version>${tft.embedded-jre-version}</version>
+                                            <type>tgz</type>
+                                            <classifier>${tft.embedded-jre-classifier}</classifier>
+                                            <overWrite>true</overWrite>
+                                            <outputDirectory>${project.basedir}/target/appbundle/executables/${tft.embedded-jre-directory}</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     <!--================================================================================================================
     
     
