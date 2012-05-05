@@ -1428,10 +1428,7 @@
                                         <mkdir dir="${project.build.directory}/appbundle/java"/>
                                         <mkdir dir="${project.build.directory}/appbundle/resources"/>
                                         <mkdir dir="${project.build.directory}/appbundle/executables"/>
-<!--
-                                        <copy file="myfile.txt" 
-                                              todir="../some/other/dir"/>
--->
+
                                         <jarbundler dir="${project.build.directory}"
                                                     jar="${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib/boot.jar" 
                                                     mainclass="dummy"
