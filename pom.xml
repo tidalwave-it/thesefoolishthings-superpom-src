@@ -55,6 +55,7 @@
 
         <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.maven.requiredVersion>3.0.3</tft.maven.requiredVersion> 
+        <tft.maven.requiredJdk>[1.6.0,)</tft.maven.requiredJdk>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
@@ -652,6 +653,18 @@
                                 <requireMavenVersion>
                                     <version>${tft.maven.requiredVersion}</version>
                                 </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <message>To build this project JDK ${tft.maven.requiredJdk} is required. Please install it and properly set JAVA_HOME.</message>
+                                    <version>${tft.maven.requiredJdk}</version>
+                                </requireJavaVersion>
+                                <!-- Note that this rule is currently not working with Maven 3.x -->
+                                <requirePluginVersions>
+                                    <message>Best Practice is to always define plugin versions!</message>
+                                    <banLatest>true</banLatest>
+                                    <banRelease>true</banRelease>
+                                    <banSnapshots>true</banSnapshots>
+                                    <phases>clean,deploy,site</phases>
+                                </requirePluginVersions>
                             </rules>    
                         </configuration>
                     </execution>
