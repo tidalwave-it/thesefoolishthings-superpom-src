@@ -901,6 +901,7 @@
             <properties>
                 <scm.repo.effective.url>file://${project.build.directory}/dummy-hg-repo</scm.repo.effective.url>
                 <skipTests>true</skipTests>
+                <dryRun>false</dryRun>
                 <altDeploymentRepository>release-repo-hudson::default::${staging.mvn.repo.url}</altDeploymentRepository>
             </properties>
 
