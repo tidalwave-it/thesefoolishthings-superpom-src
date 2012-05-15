@@ -70,7 +70,10 @@
         <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
         <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
         <tft.release.localCheckout>true</tft.release.localCheckout>            
-        <tft.lombok.version>0.10.6</tft.lombok.version>
+        <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
+        <tft.release.completionGoals></tft.release.completionGoals>
+        <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:assembly deploy</tft.release.goals>
+        <tft.lombok.version>0.11.0</tft.lombok.version>
         <tft.testng.version>6.1.1</tft.testng.version>
         <tft.junit.version>4.7</tft.junit.version>
         <tft.mockito.version>1.8.2</tft.mockito.version>
@@ -103,6 +106,7 @@
 
         <!-- tft.test.listeners></tft.test.listeners -->
         <tft.javadoc.excludePackageNames>*.impl:*.impl.*</tft.javadoc.excludePackageNames>
+        <tft.javadoc.doclet>org.umlgraph.doclet.UmlGraphDoc</tft.javadoc.doclet>
         <tft.clirr.skip>false</tft.clirr.skip>
         <tft.buildNumber.getRevisionOnlyOnce>false</tft.buildNumber.getRevisionOnlyOnce>
         <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
@@ -625,13 +629,14 @@
                 <configuration>
                     <localCheckout>${tft.release.localCheckout}</localCheckout>
                     <!-- pushChanges>false</pushChanges --> <!-- doesn't work! NOTE: should have been fixed with scm-plugin 1.5 -->
-                    <preparationGoals>clean install verify</preparationGoals>
-                    <goals>clean install source:test-jar javadoc:javadoc assembly:assembly deploy</goals>
-                    <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}"</arguments>
+                    <preparationGoals>${tft.release.preparationGoals}</preparationGoals>
+                    <completionGoals>${tft.release.completionGoals}</completionGoals>
+                    <goals>${tft.release.goals}</goals>
+                    <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}" -DdryRun=${dryRun}</arguments>
                     <tagNameFormat>@{project.version}</tagNameFormat> 
                 </configuration>
             </plugin>
-
+            
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
@@ -787,7 +792,7 @@
                     </tags>
                     <docfilessubdirs>true</docfilessubdirs>
                     <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
-                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                    <doclet>${tft.javadoc.doclet}</doclet>
                     <docletArtifact>
                         <groupId>org.umlgraph</groupId>
                         <artifactId>doclet</artifactId>
@@ -1628,7 +1633,7 @@
                     </tags>
                     <docfilessubdirs>true</docfilessubdirs>
                     <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
-                    <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                    <doclet>${tft.javadoc.doclet}</doclet>
                     <docletArtifact>
                         <groupId>org.umlgraph</groupId>
                         <artifactId>doclet</artifactId>
