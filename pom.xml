@@ -1023,7 +1023,7 @@
                                         <echo file="${tft.descriptionStamp}">REVISION: ${buildNumber}${line.separator}DESCRIPTION: ${buildNumber}${line.separator}</echo>
                                         <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
                                         <echo>${tft.description}</echo>
-                                        <echo>Java Version: ${java.version}</echo>
+                                        <echo>Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
                                     </target>
                                 </configuration>
                             </execution>
