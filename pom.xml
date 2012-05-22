@@ -1102,7 +1102,7 @@
                                 <id>push-hg</id>
                                 <phase>initialize</phase>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>run</goal>
                                 </goals>
                                 <configuration>
                                     <target>
@@ -1136,7 +1136,7 @@
                                 <id>strip-hg</id>
                                 <phase>initialize</phase>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>run</goal>
                                 </goals>
                                 <configuration>
                                     <!-- FIXME: would be better to strip local changes -->
