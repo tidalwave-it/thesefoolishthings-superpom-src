@@ -54,7 +54,7 @@
         <release.profiles>release</release.profiles>
 
         <tft.descriptionStamp>.description</tft.descriptionStamp>
-        <tft.maven.requiredVersion>3.0.3</tft.maven.requiredVersion> 
+        <tft.maven.requiredVersion>3.0.3</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.6.0,)</tft.maven.requiredJdk>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.javac.source>1.6</tft.javac.source>
@@ -69,10 +69,12 @@
         <tft.stableAPIVersion>${stableAPIVersion}</tft.stableAPIVersion>
         <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
         <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
-        <tft.release.localCheckout>true</tft.release.localCheckout>            
+        <tft.release.localCheckout>true</tft.release.localCheckout>      
         <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
         <tft.release.completionGoals></tft.release.completionGoals>
         <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:assembly deploy</tft.release.goals>
+        <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
+
         <tft.lombok.version>0.11.0</tft.lombok.version>
         <tft.testng.version>6.1.1</tft.testng.version>
         <tft.junit.version>4.7</tft.junit.version>
@@ -98,7 +100,7 @@
         <tft.jetty.port>8080</tft.jetty.port>
         <tft.jetty.stopPort>9966</tft.jetty.stopPort>
         <tft.jetty.scanIntervalSeconds>4</tft.jetty.scanIntervalSeconds>
-        <tft.jetty.stopKey>${project.groupId}:${project.artifactId}</tft.jetty.stopKey>        
+        <tft.jetty.stopKey>${project.groupId}:${project.artifactId}</tft.jetty.stopKey>
 
         <tft.gwt.version>2.1.1</tft.gwt.version>
 
@@ -111,9 +113,9 @@
         <tft.buildNumber.getRevisionOnlyOnce>false</tft.buildNumber.getRevisionOnlyOnce>
         <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
         <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
- 
+
         <!--==== Plugin Versions ==================================================================================-->
-           
+
         <tft.maven-android-plugin.version>2.9.0-beta-4</tft.maven-android-plugin.version>
         <tft.maven-antrun-plugin.version>1.6</tft.maven-antrun-plugin.version>
         <tft.maven-archetype-plugin.version>2.0-alpha-5</tft.maven-archetype-plugin.version>
@@ -131,11 +133,11 @@
         <tft.maven-install-plugin.version>2.3.1</tft.maven-install-plugin.version>
         <tft.maven-jar-plugin.version>2.3.2</tft.maven-jar-plugin.version>
         <tft.maven-jarsigner-plugin.version>1.2</tft.maven-jarsigner-plugin.version>
-        <tft.maven-javadoc-plugin.version>2.8</tft.maven-javadoc-plugin.version>  
+        <tft.maven-javadoc-plugin.version>2.8</tft.maven-javadoc-plugin.version>
         <tft.maven-jetty-plugin.version>6.1.24</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
         <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
         <tft.maven-pmd-plugin.version>2.5</tft.maven-pmd-plugin.version>
-        <tft.maven-release-plugin.version>2.2.1</tft.maven-release-plugin.version> 
+        <tft.maven-release-plugin.version>2.2.1</tft.maven-release-plugin.version>
         <tft.maven-replacer-plugin.version>1.3.9</tft.maven-replacer-plugin.version>
         <tft.maven-resources-plugin.version>2.5</tft.maven-resources-plugin.version>
         <tft.maven-scm-plugin.version>1.5</tft.maven-scm-plugin.version>
@@ -151,18 +153,18 @@
         <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version>
         <tft.cobertura-maven-plugin.version>2.5.1</tft.cobertura-maven-plugin.version>
         <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
-        <tft.findbugs-maven-plugin.version>2.4.0</tft.findbugs-maven-plugin.version> 
+        <tft.findbugs-maven-plugin.version>2.4.0</tft.findbugs-maven-plugin.version>
         <tft.gmaven-plugin>1.0</tft.gmaven-plugin>
         <tft.gwt-maven-plugin.version>2.1.0-1</tft.gwt-maven-plugin.version>
         <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
         <tft.jaxb2-maven-plugin.version>1.3</tft.jaxb2-maven-plugin.version>
         <tft.jaxws-maven-plugin.version>2.1</tft.jaxws-maven-plugin.version>
-        <tft.nbm-maven-plugin.version>3.6</tft.nbm-maven-plugin.version>                    
+        <tft.nbm-maven-plugin.version>3.6</tft.nbm-maven-plugin.version> 
         <tft.nexus-maven-plugin.version>1.9.2.4</tft.nexus-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>1.1</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>1.0.2</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>1.2</tft.versions-maven-plugin.version>
-        <tft.wagon-maven-plugin.version>1.0-beta-3</tft.wagon-maven-plugin.version>                
+        <tft.wagon-maven-plugin.version>1.0-beta-3</tft.wagon-maven-plugin.version>
         <tft.webdav-jackrabbit.version>1.0-beta-7</tft.webdav-jackrabbit.version>
 
         <tft.archetype-packaging.version>2.0-alpha-5</tft.archetype-packaging.version>
@@ -215,7 +217,7 @@
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
-                <version>${tft.aspectjrt.version}</version> 
+                <version>${tft.aspectjrt.version}</version>
             </dependency>
 
             <!--==== Testing ======================================================================================-->
@@ -343,7 +345,7 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>                    
+                    <artifactId>maven-site-plugin</artifactId>           
                     <version>${tft.maven-site-plugin.version}</version>
                 </plugin>
                 <plugin>
@@ -633,10 +635,10 @@
                     <completionGoals>${tft.release.completionGoals}</completionGoals>
                     <goals>${tft.release.goals}</goals>
                     <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}" -DdryRun=${dryRun}</arguments>
-                    <tagNameFormat>@{project.version}</tagNameFormat> 
+                    <tagNameFormat>@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
@@ -676,11 +678,11 @@
                                     <banSnapshots>true</banSnapshots>
                                     <phases>clean,deploy,site</phases>
                                 </requirePluginVersions>
-                            </rules>    
+                            </rules>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>        
+            </plugin>
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -799,7 +801,7 @@
                         <version>${tft.UmlGraphDoc.version}</version>
                     </docletArtifact>
                     <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
-                    <useStandardDocletOptions>true</useStandardDocletOptions> 
+                    <useStandardDocletOptions>true</useStandardDocletOptions>
                     <skip>${tft.disableJavaDocs}</skip>
                 </configuration>
             </plugin>
@@ -891,9 +893,9 @@
         </profile>
 
     <!--================================================================================================================
-    
+
     This profile is activated during a release.
-    
+
     =================================================================================================================-->
         <profile>
             <id>release</id>
@@ -914,50 +916,46 @@
                          is that the dummy repo is created for each children module.
                          This step would be unnecessary if pushChanges=false worked... -->
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>clean-release-dirs</id>
                                 <phase>initialize</phase>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>run</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>rm</executable>
-                                    <arguments>
-                                        <argument>-rf</argument>
-                                        <argument>${project.build.directory}/dummy-hg-repo</argument>
-                                        <argument>${project.build.directory}/target-maven-repo</argument>
-                                    </arguments>
+                                    <target>
+                                        <delete dir="${project.build.directory}/dummy-hg-repo"/>
+                                        <delete dir="${project.build.directory}/target-maven-repo"/>
+                                    </target>
                                 </configuration>
                             </execution>
                             <execution>
                                 <id>create-release-dirs</id>
                                 <phase>initialize</phase>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>run</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>mkdir</executable>
-                                    <arguments>
-                                        <argument>-p</argument>
-                                        <argument>${project.build.directory}/dummy-hg-repo</argument>
-                                    </arguments>
+                                    <target>
+                                        <mkdir dir="${project.build.directory}/dummy-hg-repo"/>
+                                    </target>
                                 </configuration>
                             </execution>
                             <execution>
                                 <id>init-dummy-hg-repo</id>
                                 <phase>initialize</phase>
                                 <goals>
-                                    <goal>exec</goal>
+                                    <goal>run</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>hg</executable>
-                                    <workingDirectory>${project.build.directory}/dummy-hg-repo</workingDirectory>
-                                    <arguments>
-                                        <argument>init</argument>
-                                    </arguments>
+                                    <target>
+                                        <exec executable="hg" dir="${project.build.directory}/dummy-hg-repo">
+                                            <arg value="init"/>
+                                        </exec>
+                                    </target>
                                 </configuration>
                             </execution>
                         </executions>
@@ -967,9 +965,9 @@
         </profile>
 
     <!--================================================================================================================
-    
+
     This profile signs the build artifacts.
-    
+
     =================================================================================================================-->
         <profile>
             <id>release-sign-artifacts</id>
@@ -984,6 +982,9 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
+                        <configuration>
+                            <skip>${tft.release.sign-artifacts.skip}</skip>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -997,14 +998,14 @@
                 </plugins>
             </build>
         </profile>
-
+        
     <!--================================================================================================================
-    
+
     This profile stores the current build description and Java version into a local file.
-    
+
     =================================================================================================================-->
         <profile>
-            <id>generate-revision-id</id> 
+            <id>generate-revision-id</id>
             <build>
                 <plugins>
                     <plugin>
@@ -1018,7 +1019,7 @@
                                     <goal>run</goal>
                                 </goals>
                                 <configuration>
-                                    <target> 
+                                    <target>
                                         <echo file="${tft.descriptionStamp}">REVISION: ${buildNumber}${line.separator}DESCRIPTION: ${buildNumber}${line.separator}</echo>
                                         <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
                                         <echo>${tft.description}</echo>
@@ -1033,9 +1034,9 @@
         </profile>
 
     <!--================================================================================================================
-    
+
     This profile prints the current build description and Java version - used for Hudson builds.
-    
+
     =================================================================================================================-->
         <profile>
             <id>show-revision-id</id>
@@ -1052,7 +1053,7 @@
                                     <goal>run</goal>
                                 </goals>
                                 <configuration>
-                                    <target> 
+                                    <target>
                                         <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
                                         <echo>${tft.description}</echo>
                                         <echo>Java Version: ${java.version}</echo>
@@ -1066,9 +1067,9 @@
         </profile>
 
     <!--================================================================================================================
-    
+
     This profile commits local artifacts after a successful staged release and pushes Mercurial changes.
-    
+
     =================================================================================================================-->
         <profile>
             <id>release-commit</id>
@@ -1094,8 +1095,8 @@
                     </plugin>
 
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>push-hg</id>
@@ -1104,10 +1105,11 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>hg</executable>
-                                    <arguments>
-                                        <argument>push</argument>
-                                    </arguments>
+                                    <target>
+                                        <exec executable="hg" dir="${project.build.directory}">
+                                            <arg value="push"/>
+                                        </exec>
+                                    </target>
                                 </configuration>
                             </execution>
                         </executions>
@@ -1117,18 +1119,18 @@
         </profile>
 
     <!--================================================================================================================
-    
+
     This profile is executed when a staged release is canceled. BEWARE: it strips the local HG repository! It has been
     designed to work with Hudson.
-    
+
     =================================================================================================================-->
         <profile>
             <id>release-cancel</id>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>strip-hg</id>
@@ -1138,11 +1140,9 @@
                                 </goals>
                                 <configuration>
                                     <!-- FIXME: would be better to strip local changes -->
-                                    <executable>rm</executable>
-                                    <arguments>
-                                        <argument>-rf</argument>
-                                        <argument>.hg</argument>
-                                    </arguments>
+                                    <target>
+                                        <delete dir="${project.build.directory}/.hg"/>
+                                    </target>
                                 </configuration>
                             </execution>
                         </executions>
@@ -1152,9 +1152,9 @@
         </profile>
 
     <!--================================================================================================================
-    
+
     This profile deploys the extra artifacts xxx-bin.tar.gz and xxx-project.tar.gz.
-    
+
     =================================================================================================================-->
         <profile>
             <id>deploy-extra-artifacts</id>
@@ -1200,10 +1200,10 @@
         </profile>
 
     <!--================================================================================================================
-    
-    This profile configures Tomcat for the build. Create an empty file in src/config/activate-tomcat-profile to 
+
+    This profile configures Tomcat for the build. Create an empty file in src/config/activate-tomcat-profile to
     activate it.
-    
+
     =================================================================================================================-->
         <profile>
             <id>tomcat</id>
@@ -1212,8 +1212,8 @@
                     <exists>src/config/activate-tomcat-profile</exists>
                 </file>
             </activation>
-            <build>        
-                <plugins>        
+            <build>
+                <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>tomcat-maven-plugin</artifactId>
@@ -1228,9 +1228,9 @@
         </profile>
 
     <!--================================================================================================================
-    
+
     This profile configures Jetty for the build. Create an empty file in src/config/activate-jetty-profile to activate it.
-    
+
     =================================================================================================================-->
         <profile>
             <id>jetty</id>
@@ -1239,18 +1239,18 @@
                     <exists>src/config/activate-jetty-profile</exists>
                 </file>
             </activation>
-            <build>        
-                <plugins>        
+            <build>
+                <plugins>
                     <plugin>
                         <groupId>org.mortbay.jetty</groupId>
                         <artifactId>maven-jetty-plugin</artifactId>
                         <configuration>
-                        <connectors>
-                            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                                <port>${tft.jetty.port}</port>
-                                <maxIdleTime>60000</maxIdleTime>
-                            </connector>
-                        </connectors>
+                            <connectors>                          
+                                <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                                    <port>${tft.jetty.port}</port>
+                                    <maxIdleTime>60000</maxIdleTime>
+                                </connector>
+                            </connectors>
                             <stopPort>${tft.jetty.stopPort}</stopPort>
                             <stopKey>${tft.jetty.stopKey}</stopKey>
                             <scanIntervalSeconds>${tft.jetty.scanIntervalSeconds}</scanIntervalSeconds>
@@ -1269,10 +1269,10 @@
         </profile>
 
     <!--================================================================================================================
-    
-    This profile configures AspectJ in the build. Create an empty file in src/config/activate-aspectj-profile to 
+
+    This profile configures AspectJ in the build. Create an empty file in src/config/activate-aspectj-profile to
     activate it.
-    
+
     =================================================================================================================-->
         <profile>
             <id>aspectj</id>
@@ -1281,8 +1281,8 @@
                     <exists>src/config/activate-aspectj-profile</exists>
                 </file>
             </activation>
-            <build>        
-                <plugins>        
+            <build>
+                <plugins>
                 <!-- Will be no more needed when http://jira.codehaus.org/browse/MASPECTJ-9 is fixed -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -1340,23 +1340,23 @@
                                     </target>
                                 </configuration>
                             </execution>
-                        </executions>                
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
         </profile>
 
     <!--================================================================================================================
-    
+
     This profile compiles custom Vaadin widgets into GWT components.
-    
+
     =================================================================================================================-->
         <profile>
             <id>vaadin-compile-widgetset</id>
             <build>
                 <plugins>
               <!-- Compile custom GWT components or widget dependencies with the GWT compiler -->
-                    <plugin>  
+                    <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>gwt-maven-plugin</artifactId>
                         <configuration>
@@ -1403,7 +1403,7 @@
                 </file>
             </activation>
             <build>
-                <plugins>             
+                <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
@@ -1433,16 +1433,16 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <taskdef name="jarbundler" 
-                                                 classname="net.sourceforge.jarbundler.JarBundler" 
+                                        <taskdef name="jarbundler"
+                                                 classname="net.sourceforge.jarbundler.JarBundler"
                                                  classpath="src/main/app-resources/jarbundler-${tft.jarbundler.version}.jar" />
-    
+
                                         <mkdir dir="${project.build.directory}/appbundle/java"/>
                                         <mkdir dir="${project.build.directory}/appbundle/resources"/>
                                         <mkdir dir="${project.build.directory}/appbundle/executables"/>
 
                                         <jarbundler dir="${project.build.directory}"
-                                                    jar="${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib/boot.jar" 
+                                                    jar="${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib/boot.jar"
                                                     mainclass="dummy"
                                                     name="${tft.appbundle.name}"
                                                     shortname="${tft.appbundle.name}"
@@ -1468,21 +1468,21 @@
                                             </execfileset>
                                         </jarbundler>
 
-                                        <chmod file="${project.build.directory}/${tft.appbundle.name}.app/Contents/Resources/Java/${netbeans.cluster}/bin/${netbeans.cluster}" 
+                                        <chmod file="${project.build.directory}/${tft.appbundle.name}.app/Contents/Resources/Java/${netbeans.cluster}/bin/${netbeans.cluster}"
                                                perm="ugo+rx"/>
 
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
-                                            <arg value="create"/> 
-                                            <arg value="-noanyowners"/> 
-                                            <arg value="-imagekey"/> 
-                                            <arg value="zlib-level=1"/> 
-                                            <arg value="-srcfolder"/> 
-                                            <arg value="${tft.appbundle.name}.app"/> 
+                                            <arg value="create"/>
+                                            <arg value="-noanyowners"/>
+                                            <arg value="-imagekey"/>
+                                            <arg value="zlib-level=1"/>
+                                            <arg value="-srcfolder"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
                                             <arg value="${tft.appbundle.name}.dmg"/>
                                         </exec>
 
                                         <exec dir="${project.build.directory}" os="Linux" executable="mkisofs">
-                                            <arg value="-V"/> 
+                                            <arg value="-V"/>
                                             <arg value="${tft.appbundle.name}"/>
                                             <arg value="-U"/>
                                             <arg value="-f"/>
@@ -1533,7 +1533,7 @@
                 </plugins>
             </build>
         </profile>
-        
+
     <!--================================================================================================================
 
     This profile embeds the JRE for Mac OS X.
@@ -1579,8 +1579,8 @@
         </profile>
 
     <!--================================================================================================================
-    
-    
+
+
     =================================================================================================================-->
         <profile>
             <id>jdk7</id>
@@ -1597,7 +1597,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
-                <version>${tft.maven-javadoc-plugin.version}</version> 
+                <version>${tft.maven-javadoc-plugin.version}</version>
                 <!-- Configuration must be replicated in build section -->
                 <configuration>
                     <tags>
@@ -1641,7 +1641,7 @@
                         <version>${tft.UmlGraphDoc.version}</version>
                     </docletArtifact>
                     <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
-                    <useStandardDocletOptions>true</useStandardDocletOptions> 
+                    <useStandardDocletOptions>true</useStandardDocletOptions>
                     <skip>${tft.disableJavaDocs}</skip>
                 </configuration>
             </plugin>
@@ -1672,4 +1672,3 @@
     </reporting>
 
 </project>
-
