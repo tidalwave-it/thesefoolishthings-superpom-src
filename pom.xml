@@ -53,6 +53,7 @@
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
         <release.profiles>release</release.profiles>
 
+        <tft.defaultGoal>clean install</tft.defaultGoal>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.maven.requiredVersion>3.0.3</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.6.0,)</tft.maven.requiredJdk>
@@ -250,6 +251,7 @@
     </dependencyManagement>
 
     <build>
+        <defaultGoal>${tft.defaultGoal}</defaultGoal>
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
