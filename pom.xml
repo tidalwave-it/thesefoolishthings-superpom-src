@@ -1428,20 +1428,18 @@
                                     <goal>copy</goal>
                                 </goals>
                                 <configuration>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib</outputDirectory>
                                     <artifactItems>
                                         <artifactItem>
                                             <groupId>it.tidalwave.${netbeans.cluster}</groupId>
                                             <artifactId>it-tidalwave-${netbeans.cluster}-boot</artifactId>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib</outputDirectory>
                                             <destFileName>${netbeans.cluster}-boot.jar</destFileName>
                                         </artifactItem>
                                         <artifactItem>
                                             <groupId>it.tidalwave.netbeans.boot</groupId>
                                             <artifactId>base-launcher</artifactId>
                                             <version>${capecanaveral.version}</version>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib</outputDirectory>
                                             <destFileName>base-launcher.jar</destFileName>
                                         </artifactItem>
                                     </artifactItems>
