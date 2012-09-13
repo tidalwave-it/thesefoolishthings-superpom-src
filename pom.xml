@@ -1404,6 +1404,9 @@
                     <exists>src/config/activate-it.tidalwave-netbeans-platform-appbundle-profile-v2.0</exists>
                 </file>
             </activation>
+            <properties>
+                <tft.appbundle.stub>src/main/app-resources/JavaApplicationStub</tft.appbundle.stub>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -1470,8 +1473,7 @@
                                         <mkdir dir="${project.build.directory}/appbundle/executables"/>
 
                                         <jarbundler dir="${project.build.directory}"
-                                                    jar="${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib/boot.jar"
-                                                    mainclass="dummy"
+                                                    mainclass="${tft.netbeans.main}"
                                                     name="${tft.appbundle.name}"
                                                     shortname="${tft.appbundle.name}"
                                                     signature="${tft.appbundle.signature}"
@@ -1480,8 +1482,12 @@
                                                     showplist="false"
                                                     build="${project.version}"
                                                     bundleId="${project.groupId}"
-                                                    stubfile="src/main/app-resources/${netbeans.cluster}"
-                                                    version="${project.version}">
+                                                    stubfile="${tft.appbundle.stub}"
+                                                    version="${project.version}"
+                                                    vmoptions="${tft.netbeans.vmargs} -Dnetbeans.home=$JAVAROOT/${netbeans.cluster}/platform">
+                                            <jarfileset dir="${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib">
+                                                <include name="*.jar" />
+                                            </jarfileset>                
                                             <javafileset dir="src/main/app-resources">
                                                 <include name="**/*.icns" />
                                             </javafileset>
@@ -1609,7 +1615,7 @@
     <!--================================================================================================================
 
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>jdk7</id>
             <properties>
