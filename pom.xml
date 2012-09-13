@@ -6,7 +6,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>1.19-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://thesefoolishthings.kenai.com</url>
     <description>TheseFoolishThings</description>
@@ -1468,7 +1468,8 @@
                                                  classname="com.oracle.appbundler.AppBundlerTask"
                                                  classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
 
-                                                   <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
+                                        <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
+                                        <!-- FIXME: way to specify min Java version? -->
                                         <bundleapp outputdirectory="${project.build.directory}"
                                                    name="${tft.appbundle.name}"
                                                    displayname="${tft.appbundle.name}"
@@ -1478,14 +1479,12 @@
                                                    mainclassname="${tft.netbeans.main}"
                                                    signature="${tft.appbundle.signature}">
                                             <!-- FIXME: doesn't embed the jre properly, it's not used by the stub -->
-<!--                                            <runtime dir="${project.basedir}/target/jre">
-                                                <include name="/**/*"/>
-                                            </runtime>-->
+                                            <!--<runtime dir="${project.build.directory}/jre"/>-->
                                             <classpath dir="${project.basedir}" casesensitive="yes">
                                                 <include name="target/application/${netbeans.cluster}/platform/lib/*.jar"/>
                                                 <include name="target/boot/*.jar"/>
                                             </classpath>
-<!--                                            <option value="${tft.netbeans.vmargs}"/>--> <!-- FIXME -->
+<!--                                            <option value="${tft.netbeans.vmargs}"/> FIXME -->
                                             <option value="-Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform"/>
                                             <option value="-Xms24m"/>
                                             <option value="-Xmx128m"/>
@@ -1496,9 +1495,9 @@
                                             <fileset dir="${project.build.directory}/application"/>
                                             <!-- TODO exclude solidblue/bin, solidblue/etc/solidblue.conf -->
                                         </copy>                                        
-                                        <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/PlugIns/jre">
+<!--                                        <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/PlugIns/jre">
                                             <fileset dir="${project.build.directory}/jre"/>
-                                        </copy>
+                                        </copy>-->
 
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
                                             <arg value="create"/>
