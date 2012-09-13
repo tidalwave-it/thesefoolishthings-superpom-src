@@ -1393,15 +1393,15 @@
 
     <!--================================================================================================================
 
-    This profile configures the jarbundler for the build. Create an empty file in src/config/activate-appbundle-profile
-    to activate it.
+    This profile configures the jarbundler for the build. Create an empty file in 
+    src/config/activate-it.tidalwave-netbeans-platform-appbundle-profile-v2.0 to activate it.
 
     =================================================================================================================-->
         <profile>
             <id>appbundle</id>
             <activation>
                 <file>
-                    <exists>src/config/activate-netbeans-platform-appbundle-profile</exists>
+                    <exists>src/config/activate-it.tidalwave-netbeans-platform-appbundle-profile-v2.0</exists>
                 </file>
             </activation>
             <build>
@@ -1411,6 +1411,7 @@
                         <artifactId>maven-dependency-plugin</artifactId>
                         <executions>
                             <execution>
+                                <id>unpack-application</id>
                                 <phase>generate-resources</phase>
                                 <goals>
                                     <goal>unpack-dependencies</goal>
@@ -1418,6 +1419,33 @@
                                 <configuration>
                                     <excludeTransitive>true</excludeTransitive>
                                     <outputDirectory>${project.build.directory}/appbundle/java</outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-booter</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>it.tidalwave.${netbeans.cluster}</groupId>
+                                            <artifactId>it-tidalwave-${netbeans.cluster}-boot</artifactId>
+                                            <overWrite>true</overWrite>
+                                            <outputDirectory>${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib</outputDirectory>
+                                            <destFileName>${netbeans.cluster}-boot.jar</destFileName>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>it.tidalwave.netbeans.boot</groupId>
+                                            <artifactId>base-launcher</artifactId>
+                                            <version>${capecanaveral.version}</version>
+                                            <overWrite>true</overWrite>
+                                            <outputDirectory>${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib</outputDirectory>
+                                            <destFileName>base-launcher.jar</destFileName>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <excludeTransitive>true</excludeTransitive>
                                 </configuration>
                             </execution>
                         </executions>
