@@ -1401,11 +1401,11 @@
             <id>appbundle</id>
             <activation>
                 <file>
-                    <exists>src/config/activate-it.tidalwave-netbeans-platform-appbundle-profile-v2.0</exists>
+                    <exists>src/config/activate-it.tidalwave-netbeans-platform-appbundle-profile-v2</exists>
                 </file>
             </activation>
             <properties>
-                <tft.appbundle.stub>src/main/app-resources/JavaApplicationStub</tft.appbundle.stub>
+                <tft.appbundler.version>1.0</tft.appbundler.version>
             </properties>
             <build>
                 <plugins>
@@ -1421,7 +1421,7 @@
                                 </goals>
                                 <configuration>
                                     <excludeTransitive>true</excludeTransitive>
-                                    <outputDirectory>${project.build.directory}/appbundle/java</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/application</outputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -1432,7 +1432,7 @@
                                 </goals>
                                 <configuration>
                                     <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/boot</outputDirectory>
                                     <artifactItems>
                                         <artifactItem>
                                             <groupId>it.tidalwave.${netbeans.cluster}</groupId>
@@ -1464,46 +1464,41 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <taskdef name="jarbundler"
-                                                 classname="net.sourceforge.jarbundler.JarBundler"
-                                                 classpath="src/main/app-resources/jarbundler-${tft.jarbundler.version}.jar" />
+                                        <taskdef name="bundleapp" 
+                                                 classname="com.oracle.appbundler.AppBundlerTask"
+                                                 classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
 
-                                        <mkdir dir="${project.build.directory}/appbundle/java"/>
-                                        <mkdir dir="${project.build.directory}/appbundle/resources"/>
-                                        <mkdir dir="${project.build.directory}/appbundle/executables"/>
+                                                   <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
+                                        <bundleapp outputdirectory="${project.build.directory}"
+                                                   name="${tft.appbundle.name}"
+                                                   displayname="${tft.appbundle.name}"
+                                                   icon="src/main/app-resources/${netbeans.cluster}.icns"
+                                                   identifier="${project.groupId}"
+                                                   shortversion="${project.version}"
+                                                   mainclassname="${tft.netbeans.main}"
+                                                   signature="${tft.appbundle.signature}">
+                                            <!-- FIXME: doesn't embed the jre properly, it's not used by the stub -->
+<!--                                            <runtime dir="${project.basedir}/target/jre">
+                                                <include name="/**/*"/>
+                                            </runtime>-->
+                                            <classpath dir="${project.basedir}" casesensitive="yes">
+                                                <include name="target/application/${netbeans.cluster}/platform/lib/*.jar"/>
+                                                <include name="target/boot/*.jar"/>
+                                            </classpath>
+<!--                                            <option value="${tft.netbeans.vmargs}"/>--> <!-- FIXME -->
+                                            <option value="-Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform"/>
+                                            <option value="-Xms24m"/>
+                                            <option value="-Xmx128m"/>
+                                            <option value="-XX:CompileCommand=exclude,java/nio/MappedByteBuffer,load"/>
+                                        </bundleapp>
 
-                                        <jarbundler dir="${project.build.directory}"
-                                                    mainclass="${tft.netbeans.main}"
-                                                    name="${tft.appbundle.name}"
-                                                    shortname="${tft.appbundle.name}"
-                                                    signature="${tft.appbundle.signature}"
-                                                    icon="src/main/app-resources/${netbeans.cluster}.icns"
-                                                    jvmversion="${tft.javac.target}+"
-                                                    showplist="false"
-                                                    build="${project.version}"
-                                                    bundleId="${project.groupId}"
-                                                    stubfile="${tft.appbundle.stub}"
-                                                    version="${project.version}"
-                                                    vmoptions="${tft.netbeans.vmargs} -Dnetbeans.home=$JAVAROOT/${netbeans.cluster}/platform">
-                                            <jarfileset dir="${project.build.directory}/appbundle/java/${netbeans.cluster}/platform/lib">
-                                                <include name="*.jar" />
-                                            </jarfileset>                
-                                            <javafileset dir="src/main/app-resources">
-                                                <include name="**/*.icns" />
-                                            </javafileset>
-                                            <javafileset dir="${project.build.directory}/appbundle/java">
-                                                <include name="**/*" />
-                                            </javafileset>
-                                            <resourcefileset dir="${project.build.directory}/appbundle/resources">
-                                                <include name="**/*" />
-                                            </resourcefileset>
-                                            <execfileset dir="${project.build.directory}/appbundle/executables">
-                                                <include name="**/*" />
-                                            </execfileset>
-                                        </jarbundler>
-
-                                        <chmod file="${project.build.directory}/${tft.appbundle.name}.app/Contents/Resources/Java/${netbeans.cluster}/bin/${netbeans.cluster}"
-                                               perm="ugo+rx"/>
+                                        <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/Java">
+                                            <fileset dir="${project.build.directory}/application"/>
+                                            <!-- TODO exclude solidblue/bin, solidblue/etc/solidblue.conf -->
+                                        </copy>                                        
+                                        <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/PlugIns/jre">
+                                            <fileset dir="${project.build.directory}/jre"/>
+                                        </copy>
 
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
                                             <arg value="create"/>
@@ -1601,7 +1596,8 @@
                                             <type>tgz</type>
                                             <classifier>${tft.embedded-jre-classifier}</classifier>
                                             <overWrite>true</overWrite>
-                                            <outputDirectory>${project.basedir}/target/appbundle/executables/${tft.embedded-jre-directory}</outputDirectory>
+                                            <outputDirectory>${project.basedir}/target/jre</outputDirectory>
+                                            <!--<outputDirectory>${project.basedir}/target/appbundle/executables/${tft.embedded-jre-directory}</outputDirectory>-->
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
