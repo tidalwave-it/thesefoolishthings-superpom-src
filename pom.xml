@@ -1400,10 +1400,10 @@
 
     =================================================================================================================-->
         <profile>
-            <id>it.tidalwave-netbeans-platform-appbundle-embedded-jre-profile-v2</id>
+            <id>it.tidalwave-netbeans-platform-appbundle-embedded-jre-v2</id>
             <activation>
                 <file>
-                    <exists>src/config/it.tidalwave-netbeans-platform-appbundle-embedded-jre-profile-v2</exists>
+                    <exists>src/config/activate-it.tidalwave-netbeans-platform-appbundle-embedded-jre-v2-profile</exists>
                 </file>
             </activation>
             <build>
@@ -1582,10 +1582,10 @@
 
     =================================================================================================================-->
         <profile>
-            <id>it.tidalwave-netbeans-platform-appbundle-profile-v2</id>
+            <id>it.tidalwave-netbeans-platform-appbundle-v2</id>
             <activation>
                 <file>
-                    <exists>src/config/it.tidalwave-netbeans-platform-appbundle-profile-v2</exists>
+                    <exists>src/config/activate-it.tidalwave-netbeans-platform-appbundle-v2-profile</exists>
                 </file>
             </activation>
             <build>
