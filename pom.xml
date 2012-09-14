@@ -1157,6 +1157,7 @@
     <!--================================================================================================================
 
     This profile deploys the extra artifacts xxx-bin.tar.gz and xxx-project.tar.gz.
+    TODO: remove the profile; instead use two specific profiles that automatically attach the files when present.
 
     =================================================================================================================-->
         <profile>
