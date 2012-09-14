@@ -76,6 +76,7 @@
         <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:assembly deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
 
+        <tft.appbundler.version>1.0</tft.appbundler.version>
         <tft.lombok.version>0.11.0</tft.lombok.version>
         <tft.testng.version>6.1.1</tft.testng.version>
         <tft.junit.version>4.7</tft.junit.version>
@@ -90,7 +91,7 @@
         <tft.embedded-jre-artifactId>it-tidalwave-jre7</tft.embedded-jre-artifactId>
         <tft.embedded-jre-version>1.7.0_04-1</tft.embedded-jre-version>
         <tft.embedded-jre-classifier>macosx-intel</tft.embedded-jre-classifier>
-        <tft.embedded-jre-directory>jre-1.7.0_04</tft.embedded-jre-directory>
+        <!--<tft.embedded-jre-directory>jre-1.7.0_04</tft.embedded-jre-directory>-->
 
         <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
 
@@ -1394,25 +1395,42 @@
     <!--================================================================================================================
 
     This profile configures the jarbundler for the build. Create an empty file in 
-    src/config/activate-it.tidalwave-netbeans-platform-appbundle-profile-v2.0 to activate it.
+    src/config/it.tidalwave-netbeans-platform-appbundle-embedded-jre-profile-v2 to activate it.
 
     =================================================================================================================-->
         <profile>
-            <id>appbundle</id>
+            <id>it.tidalwave-netbeans-platform-appbundle-embedded-jre-profile-v2</id>
             <activation>
                 <file>
-                    <exists>src/config/activate-it.tidalwave-netbeans-platform-appbundle-profile-v2</exists>
+                    <exists>src/config/it.tidalwave-netbeans-platform-appbundle-embedded-jre-profile-v2</exists>
                 </file>
             </activation>
-            <properties>
-                <tft.appbundler.version>1.0</tft.appbundler.version>
-            </properties>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
                         <executions>
+                            <execution>
+                                <id>unpack-embedded-jre</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>${tft.embedded-jre-groupId}</groupId>
+                                            <artifactId>${tft.embedded-jre-artifactId}</artifactId>
+                                            <version>${tft.embedded-jre-version}</version>
+                                            <type>tgz</type>
+                                            <classifier>${tft.embedded-jre-classifier}</classifier>
+                                            <overWrite>true</overWrite>
+                                            <outputDirectory>${project.basedir}/target/jre/jre</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
                             <execution>
                                 <id>unpack-application</id>
                                 <phase>generate-resources</phase>
@@ -1479,16 +1497,16 @@
                                                    mainclassname="${tft.netbeans.main}"
                                                    signature="${tft.appbundle.signature}">
                                             <!-- FIXME: doesn't embed the jre properly, it's not used by the stub -->
-                                            <!--<runtime dir="${project.build.directory}/jre"/>-->
+                                            <runtime dir="/Library/Java/JavaVirtualMachines/1.7.0u4.jdk/Contents/Home"/>
+<!--                                            <runtime dir="${project.build.directory}/jre"/>-->
                                             <classpath dir="${project.basedir}" casesensitive="yes">
                                                 <include name="target/application/${netbeans.cluster}/platform/lib/*.jar"/>
                                                 <include name="target/boot/*.jar"/>
                                             </classpath>
-<!--                                            <option value="${tft.netbeans.vmargs}"/> FIXME -->
-                                            <option value="-Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform"/>
-                                            <option value="-Xms24m"/>
+                                            <options value="${tft.netbeans.vmargs} -Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform"/>  
+<!--                                            <option value="-Xms24m"/>
                                             <option value="-Xmx128m"/>
-                                            <option value="-XX:CompileCommand=exclude,java/nio/MappedByteBuffer,load"/>
+                                            <option value="-XX:CompileCommand=exclude,java/nio/MappedByteBuffer,load"/>-->
                                         </bundleapp>
 
                                         <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/Java">
@@ -1564,14 +1582,15 @@
 
     <!--================================================================================================================
 
-    This profile embeds the JRE for Mac OS X.
+    This profile configures the jarbundler for the build. Create an empty file in 
+    src/config/it.tidalwave-netbeans-platform-appbundle-profile-v2 to activate it.
 
     =================================================================================================================-->
         <profile>
-            <id>macosx-embedjre</id>
+            <id>it.tidalwave-netbeans-platform-appbundle-profile-v2</id>
             <activation>
                 <file>
-                    <exists>src/config/activate-macosx-embedjre-profile</exists>
+                    <exists>src/config/it.tidalwave-netbeans-platform-appbundle-profile-v2</exists>
                 </file>
             </activation>
             <build>
@@ -1581,24 +1600,140 @@
                         <artifactId>maven-dependency-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>embed-jre</id>
+                                <id>unpack-application</id>
                                 <phase>generate-resources</phase>
                                 <goals>
-                                    <goal>unpack</goal>
+                                    <goal>unpack-dependencies</goal>
                                 </goals>
                                 <configuration>
+                                    <excludeTransitive>true</excludeTransitive>
+                                    <outputDirectory>${project.build.directory}/application</outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-booter</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/boot</outputDirectory>
                                     <artifactItems>
                                         <artifactItem>
-                                            <groupId>${tft.embedded-jre-groupId}</groupId>
-                                            <artifactId>${tft.embedded-jre-artifactId}</artifactId>
-                                            <version>${tft.embedded-jre-version}</version>
-                                            <type>tgz</type>
-                                            <classifier>${tft.embedded-jre-classifier}</classifier>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${project.basedir}/target/jre</outputDirectory>
-                                            <!--<outputDirectory>${project.basedir}/target/appbundle/executables/${tft.embedded-jre-directory}</outputDirectory>-->
+                                            <groupId>it.tidalwave.${netbeans.cluster}</groupId>
+                                            <artifactId>it-tidalwave-${netbeans.cluster}-boot</artifactId>
+                                            <destFileName>${netbeans.cluster}-boot.jar</destFileName>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>it.tidalwave.netbeans.boot</groupId>
+                                            <artifactId>base-launcher</artifactId>
+                                            <version>${capecanaveral.version}</version>
+                                            <destFileName>base-launcher.jar</destFileName>
                                         </artifactItem>
                                     </artifactItems>
+                                    <excludeTransitive>true</excludeTransitive>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>create-app-bundle</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <taskdef name="bundleapp" 
+                                                 classname="com.oracle.appbundler.AppBundlerTask"
+                                                 classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
+
+                                        <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
+                                        <!-- FIXME: way to specify min Java version? -->
+                                        <bundleapp outputdirectory="${project.build.directory}"
+                                                   name="${tft.appbundle.name}"
+                                                   displayname="${tft.appbundle.name}"
+                                                   icon="src/main/app-resources/${netbeans.cluster}.icns"
+                                                   identifier="${project.groupId}"
+                                                   shortversion="${project.version}"
+                                                   mainclassname="${tft.netbeans.main}"
+                                                   signature="${tft.appbundle.signature}">
+                                            <classpath dir="${project.basedir}" casesensitive="yes">
+                                                <include name="target/application/${netbeans.cluster}/platform/lib/*.jar"/>
+                                                <include name="target/boot/*.jar"/>
+                                            </classpath>
+                                            <options value="${tft.netbeans.vmargs} -Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform"/>  
+<!--                                            <option value="-Xms24m"/>
+                                            <option value="-Xmx128m"/>
+                                            <option value="-XX:CompileCommand=exclude,java/nio/MappedByteBuffer,load"/>-->
+                                        </bundleapp>
+
+                                        <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/Java">
+                                            <fileset dir="${project.build.directory}/application"/>
+                                            <!-- TODO exclude solidblue/bin, solidblue/etc/solidblue.conf -->
+                                        </copy>                                        
+
+                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
+                                            <arg value="create"/>
+                                            <arg value="-noanyowners"/>
+                                            <arg value="-imagekey"/>
+                                            <arg value="zlib-level=1"/>
+                                            <arg value="-srcfolder"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
+                                            <arg value="${tft.appbundle.name}.dmg"/>
+                                        </exec>
+
+                                        <exec dir="${project.build.directory}" os="Linux" executable="mkisofs">
+                                            <arg value="-V"/>
+                                            <arg value="${tft.appbundle.name}"/>
+                                            <arg value="-U"/>
+                                            <arg value="-f"/>
+                                            <arg value="-D"/>
+                                            <arg value="-l"/>
+                                            <arg value="-L"/>
+                                            <arg value="-allow-multidot"/>
+                                            <arg value="-max-iso9660-filenames"/>
+                                            <arg value="-relaxed-filenames"/>
+                                            <arg value="-no-iso-translate"/>
+                                            <arg value="-r"/>
+                                            <arg value="-o"/>
+                                            <arg value="${tft.appbundle.name}.dmg"/>
+                                            <arg value="-root"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
+                                        </exec>
+
+                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg"
+                                              destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz"/>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-app-bundle</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${project.build.directory}/${tft.appbundle.name}.dmg.gz</file>
+                                            <type>dmg.gz</type>
+                                            <classifier>executable</classifier>
+                                        </artifact>
+                                    </artifacts>
                                 </configuration>
                             </execution>
                         </executions>
