@@ -1736,17 +1736,33 @@
                 </plugins>
             </build>
         </profile>
-
     <!--================================================================================================================
 
 
-        =================================================================================================================-->
-        <profile>
-            <id>jdk7</id>
+
+     =================================================================================================================-->
+         <profile>
+            <id>it.tidalwave.use-local-artifact-target-repo-v1</id>
             <properties>
-                <tft.javac.source>1.7</tft.javac.source>
-                <tft.javac.target>1.7</tft.javac.target>
+                <altDeploymentRepository>local-repo::default::${staging.mvn.repo.url}</altDeploymentRepository>
             </properties>
+        </profile>
+
+    <!--================================================================================================================
+
+    Note: on Mac OS X you need to run this with -Djava.io.tmpdir=/tmp (or other directory).
+
+    =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave.publish-artifacts-v1</id>
+            <properties>
+                <wagon.source>${staging.mvn.repo.url}</wagon.source>
+                <wagon.target>https://oss.sonatype.org/content/repositories/snapshots</wagon.target>
+                <wagon.targetId>snapshots-oss.sonatype.org</wagon.targetId>
+            </properties>
+            <build>
+                <defaultGoal>initialize org.codehaus.mojo:wagon-maven-plugin:copy</defaultGoal>
+            </build>
         </profile>
     </profiles>
 
