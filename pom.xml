@@ -55,7 +55,7 @@
 
         <tft.defaultGoal>clean install</tft.defaultGoal>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
-        <tft.maven.requiredVersion>3.0.3</tft.maven.requiredVersion>
+        <tft.maven.requiredVersion>3.0.4</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.6.0,)</tft.maven.requiredJdk>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.javac.source>1.6</tft.javac.source>
