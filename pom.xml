@@ -97,8 +97,6 @@
 
         <tft.aspectjrt.version>1.6.11</tft.aspectjrt.version>
 
-        <tft.jarbundler.version>2.2.0</tft.jarbundler.version>
-
         <tft.jetty.port>8080</tft.jetty.port>
         <tft.jetty.stopPort>9966</tft.jetty.stopPort>
         <tft.jetty.scanIntervalSeconds>4</tft.jetty.scanIntervalSeconds>
