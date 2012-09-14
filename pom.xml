@@ -77,7 +77,7 @@
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
 
         <tft.appbundler.version>1.0-patched</tft.appbundler.version>
-        <tft.lombok.version>0.11.0</tft.lombok.version>
+        <tft.lombok.version>0.11.4</tft.lombok.version>
         <tft.testng.version>6.1.1</tft.testng.version>
         <tft.junit.version>4.7</tft.junit.version>
         <tft.mockito.version>1.8.2</tft.mockito.version>
