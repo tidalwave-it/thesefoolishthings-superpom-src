@@ -87,11 +87,11 @@
         <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
         <tft.test.vmOptions></tft.test.vmOptions>
 
-        <tft.embedded-jre-groupId>it.tidalwave.jre</tft.embedded-jre-groupId>
-        <tft.embedded-jre-artifactId>it-tidalwave-jre7</tft.embedded-jre-artifactId>
-        <tft.embedded-jre-version>1.7.0_04-1</tft.embedded-jre-version>
-        <tft.embedded-jre-classifier>macosx-intel</tft.embedded-jre-classifier>
-        <!--<tft.embedded-jre-directory>jre-1.7.0_04</tft.embedded-jre-directory>-->
+        <tft.embedded-jdk-groupId>it.tidalwave.jdk</tft.embedded-jdk-groupId>
+        <tft.embedded-jdk-artifactId>it-tidalwave-openjdk7</tft.embedded-jdk-artifactId>
+        <tft.embedded-jdk-name>openjdk1.7.0u4</tft.embedded-jdk-name>
+        <tft.embedded-jdk-version>1.7.0_04-2</tft.embedded-jdk-version>
+        <tft.embedded-jdk-classifier>macosx-intel</tft.embedded-jdk-classifier>
 
         <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
 
@@ -1412,7 +1412,7 @@
                         <artifactId>maven-dependency-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>unpack-embedded-jre</id>
+                                <id>unpack-embedded-jdk</id>
                                 <phase>generate-resources</phase>
                                 <goals>
                                     <goal>unpack</goal>
@@ -1420,13 +1420,13 @@
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>
-                                            <groupId>${tft.embedded-jre-groupId}</groupId>
-                                            <artifactId>${tft.embedded-jre-artifactId}</artifactId>
-                                            <version>${tft.embedded-jre-version}</version>
+                                            <groupId>${tft.embedded-jdk-groupId}</groupId>
+                                            <artifactId>${tft.embedded-jdk-artifactId}</artifactId>
+                                            <version>${tft.embedded-jdk-version}</version>
                                             <type>tgz</type>
-                                            <classifier>${tft.embedded-jre-classifier}</classifier>
+                                            <classifier>${tft.embedded-jdk-classifier}</classifier>
                                             <overWrite>true</overWrite>
-                                            <outputDirectory>${project.basedir}/target/jre/jre</outputDirectory>
+                                            <outputDirectory>${project.basedir}/target/jdk/${tft.embedded-jdk-name}</outputDirectory>
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
@@ -1487,7 +1487,6 @@
                                                  classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
 
                                         <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
-                                        <!-- FIXME: way to specify min Java version? -->
                                         <bundleapp outputdirectory="${project.build.directory}"
                                                    name="${tft.appbundle.name}"
                                                    displayname="${tft.appbundle.name}"
@@ -1496,9 +1495,7 @@
                                                    shortversion="${project.version}"
                                                    mainclassname="${tft.netbeans.main}"
                                                    signature="${tft.appbundle.signature}">
-                                            <!-- FIXME: doesn't embed the jre properly, it's not used by the stub -->
-                                            <runtime dir="/Library/Java/JavaVirtualMachines/1.7.0u4.jdk/Contents/Home"/>
-<!--                                            <runtime dir="${project.build.directory}/jre"/>-->
+                                            <runtime dir="${project.build.directory}/jdk/${tft.embedded-jdk-name}/Contents/Home"/>
                                             <classpath dir="${project.basedir}" casesensitive="yes">
                                                 <include name="target/application/${netbeans.cluster}/platform/lib/*.jar"/>
                                                 <include name="target/boot/*.jar"/>
@@ -1511,11 +1508,8 @@
 
                                         <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/Java">
                                             <fileset dir="${project.build.directory}/application"/>
-                                            <!-- TODO exclude solidblue/bin, solidblue/etc/solidblue.conf -->
+                                            <!-- TODO exclude ${netbeans.cluster}/bin, ${netbeans.cluster}/etc/${netbeans.cluster}.conf -->
                                         </copy>                                        
-<!--                                        <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/PlugIns/jre">
-                                            <fileset dir="${project.build.directory}/jre"/>
-                                        </copy>-->
 
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
                                             <arg value="create"/>
