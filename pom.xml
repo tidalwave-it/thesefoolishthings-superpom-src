@@ -89,8 +89,8 @@
 
         <tft.embedded-jdk-groupId>it.tidalwave.jdk</tft.embedded-jdk-groupId>
         <tft.embedded-jdk-artifactId>it-tidalwave-openjdk7</tft.embedded-jdk-artifactId>
-        <tft.embedded-jdk-name>openjdk1.7.0u4</tft.embedded-jdk-name>
-        <tft.embedded-jdk-version>1.7.0_04-2</tft.embedded-jdk-version>
+        <tft.embedded-jdk-name>openjdk1.7.0u7</tft.embedded-jdk-name>
+        <tft.embedded-jdk-version>1.7.0_07-1</tft.embedded-jdk-version>
         <tft.embedded-jdk-classifier>macosx-intel</tft.embedded-jdk-classifier>
 
         <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
