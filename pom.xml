@@ -1499,15 +1499,20 @@
                                                 <include name="target/application/${netbeans.cluster}/platform/lib/*.jar"/>
                                                 <include name="target/boot/*.jar"/>
                                             </classpath>
-                                            <options value="${tft.netbeans.vmargs} -Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform"/>  
+                                            <options value="${tft.netbeans.vmargs}"/>  
+                                            <option value="-Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform"/>  
 <!--                                            <option value="-Xms24m"/>
                                             <option value="-Xmx128m"/>
                                             <option value="-XX:CompileCommand=exclude,java/nio/MappedByteBuffer,load"/>-->
                                         </bundleapp>
 
                                         <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/Java">
-                                            <fileset dir="${project.build.directory}/application"/>
-                                            <!-- TODO exclude ${netbeans.cluster}/bin, ${netbeans.cluster}/etc/${netbeans.cluster}.conf -->
+                                            <fileset dir="${project.build.directory}/application">
+                                                <exclude name="*/bin/**"/>
+                                                <exclude name="*/etc/*.conf"/>
+                                                <exclude name="*/platform/docs/**"/>
+                                                <exclude name="*/platform/lib/nbexec*"/>
+                                            </fileset>
                                         </copy>                                        
 
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
@@ -1661,15 +1666,20 @@
                                                 <include name="target/application/${netbeans.cluster}/platform/lib/*.jar"/>
                                                 <include name="target/boot/*.jar"/>
                                             </classpath>
-                                            <options value="${tft.netbeans.vmargs} -Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform"/>  
+                                            <options value="${tft.netbeans.vmargs}"/>  
+                                            <option value="-Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform"/>  
 <!--                                            <option value="-Xms24m"/>
                                             <option value="-Xmx128m"/>
                                             <option value="-XX:CompileCommand=exclude,java/nio/MappedByteBuffer,load"/>-->
                                         </bundleapp>
 
                                         <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/Java">
-                                            <fileset dir="${project.build.directory}/application"/>
-                                            <!-- TODO exclude solidblue/bin, solidblue/etc/solidblue.conf -->
+                                            <fileset dir="${project.build.directory}/application">
+                                                <exclude name="*/bin/**"/>
+                                                <exclude name="*/etc/*.conf"/>
+                                                <exclude name="*/platform/docs/**"/>
+                                                <exclude name="*/platform/lib/nbexec*"/>
+                                            </fileset>
                                         </copy>                                        
 
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
