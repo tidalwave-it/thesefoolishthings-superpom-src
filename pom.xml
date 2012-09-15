@@ -93,6 +93,7 @@
         <tft.embedded-jdk-version>1.7.0_07-1</tft.embedded-jdk-version>
         <tft.embedded-jdk-classifier>macosx-intel</tft.embedded-jdk-classifier>
 
+        <tft.netbeans.main>it.tidalwave.${netbeans.cluster}.boot.Main</tft.netbeans.main>
         <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
 
         <tft.aspectjrt.version>1.6.11</tft.aspectjrt.version>
