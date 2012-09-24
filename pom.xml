@@ -1445,7 +1445,7 @@
                                     <outputDirectory>${project.build.directory}/boot</outputDirectory>
                                     <artifactItems>
                                         <artifactItem>
-                                            <groupId>it.tidalwave.${netbeans.cluster}</groupId>
+                                            <groupId>${project.groupId}</groupId>
                                             <artifactId>it-tidalwave-${netbeans.cluster}-boot</artifactId>
                                             <destFileName>${netbeans.cluster}-boot.jar</destFileName>
                                         </artifactItem>
@@ -1603,7 +1603,7 @@
                                     <outputDirectory>${project.build.directory}/boot</outputDirectory>
                                     <artifactItems>
                                         <artifactItem>
-                                            <groupId>it.tidalwave.${netbeans.cluster}</groupId>
+                                            <groupId>${project.groupId}</groupId>
                                             <artifactId>it-tidalwave-${netbeans.cluster}-boot</artifactId>
                                             <destFileName>${netbeans.cluster}-boot.jar</destFileName>
                                         </artifactItem>
