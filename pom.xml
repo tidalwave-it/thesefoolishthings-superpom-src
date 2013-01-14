@@ -57,6 +57,7 @@
         <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.maven.requiredVersion>3.0.4</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.6.0,)</tft.maven.requiredJdk>
+        <tft.superpom.config.version>1.0</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
@@ -123,7 +124,7 @@
         <tft.maven-archetype-plugin.version>2.0-alpha-5</tft.maven-archetype-plugin.version>
         <tft.maven-assembly-plugin.version>2.2.1</tft.maven-assembly-plugin.version>
         <tft.maven-bundle-plugin.version>2.0.1</tft.maven-bundle-plugin.version>
-        <tft.maven-checkstyle-plugin.version>2.6</tft.maven-checkstyle-plugin.version>
+        <tft.maven-checkstyle-plugin.version>2.9.1</tft.maven-checkstyle-plugin.version>
         <tft.maven-clean-plugin.version>2.4.1</tft.maven-clean-plugin.version>
         <tft.maven-compiler-plugin.version>2.3.2</tft.maven-compiler-plugin.version>
         <tft.maven-dependency-plugin.version>2.4</tft.maven-dependency-plugin.version>
@@ -632,6 +633,23 @@
                 </configuration>
             </plugin>
 
+            <!-- CheckStyle (not in a profile, to be used by NetBeans editor) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${tft.maven-checkstyle-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>it.tidalwave.thesefoolishthings</groupId>
+                        <artifactId>superpom-config</artifactId>
+                        <version>${tft.superpom.config.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <configLocation>it/tidalwave/checkstyle/checkstyle.xml</configLocation>
+                </configuration>
+            </plugin>
+            
             <!-- Configures the release process, calling the assembly to include extra artifacts in deploy -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -884,18 +902,7 @@
                             <minimumTokens>100</minimumTokens>
                             <targetJdk>1.6</targetJdk>
                         </configuration>
-                    </plugin>
-
-                    <!-- CheckStyle -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-checkstyle-plugin</artifactId>
-                        <!-- version must be replicated here -->
-                        <version>${tft.maven-checkstyle-plugin.version}</version>
-                        <configuration>
-                            <configLocation>${project.basedir}/src/checkstyle/checkstyle.xml</configLocation>
-                        </configuration>
-                    </plugin>
+                    </plugin>                    
                 </plugins>
             </reporting>
         </profile>
@@ -1747,6 +1754,68 @@
                 <defaultGoal>initialize org.codehaus.mojo:wagon-maven-plugin:copy</defaultGoal>
             </build>
         </profile>
+
+    <!--================================================================================================================
+
+    This profile updates all the dependencies to their latest release. The project must be structured in the standard
+    TheseFoolishThings layout.
+
+    =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-update-releases-v1</id>
+            <build>
+                <defaultGoal>initialize</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>versions-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>update-properties</goal>
+                                </goals>
+                                <configuration>
+                                    <allowSnapshots>false</allowSnapshots>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    <!--================================================================================================================
+
+    This profile updates all the dependencies to their latest snapshots. The project must be structured in the standard
+    TheseFoolishThings layout.
+
+
+    =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-update-snapshots-v1</id>
+            <build>
+                <defaultGoal>initialize</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>versions-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>update-properties</goal>
+                                </goals>
+                                <configuration>
+                                    <allowSnapshots>true</allowSnapshots>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
 
     <reporting>
