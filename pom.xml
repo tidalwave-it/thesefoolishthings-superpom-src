@@ -6,7 +6,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>2.2</version>
+    <version>2.3-SNAPSHOT</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://thesefoolishthings.kenai.com</url>
     <description>TheseFoolishThings</description>
