@@ -8,13 +8,14 @@
     <packaging>pom</packaging>
     <version>2.3-SNAPSHOT</version>
     <name>TheseFoolishThings - SuperPOM</name>
-    <url>http://thesefoolishthings.kenai.com</url>
-    <description>TheseFoolishThings</description>
+    <url>${tft.project.url}</url>
+    <description>${tft.project.description}</description>
+    <inceptionYear>2010</inceptionYear>
+    
     <organization>
         <name>Tidalwave s.a.s. (http://tidalwave.it)</name>
         <url>http://tidalwave.it</url>
     </organization>
-    <inceptionYear>2010</inceptionYear>
 
     <developers>
         <developer>
@@ -40,6 +41,9 @@
     </licenses>
 
     <properties>
+        <tft.project.url>http://thesefoolishthings.kenai.com</tft.project.url>
+        <tft.project.description>TheseFoolishThings Super POM</tft.project.description>
+            
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <bundle.namespace>${project.groupId}.${project.artifactId}</bundle.namespace>
         <staging.mvn.repo.url>file://${project.build.directory}/target-maven-repo</staging.mvn.repo.url>
