@@ -11,8 +11,8 @@
     <url>http://thesefoolishthings.kenai.com</url>
     <description>TheseFoolishThings</description>
     <organization>
-        <name>Tidalwave s.a.s.</name>
-        <url>http://www.tidalwave.it</url>
+        <name>Tidalwave s.a.s. (http://tidalwave.it)</name>
+        <url>http://tidalwave.it</url>
     </organization>
     <inceptionYear>2010</inceptionYear>
 
@@ -55,9 +55,11 @@
 
         <tft.defaultGoal>clean install</tft.defaultGoal>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
+        <tft.license.name>tidalwave_asf2</tft.license.name>
+        <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
         <tft.maven.requiredVersion>3.0.4</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.6.0,)</tft.maven.requiredJdk>
-        <tft.superpom.config.version>1.0</tft.superpom.config.version>
+        <tft.superpom.config.version>1.1-SNAPSHOT</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.javac.source>1.6</tft.javac.source>
         <tft.javac.target>1.6</tft.javac.target>
@@ -162,6 +164,7 @@
         <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
         <tft.jaxb2-maven-plugin.version>1.3</tft.jaxb2-maven-plugin.version>
         <tft.jaxws-maven-plugin.version>2.1</tft.jaxws-maven-plugin.version>
+        <tft.license-maven-plugin.version>1.4</tft.license-maven-plugin.version>
         <tft.nbm-maven-plugin.version>3.6</tft.nbm-maven-plugin.version> 
         <tft.nexus-maven-plugin.version>1.9.2.4</tft.nexus-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>1.1</tft.tomcat-maven-plugin.version>
@@ -447,6 +450,11 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>jaxb2-maven-plugin</artifactId>
                     <version>${tft.jaxb2-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                     <groupId>org.codehaus.mojo</groupId>
+                     <artifactId>license-maven-plugin</artifactId>
+                     <version>${tft.license-maven-plugin.version}</version> 
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -747,6 +755,46 @@
             </plugin>
 
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <canUpdateCopyright>true</canUpdateCopyright>
+                    <canUpdateDescription>true</canUpdateDescription>
+                    <licenseName>${tft.licenseName}</licenseName>
+                    <licenseResolver>classpath://it/tidalwave/license</licenseResolver>
+                    <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+                    <verbose>false</verbose>
+                    <addSvnKeyWords>true</addSvnKeyWords>
+                    <descriptionTemplate>${tft.licenseTemplate}</descriptionTemplate>
+                    <excludes>
+                        <exclude>LICENSE.txt</exclude>
+                        <exclude>**/*.form</exclude>
+                        <exclude>**/*.mf</exclude>
+                        <exclude>**/.description</exclude>
+                        <exclude>.hgtags</exclude>
+                        <exclude>.hgignore</exclude>
+                        <exclude>**/.classpath</exclude>
+                        <exclude>**/.settings</exclude>
+                        <exclude>**/archetypes/**</exclude>
+                        <exclude>**/*-profile</exclude>
+                    </excludes>
+                    <roots>
+                        <root>src/main/java</root>
+                        <root>src/main/resources</root>
+                        <root>src/test/java</root>
+                        <root>src/test/resources</root>
+                    </roots>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>it.tidalwave.thesefoolishthings</groupId>
+                        <artifactId>superpom-config</artifactId>
+                        <version>${tft.superpom.config.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+                   
+            <plugin> <!-- DEPRECATED in favour of license-maven-plugin -->
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
                 <configuration>
@@ -767,10 +815,11 @@
                         <exclude>**/LICENSE.txt</exclude>
                         <exclude>.hgignore</exclude>
                         <exclude>.hgtags</exclude>
-                        <exclude>**/*.revision</exclude>
+                        <exclude>**/*.description</exclude>
                         <exclude>**/*.mf</exclude>
                         <exclude>**/*.form</exclude>
                         <exclude>**/META-INF/**/*.*</exclude>
+                        <exclude>**/*-profile</exclude>
                     </excludes>
                     <encoding>UTF-8</encoding>
                     <headerDefinitions>
@@ -1791,7 +1840,7 @@
     TheseFoolishThings layout.
 
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-update-snapshots-v1</id>
             <build>
