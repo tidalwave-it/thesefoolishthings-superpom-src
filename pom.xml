@@ -762,12 +762,12 @@
                 <configuration>
                     <canUpdateCopyright>true</canUpdateCopyright>
                     <canUpdateDescription>true</canUpdateDescription>
-                    <licenseName>${tft.licenseName}</licenseName>
+                    <licenseName>${tft.license.name}</licenseName>
                     <licenseResolver>classpath://it/tidalwave/license</licenseResolver>
                     <addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
                     <verbose>false</verbose>
                     <addSvnKeyWords>true</addSvnKeyWords>
-                    <descriptionTemplate>${tft.licenseTemplate}</descriptionTemplate>
+                    <descriptionTemplate>${tft.license.template}</descriptionTemplate>
                     <excludes>
                         <exclude>LICENSE.txt</exclude>
                         <exclude>**/*.form</exclude>
