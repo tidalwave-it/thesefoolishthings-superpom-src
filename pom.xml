@@ -44,6 +44,8 @@
         <bundle.namespace>${project.groupId}.${project.artifactId}</bundle.namespace>
         <staging.mvn.repo.url>file://${project.build.directory}/target-maven-repo</staging.mvn.repo.url>
 
+        <netbeans.checkstyle.format>true</netbeans.checkstyle.format>
+
         <!-- Deprecated properties replaced by tft.* ones -->
         <testFailureIgnore>false</testFailureIgnore> <!-- backward compatibility, to be dropped -->
         <stableAPI>false</stableAPI>
