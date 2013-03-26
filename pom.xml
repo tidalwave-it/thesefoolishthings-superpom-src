@@ -1096,7 +1096,7 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <echo file="${tft.descriptionStamp}">REVISION: ${project.version}-${buildNumber}${line.separator}DESCRIPTION: ${project.version}-${buildNumber}${line.separator}</echo>
+                                        <echo file="${tft.descriptionStamp}">DESCRIPTION: ${project.version}-${buildNumber}${line.separator}</echo>
                                         <loadfile property="tft.description" srcFile="${tft.descriptionStamp}" />
                                         <echo>${tft.description}</echo>
                                         <echo>Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
