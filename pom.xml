@@ -888,6 +888,11 @@
         </plugins>
     </build>
 
+    <!--================================================================================================================
+
+    This profile is used in Continous Integration to create QA metrics data.
+
+    =================================================================================================================-->
     <profiles>
         <profile>
             <id>metrics</id>
@@ -895,6 +900,8 @@
                 <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/cobertura</tft.test.reportsDirectory>
             </properties>
             <build>
+                <defaultGoal>install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr dependency:analyze</defaultGoal>
+                <!--<defaultGoal>install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr javancss:report dependency:analyze</defaultGoal>-->
                 <plugins>
                     <!-- Cobertura -->
                     <plugin>
