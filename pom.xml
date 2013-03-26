@@ -1943,6 +1943,80 @@
             </build>
         </profile>
 
+    <!--================================================================================================================
+
+    This profile checks the headers of files.
+
+        =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-check-headers</id>
+            <properties>
+                <tft.license.template>${basedir}/target/it/tidalwave/license/filtered/tidalwave-header-description.ftl</tft.license.template>
+            </properties>
+            <build>
+                <defaultGoal>initialize</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>it.tidalwave.thesefoolishthings</groupId>
+                                            <artifactId>superpom-config</artifactId>
+                                            <version>${tft.superpom.config.version}</version>
+                                            <overWrite>true</overWrite>
+                                            <outputDirectory>${basedir}/target/superpom-config</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/it/tidalwave/license/filtered</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/target/superpom-config/it/tidalwave/license</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>check-file-header</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <reporting>
