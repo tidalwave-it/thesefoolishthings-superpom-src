@@ -147,7 +147,7 @@
         <tft.maven-javadoc-plugin.version>2.8</tft.maven-javadoc-plugin.version>
         <tft.maven-jetty-plugin.version>6.1.24</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
         <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
-        <tft.maven-pmd-plugin.version>2.5</tft.maven-pmd-plugin.version>
+        <tft.maven-pmd-plugin.version>3.0.1</tft.maven-pmd-plugin.version>
         <tft.maven-release-plugin.version>2.2.1</tft.maven-release-plugin.version>
         <tft.maven-replacer-plugin.version>1.3.9</tft.maven-replacer-plugin.version>
         <tft.maven-resources-plugin.version>2.5</tft.maven-resources-plugin.version>
@@ -952,7 +952,7 @@
                             <linkXref>true</linkXref>
                             <sourceEncoding>utf-8</sourceEncoding>
                             <minimumTokens>100</minimumTokens>
-                            <targetJdk>1.6</targetJdk>
+                            <targetJdk>${tft.javac.source}</targetJdk>
                         </configuration>
                     </plugin>
                 </plugins>
