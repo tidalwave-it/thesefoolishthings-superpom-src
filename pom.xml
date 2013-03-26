@@ -85,6 +85,8 @@
         <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:assembly deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
 
+        <tft.profile.metrics.defaultGoal>install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr javancss:report dependency:analyze</tft.profile.metrics.defaultGoal>
+
         <tft.appbundler.version>1.0-patched</tft.appbundler.version>
         <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
         <tft.lombok.version>0.11.4</tft.lombok.version>
@@ -900,8 +902,7 @@
                 <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/cobertura</tft.test.reportsDirectory>
             </properties>
             <build>
-                <defaultGoal>install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr dependency:analyze</defaultGoal>
-                <!--<defaultGoal>install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr javancss:report dependency:analyze</defaultGoal>-->
+                <defaultGoal>${tft.profile.metrics.defaultGoal}</defaultGoal>
                 <plugins>
                     <!-- Cobertura -->
                     <plugin>
