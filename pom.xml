@@ -75,6 +75,8 @@
         <tft.javac.showDeprecation>true</tft.javac.showDeprecation>
         <tft.javac.showWarnings>true</tft.javac.showWarnings>
         <tft.javac.fork>true</tft.javac.fork>
+        <tft.project.build.unwoven-classes.directory>${project.build.directory}/unwoven-classes</tft.project.build.unwoven-classes.directory>
+        <tft.project.build.unwoven-test-classes.directory>${project.build.directory}/unwoven-test-classes</tft.project.build.unwoven-test-classes.directory>
         <tft.stableAPI>${stableAPI}</tft.stableAPI>
         <tft.stableAPIVersion>${stableAPIVersion}</tft.stableAPIVersion>
         <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
@@ -1368,14 +1370,14 @@
                                 <id>default-compile</id>
                                 <phase>compile</phase>
                                 <configuration>
-                                    <outputDirectory>${project.build.directory}/unwoven-classes</outputDirectory>
+                                    <outputDirectory>${tft.project.build.unwoven-classes.directory}</outputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
                                 <id>default-testCompile</id>
                                 <phase>test-compile</phase>
                                 <configuration>
-                                    <outputDirectory>${project.build.directory}/unwoven-test-classes</outputDirectory>
+                                    <outputDirectory>${tft.project.build.unwoven-test-classes.directory}</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
@@ -1401,7 +1403,7 @@
                                     <goal>copy-resources</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${project.build.directory}/unwoven-classes</outputDirectory>
+                                    <outputDirectory>${tft.project.build.unwoven-classes.directory}</outputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -1411,7 +1413,7 @@
                                       <goal>copy-resources</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${project.build.directory}/unwoven-test-classes</outputDirectory>
+                                    <outputDirectory>${tft.project.build.unwoven-test-classes.directory}</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
@@ -1439,7 +1441,7 @@
                                 </goals>
                                 <configuration>
                                     <weaveDirectories>
-                                        <weaveDirectory>${project.build.directory}/unwoven-classes</weaveDirectory>
+                                        <weaveDirectory>${tft.project.build.unwoven-classes.directory}</weaveDirectory>
                                     </weaveDirectories>
                                 </configuration>
                             </execution>
@@ -1451,7 +1453,7 @@
                                 </goals>
                                 <configuration>
                                     <weaveDirectories>
-                                        <weaveDirectory>${project.build.directory}/unwoven-test-classes</weaveDirectory>
+                                        <weaveDirectory>${tft.project.build.unwoven-test-classes.directory}</weaveDirectory>
                                     </weaveDirectories>
                                 </configuration>
                             </execution>
