@@ -1387,6 +1387,7 @@
                     </plugin>
                     
                     <!-- Create the target directories for unwoven classes -->
+                    <!-- See http://mojo.codehaus.org/aspectj-maven-plugin/weaveDirectories.html -->
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
                         <configuration>
