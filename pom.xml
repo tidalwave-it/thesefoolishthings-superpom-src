@@ -1352,6 +1352,9 @@
 
     This profile configures AspectJ in the build. Create an empty file in src/config/activate-aspectj-profile to
     activate it.
+    This profile arranges things AspectJ is compatibile with other tools that manipulate the bytecode, such as 
+    annotation processors (e.g. Lombok).
+    The original, unwoven classes are stored in target/unwoven-classes and target/unwoven-test-classes.
 
     =================================================================================================================-->
         <profile>
