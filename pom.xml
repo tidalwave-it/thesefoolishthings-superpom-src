@@ -1431,7 +1431,9 @@
                             <source>${tft.javac.source}</source>
                             <complianceLevel>${tft.javac.source}</complianceLevel>
                             <target>${tft.javac.target}</target>
+                            <!-- Prevent ajc from finding sources -->
                             <sources/>
+                            <testSources/>
                             <!-- This is important because sometimes the plugin decides that there's nothing to do
                                  because sources are not specified -->
                             <forceAjcCompile>true</forceAjcCompile>
