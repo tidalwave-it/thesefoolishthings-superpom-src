@@ -1438,6 +1438,14 @@
                             <!-- This is important because sometimes the plugin decides that there's nothing to do
                                  because sources are not specified -->
                             <forceAjcCompile>true</forceAjcCompile>
+                            <showWeaveInfo>true</showWeaveInfo>
+                            <verbose>true</verbose>
+                            <aspectLibraries>
+                                <dependency>
+                                    <groupId>org.springframework</groupId>
+                                    <artifactId>spring-aspects</artifactId>
+                                </dependency>
+                            </aspectLibraries>
                         </configuration>
                         <executions>
                             <execution>
