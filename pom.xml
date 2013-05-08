@@ -6,7 +6,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>2.7-SNAPSHOT</version>
+    <version>2.7</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>${tft.project.url}</url>
     <description>${tft.project.description}</description>
@@ -1434,8 +1434,8 @@
                             <complianceLevel>${tft.javac.source}</complianceLevel>
                             <target>${tft.javac.target}</target>
                             <!-- Prevent ajc from finding sources -->
-                            <sources/>
-                            <testSources/>
+                            <sources />
+                            <testSources />
                             <!-- This is important because sometimes the plugin decides that there's nothing to do
                                  because sources are not specified -->
                             <forceAjcCompile>true</forceAjcCompile>
