@@ -112,6 +112,7 @@
         <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
 
         <tft.aspectjrt.version>1.6.11</tft.aspectjrt.version>
+        <tft.aspectj.ajc.verbose>false</tft.aspectj.ajc.verbose>
 
         <tft.jetty.port>8080</tft.jetty.port>
         <tft.jetty.stopPort>9966</tft.jetty.stopPort>
@@ -1438,8 +1439,8 @@
                             <!-- This is important because sometimes the plugin decides that there's nothing to do
                                  because sources are not specified -->
                             <forceAjcCompile>true</forceAjcCompile>
-                            <showWeaveInfo>true</showWeaveInfo>
-                            <verbose>true</verbose>
+                            <showWeaveInfo>${tft.aspectj.ajc.verbose}</showWeaveInfo>
+                            <verbose>${tft.aspectj.ajc.verbose}</verbose>
                             <aspectLibraries>
                                 <dependency>
                                     <groupId>org.springframework</groupId>
