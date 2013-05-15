@@ -134,7 +134,7 @@
         <!--==== Plugin Versions ==================================================================================-->
 
         <tft.maven-android-plugin.version>2.9.0-beta-4</tft.maven-android-plugin.version>
-        <tft.maven-antrun-plugin.version>1.6</tft.maven-antrun-plugin.version>
+        <tft.maven-antrun-plugin.version>1.7</tft.maven-antrun-plugin.version>
         <tft.maven-archetype-plugin.version>2.0-alpha-5</tft.maven-archetype-plugin.version>
         <tft.maven-assembly-plugin.version>2.2.1</tft.maven-assembly-plugin.version>
         <tft.maven-bundle-plugin.version>2.0.1</tft.maven-bundle-plugin.version>
