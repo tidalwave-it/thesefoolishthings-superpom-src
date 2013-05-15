@@ -751,11 +751,21 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>package-jar</id>
                         <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>package-test-jar</id>
+                        <phase>package</phase>
+                        <goals>
                             <goal>test-jar</goal>
                         </goals>
+                        <configuration>
+                            <skipIfEmpty>true</skipIfEmpty>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
