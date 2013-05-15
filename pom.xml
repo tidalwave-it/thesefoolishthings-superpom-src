@@ -184,6 +184,7 @@
         <tft.versions-maven-plugin.version>1.3.1</tft.versions-maven-plugin.version>
         <tft.wagon-maven-plugin.version>1.0-beta-3</tft.wagon-maven-plugin.version>
         <tft.webdav-jackrabbit.version>1.0-beta-7</tft.webdav-jackrabbit.version>
+        <tft.xml-maven-plugin.version>1.0</tft.xml-maven-plugin.version>
 
         <tft.archetype-packaging.version>2.0-alpha-5</tft.archetype-packaging.version>
     </properties>
@@ -482,6 +483,11 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>wagon-maven-plugin</artifactId>
                     <version>${tft.wagon-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>xml-maven-plugin</artifactId>
+                    <version>${tft.xml-maven-plugin.version}</version> 
                 </plugin>
 
                 <plugin>
