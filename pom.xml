@@ -160,7 +160,7 @@
         <tft.maven-scm-plugin.version>1.8.1</tft.maven-scm-plugin.version>
         <tft.maven-shade-plugin.version>2.0</tft.maven-shade-plugin.version>
         <tft.maven-site-plugin.version>3.3</tft.maven-site-plugin.version>
-        <tft.maven-source-plugin.version>2.1.2</tft.maven-source-plugin.version>
+        <tft.maven-source-plugin.version>2.2.1</tft.maven-source-plugin.version>
         <tft.maven-surefire-plugin.version>2.10</tft.maven-surefire-plugin.version>
         <tft.maven-war-plugin.version>2.1.1</tft.maven-war-plugin.version>
 
