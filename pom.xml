@@ -159,7 +159,7 @@
         <tft.maven-resources-plugin.version>2.5</tft.maven-resources-plugin.version>
         <tft.maven-scm-plugin.version>1.5</tft.maven-scm-plugin.version>
         <tft.maven-shade-plugin.version>1.5</tft.maven-shade-plugin.version>
-        <tft.maven-site-plugin.version>3.2</tft.maven-site-plugin.version> <!-- 3.0-beta-3 miserably fails with -->
+        <tft.maven-site-plugin.version>3.2</tft.maven-site-plugin.version>
         <tft.maven-source-plugin.version>2.1.2</tft.maven-source-plugin.version>
         <tft.maven-surefire-plugin.version>2.10</tft.maven-surefire-plugin.version>
         <tft.maven-war-plugin.version>2.1.1</tft.maven-war-plugin.version>
@@ -1353,7 +1353,7 @@
 
     This profile configures AspectJ for Spring in the build. Create an empty file in src/config/activate-aspectj-profile
     to activate it.
-    This profile arranges things AspectJ is compatibile with other tools that manipulate the bytecode, such as 
+    This profile arranges things AspectJ is compatibile with other tools that manipulate the bytecode, such as
     annotation processors (e.g. Lombok).
     The original, unwoven classes are stored in target/unwoven-classes and target/unwoven-test-classes.
 
@@ -1366,7 +1366,7 @@
                 </file>
             </activation>
             <build>
-                <plugins>                    
+                <plugins>
                     <plugin>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <executions>
@@ -1386,7 +1386,7 @@
                             </execution>
                         </executions>
                     </plugin>
-                    
+
                     <!-- Create the target directories for unwoven classes -->
                     <!-- See http://mojo.codehaus.org/aspectj-maven-plugin/weaveDirectories.html -->
                     <plugin>
@@ -1423,8 +1423,8 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>    
-                    
+                    </plugin>
+
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>aspectj-maven-plugin</artifactId>
@@ -1474,11 +1474,11 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>                                    
+                    </plugin>
                 </plugins>
             </build>
         </profile>
-        
+
     <!--================================================================================================================
 
     This profile compiles custom Vaadin widgets into GWT components.
