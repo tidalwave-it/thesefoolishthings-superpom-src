@@ -137,7 +137,7 @@
         <tft.maven-antrun-plugin.version>1.7</tft.maven-antrun-plugin.version>
         <tft.maven-archetype-plugin.version>2.0-alpha-5</tft.maven-archetype-plugin.version> <!-- TODO 2.2 -->
         <tft.maven-assembly-plugin.version>2.2.1</tft.maven-assembly-plugin.version> <!-- TODO 2.4 -->
-        <tft.maven-bundle-plugin.version>2.0.1</tft.maven-bundle-plugin.version>
+        <tft.maven-bundle-plugin.version>2.0.1</tft.maven-bundle-plugin.version> <!-- TODO 2.3.7 -->
         <tft.maven-checkstyle-plugin.version>2.9.1</tft.maven-checkstyle-plugin.version>
         <tft.maven-clean-plugin.version>2.4.1</tft.maven-clean-plugin.version>
         <tft.maven-compiler-plugin.version>3.1</tft.maven-compiler-plugin.version>
