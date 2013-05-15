@@ -162,7 +162,7 @@
         <tft.maven-site-plugin.version>3.3</tft.maven-site-plugin.version>
         <tft.maven-source-plugin.version>2.2.1</tft.maven-source-plugin.version>
         <tft.maven-surefire-plugin.version>2.13</tft.maven-surefire-plugin.version>
-        <tft.maven-war-plugin.version>2.1.1</tft.maven-war-plugin.version>
+        <tft.maven-war-plugin.version>2.3</tft.maven-war-plugin.version>
 
         <tft.aspectj-maven-plugin.version>1.4</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>1.7</tft.build-helper-maven-plugin.version>
