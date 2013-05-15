@@ -166,7 +166,7 @@
 
         <tft.aspectj-maven-plugin.version>1.4</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>1.7</tft.build-helper-maven-plugin.version>
-        <tft.buildnumber-maven-plugin.version>1.0</tft.buildnumber-maven-plugin.version>
+        <tft.buildnumber-maven-plugin.version>1.2</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version>
         <tft.cobertura-maven-plugin.version>2.5.1</tft.cobertura-maven-plugin.version>
         <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- Version 1.2 breaks the generation of .revision -->
