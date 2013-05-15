@@ -170,7 +170,7 @@
         <tft.clirr-maven-plugin.version>2.3</tft.clirr-maven-plugin.version> <!-- TODO 2.5 -->
         <tft.cobertura-maven-plugin.version>2.5.1</tft.cobertura-maven-plugin.version> <!-- TODO 2.5.2 -->
         <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- TODO 1.2.1, but ersion 1.2 breaks the generation of .revision -->
-        <tft.findbugs-maven-plugin.version>2.4.0</tft.findbugs-maven-plugin.version> <!-- TODO 2.5.2 -->
+        <tft.findbugs-maven-plugin.version>2.5.2</tft.findbugs-maven-plugin.version>
         <tft.gmaven-plugin>1.0</tft.gmaven-plugin> <!-- TODO 1.4 -->
         <tft.gwt-maven-plugin.version>2.1.0-1</tft.gwt-maven-plugin.version>
         <tft.javancss-maven-plugin.version>2.0</tft.javancss-maven-plugin.version>
