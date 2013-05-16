@@ -676,6 +676,7 @@
                     <doUpdate>false</doUpdate>
                     <getRevisionOnlyOnce>${tft.buildNumber.getRevisionOnlyOnce}</getRevisionOnlyOnce>
                     <revisionOnScmFailure>unknown</revisionOnScmFailure>
+                    <shortRevisionLength>12</shortRevisionLength>
                 </configuration>
             </plugin>
 
