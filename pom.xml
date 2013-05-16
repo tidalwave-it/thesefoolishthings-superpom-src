@@ -1345,8 +1345,8 @@
 
     <!--================================================================================================================
 
-    This profile is executed when a staged release is canceled. BEWARE: it strips the local HG repository! It has been
-    designed to work with Hudson.
+    This profile is executed when a staged release is canceled - it erases the local SCM repository. BEWARE: this has
+    been designed to work with Hudson, not on your local workarea.
 
     =================================================================================================================-->
         <profile>
@@ -1365,8 +1365,21 @@
                                 </goals>
                                 <configuration>
                                     <!-- FIXME: would be better to strip local changes -->
-                                    <target>
+                                    <target name="strip-hg" if="tft.scm-detector.hg">
                                         <delete dir="${project.build.directory}/.hg" />
+                                    </target>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>strip-git</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- FIXME: would be better to strip local changes -->
+                                    <target name="strip-git" if="tft.scm-detector.git">
+                                        <delete dir="${project.build.directory}/.git" />
                                     </target>
                                 </configuration>
                             </execution>
