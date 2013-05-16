@@ -1274,8 +1274,9 @@
         
     <!--================================================================================================================
 
-    This profile commits local artifacts after a successful staged release and pushes Mercurial changes.
-
+    This profile commits local artifacts after a successful staged release and pushes SCM changes.
+    Run as mvn -N -Prelease-commit
+    
     =================================================================================================================-->
         <profile>
             <id>release-commit</id>
