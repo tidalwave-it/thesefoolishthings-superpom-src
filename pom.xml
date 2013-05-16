@@ -801,7 +801,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <localCheckout>${tft.release.localCheckout}</localCheckout>
-                    <!-- pushChanges>false</pushChanges --> <!-- doesn't work! NOTE: should have been fixed with scm-plugin 1.5 -->
+                    <pushChanges>false</pushChanges>
                     <preparationGoals>${tft.release.preparationGoals}</preparationGoals>
                     <completionGoals>${tft.release.completionGoals}</completionGoals>
                     <goals>${tft.release.goals}</goals>
@@ -1105,7 +1105,6 @@
             <id>release</id>
 
             <properties>
-                <scm.repo.effective.url>file://${project.build.directory}/dummy-hg-repo</scm.repo.effective.url>
                 <skipTests>true</skipTests>
                 <dryRun>false</dryRun>
                 <altDeploymentRepository>release-repo-hudson::default::${staging.mvn.repo.url}</altDeploymentRepository>
@@ -1114,11 +1113,7 @@
             <build>
                 <finalName>${project.artifactId}-${project.version}</finalName>
                 <plugins>
-                    <!-- Cleans and initializes the dummy local hg repo that will be the target of the push performed during release
-                         Up to Maven 2.2.1 these executions were marked inherited=false to prevent them from happening in children poms;
-                         but since Maven 3 they won't be inherited from the superpom at all. The minor drawback without inheritance=false
-                         is that the dummy repo is created for each children module.
-                         This step would be unnecessary if pushChanges=false worked... -->
+                    <!-- FIXME: this directory is created in all submodules, only the master one is needed -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
@@ -1131,34 +1126,7 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <delete dir="${project.build.directory}/dummy-hg-repo" />
                                         <delete dir="${project.build.directory}/target-maven-repo" />
-                                    </target>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>create-release-dirs</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <mkdir dir="${project.build.directory}/dummy-hg-repo" />
-                                    </target>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>init-dummy-hg-repo</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <exec executable="hg" dir="${project.build.directory}/dummy-hg-repo">
-                                            <arg value="init" />
-                                        </exec>
                                     </target>
                                 </configuration>
                             </execution>
