@@ -94,6 +94,7 @@
         <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
         <tft.lombok.version>0.11.4</tft.lombok.version>
         <tft.testng.version>6.1.1</tft.testng.version>
+        <tft.test.jacoco.argLine></tft.test.jacoco.argLine>
         <tft.junit.version>4.7</tft.junit.version>
         <tft.mockito.version>1.8.2</tft.mockito.version>
         <tft.hamcrest-matchers.version>1.1</tft.hamcrest-matchers.version>
