@@ -94,7 +94,6 @@
         <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
         <tft.lombok.version>0.11.4</tft.lombok.version>
         <tft.testng.version>6.1.1</tft.testng.version>
-        <tft.test.jacoco.argLine></tft.test.jacoco.argLine>
         <tft.junit.version>4.7</tft.junit.version>
         <tft.mockito.version>1.8.2</tft.mockito.version>
         <tft.hamcrest-matchers.version>1.1</tft.hamcrest-matchers.version>
@@ -1115,6 +1114,14 @@
             <build>
                 <defaultGoal>${tft.profile.metrics.defaultGoal}</defaultGoal>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>-Xmx${tft.test.maxMemory} ${tft.test.vmOptions} ${tft.test.jacoco.argLine}</argLine>
+                        </configuration>
+                    </plugin>
+
                     <!-- Jacoco -->
                     <plugin>
                         <groupId>org.jacoco</groupId>
