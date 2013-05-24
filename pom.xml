@@ -1512,11 +1512,9 @@
 
     <!--================================================================================================================
 
-    This profile configures AspectJ for Spring in the build. Create an empty file in src/config/activate-aspectj-profile
-    to activate it.
-    This profile arranges things AspectJ is compatibile with other tools that manipulate the bytecode, such as
-    annotation processors (e.g. Lombok).
-    The original, unwoven classes are stored in target/unwoven-classes and target/unwoven-test-classes.
+    This profile configures AspectJ in the build. Create an empty file in src/config/activate-aspectj-profile to
+    activate it.
+    THIS IS A DEPRECATED PROFILE.
 
     =================================================================================================================-->
         <profile>
@@ -1524,6 +1522,74 @@
             <activation>
                 <file>
                     <exists>src/config/activate-aspectj-profile</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                <!-- Will be no more needed when http://jira.codehaus.org/browse/MASPECTJ-9 is fixed -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjrt</artifactId>
+                                <version>${tft.aspectjrt.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjtools</artifactId>
+                                <version>${tft.aspectjrt.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>weave-classes</id>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties" classpathref="maven.plugin.classpath" />
+                                        <iajc destDir="${project.build.directory}/classes" inpath="${project.build.directory}/classes" source="${tft.javac.source}" target="${tft.javac.target}" aspectPath="${org.springframework:spring-aspects:jar}" classpathRef="maven.compile.classpath" Xlint="ignore" />
+                                    </target>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>weave-test-classes</id>
+                                <phase>process-test-classes</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties" classpathref="maven.plugin.classpath" />
+                                        <iajc destDir="${project.build.directory}/test-classes" inpath="${project.build.directory}/test-classes" source="${tft.javac.source}" target="${tft.javac.target}" aspectPath="${org.springframework:spring-aspects:jar}" classpathRef="maven.compile.classpath" Xlint="ignore" />
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    <!--================================================================================================================
+
+    This profile configures AspectJ for Spring in the build. Create an empty file in 
+    src/config/activate-it.tidalwave.aspectj-springaop-v1-profile
+    to activate it.
+    This profile arranges things so that AspectJ is compatibile with other tools that manipulate the bytecode, such as
+    annotation processors (e.g. Lombok). The original, unwoven classes are stored in target/unwoven-classes and 
+    target/unwoven-test-classes.
+
+    =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-aspectj-springaop-v1</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-it.tidalwave-aspectj-springaop-v1-profile</exists>
                 </file>
             </activation>
             <build>
