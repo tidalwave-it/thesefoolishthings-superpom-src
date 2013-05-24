@@ -56,6 +56,7 @@
         <stableAPIVersion>(,${project.version})</stableAPIVersion>
         <disableJavaDocs>false</disableJavaDocs>
         <disableDeploy>false</disableDeploy>
+        <skipTests>false</skipTests>
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
         <release.profiles>release</release.profiles>
 
@@ -1022,6 +1023,7 @@
     <!--================================================================================================================
 
     This profile is used in Continous Integration to create QA metrics data.
+    THIS PROFILE IS GOING TO BE DEPRECATED BECAUSE IT USES COBERTURA.
 
     =================================================================================================================-->
     <profiles>
@@ -1098,7 +1100,93 @@
             </reporting>
         </profile>
 
-    <!--================================================================================================================
+     <!--================================================================================================================
+
+    This profile is used in Continous Integration to create QA metrics data.
+
+    =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-metrics-v2</id>
+            <properties>
+                <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/jacoco</tft.test.reportsDirectory>
+            </properties>
+            <build>
+                <defaultGoal>${tft.profile.metrics.defaultGoal}</defaultGoal>
+                <plugins>
+                    <!-- Jacoco -->
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.6.2.201302030002</version>
+                        <configuration>
+                            <propertyName>tft.test.jacoco.argLine</propertyName>
+                            <skipTests>${tft.test.skip}</skipTests>
+                            <!--<destfile>${project.build.directory}/coverage-reports/jacoco-unit.exec</destfile>-->
+                            <!--<datafile>${project.build.directory}/target/coverage-reports/jacoco-unit.exec</datafile>-->
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>prepare-agent</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>report</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <reporting>
+                <plugins>
+                    <!-- Jacoco -->
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <!-- version must be replicated here -->
+                        <version>0.6.2.201302030002</version>
+                    </plugin>
+
+                    <!-- FindBugs -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>findbugs-maven-plugin</artifactId>
+                        <!-- version must be replicated here -->
+                        <version>${tft.findbugs-maven-plugin.version}</version>
+                        <configuration>
+                            <xmlOutput>true</xmlOutput>
+                            <findbugsXmlOutput>true</findbugsXmlOutput>
+                            <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+                            <effort>Max</effort>
+                            <threshold>Low</threshold>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                    </plugin>
+
+                    <!-- PMD -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <!-- version must be replicated here -->
+                        <version>${tft.maven-pmd-plugin.version}</version>
+                        <configuration>
+                            <linkXref>true</linkXref>
+                            <sourceEncoding>utf-8</sourceEncoding>
+                            <minimumTokens>100</minimumTokens>
+                            <targetJdk>${tft.javac.source}</targetJdk>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </reporting>
+        </profile>
+        
+   <!--================================================================================================================
 
     This profile is activated during a release.
 
