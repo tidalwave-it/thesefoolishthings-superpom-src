@@ -1136,6 +1136,7 @@
                         <executions>
                             <execution>
                                 <id>prepare-agent</id>
+                                <!-- This properly sets ${tft.test.jacoco.argLine} so it's later used by Surefire -->
                                 <goals>
                                     <goal>prepare-agent</goal>
                                 </goals>
@@ -1237,8 +1238,10 @@
 
     <!--================================================================================================================
 
-    This profile signs the build artifacts.
-
+    This profile signs the build artifacts. It is automatically enabled during a release; signing requires that the
+    proper certificates have been locally set up with PGP. If you want to skip signing, set the property
+    tft.release.sign-artifacts.skip to true.
+    
     =================================================================================================================-->
         <profile>
             <id>release-sign-artifacts</id>
@@ -1272,7 +1275,7 @@
 
     <!--================================================================================================================
 
-    This profile stores the current build description and Java version into a local file.
+    This profile stores the current build description and Java version into a local file - used for Hudson builds.
 
     =================================================================================================================-->
         <profile>
@@ -1356,7 +1359,7 @@
         
     <!--================================================================================================================
 
-    This profile detects Git it's used by the release-commit profile.
+    This profile detects Git, it's used by the release-commit profile.
 
     =================================================================================================================-->
         <profile>
@@ -1373,7 +1376,8 @@
         
     <!--================================================================================================================
 
-    This profile commits local artifacts after a successful staged release and pushes SCM changes.
+    This profile deploys local artifacts to the remote repository and pushes SCM changes  after a successful staged 
+    release.
     Run as mvn -N -Prelease-commit
     
     =================================================================================================================-->
