@@ -61,6 +61,8 @@
         <release.profiles>release</release.profiles>
 
         <tft.defaultGoal>clean install</tft.defaultGoal>
+        <tft.profile.metrics.defaultGoal>install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr javancss:report dependency:analyze</tft.profile.metrics.defaultGoal>
+
         <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.license.name>tidalwave_asf2</tft.license.name>
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
@@ -87,8 +89,6 @@
         <tft.release.completionGoals />
         <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:assembly deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
-
-        <tft.profile.metrics.defaultGoal>install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr javancss:report dependency:analyze</tft.profile.metrics.defaultGoal>
 
         <tft.appbundler.version>1.0-patched</tft.appbundler.version>
         <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
