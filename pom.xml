@@ -170,7 +170,7 @@
         <tft.buildnumber-maven-plugin.version>1.2</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.5</tft.clirr-maven-plugin.version> 
         <tft.cobertura-maven-plugin.version>2.5.1</tft.cobertura-maven-plugin.version> <!-- TODO 2.5.2 -->
-        <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- TODO 1.2.1, but ersion 1.2 breaks the generation of .revision -->
+        <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- TODO 1.2.1, but version 1.2 breaks the generation of .description -->
         <tft.findbugs-maven-plugin.version>2.5.2</tft.findbugs-maven-plugin.version>
         <tft.gmaven-plugin.version>1.0</tft.gmaven-plugin.version> <!-- TODO 1.4 -->
         <tft.gwt-maven-plugin.version>2.1.0-1</tft.gwt-maven-plugin.version>
@@ -196,8 +196,8 @@
         <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
 
     <prerequisites>
         <maven>${tft.maven.requiredVersion}</maven>
@@ -279,6 +279,7 @@
 
     <build>
         <defaultGoal>${tft.defaultGoal}</defaultGoal>
+        
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
@@ -773,7 +774,7 @@
                     </execution>
                 </executions>
             </plugin>
-
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -1752,7 +1753,7 @@
                             </execution>
                         </executions>
                     </plugin>
-
+                    
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>aspectj-maven-plugin</artifactId>
@@ -2199,6 +2200,11 @@
 
     <!--================================================================================================================
 
+    Deploys to a public repo those artifacts that have been generated during a release process and stored in a local 
+    repository. Run as:
+    
+    mvn -N -Pit.tidalwave.publish-artifacts-v1
+    
     Note: on Mac OS X you need to run this with -Djava.io.tmpdir=/tmp (or other directory).
 
     =================================================================================================================-->
@@ -2217,7 +2223,9 @@
     <!--================================================================================================================
 
     This profile updates all the dependencies to their latest release. The project must be structured in the standard
-    TheseFoolishThings layout.
+    TheseFoolishThings layout. Run as:
+    
+    mvn -N -Pit.tidalwave-update-releases-v1
 
     =================================================================================================================-->
         <profile>
@@ -2247,10 +2255,11 @@
     <!--================================================================================================================
 
     This profile updates all the dependencies to their latest snapshots. The project must be structured in the standard
-    TheseFoolishThings layout.
+    TheseFoolishThings layout. Run as:
+    
+    mvn -N -Pit.tidalwave-update-snapshots-v1
 
-
-        =================================================================================================================-->
+    =================================================================================================================-->
         <profile>
             <id>it.tidalwave-update-snapshots-v1</id>
             <build>
@@ -2279,7 +2288,7 @@
 
     This profile updates the headers of files.
 
-        =================================================================================================================-->
+    =================================================================================================================-->
         <profile>
             <id>it.tidalwave-update-headers</id>
             <properties>
