@@ -1717,38 +1717,21 @@
                     </plugin>
 
                     <!-- Create the target directories for unwoven classes -->
-                    <!-- See http://mojo.codehaus.org/aspectj-maven-plugin/weaveDirectories.html -->
                     <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <configuration>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}</directory>
-                                    <includes>
-                                        <include>non-existent</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>create-unwoven-classes</id>
+                                <id>create-unwoven-classes-dirs</id>
                                 <phase>initialize</phase>
                                 <goals>
-                                    <goal>copy-resources</goal>
+                                    <goal>run</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${tft.project.build.unwoven-classes.directory}</outputDirectory>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>create-unwoven-test-classes</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                      <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${tft.project.build.unwoven-test-classes.directory}</outputDirectory>
+                                    <target>
+                                        <mkdir dir="${tft.project.build.unwoven-classes.directory}" />
+                                        <mkdir dir="${tft.project.build.unwoven-test-classes.directory}" />
+                                    </target>
                                 </configuration>
                             </execution>
                         </executions>
@@ -2516,3 +2499,4 @@
     </reporting>
 
 </project>
+
