@@ -677,7 +677,7 @@
                 </executions>
                 <configuration>
                     <doCheck>false</doCheck>
-                    <doUpdate>false</doUpdate>
+                     <doUpdate>false</doUpdate>
                     <getRevisionOnlyOnce>${tft.buildNumber.getRevisionOnlyOnce}</getRevisionOnlyOnce>
                     <revisionOnScmFailure>unknown</revisionOnScmFailure>
                     <shortRevisionLength>12</shortRevisionLength>
@@ -707,10 +707,7 @@
                 <configuration>
                     <tarLongFileMode>gnu</tarLongFileMode>
                     <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
-                    <descriptors>
-                        <descriptor>src/assemble/bin.xml</descriptor>
-                        <descriptor>src/assemble/project.xml</descriptor>
-                    </descriptors>
+                    <!-- References to assembly descriptors are in profiles -->
                 </configuration>
             </plugin>
 
@@ -1506,12 +1503,11 @@
 
     <!--================================================================================================================
 
-    This profile deploys the extra artifacts xxx-bin.tar.gz and xxx-project.tar.gz.
-    TODO: remove the profile; instead use two specific profiles that automatically attach the files when present.
+    This profile deploys the extra artifacts that are created by the assembly plugin.
 
     =================================================================================================================-->
         <profile>
-            <id>deploy-extra-artifacts</id>
+            <id>it.tidalwave-deploy-extra-artifacts-v2</id>
 
             <properties>
                 <staging.mvn.repo.url>file://${project.build.directory}/../../target-maven-repo</staging.mvn.repo.url>
@@ -1519,32 +1515,81 @@
             </properties>
 
             <build>
+                <defaultGoal>initialize assembly:assembly build-helper:attach-artifact verify deploy:deploy</defaultGoal>
                 <finalName>${project.artifactId}-${project.version}</finalName>
+            </build>
+        </profile>
+
+    <!--================================================================================================================
+
+    This profiles creates an assembly 'bin' artifact if its configuration file is present.
+
+    =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-assembly-bin-descriptor</id>
+            <activation>
+                <file>
+                    <exists>src/assemble/bin.xml</exists>
+                </file>
+            </activation>
+            <build>
                 <plugins>
-                    <!-- Attaches the extra artifacts prepared during the release process by the assembly plugin -->
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <configuration>
+                            <descriptors combine.children="append">
+                                <descriptor>src/assemble/bin.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </plugin>                
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-artifacts</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>attach-artifact</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                         <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${project.build.directory}/${project.build.finalName}-project.tar.gz</file>
-                                    <type>tar.gz</type>
-                                    <classifier>project</classifier>
-                                </artifact>
+                            <artifacts combine.children="append">
                                 <artifact>
                                     <file>${project.build.directory}/${project.build.finalName}-bin.tar.gz</file>
                                     <type>tar.gz</type>
                                     <classifier>bin</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    <!--================================================================================================================
+
+    This profiles creates an assembly 'project' artifact if its configuration file is present.
+
+    =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-assembly-project-descriptor</id>
+            <activation>
+                <file>
+                    <exists>src/assemble/project.xml</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <configuration>
+                            <descriptors combine.children="append">
+                                <descriptor>src/assemble/project.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <configuration>
+                            <artifacts combine.children="append">
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}-project.tar.gz</file>
+                                    <type>tar.gz</type>
+                                    <classifier>project</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>
