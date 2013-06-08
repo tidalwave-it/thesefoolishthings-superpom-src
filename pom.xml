@@ -1979,10 +1979,19 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
+                                        <taskdef name="bundleapp" 
+                                                 classname="com.oracle.appbundler.AppBundlerTask" 
+                                                 classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
 
                                         <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
-                                        <bundleapp outputdirectory="${project.build.directory}" name="${tft.appbundle.name}" displayname="${tft.appbundle.name}" icon="src/main/app-resources/${netbeans.cluster}.icns" identifier="${project.groupId}" shortversion="${project.version}" mainclassname="${tft.netbeans.main}" signature="${tft.appbundle.signature}">
+                                        <bundleapp outputdirectory="${project.build.directory}" 
+                                                   name="${tft.appbundle.name}" 
+                                                   displayname="${tft.appbundle.name}" 
+                                                   icon="src/main/app-resources/${netbeans.cluster}.icns" 
+                                                   identifier="${project.groupId}" 
+                                                   shortversion="${project.version}" 
+                                                   mainclassname="${tft.netbeans.main}" 
+                                                   signature="${tft.appbundle.signature}">
                                             <runtime dir="${project.build.directory}/jdk/${tft.embedded-jdk-name}/Contents/Home" />
                                             <classpath dir="${project.basedir}" casesensitive="yes">
                                                 <include name="target/application/${netbeans.cluster}/platform/lib/*.jar" />
