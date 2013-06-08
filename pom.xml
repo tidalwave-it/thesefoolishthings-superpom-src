@@ -2003,6 +2003,7 @@
                                             <option value="-Dit.tidalwave.netbeans.boot.userDirName=${tft.appbundle.name}" />
                                             <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}" />
                                             <option value="-Xdock:name=${tft.appbundle.name}" />
+                                            <option value="-Xbootclasspath/a:$APP_ROOT/Contents/PlugIns/${tft.embedded-jdk-name}/Contents/Home/jre/lib/jfxrt.jar" />
                                         </bundleapp>
 
                                         <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/Java">
