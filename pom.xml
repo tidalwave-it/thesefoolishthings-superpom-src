@@ -112,7 +112,7 @@
         <tft.netbeans.main>it.tidalwave.netbeans.boot.NetBeansLauncher</tft.netbeans.main>
         <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
 
-        <tft.aspectjrt.version>1.6.11</tft.aspectjrt.version>
+        <tft.aspectjrt.version>1.7.2</tft.aspectjrt.version>
         <tft.aspectj.ajc.verbose>false</tft.aspectj.ajc.verbose>
 
         <tft.jetty.port>8080</tft.jetty.port>
@@ -1841,6 +1841,18 @@
                                 </configuration>
                             </execution>
                         </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjrt</artifactId>
+                                <version>${tft.aspectjrt.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjtools</artifactId>
+                                <version>${tft.aspectjrt.version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
