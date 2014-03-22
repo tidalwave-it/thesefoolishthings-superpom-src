@@ -95,7 +95,7 @@
         <tft.lombok.version>1.12.6</tft.lombok.version>
         <tft.testng.version>6.1.1</tft.testng.version>
         <tft.junit.version>4.7</tft.junit.version>
-        <tft.mockito.version>1.8.2</tft.mockito.version>
+        <tft.mockito.version>1.8.5</tft.mockito.version>
         <tft.hamcrest-matchers.version>1.1</tft.hamcrest-matchers.version>
         <tft.test.skip>${skipTests}</tft.test.skip>
         <tft.test.maxMemory>768M</tft.test.maxMemory>
