@@ -92,7 +92,7 @@
 
         <tft.appbundler.version>1.0-patched</tft.appbundler.version>
         <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
-        <tft.lombok.version>0.11.4</tft.lombok.version>
+        <tft.lombok.version>1.12.6</tft.lombok.version>
         <tft.testng.version>6.1.1</tft.testng.version>
         <tft.junit.version>4.7</tft.junit.version>
         <tft.mockito.version>1.8.2</tft.mockito.version>
@@ -2110,6 +2110,7 @@
                                     <outputDirectory>${project.build.directory}/application</outputDirectory>
                                 </configuration>
                             </execution>
+<!-- FIXME: until we're able to put jfxrt.jar to the bootclasspath, copy it to the appbundle -->
                             <execution>
                                 <id>copy-booter</id>
                                 <phase>generate-resources</phase>
