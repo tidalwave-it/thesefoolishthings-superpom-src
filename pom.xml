@@ -6,7 +6,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>2.14-SNAPSHOT</version>
+    <version>2.14</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>${tft.project.url}</url>
     <description>${tft.project.description}</description>
@@ -84,7 +84,7 @@
         <tft.stableAPIVersion>${stableAPIVersion}</tft.stableAPIVersion>
         <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
         <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
-        <tft.javadoc.doclint></tft.javadoc.doclint>
+        <tft.javadoc.doclint />
         <tft.release.localCheckout>true</tft.release.localCheckout>
         <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
         <tft.release.completionGoals />
@@ -197,7 +197,7 @@
         <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-        <tag>HEAD</tag>
+        <tag>2.14</tag>
     </scm>
 
     <prerequisites>
