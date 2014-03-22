@@ -84,6 +84,7 @@
         <tft.stableAPIVersion>${stableAPIVersion}</tft.stableAPIVersion>
         <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
         <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
+        <tft.javadoc.doclint></tft.javadoc.doclint>
         <tft.release.localCheckout>true</tft.release.localCheckout>
         <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
         <tft.release.completionGoals />
@@ -1021,9 +1022,10 @@
                         <artifactId>doclet</artifactId>
                         <version>${tft.UmlGraphDoc.version}</version>
                     </docletArtifact>
-                    <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
+                    <additionalparam>${tft.UmlGraphDoc.additionalParam} ${tft.javadoc.doclint}</additionalparam>
                     <useStandardDocletOptions>true</useStandardDocletOptions>
                     <skip>${tft.disableJavaDocs}</skip>
+                    <failOnError>false</failOnError>
                 </configuration>
             </plugin>
         </plugins>
@@ -2802,9 +2804,10 @@
                         <artifactId>doclet</artifactId>
                         <version>${tft.UmlGraphDoc.version}</version>
                     </docletArtifact>
-                    <additionalparam>${tft.UmlGraphDoc.additionalParam}</additionalparam>
+                    <additionalparam>${tft.UmlGraphDoc.additionalParam} ${tft.javadoc.doclint}</additionalparam>
                     <useStandardDocletOptions>true</useStandardDocletOptions>
                     <skip>${tft.disableJavaDocs}</skip>
+                    <failOnError>false</failOnError>
                 </configuration>
             </plugin>
 
