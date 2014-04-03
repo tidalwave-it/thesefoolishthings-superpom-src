@@ -163,7 +163,7 @@
         <tft.maven-shade-plugin.version>2.0</tft.maven-shade-plugin.version>
         <tft.maven-site-plugin.version>3.3</tft.maven-site-plugin.version>
         <tft.maven-source-plugin.version>2.2.1</tft.maven-source-plugin.version>
-        <tft.maven-surefire-plugin.version>2.13</tft.maven-surefire-plugin.version>
+        <tft.maven-surefire-plugin.version>2.16</tft.maven-surefire-plugin.version>
         <tft.maven-war-plugin.version>2.3</tft.maven-war-plugin.version>
 
         <tft.aspectj-maven-plugin.version>1.4</tft.aspectj-maven-plugin.version>
@@ -2411,7 +2411,7 @@
                                 </goals>
                                 <configuration>
                                     <excludeTransitive>false</excludeTransitive>
-                                    <!-- FIXME: workaround until we're able to put it in bootclasspath -->
+                                   <!-- FIXME: workaround until we're able to put it in bootclasspath -->
                                     <!--<excludeArtifactIds>javafx-embedded</excludeArtifactIds>-->
                                     <outputDirectory>${project.build.directory}/application</outputDirectory>
                                 </configuration>
