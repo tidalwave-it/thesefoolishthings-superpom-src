@@ -2289,6 +2289,7 @@
                                 <configuration>
                                     <excludeTransitive>false</excludeTransitive>
                                     <excludeArtifactIds>javafx-embedded</excludeArtifactIds>
+                                    <includeScope>runtime</includeScope>
                                     <outputDirectory>${project.build.directory}/application</outputDirectory>
                                 </configuration>
                             </execution>
@@ -2411,6 +2412,7 @@
                                 </goals>
                                 <configuration>
                                     <excludeTransitive>false</excludeTransitive>
+                                    <includeScope>runtime</includeScope>
                                    <!-- FIXME: workaround until we're able to put it in bootclasspath -->
                                     <!--<excludeArtifactIds>javafx-embedded</excludeArtifactIds>-->
                                     <outputDirectory>${project.build.directory}/application</outputDirectory>
