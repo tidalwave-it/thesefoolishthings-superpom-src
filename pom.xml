@@ -159,7 +159,7 @@
         <tft.maven-release-plugin.version>2.4.1</tft.maven-release-plugin.version>
         <tft.maven-replacer-plugin.version>1.3.9</tft.maven-replacer-plugin.version> <!-- TODO: 1.5.2 -->
         <tft.maven-resources-plugin.version>2.5</tft.maven-resources-plugin.version> <!-- TODO 2.6 -->
-        <tft.maven-scm-plugin.version>1.8.1</tft.maven-scm-plugin.version>
+        <tft.maven-scm-plugin.version>1.9</tft.maven-scm-plugin.version>
         <tft.maven-shade-plugin.version>2.0</tft.maven-shade-plugin.version>
         <tft.maven-site-plugin.version>3.3</tft.maven-site-plugin.version>
         <tft.maven-source-plugin.version>2.2.1</tft.maven-source-plugin.version>
@@ -168,7 +168,7 @@
 
         <tft.aspectj-maven-plugin.version>1.7</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>1.8</tft.build-helper-maven-plugin.version>
-        <tft.buildnumber-maven-plugin.version>1.2</tft.buildnumber-maven-plugin.version>
+        <tft.buildnumber-maven-plugin.version>1.3</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.6.1</tft.clirr-maven-plugin.version>
         <tft.cobertura-maven-plugin.version>2.5.1</tft.cobertura-maven-plugin.version> <!-- TODO 2.5.2 -->
         <tft.exec-maven-plugin.version>1.1.1</tft.exec-maven-plugin.version>  <!-- TODO 1.2.1, but version 1.2 breaks the generation of .description -->
