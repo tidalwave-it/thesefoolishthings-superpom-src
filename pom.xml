@@ -94,10 +94,10 @@
         <tft.appbundler.version>1.0-patched</tft.appbundler.version>
         <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
         <tft.lombok.version>1.12.6</tft.lombok.version>
-        <tft.testng.version>6.1.1</tft.testng.version>
+        <tft.testng.version>6.8.8</tft.testng.version>
         <tft.junit.version>4.7</tft.junit.version>
-        <tft.mockito.version>1.8.5</tft.mockito.version>
-        <tft.hamcrest-matchers.version>1.1</tft.hamcrest-matchers.version>
+        <tft.mockito.version>1.9.5</tft.mockito.version>
+        <tft.hamcrest-matchers.version>1.3</tft.hamcrest-matchers.version>
         <tft.test.skip>${skipTests}</tft.test.skip>
         <tft.test.maxMemory>768M</tft.test.maxMemory>
         <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/plain</tft.test.reportsDirectory>
@@ -262,8 +262,18 @@
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${tft.mockito.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
                 <version>${tft.mockito.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>${tft.hamcrest-matchers.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hamcrest</groupId>
