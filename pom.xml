@@ -181,7 +181,7 @@
         <tft.jaxws-maven-plugin.version>2.1</tft.jaxws-maven-plugin.version> <!-- TODO 2.2.1 -->
         <tft.license-maven-plugin.version>1.4</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
-        <tft.nbm-maven-plugin.version>3.10.1</tft.nbm-maven-plugin.version>
+        <tft.nbm-maven-plugin.version>3.13.2</tft.nbm-maven-plugin.version>
         <tft.nexus-maven-plugin.version>1.9.2.4</tft.nexus-maven-plugin.version> <!-- TODO: plugin changed name -->
         <tft.tomcat-maven-plugin.version>1.1</tft.tomcat-maven-plugin.version> <!-- TODO 2.1 -->
         <tft.vaadin-maven-plugin.version>1.0.2</tft.vaadin-maven-plugin.version>
