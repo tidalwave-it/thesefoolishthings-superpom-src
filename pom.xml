@@ -1130,6 +1130,7 @@
             <id>it.tidalwave-metrics-v2</id>
             <properties>
                 <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/jacoco</tft.test.reportsDirectory>
+                <tft.test.failureIgnore>true</tft.test.failureIgnore>
             </properties>
             <build>
                 <defaultGoal>${tft.profile.metrics.defaultGoal}</defaultGoal>
