@@ -871,7 +871,6 @@
                                     <message>To build this project JDK ${tft.maven.requiredJdk} is required. Please install it and properly set JAVA_HOME.</message>
                                     <version>${tft.maven.requiredJdk}</version>
                                 </requireJavaVersion>
-                                <!-- Note that this rule is currently not working with Maven 3.x -->
                                 <requirePluginVersions>
                                     <message>Best Practice is to always define plugin versions!</message>
                                     <banLatest>true</banLatest>
@@ -879,6 +878,11 @@
                                     <banSnapshots>true</banSnapshots>
                                     <phases>clean,deploy,site</phases>
                                 </requirePluginVersions>
+                                <reactorModuleConvergence>
+                                    <message>The reactor is not valid</message>
+                                    <ignoreModuleDependencies>false</ignoreModuleDependencies>
+                                </reactorModuleConvergence>
+                                <dependencyConvergence/>
                             </rules>
                         </configuration>
                     </execution>
