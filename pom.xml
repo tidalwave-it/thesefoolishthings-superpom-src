@@ -61,8 +61,8 @@
         <release.profiles>release</release.profiles>
 
         <tft.defaultGoal>clean install</tft.defaultGoal>
-        <tft.profile.metrics.defaultGoal>install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr javancss:report dependency:analyze</tft.profile.metrics.defaultGoal>
-            
+        <tft.profile.metrics.defaultGoal>clean install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr javancss:report dependency:analyze</tft.profile.metrics.defaultGoal>
+
         <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.license.name>tidalwave_asf2</tft.license.name>
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
@@ -113,7 +113,7 @@
         <tft.netbeans.main>it.tidalwave.netbeans.boot.NetBeansLauncher</tft.netbeans.main>
         <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
 
-        <tft.aspectjrt.version>1.8.1</tft.aspectjrt.version>        
+        <tft.aspectjrt.version>1.8.1</tft.aspectjrt.version>
         <tft.aspectj.ajc.verbose>false</tft.aspectj.ajc.verbose>
 
         <tft.jetty.port>8080</tft.jetty.port>
@@ -290,7 +290,7 @@
 
     <build>
         <defaultGoal>${tft.defaultGoal}</defaultGoal>
-        
+
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
@@ -503,7 +503,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>xml-maven-plugin</artifactId>
-                    <version>${tft.xml-maven-plugin.version}</version> 
+                    <version>${tft.xml-maven-plugin.version}</version>
                 </plugin>
 
                 <plugin>
@@ -621,7 +621,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>org.codehaus.mojo</groupId>
                                         <artifactId>xml-maven-plugin</artifactId>
-                                        <versionRange>${tft.xml-maven-plugin.version}</versionRange> 
+                                        <versionRange>${tft.xml-maven-plugin.version}</versionRange>
                                         <goals>
                                             <goal>transform</goal>
                                         </goals>
@@ -792,7 +792,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -1216,7 +1216,7 @@
                 </plugins>
             </reporting>
         </profile>
-        
+
    <!--================================================================================================================
 
     This profile is activated during a release.
@@ -1262,7 +1262,7 @@
     This profile signs the build artifacts. It is automatically enabled during a release; signing requires that the
     proper certificates have been locally set up with PGP. If you want to skip signing, set the property
     tft.release.sign-artifacts.skip to true.
-    
+
     =================================================================================================================-->
         <profile>
             <id>release-sign-artifacts</id>
@@ -1377,7 +1377,7 @@
                 <tft.scm-detector.hg>true</tft.scm-detector.hg>
             </properties>
         </profile>
-        
+
     <!--================================================================================================================
 
     This profile detects Git, it's used by the release-commit profile.
@@ -1394,13 +1394,13 @@
                 <tft.scm-detector.git>true</tft.scm-detector.git>
             </properties>
         </profile>
-        
+
     <!--================================================================================================================
 
-    This profile deploys local artifacts to the remote repository and pushes SCM changes  after a successful staged 
+    This profile deploys local artifacts to the remote repository and pushes SCM changes  after a successful staged
     release.
     Run as mvn -N -Prelease-commit
-    
+
     =================================================================================================================-->
         <profile>
             <id>release-commit</id>
@@ -1554,7 +1554,7 @@
                                 <descriptor>src/assemble/bin.xml</descriptor>
                             </descriptors>
                         </configuration>
-                    </plugin>                
+                    </plugin>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
@@ -1747,11 +1747,11 @@
 
     <!--================================================================================================================
 
-    This profile configures AspectJ for Spring in the build. Create an empty file in 
+    This profile configures AspectJ for Spring in the build. Create an empty file in
     src/config/activate-it.tidalwave.aspectj-springaop-v1-profile
     to activate it.
     This profile arranges things so that AspectJ is compatibile with other tools that manipulate the bytecode, such as
-    annotation processors (e.g. Lombok). The original, unwoven classes are stored in target/unwoven-classes and 
+    annotation processors (e.g. Lombok). The original, unwoven classes are stored in target/unwoven-classes and
     target/unwoven-test-classes.
 
     =================================================================================================================-->
@@ -1804,7 +1804,7 @@
                             </execution>
                         </executions>
                     </plugin>
-                    
+
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>aspectj-maven-plugin</artifactId>
@@ -2251,7 +2251,7 @@
                 </plugins>
             </build>
         </profile>
-        
+
     <!--================================================================================================================
 
     This profile configures the jarbundler for the build. Create an empty file in
@@ -2395,7 +2395,7 @@
                 </plugins>
             </build>
         </profile>
-        
+
     <!--================================================================================================================
 
     This profile configures the jarbundler for the build. Create an empty file in
@@ -2518,7 +2518,7 @@
                 </plugins>
             </build>
         </profile>
-        
+
     <!--================================================================================================================
 
 
@@ -2533,11 +2533,11 @@
 
     <!--================================================================================================================
 
-    Deploys to a public repo those artifacts that have been generated during a release process and stored in a local 
+    Deploys to a public repo those artifacts that have been generated during a release process and stored in a local
     repository. Run as:
-    
+
     mvn -N -Pit.tidalwave.publish-artifacts-v1
-    
+
     Note: on Mac OS X you need to run this with -Djava.io.tmpdir=/tmp (or other directory).
 
     =================================================================================================================-->
@@ -2557,7 +2557,7 @@
 
     This profile updates all the dependencies to their latest release. The project must be structured in the standard
     TheseFoolishThings layout. Run as:
-    
+
     mvn -N -Pit.tidalwave-update-releases-v1
 
     =================================================================================================================-->
@@ -2589,7 +2589,7 @@
 
     This profile updates all the dependencies to their latest snapshots. The project must be structured in the standard
     TheseFoolishThings layout. Run as:
-    
+
     mvn -N -Pit.tidalwave-update-snapshots-v1
 
     =================================================================================================================-->
@@ -2765,7 +2765,7 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>        
+        </profile>
     </profiles>
 
     <reporting>
