@@ -92,7 +92,7 @@
         <tft.stableAPIVersion>${stableAPIVersion}</tft.stableAPIVersion>
         <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
         <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
-        <tft.javadoc.doclint />
+        <tft.javadoc.doclint>-Xdoclint:none</tft.javadoc.doclint>
         <tft.release.localCheckout>true</tft.release.localCheckout>
         <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
         <tft.release.completionGoals />
