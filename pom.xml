@@ -100,10 +100,12 @@
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
 
         <tft.appbundler.version>1.0-patched</tft.appbundler.version>
+        <tft.aspectjrt.version>1.8.6</tft.aspectjrt.version>
         <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
-        <tft.lombok.version>1.12.6</tft.lombok.version>
-        <tft.testng.version>6.8.8</tft.testng.version>
-        <tft.junit.version>4.7</tft.junit.version>
+        <tft.jsr305.version>3.0.1</tft.jsr305.version>
+        <tft.lombok.version>1.16.4</tft.lombok.version>
+        <tft.testng.version>6.9.10</tft.testng.version>
+        <tft.junit.version>4.12</tft.junit.version>
         <tft.mockito.version>1.9.5</tft.mockito.version>
         <tft.hamcrest-matchers.version>1.3</tft.hamcrest-matchers.version>
         <tft.test.skip>${skipTests}</tft.test.skip>
