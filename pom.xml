@@ -21,7 +21,7 @@
         <developer>
             <name>Fabrizio Giudici</name>
             <email>fabrizio.giudici@tidalwave.it</email>
-            <url>http://fabriziogiudici.it</url>
+            <url>http://tidalwave.it/people/fabrizio/</url>
             <organization>Tidalwave s.a.s.</organization>
             <organizationUrl>http://tidalwave.it</organizationUrl>
             <roles>
@@ -946,6 +946,8 @@
                         <exclude>**/.description</exclude>
                         <exclude>.hgtags</exclude>
                         <exclude>.hgignore</exclude>
+                        <exclude>.gitignore</exclude>
+                        <exclude>.svnignore</exclude>
                         <exclude>**/.classpath</exclude>
                         <exclude>**/.settings</exclude>
                         <exclude>**/archetypes/**</exclude>
