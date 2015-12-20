@@ -1134,7 +1134,7 @@
             </reporting>
         </profile>
 
-     <!--================================================================================================================
+    <!--================================================================================================================
 
     This profile is used in Continous Integration to create QA metrics data.
 
@@ -2777,6 +2777,49 @@
                                 </goals>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    <!--================================================================================================================
+
+    This profile generates the README.md from the pom metadata.
+
+    =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-generate-readme-md-v1</id>
+            <build>
+                <defaultGoal>dependency:unpack resources:copy-resources</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>it.tidalwave.thesefoolishthings</groupId>
+                                    <artifactId>superpom-config</artifactId>
+                                    <version>${tft.superpom.config.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.basedir}/target/superpom-resources</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/target/superpom-resources/it/tidalwave/readme/</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <outputDirectory>.</outputDirectory>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
