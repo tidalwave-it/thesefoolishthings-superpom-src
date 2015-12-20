@@ -104,13 +104,13 @@
         <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
         <tft.hamcrest-matchers.version>1.3</tft.hamcrest-matchers.version>
         <tft.jsr305.version>3.0.1</tft.jsr305.version>
-       <tft.jsr330.version>1</tft.jsr330.version>
+        <tft.jsr330.version>1</tft.jsr330.version>
         <tft.junit.version>4.12</tft.junit.version>
-       <tft.logback.version>1.1.3</tft.logback.version>
+        <tft.logback.version>1.1.3</tft.logback.version>
         <tft.lombok.version>1.16.4</tft.lombok.version>
         <tft.mockito.version>1.9.5</tft.mockito.version>
-       <tft.slf4j.version>1.7.7</tft.slf4j.version>
-       <tft.spring.version>4.2.0.RELEASE</tft.spring.version>
+        <tft.slf4j.version>1.7.7</tft.slf4j.version>
+        <tft.spring.version>4.2.0.RELEASE</tft.spring.version>
         <tft.testng.version>6.9.10</tft.testng.version>
 
         <tft.test.skip>${skipTests}</tft.test.skip>
@@ -2661,7 +2661,7 @@
 
     This profile generates the README.md from the pom metadata.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-generate-readme-md-v1</id>
             <build>
