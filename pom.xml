@@ -845,6 +845,16 @@
                         <version>${tft.superpom.config.version}</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <linkXref>true</linkXref>
+                    <sourceEncoding>utf-8</sourceEncoding>
+                    <minimumTokens>100</minimumTokens>
+                    <targetJdk>${tft.javac.source}</targetJdk>
+                    <skip>${tft.pmd.skip}</skip>
+                    <rulesets>
+                        <ruleset>/it/tidalwave/pmd/basic</ruleset>
+                    </rulesets>
+                </configuration>
             </plugin>
 
             <!-- Configures the release process, calling the assembly to include extra artifacts in deploy -->
