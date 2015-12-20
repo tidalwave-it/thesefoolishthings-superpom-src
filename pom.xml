@@ -71,7 +71,7 @@
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
         <tft.maven.requiredVersion>3.0.4</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.7.0,)</tft.maven.requiredJdk>
-        <tft.superpom.config.version>1.2</tft.superpom.config.version>
+        <tft.superpom.config.version>1.3</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.javac.source>1.7</tft.javac.source>
         <tft.javac.target>1.7</tft.javac.target>
