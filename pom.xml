@@ -852,7 +852,7 @@
                     <targetJdk>${tft.javac.source}</targetJdk>
                     <skip>${tft.pmd.skip}</skip>
                     <rulesets>
-                        <ruleset>/it/tidalwave/pmd/basic</ruleset>
+                        <ruleset>/it/tidalwave/pmd/basic.xml</ruleset>
                     </rulesets>
                 </configuration>
             </plugin>
