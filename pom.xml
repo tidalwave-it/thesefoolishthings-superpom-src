@@ -84,6 +84,8 @@
         <tft.pmd.skip>false</tft.pmd.skip>
         <pmd.skip>${tft.pmd.skip}</pmd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <cpd.skip>${tft.pmd.skip}</cpd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
+        <tft.javancss.skip>true</tft.javancss.skip> <!-- FIXME: breaks with JDK 1.7+ -->
+        <ncss.skip>${tft.javancss.skip}</ncss.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <tft.project.build.unwoven-classes.directory>${project.build.directory}/unwoven-classes</tft.project.build.unwoven-classes.directory>
         <tft.project.build.unwoven-test-classes.directory>${project.build.directory}/unwoven-test-classes</tft.project.build.unwoven-test-classes.directory>
         <tft.stableAPI>${stableAPI}</tft.stableAPI>
@@ -2720,6 +2722,9 @@
                 <artifactId>javancss-maven-plugin</artifactId>
                 <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
                 <version>${tft.javancss-maven-plugin.version}</version>
+                <configuration>
+                    <skip>${tft.javancss.skip}</skip>
+                </configuration>
                 <!-- Configuration must be replicated in build section -->
             </plugin>
         </plugins>
