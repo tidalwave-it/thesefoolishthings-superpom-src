@@ -834,6 +834,19 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>${tft.maven-pmd-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>it.tidalwave.thesefoolishthings</groupId>
+                        <artifactId>superpom-config</artifactId>
+                        <version>${tft.superpom.config.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
             <!-- Configures the release process, calling the assembly to include extra artifacts in deploy -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -1120,6 +1133,9 @@
                             <minimumTokens>100</minimumTokens>
                             <targetJdk>${tft.javac.source}</targetJdk>
                             <skip>${tft.pmd.skip}</skip>
+                            <rulesets>
+                                <ruleset>/it/tidalwave/pmd/pmd.xml</ruleset>
+                            </rulesets>
                         </configuration>
                     </plugin>
                 </plugins>
