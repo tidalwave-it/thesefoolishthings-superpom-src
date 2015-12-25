@@ -117,6 +117,7 @@
         <tft.test.maxMemory>768M</tft.test.maxMemory>
         <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/plain</tft.test.reportsDirectory>
         <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
+        <tft.test.excludedGroups></tft.test.excludedGroups>
         <tft.test.vmOptions />
 
         <tft.embedded-jdk-groupId>it.tidalwave.jdk</tft.embedded-jdk-groupId>
@@ -742,6 +743,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skipTests>${tft.test.skip}</skipTests>
+                    <excludedGroups>${tft.test.excludedGroups}</excludedGroups>
                     <reportsDirectory>${tft.test.reportsDirectory}</reportsDirectory>
                     <includes>
                         <include>**/*Test.java</include>
@@ -1050,6 +1052,18 @@
     </build>
 
     <profiles>
+    <!--================================================================================================================
+
+    This profile is used in Continous Integration.
+
+    =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-ci-v1</id>
+            <properties>
+                <tft.test.excludedGroups>no-ci</tft.test.excludedGroups>
+            </properties>
+        </profile>
+
     <!--================================================================================================================
 
     This profile is used in Continous Integration to create QA metrics data.
