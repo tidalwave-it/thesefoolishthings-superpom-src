@@ -172,7 +172,7 @@ to override those related to the development of this POM.
 
         <tft.gwt.version>2.1.1</tft.gwt.version>
 
-        <tft.scm>hg</tft.scm>
+        <tft.scm>git</tft.scm>
 
         <!-- tft.test.listeners></tft.test.listeners -->
         <tft.javadoc.excludePackageNames>*.impl:*.impl.*</tft.javadoc.excludePackageNames>
