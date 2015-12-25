@@ -6,7 +6,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>3.2-SNAPSHOT</version>
+    <version>3.2</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>${tft.project.url}</url>
     <inceptionYear>2010</inceptionYear>
@@ -151,7 +151,7 @@ to override those related to the development of this POM.
         <tft.test.maxMemory>768M</tft.test.maxMemory>
         <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/plain</tft.test.reportsDirectory>
         <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
-        <tft.test.excludedGroups></tft.test.excludedGroups>
+        <tft.test.excludedGroups />
         <tft.test.vmOptions />
 
         <tft.embedded-jdk-groupId>it.tidalwave.jdk</tft.embedded-jdk-groupId>
@@ -246,7 +246,7 @@ to override those related to the development of this POM.
         <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-        <tag>HEAD</tag>
+        <tag>3.2</tag>
     </scm>
 
     <prerequisites>
