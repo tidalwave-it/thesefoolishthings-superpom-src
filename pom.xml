@@ -128,7 +128,6 @@
         <tft.netbeans.main>it.tidalwave.netbeans.boot.NetBeansLauncher</tft.netbeans.main>
         <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
 
-        <tft.aspectjrt.version>1.8.1</tft.aspectjrt.version>
         <tft.aspectj.ajc.verbose>false</tft.aspectj.ajc.verbose>
 
         <tft.jetty.port>8080</tft.jetty.port>
