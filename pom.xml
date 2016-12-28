@@ -25,15 +25,15 @@ A number of profiles, easily activatable, are available for:
 * deploying WARs and locally running them with Tomcat or Jetty;
 * creating a Mac OS X bundle for JavaFX applications;
 * creating a Mac OS X bundle for NetBeans Platform applications;
-* a customized release cycle, including all requirements for the Maven Central such as signing, with a 'transactional' behaviour 
+* a customized release cycle, including all requirements for the Maven Central such as signing, with a 'transactional' behaviour
   (all artifacts, both the DSCM and the Maven artifacts are prepared on the local disk, so they can be uploaded in a second moment);
 
 
 Remember to customise it
 ------------------------
 
-If you use it, please remember to change the ```description```,```url```, ```organization```, ```developers```, ```license```, etc... 
-to override those related to the development of this POM. 
+If you use it, please remember to change the ```description```,```url```, ```organization```, ```developers```, ```license```, etc...
+to override those related to the development of this POM.
     </description>
 
     <organization>
@@ -91,6 +91,8 @@ to override those related to the development of this POM.
         <disableDeploy>false</disableDeploy>
         <skipTests>false</skipTests>
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
+
+
         <release.profiles>release</release.profiles>
 
         <tft.defaultGoal>clean install</tft.defaultGoal>
@@ -106,6 +108,8 @@ to override those related to the development of this POM.
         <tft.maven.requiredJdk>[1.8.0,)</tft.maven.requiredJdk>
         <tft.superpom.config.version>1.4</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
+
+        <!-- Default compiler settings. -->
         <tft.javac.source>1.8</tft.javac.source>
         <tft.javac.target>1.8</tft.javac.target>
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
@@ -114,6 +118,7 @@ to override those related to the development of this POM.
         <tft.javac.showDeprecation>true</tft.javac.showDeprecation>
         <tft.javac.showWarnings>true</tft.javac.showWarnings>
         <tft.javac.fork>true</tft.javac.fork>
+
         <tft.pmd.skip>false</tft.pmd.skip>
         <pmd.skip>${tft.pmd.skip}</pmd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <cpd.skip>${tft.pmd.skip}</cpd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
@@ -132,6 +137,7 @@ to override those related to the development of this POM.
         <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:assembly deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
 
+        <!-- Default dependency versions -->
         <tft.appbundler.version>1.0-patched</tft.appbundler.version>
         <tft.aspectjrt.version>1.8.6</tft.aspectjrt.version>
         <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
@@ -146,6 +152,7 @@ to override those related to the development of this POM.
         <tft.spring.version>4.2.0.RELEASE</tft.spring.version>
         <tft.testng.version>6.9.10</tft.testng.version>
 
+        <!-- Default test configuration. -->
         <tft.test.skip>${skipTests}</tft.test.skip>
         <tft.test.maxMemory>768M</tft.test.maxMemory>
         <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/plain</tft.test.reportsDirectory>
