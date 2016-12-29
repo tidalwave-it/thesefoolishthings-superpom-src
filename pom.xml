@@ -204,7 +204,7 @@ to override those related to the development of this POM.
         <tft.maven-enforcer-plugin.version>1.4.1</tft.maven-enforcer-plugin.version>
         <tft.maven-gpg-plugin.version>1.6</tft.maven-gpg-plugin.version>
         <tft.maven-graph-plugin.version>1.15</tft.maven-graph-plugin.version>
-        <tft.maven-install-plugin.version>2.4</tft.maven-install-plugin.version>
+        <tft.maven-install-plugin.version>2.5.2</tft.maven-install-plugin.version>
         <tft.maven-jar-plugin.version>2.4</tft.maven-jar-plugin.version>
         <tft.maven-jarsigner-plugin.version>1.2</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>2.9.1</tft.maven-javadoc-plugin.version>
