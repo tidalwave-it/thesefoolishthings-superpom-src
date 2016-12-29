@@ -812,7 +812,7 @@ to override those related to the development of this POM.
                 </dependencies>
                 <configuration>
                     <linkXref>true</linkXref>
-                    <sourceEncoding>utf-8</sourceEncoding>
+                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>${tft.javac.source}</targetJdk>
                     <skip>${tft.pmd.skip}</skip>
@@ -891,8 +891,8 @@ to override those related to the development of this POM.
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <configuration>
-                    <inputEncoding>UTF-8</inputEncoding>
-                    <outputEncoding>UTF-8</outputEncoding>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
                 </configuration>
                 <!-- Works around http://jira.codehaus.org/browse/MSITE-459 TODO: issue is marked fixed, try to remove it -->
                 <dependencies>
@@ -1167,7 +1167,7 @@ to override those related to the development of this POM.
                         <version>${tft.maven-pmd-plugin.version}</version>
                         <configuration>
                             <linkXref>true</linkXref>
-                            <sourceEncoding>utf-8</sourceEncoding>
+                            <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
                             <minimumTokens>100</minimumTokens>
                             <targetJdk>${tft.javac.source}</targetJdk>
                             <skip>${tft.pmd.skip}</skip>
