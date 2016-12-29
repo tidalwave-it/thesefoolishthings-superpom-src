@@ -207,7 +207,7 @@ to override those related to the development of this POM.
         <tft.maven-install-plugin.version>2.5.2</tft.maven-install-plugin.version>
         <tft.maven-jar-plugin.version>2.4</tft.maven-jar-plugin.version>
         <tft.maven-jarsigner-plugin.version>1.4</tft.maven-jarsigner-plugin.version>
-        <tft.maven-javadoc-plugin.version>2.9.1</tft.maven-javadoc-plugin.version>
+        <tft.maven-javadoc-plugin.version>2.10.4</tft.maven-javadoc-plugin.version>
         <tft.maven-jetty-plugin.version>6.1.24</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
         <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
         <tft.maven-pmd-plugin.version>3.6</tft.maven-pmd-plugin.version>
