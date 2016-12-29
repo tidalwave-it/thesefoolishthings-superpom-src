@@ -233,7 +233,7 @@ to override those related to the development of this POM.
         <tft.jacoco-maven-plugin.version>0.7.8</tft.jacoco-maven-plugin.version>
         <tft.javancss-maven-plugin.version>2.1</tft.javancss-maven-plugin.version>
         <tft.jaxb2-maven-plugin.version>1.3</tft.jaxb2-maven-plugin.version> <!-- TODO 1.5 -->
-        <tft.jaxws-maven-plugin.version>2.1</tft.jaxws-maven-plugin.version> <!-- TODO 2.2.1 -->
+        <tft.jaxws-maven-plugin.version>2.2</tft.jaxws-maven-plugin.version> <!-- TODO 2.2.1 -->
         <tft.license-maven-plugin.version>1.4</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
         <tft.nbm-maven-plugin.version>3.13.2</tft.nbm-maven-plugin.version>
