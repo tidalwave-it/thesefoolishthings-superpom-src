@@ -230,7 +230,7 @@ to override those related to the development of this POM.
         <tft.findbugs-maven-plugin.version>3.0.3</tft.findbugs-maven-plugin.version>
         <tft.gmaven-plugin.version>2.0</tft.gmaven-plugin.version>
         <tft.gwt-maven-plugin.version>2.8.0</tft.gwt-maven-plugin.version>
-        <tft.jacoco-maven-plugin.version>0.7.5.201505241946</tft.jacoco-maven-plugin.version>
+        <tft.jacoco-maven-plugin.version>0.7.8</tft.jacoco-maven-plugin.version>
         <tft.javancss-maven-plugin.version>2.1</tft.javancss-maven-plugin.version>
         <tft.jaxb2-maven-plugin.version>1.3</tft.jaxb2-maven-plugin.version> <!-- TODO 1.5 -->
         <tft.jaxws-maven-plugin.version>2.1</tft.jaxws-maven-plugin.version> <!-- TODO 2.2.1 -->
