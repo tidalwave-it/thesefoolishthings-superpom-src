@@ -218,7 +218,7 @@ to override those related to the development of this POM.
         <tft.maven-shade-plugin.version>2.4.3</tft.maven-shade-plugin.version>
         <tft.maven-site-plugin.version>3.6</tft.maven-site-plugin.version>
         <tft.maven-source-plugin.version>3.0.1</tft.maven-source-plugin.version>
-        <tft.maven-surefire-plugin.version>2.19</tft.maven-surefire-plugin.version>
+        <tft.maven-surefire-plugin.version>2.19.1</tft.maven-surefire-plugin.version>
         <tft.maven-war-plugin.version>2.3</tft.maven-war-plugin.version>
 
         <tft.aspectj-maven-plugin.version>1.7</tft.aspectj-maven-plugin.version>
