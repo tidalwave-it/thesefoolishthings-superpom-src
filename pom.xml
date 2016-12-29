@@ -225,7 +225,6 @@ to override those related to the development of this POM.
         <tft.build-helper-maven-plugin.version>1.12</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.4</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.7</tft.clirr-maven-plugin.version>
-        <tft.cobertura-maven-plugin.version>2.5.1</tft.cobertura-maven-plugin.version> <!-- TODO 2.5.2 -->
         <tft.exec-maven-plugin.version>1.5.0</tft.exec-maven-plugin.version>
         <tft.findbugs-maven-plugin.version>3.0.3</tft.findbugs-maven-plugin.version>
         <tft.gmaven-plugin.version>2.0</tft.gmaven-plugin.version>
@@ -437,11 +436,6 @@ to override those related to the development of this POM.
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>nbm-maven-plugin</artifactId>
                     <version>${tft.nbm-maven-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>cobertura-maven-plugin</artifactId>
-                    <version>${tft.cobertura-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
