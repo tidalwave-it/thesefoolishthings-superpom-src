@@ -238,7 +238,7 @@ to override those related to the development of this POM.
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
         <tft.nbm-maven-plugin.version>3.13.2</tft.nbm-maven-plugin.version>
         <tft.nexus-maven-plugin.version>1.9.2.4</tft.nexus-maven-plugin.version> <!-- TODO: plugin changed name -->
-        <tft.tomcat-maven-plugin.version>1.1</tft.tomcat-maven-plugin.version> <!-- TODO 2.1 -->
+        <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>1.0.2</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>2.2</tft.versions-maven-plugin.version>
         <tft.wagon-maven-plugin.version>1.0-beta-4</tft.wagon-maven-plugin.version>
