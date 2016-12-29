@@ -222,7 +222,7 @@ to override those related to the development of this POM.
         <tft.maven-war-plugin.version>3.0.0</tft.maven-war-plugin.version>
 
         <tft.aspectj-maven-plugin.version>1.9</tft.aspectj-maven-plugin.version>
-        <tft.build-helper-maven-plugin.version>1.8</tft.build-helper-maven-plugin.version>
+        <tft.build-helper-maven-plugin.version>1.12</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.3</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.7</tft.clirr-maven-plugin.version>
         <tft.cobertura-maven-plugin.version>2.5.1</tft.cobertura-maven-plugin.version> <!-- TODO 2.5.2 -->
