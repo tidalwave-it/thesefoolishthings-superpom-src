@@ -1,3 +1,8 @@
+![Maven Central](https://img.shields.io/maven-central/v/it.tidalwave.thesefoolishthings/superpom.svg)
+[![Build Status](https://img.shields.io/jenkins/s/http/services.tidalwave.it/ci/TheseFoolishThings - SuperPOM_Build_from_Scratch.svg)](http://services.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
+[![Test Status](https://img.shields.io/jenkins/t/http/services.tidalwave.it/ci/TheseFoolishThings - SuperPOM.svg)](http://services.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
+[![Coverage](https://img.shields.io/jenkins/c/http/services.tidalwave.it/ci/TheseFoolishThings - SuperPOM.svg)](http://services.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
+
 TheseFoolishThings - SuperPOM
 ================================
 
@@ -14,15 +19,14 @@ A number of profiles, easily activatable, are available for:
 * different kinds of Continous Integration tasks, including a full run of QA tools such as JaCoCo, FindBugs, PMD, etc...
 * deploying WARs and locally running them with Tomcat or Jetty;
 * creating a Mac OS X bundle for JavaFX applications;
-* creating a Mac OS X bundle for NetBeans Platform applications;
-* a customized release cycle, including all requirements for the Maven Central such as signing, with a 'transactional' behaviour 
+* a customized release cycle, including all requirements for the Maven Central such as signing, with a 'transactional' behaviour
   (all artifacts, both the DSCM and the Maven artifacts are prepared on the local disk, so they can be uploaded in a second moment);
 
 
 Remember to customise it
 ------------------------
 
-If you use it, please remember to change the ```description```,```url```, ```organization```, ```developers```, ```license```, etc... 
+If you use it, please remember to change the ```description```,```url```, ```organization```, ```developers```, ```license```, etc...
 to override those related to the development of this POM.
 
 
@@ -39,7 +43,7 @@ The project can be opened and built by a recent version of the NetBeans, Eclipse
 Documentation
 -------------
 
-More information can be found on the [homepage](http://thesefoolishthings.kenai.com) of the project.
+More information can be found on the [homepage](http://tidalwave.it) of the project.
 
 
 Where can I get the latest release?
@@ -60,7 +64,7 @@ Alternatively you can pull it from the central Maven repositories:
 Contributing
 ------------
 
-We accept pull requests via BitBucket or GitHub.
+We accept pull requests via Bitbucket or GitHub.
 
 There are some guidelines which will make applying pull requests easier for us:
 
@@ -85,4 +89,4 @@ Additional Resources
 
 * [Tidalwave Homepage](http://tidalwave.it)
 * [Project Issue Tracker (Jira)](http://services.tidalwave.it/jira/browse/SUP)
-* [Project Continuous Integration (hudson)](http://ci.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
+* [Project Continuous Integration (hudson)](http://services.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
