@@ -1015,6 +1015,11 @@ to override those related to the development of this POM.
 
             <dependency>
                 <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${tft.aspectjrt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
                 <version>${tft.aspectjrt.version}</version>
             </dependency>
@@ -1241,6 +1246,8 @@ to override those related to the development of this POM.
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <configuration>
+                            <keyname>${gpg.keyname}</keyname>
+                            <passphrase>${gpg.passphrase}</passphrase>
                             <skip>${tft.release.sign-artifacts.skip}</skip>
                         </configuration>
                         <executions>
