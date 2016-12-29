@@ -205,7 +205,7 @@ to override those related to the development of this POM.
         <tft.maven-gpg-plugin.version>1.6</tft.maven-gpg-plugin.version>
         <tft.maven-graph-plugin.version>1.15</tft.maven-graph-plugin.version>
         <tft.maven-install-plugin.version>2.5.2</tft.maven-install-plugin.version>
-        <tft.maven-jar-plugin.version>2.4</tft.maven-jar-plugin.version>
+        <tft.maven-jar-plugin.version>2.6</tft.maven-jar-plugin.version> <!-- TODO 3.0.2 doesn't support useDefaultManifestFile -->
         <tft.maven-jarsigner-plugin.version>1.4</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>2.10.4</tft.maven-javadoc-plugin.version>
         <tft.maven-jetty-plugin.version>6.1.24</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
