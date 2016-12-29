@@ -204,6 +204,7 @@ to override those related to the development of this POM.
         <tft.maven-jar-plugin.version>2.6</tft.maven-jar-plugin.version> <!-- TODO 3.0.2 doesn't support useDefaultManifestFile -->
         <tft.maven-jarsigner-plugin.version>1.4</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>2.10.4</tft.maven-javadoc-plugin.version>
+        <tft.maven-jdeb-plugin.version>1.5</tft.maven-jdeb-plugin.version>
         <tft.maven-jetty-plugin.version>6.1.24</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
         <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
         <tft.maven-pmd-plugin.version>3.7</tft.maven-pmd-plugin.version>
@@ -288,6 +289,11 @@ to override those related to the development of this POM.
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-webdav-jackrabbit</artifactId>
                 <version>${tft.webdav-jackrabbit.version}</version>
+            </extension>
+            <extension>
+                <groupId>org.vafer</groupId>
+                <artifactId>jdeb</artifactId>
+                <version>${tft.maven-jdeb-plugin.version}</version>
             </extension>
         </extensions>
 
@@ -540,6 +546,12 @@ to override those related to the development of this POM.
                     <groupId>org.jvnet.jax-ws-commons</groupId>
                     <artifactId>jaxws-maven-plugin</artifactId>
                     <version>${tft.jaxws-maven-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.vafer</groupId>
+                    <artifactId>jdeb</artifactId>
+                    <version>${tft.maven-jdeb-plugin.version}</version>
                 </plugin>
 
                 <!--
@@ -2017,6 +2029,64 @@ to override those related to the development of this POM.
                                         </artifact>
                                     </artifacts>
                                 </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    <!--================================================================================================================
+
+
+
+     =================================================================================================================-->
+        <profile>
+            <activation>
+                <property>
+                    <name>gpg.keyname</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.vafer</groupId>
+                        <artifactId>jdeb</artifactId>
+                        <configuration>
+                            <signPackage>true</signPackage>
+                            <signMethod>dpkg-sig</signMethod>
+                            <signRole>origin</signRole>
+                            <key>${gpg.keyname}</key>
+                            <passphrase>${gpg.passphrase}</passphrase>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    <!--================================================================================================================
+
+
+
+     =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-deb-v1</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-it.tidalwave-deb-v1-profile</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.vafer</groupId>
+                        <artifactId>jdeb</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jdeb</goal>
+                                </goals>
                             </execution>
                         </executions>
                     </plugin>
