@@ -24,7 +24,6 @@ A number of profiles, easily activatable, are available for:
 * different kinds of Continous Integration tasks, including a full run of QA tools such as JaCoCo, FindBugs, PMD, etc...
 * deploying WARs and locally running them with Tomcat or Jetty;
 * creating a Mac OS X bundle for JavaFX applications;
-* creating a Mac OS X bundle for NetBeans Platform applications;
 * a customized release cycle, including all requirements for the Maven Central such as signing, with a 'transactional' behaviour
   (all artifacts, both the DSCM and the Maven artifacts are prepared on the local disk, so they can be uploaded in a second moment);
 
@@ -166,9 +165,6 @@ to override those related to the development of this POM.
         <tft.embedded-jdk-version>1.7.0_07-1</tft.embedded-jdk-version>
         <tft.embedded-jdk-classifier>macosx-intel</tft.embedded-jdk-classifier>
 
-        <tft.netbeans.main>it.tidalwave.netbeans.boot.NetBeansLauncher</tft.netbeans.main>
-        <tft.netbeans.useOSGiDependencies>false</tft.netbeans.useOSGiDependencies>
-
         <tft.aspectj.ajc.verbose>false</tft.aspectj.ajc.verbose>
 
         <tft.jetty.port>8080</tft.jetty.port>
@@ -235,7 +231,6 @@ to override those related to the development of this POM.
         <tft.jaxws-maven-plugin.version>2.2</tft.jaxws-maven-plugin.version> <!-- TODO 2.2.1 -->
         <tft.license-maven-plugin.version>1.4</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
-        <tft.nbm-maven-plugin.version>3.13.2</tft.nbm-maven-plugin.version>
         <tft.nexus-maven-plugin.version>1.9.2.4</tft.nexus-maven-plugin.version> <!-- TODO: plugin changed name -->
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>7.7.6</tft.vaadin-maven-plugin.version>
@@ -431,11 +426,6 @@ to override those related to the development of this POM.
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>${tft.exec-maven-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>nbm-maven-plugin</artifactId>
-                    <version>${tft.nbm-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -639,21 +629,6 @@ to override those related to the development of this POM.
                                         </execute>
                                     </action>
                                 </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.codehaus.mojo</groupId>
-                                        <artifactId>nbm-maven-plugin</artifactId>
-                                        <versionRange>${tft.nbm-maven-plugin.version}</versionRange>
-                                        <goals>
-                                            <goal>manifest</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <execute>
-                                            <runOnIncremental>true</runOnIncremental>
-                                        </execute>
-                                    </action>
-                                </pluginExecution>
                             </pluginExecutions>
                         </lifecycleMappingMetadata>
                     </configuration>
@@ -847,18 +822,6 @@ to override those related to the development of this POM.
                     <goals>${tft.release.goals}</goals>
                     <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}" -DdryRun=${dryRun}</arguments>
                     <tagNameFormat>@{project.version}</tagNameFormat>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>nbm-maven-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <descriptor>src/main/nbm/module.xml</descriptor>
-                    <brandingToken>${netbeans.brandingToken}</brandingToken>
-                    <cluster>${netbeans.cluster}</cluster>
-                    <useOSGiDependencies>${tft.netbeans.useOSGiDependencies}</useOSGiDependencies>
                 </configuration>
             </plugin>
 
@@ -1789,344 +1752,6 @@ to override those related to the development of this POM.
                                 <version>${tft.gwt.version}</version>
                             </dependency>
                         </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-    <!--================================================================================================================
-
-    This profile configures the jarbundler for the build. Create an empty file in
-    src/config/it.tidalwave-netbeans-platform-appbundle-embedded-jre-profile-v2 to activate it.
-
-    =================================================================================================================-->
-        <profile>
-            <id>it.tidalwave-netbeans-platform-appbundle-embedded-jre-v2</id>
-            <activation>
-                <file>
-                    <exists>src/config/activate-it.tidalwave-netbeans-platform-appbundle-embedded-jre-v2-profile</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>unpack-embedded-jdk</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>unpack</goal>
-                                </goals>
-                                <configuration>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>${tft.embedded-jdk-groupId}</groupId>
-                                            <artifactId>${tft.embedded-jdk-artifactId}</artifactId>
-                                            <version>${tft.embedded-jdk-version}</version>
-                                            <type>tgz</type>
-                                            <classifier>${tft.embedded-jdk-classifier}</classifier>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${project.basedir}/target/jdk/${tft.embedded-jdk-name}</outputDirectory>
-                                        </artifactItem>
-                                    </artifactItems>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>unpack-application</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>unpack-dependencies</goal>
-                                </goals>
-                                <configuration>
-                                    <excludeTransitive>true</excludeTransitive>
-                                    <outputDirectory>${project.build.directory}/application</outputDirectory>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>copy-booter</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>copy</goal>
-                                </goals>
-                                <configuration>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/boot</outputDirectory>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>${project.groupId}</groupId>
-                                            <artifactId>it-tidalwave-${netbeans.cluster}-boot</artifactId>
-                                            <destFileName>${netbeans.cluster}-boot.jar</destFileName>
-                                        </artifactItem>
-                                        <artifactItem>
-                                            <groupId>it.tidalwave.netbeans.boot</groupId>
-                                            <artifactId>base-launcher</artifactId>
-                                            <version>${tft.capecanaveral.version}</version>
-                                            <destFileName>base-launcher.jar</destFileName>
-                                        </artifactItem>
-                                    </artifactItems>
-                                    <excludeTransitive>true</excludeTransitive>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>create-app-bundle</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
-
-                                        <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
-                                        <bundleapp outputdirectory="${project.build.directory}" name="${tft.appbundle.name}" displayname="${tft.appbundle.name}" icon="src/main/app-resources/${netbeans.cluster}.icns" identifier="${project.groupId}" shortversion="${project.version}" mainclassname="${tft.netbeans.main}" signature="${tft.appbundle.signature}">
-                                            <runtime dir="${project.build.directory}/jdk/${tft.embedded-jdk-name}/Contents/Home" />
-                                            <classpath dir="${project.basedir}" casesensitive="yes">
-                                                <include name="target/application/${netbeans.cluster}/platform/lib/*.jar" />
-                                                <include name="target/boot/*.jar" />
-                                            </classpath>
-                                            <options value="${tft.netbeans.vmargs}" />
-                                            <option value="-Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform" />
-                                            <option value="-Dit.tidalwave.netbeans.boot.branding=${netbeans.brandingToken}" />
-                                            <option value="-Dit.tidalwave.netbeans.boot.userDirName=${tft.appbundle.name}" />
-                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}" />
-                                            <option value="-Xdock:name=${tft.appbundle.name}" />
-                                            <option value="-Xbootclasspath/a:$APP_ROOT/Contents/PlugIns/${tft.embedded-jdk-name}/Contents/Home/jre/lib/jfxrt.jar" />
-                                        </bundleapp>
-
-                                        <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/Java">
-                                            <fileset dir="${project.build.directory}/application">
-                                                <exclude name="*/bin/**" />
-                                                <exclude name="*/etc/*.conf" />
-                                                <exclude name="*/platform/docs/**" />
-                                                <exclude name="*/platform/lib/nbexec*" />
-                                            </fileset>
-                                        </copy>
-
-                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
-                                            <arg value="create" />
-                                            <arg value="-noanyowners" />
-                                            <arg value="-imagekey" />
-                                            <arg value="zlib-level=1" />
-                                            <arg value="-srcfolder" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                            <arg value="${tft.appbundle.name}.dmg" />
-                                        </exec>
-
-                                        <exec dir="${project.build.directory}" os="Linux" executable="mkisofs">
-                                            <arg value="-V" />
-                                            <arg value="${tft.appbundle.name}" />
-                                            <arg value="-U" />
-                                            <arg value="-f" />
-                                            <arg value="-D" />
-                                            <arg value="-l" />
-                                            <arg value="-L" />
-                                            <arg value="-allow-multidot" />
-                                            <arg value="-max-iso9660-filenames" />
-                                            <arg value="-relaxed-filenames" />
-                                            <arg value="-no-iso-translate" />
-                                            <arg value="-r" />
-                                            <arg value="-o" />
-                                            <arg value="${tft.appbundle.name}.dmg" />
-                                            <arg value="-root" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                        </exec>
-
-                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg" destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz" />
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-app-bundle</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>attach-artifact</goal>
-                                </goals>
-                                <configuration>
-                                    <artifacts>
-                                        <artifact>
-                                            <file>${project.build.directory}/${tft.appbundle.name}.dmg.gz</file>
-                                            <type>dmg.gz</type>
-                                            <classifier>executable</classifier>
-                                        </artifact>
-                                    </artifacts>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-    <!--================================================================================================================
-
-    This profile configures the jarbundler for the build. Create an empty file in
-    src/config/it.tidalwave-netbeans-platform-appbundle-profile-v2 to activate it.
-
-    =================================================================================================================-->
-        <profile>
-            <id>it.tidalwave-netbeans-platform-appbundle-v2</id>
-            <activation>
-                <file>
-                    <exists>src/config/activate-it.tidalwave-netbeans-platform-appbundle-v2-profile</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>unpack-application</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>unpack-dependencies</goal>
-                                </goals>
-                                <configuration>
-                                    <excludeTransitive>true</excludeTransitive>
-                                    <outputDirectory>${project.build.directory}/application</outputDirectory>
-                                </configuration>
-                            </execution>
-<!-- FIXME: until we're able to put jfxrt.jar to the bootclasspath, copy it to the appbundle -->
-                            <execution>
-                                <id>copy-booter</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>copy</goal>
-                                </goals>
-                                <configuration>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/boot</outputDirectory>
-                                    <artifactItems>
-                                        <artifactItem>
-                                            <groupId>${project.groupId}</groupId>
-                                            <artifactId>it-tidalwave-${netbeans.cluster}-boot</artifactId>
-                                            <destFileName>${netbeans.cluster}-boot.jar</destFileName>
-                                        </artifactItem>
-                                        <artifactItem>
-                                            <groupId>it.tidalwave.netbeans.boot</groupId>
-                                            <artifactId>base-launcher</artifactId>
-                                            <version>${tft.capecanaveral.version}</version>
-                                            <destFileName>base-launcher.jar</destFileName>
-                                        </artifactItem>
-                                    </artifactItems>
-                                    <excludeTransitive>true</excludeTransitive>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>create-app-bundle</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
-
-                                        <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
-                                        <!-- FIXME: way to specify min Java version? -->
-                                        <bundleapp outputdirectory="${project.build.directory}" name="${tft.appbundle.name}" displayname="${tft.appbundle.name}" icon="src/main/app-resources/${netbeans.cluster}.icns" identifier="${project.groupId}" shortversion="${project.version}" mainclassname="${tft.netbeans.main}" signature="${tft.appbundle.signature}">
-                                            <classpath dir="${project.basedir}" casesensitive="yes">
-                                                <include name="target/application/${netbeans.cluster}/platform/lib/*.jar" />
-                                                <include name="target/boot/*.jar" />
-                                            </classpath>
-                                            <options value="${tft.netbeans.vmargs}" />
-                                            <option value="-Dnetbeans.home=$APP_ROOT/Contents/Java/${netbeans.cluster}/platform" />
-                                            <option value="-Dit.tidalwave.netbeans.boot.branding=${netbeans.brandingToken}" />
-                                            <option value="-Dit.tidalwave.netbeans.boot.userDirName=${tft.appbundle.name}" />
-                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}" />
-                                            <option value="-Xdock:name=${tft.appbundle.name}" />
-                                        </bundleapp>
-
-                                        <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/Java">
-                                            <fileset dir="${project.build.directory}/application">
-                                                <exclude name="*/bin/**" />
-                                                <exclude name="*/etc/*.conf" />
-                                                <exclude name="*/platform/docs/**" />
-                                                <exclude name="*/platform/lib/nbexec*" />
-                                            </fileset>
-                                        </copy>
-
-                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
-                                            <arg value="create" />
-                                            <arg value="-noanyowners" />
-                                            <arg value="-imagekey" />
-                                            <arg value="zlib-level=1" />
-                                            <arg value="-srcfolder" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                            <arg value="${tft.appbundle.name}.dmg" />
-                                        </exec>
-
-                                        <exec dir="${project.build.directory}" os="Linux" executable="mkisofs">
-                                            <arg value="-V" />
-                                            <arg value="${tft.appbundle.name}" />
-                                            <arg value="-U" />
-                                            <arg value="-f" />
-                                            <arg value="-D" />
-                                            <arg value="-l" />
-                                            <arg value="-L" />
-                                            <arg value="-allow-multidot" />
-                                            <arg value="-max-iso9660-filenames" />
-                                            <arg value="-relaxed-filenames" />
-                                            <arg value="-no-iso-translate" />
-                                            <arg value="-r" />
-                                            <arg value="-o" />
-                                            <arg value="${tft.appbundle.name}.dmg" />
-                                            <arg value="-root" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                        </exec>
-
-                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg" destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz" />
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-app-bundle</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>attach-artifact</goal>
-                                </goals>
-                                <configuration>
-                                    <artifacts>
-                                        <artifact>
-                                            <file>${project.build.directory}/${tft.appbundle.name}.dmg.gz</file>
-                                            <type>dmg.gz</type>
-                                            <classifier>executable</classifier>
-                                        </artifact>
-                                    </artifacts>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>
