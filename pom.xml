@@ -241,7 +241,7 @@ to override those related to the development of this POM.
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>7.7.6</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>2.3</tft.versions-maven-plugin.version>
-        <tft.wagon-maven-plugin.version>1.0-beta-4</tft.wagon-maven-plugin.version>
+        <tft.wagon-maven-plugin.version>1.0</tft.wagon-maven-plugin.version>
         <tft.webdav-jackrabbit.version>2.4</tft.webdav-jackrabbit.version>
         <tft.xml-maven-plugin.version>1.0</tft.xml-maven-plugin.version>
 
