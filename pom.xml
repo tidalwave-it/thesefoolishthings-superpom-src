@@ -192,7 +192,7 @@ to override those related to the development of this POM.
 
         <tft.maven-android-plugin.version>4.0.0</tft.maven-android-plugin.version>
         <tft.maven-antrun-plugin.version>1.7</tft.maven-antrun-plugin.version>
-        <tft.maven-archetype-plugin.version>2.2</tft.maven-archetype-plugin.version>
+        <tft.maven-archetype-plugin.version>2.4</tft.maven-archetype-plugin.version>
         <tft.maven-assembly-plugin.version>2.4</tft.maven-assembly-plugin.version>
         <tft.maven-bundle-plugin.version>2.0.1</tft.maven-bundle-plugin.version> <!-- TODO 2.3.7 -->
         <tft.maven-checkstyle-plugin.version>2.15</tft.maven-checkstyle-plugin.version>
