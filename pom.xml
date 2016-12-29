@@ -135,7 +135,7 @@ to override those related to the development of this POM.
         <tft.release.localCheckout>true</tft.release.localCheckout>
         <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
         <tft.release.completionGoals />
-        <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:assembly deploy</tft.release.goals>
+        <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:single deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
 
         <!-- Default dependency versions -->
@@ -300,7 +300,7 @@ to override those related to the development of this POM.
             </extension>
         </extensions>
 
-        <!-- For changeSet to be properly evaluated by assembly:assembly, use also the validate goal -->
+        <!-- For changeSet to be properly evaluated by assembly:single, use also the validate goal -->
         <finalName>${project.artifactId}-${project.version}.${buildNumber}</finalName>
 
         <!-- ***********************************************************************************************************
@@ -1502,7 +1502,7 @@ to override those related to the development of this POM.
             </properties>
 
             <build>
-                <defaultGoal>initialize assembly:assembly build-helper:attach-artifact verify deploy:deploy</defaultGoal>
+                <defaultGoal>initialize assembly:single build-helper:attach-artifact verify deploy:deploy</defaultGoal>
                 <finalName>${project.artifactId}-${project.version}</finalName>
             </build>
         </profile>
