@@ -91,6 +91,8 @@ to override those related to the development of this POM.
         <skipTests>false</skipTests>
         <scm.repo.effective.url>${scm.repo.url}</scm.repo.effective.url>
 
+        <tft.staging-repo.url>https://oss.sonatype.org</tft.staging-repo.url>
+        <tft.staging-repo.id>staging-oss.sonatype.org</tft.staging-repo.id>
 
         <release.profiles>release</release.profiles>
 
@@ -233,7 +235,7 @@ to override those related to the development of this POM.
         <tft.jaxws-maven-plugin.version>2.2</tft.jaxws-maven-plugin.version> <!-- TODO 2.2.1 -->
         <tft.license-maven-plugin.version>1.4</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
-        <tft.nexus-maven-plugin.version>1.9.2.4</tft.nexus-maven-plugin.version> <!-- TODO: plugin changed name -->
+        <tft.nexus-staging-maven-plugin.version>1.1</tft.nexus-staging-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>7.7.6</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>2.3</tft.versions-maven-plugin.version>
@@ -273,7 +275,7 @@ to override those related to the development of this POM.
         <repository>
             <id>staging-oss.sonatype.org</id>
             <name>Sonatype Release Repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <url>${tft.staging-repo.url}/service/local/staging/deploy/maven2</url>
         </repository>
         <snapshotRepository>
             <id>snapshots-oss.sonatype.org</id>
@@ -544,8 +546,8 @@ to override those related to the development of this POM.
 
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-maven-plugin</artifactId>
-                    <version>${tft.nexus-maven-plugin.version}</version>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>${tft.nexus-staging-maven-plugin.version}</version>
                 </plugin>
 
                 <plugin>
@@ -840,6 +842,16 @@ to override those related to the development of this POM.
                     <goals>${tft.release.goals}</goals>
                     <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}" -DdryRun=${dryRun}</arguments>
                     <tagNameFormat>@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>${tft.nexus-staging-maven-plugin.version}</version>
+                <configuration>
+                    <serverId>${tft.staging-repo.id}</serverId>
+                    <nexusUrl>${tft.staging-repo.url}</nexusUrl>
                 </configuration>
             </plugin>
 
