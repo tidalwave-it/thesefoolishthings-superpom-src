@@ -2114,6 +2114,33 @@ to override those related to the development of this POM.
 
     <!--================================================================================================================
 
+    This profile enables the management of web resources under src/main/webapp, used for applications with embedded
+    web servers.
+
+    =================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-webresources-v1</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-it.tidalwave-webresources-v1-profile</exists>
+                </file>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/webapp</directory>
+                        <targetPath>webapp</targetPath>
+                        <filtering>true</filtering>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+
+    <!--================================================================================================================
+
 
 
      =================================================================================================================-->
