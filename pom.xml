@@ -2281,9 +2281,9 @@ to override those related to the development of this POM.
 
     The product name must be defined in
 
-    * tdt.deb.name
+    * tft.deb.name
 
-    and will be installed to ${tft.deb.binaryDirectory}/${tdt.deb.name}.
+    and will be installed to ${tft.deb.binaryDirectory}/${tft.deb.name}.
 
     The files to be placed in the installer are extracted from a tarball defined by:
 
@@ -2320,6 +2320,12 @@ to override those related to the development of this POM.
                 <tft.deb.group>root</tft.deb.group>
             </properties>
             <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -2374,8 +2380,8 @@ to override those related to the development of this POM.
                                 </data>
                                 <data>
                                     <type>link</type>
-                                    <linkName>${tft.deb.binaryDirectory}/${tdt.deb.name}</linkName>
-                                    <linkTarget>${tft.deb.binaryDirectory}/${tdt.deb.name}-${project.version}</linkTarget>
+                                    <linkName>${tft.deb.binaryDirectory}/${tft.deb.name}</linkName>
+                                    <linkTarget>${tft.deb.binaryDirectory}/${tft.deb.name}-${project.version}</linkTarget>
                                     <symlink>true</symlink>
                                     <mapper>
                                         <type>perm</type>
@@ -2403,7 +2409,7 @@ to override those related to the development of this POM.
     * /var/log/${tft.deb.directory}
     * /var/cache/${tft.deb.directory}
 
-    The value of tft.deb.directory defaults to ${tdt.deb.name}.
+    The value of tft.deb.directory defaults to ${tft.deb.name}.
 
     ================================================================================================================ -->
         <profile>
@@ -2414,7 +2420,7 @@ to override those related to the development of this POM.
                 </file>
             </activation>
             <properties>
-                <tft.deb.directory>${tdt.deb.name}</tft.deb.directory>
+                <tft.deb.directory>${tft.deb.name}</tft.deb.directory>
             </properties>
             <build>
                 <plugins>
@@ -2425,8 +2431,8 @@ to override those related to the development of this POM.
                             <dataSet combine.children="append">
                                 <data>
                                     <type>file</type>
-                                    <src>${project.build.directory}/classes/${tdt.deb.name}.service</src>
-                                    <dst>/etc/systemd/system/${tdt.deb.name}.service</dst>
+                                    <src>${project.build.directory}/classes/${tft.deb.name}.service</src>
+                                    <dst>/etc/systemd/system/${tft.deb.name}.service</dst>
                                     <mapper>
                                         <type>perm</type>
                                         <user>${tft.deb.user}</user>
@@ -2489,8 +2495,8 @@ to override those related to the development of this POM.
                             <dataSet combine.children="append">
                                 <data>
                                     <type>link</type>
-                                    <linkName>/usr/bin/${tdt.deb.name}</linkName>
-                                    <linkTarget>${tft.deb.binaryDirectory}/${tdt.deb.name}/bin/${tdt.deb.name}</linkTarget>
+                                    <linkName>/usr/bin/${tft.deb.name}</linkName>
+                                    <linkTarget>${tft.deb.binaryDirectory}/${tft.deb.name}/bin/${tft.deb.name}</linkTarget>
                                     <symlink>true</symlink>
                                     <mapper>
                                         <type>perm</type>
