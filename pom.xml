@@ -2216,7 +2216,7 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-     <!-- ===============================================================================================================
+    <!-- ===============================================================================================================
 
     This profile prepares the files for an installer, by copying all the jar dependencies to 'dist/lib' and
     the local resources to 'dist'.
