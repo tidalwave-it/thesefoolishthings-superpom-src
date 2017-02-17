@@ -1,7 +1,7 @@
 ![Maven Central](https://img.shields.io/maven-central/v/it.tidalwave.thesefoolishthings/superpom.svg)
-[![Build Status](https://img.shields.io/jenkins/s/http/services.tidalwave.it/ci/TheseFoolishThings - SuperPOM_Build_from_Scratch.svg)](http://services.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
-[![Test Status](https://img.shields.io/jenkins/t/http/services.tidalwave.it/ci/TheseFoolishThings - SuperPOM.svg)](http://services.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
-[![Coverage](https://img.shields.io/jenkins/c/http/services.tidalwave.it/ci/TheseFoolishThings - SuperPOM.svg)](http://services.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
+[![Build Status](https://img.shields.io/jenkins/s/http/services.tidalwave.it/ci/job/${tidalwave.ci.view}_Build_from_Scratch.svg)](http://services.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
+[![Test Status](https://img.shields.io/jenkins/t/http/services.tidalwave.it/ci/job/${tidalwave.ci.view}.svg)](http://services.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
+[![Coverage](https://img.shields.io/jenkins/c/http/services.tidalwave.it/ci/job/${tidalwave.ci.view}.svg)](http://services.tidalwave.it/ci/view/TheseFoolishThings_SuperPOM)
 
 TheseFoolishThings - SuperPOM
 ================================
@@ -19,6 +19,7 @@ A number of profiles, easily activatable, are available for:
 * different kinds of Continous Integration tasks, including a full run of QA tools such as JaCoCo, FindBugs, PMD, etc...
 * deploying WARs and locally running them with Tomcat or Jetty;
 * creating a Mac OS X bundle for JavaFX applications;
+* creating .deb packages for both application and services;
 * a customized release cycle, including all requirements for the Maven Central such as signing, with a 'transactional' behaviour
   (all artifacts, both the DSCM and the Maven artifacts are prepared on the local disk, so they can be uploaded in a second moment);
 
@@ -48,6 +49,7 @@ More information can be found on the [homepage](http://tidalwave.it) of the proj
 
 Where can I get the latest release?
 -----------------------------------
+
 You can download source and binaries from the [download page](${scm.repo.browse.url}).
 
 Alternatively you can pull it from the central Maven repositories:
@@ -81,6 +83,7 @@ If you plan to contribute on a regular basis, please consider filing a contribut
 
 License
 -------
+
 Code is released under the [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0.txt).
 
 
