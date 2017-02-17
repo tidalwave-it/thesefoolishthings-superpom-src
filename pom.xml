@@ -2141,7 +2141,81 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+    <!-- ===============================================================================================================
+
+    This profile builds a tar.gz assembly if it founds it descriptor at src/main/assembly/tar.gz.xml.
+
+    ================================================================================================================ -->
+        <profile>
+            <id>it.tidalwave-assembly-tar.gz-v1</id>
+            <activation>
+                <file>
+                    <exists>src/main/assembly/tar.gz.xml</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <configuration>
+                            <descriptors combine.children="append">
+                                <descriptor>src/main/assembly/tar.gz.xml</descriptor>
+                            </descriptors>
+                            <runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    <!-- ===============================================================================================================
+
+    This profile builds a zip assembly if it founds it descriptor at src/main/assembly/zip.xml.
+
+    ================================================================================================================ -->
+        <profile>
+            <id>it.tidalwave-assembly-zip-v1</id>
+            <activation>
+                <file>
+                    <exists>src/main/assembly/zip.xml</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <configuration>
+                            <descriptors combine.children="append">
+                                <descriptor>src/main/assembly/zip.xml</descriptor>
+                            </descriptors>
+                            <runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+     <!--================================================================================================================
 
 
 
