@@ -98,7 +98,8 @@ to override those related to the development of this POM.
         <release.profiles>release</release.profiles>
 
         <tft.defaultGoal>clean install</tft.defaultGoal>
-        <tft.profile.metrics.defaultGoal>clean install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr javancss:report dependency:analyze</tft.profile.metrics.defaultGoal>
+        <tft.profile.metrics.sonarGoal>sonar:sonar</tft.profile.metrics.sonarGoal>
+        <tft.profile.metrics.defaultGoal>clean install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr javancss:report dependency:analyze ${tft.profile.metrics.sonarGoal}</tft.profile.metrics.defaultGoal>
 
         <tft.checkstyle.skip>false</tft.checkstyle.skip>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
@@ -240,6 +241,7 @@ to override those related to the development of this POM.
         <tft.license-maven-plugin.version>1.4</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
         <tft.nexus-staging-maven-plugin.version>1.1</tft.nexus-staging-maven-plugin.version>
+        <tft.sonar-maven-plugin.version>3.5.0.1254</tft.sonar-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>7.7.6</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>2.3</tft.versions-maven-plugin.version>
@@ -484,6 +486,11 @@ to override those related to the development of this POM.
                      <groupId>org.codehaus.mojo</groupId>
                      <artifactId>license-maven-plugin</artifactId>
                      <version>${tft.license-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${tft.sonar-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
