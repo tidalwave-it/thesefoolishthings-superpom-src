@@ -98,8 +98,14 @@ to override those related to the development of this POM.
         <release.profiles>release</release.profiles>
 
         <tft.defaultGoal>clean install</tft.defaultGoal>
+
+        <tft.profile.metrics.checkstyleGoal>checkstyle:checkstyle</tft.profile.metrics.checkstyleGoal>
+        <tft.profile.metrics.findbugsGoal>findbugs:findbugs</tft.profile.metrics.findbugsGoal>
+        <tft.profile.metrics.javancssGoal>javancss:report</tft.profile.metrics.javancssGoal>
+        <tft.profile.metrics.pmdGoal>pmd:cpd pmd:pmd</tft.profile.metrics.pmdGoal>
         <tft.profile.metrics.sonarGoal>sonar:sonar</tft.profile.metrics.sonarGoal>
-        <tft.profile.metrics.defaultGoal>clean install findbugs:findbugs pmd:cpd pmd:pmd checkstyle:checkstyle clirr:clirr javancss:report dependency:analyze ${tft.profile.metrics.sonarGoal}</tft.profile.metrics.defaultGoal>
+        <tft.profile.metrics.clirrGoal>clirr:clirr</tft.profile.metrics.clirrGoal>
+        <tft.profile.metrics.defaultGoal>clean install ${tft.profile.metrics.findbugsGoal} ${tft.profile.metrics.pmdGoal} ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} ${tft.profile.metrics.javancssGoal} dependency:analyze ${tft.profile.metrics.sonarGoal}</tft.profile.metrics.defaultGoal>
 
         <tft.checkstyle.skip>false</tft.checkstyle.skip>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
