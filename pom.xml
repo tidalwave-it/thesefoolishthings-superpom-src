@@ -236,6 +236,8 @@ to override those related to the development of this POM.
         <tft.build-helper-maven-plugin.version>1.12</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.4</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.7</tft.clirr-maven-plugin.version>
+        <tft.docker-maven-plugin.version>1.2.0</tft.docker-maven-plugin.version>
+        <tft.dockerfile-maven-plugin.version>1.4.9</tft.dockerfile-maven-plugin.version>
         <tft.exec-maven-plugin.version>1.5.0</tft.exec-maven-plugin.version>
         <tft.findbugs-maven-plugin.version>3.0.3</tft.findbugs-maven-plugin.version>
         <tft.gmaven-plugin.version>2.0</tft.gmaven-plugin.version>
@@ -529,6 +531,17 @@ to override those related to the development of this POM.
                     <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                     <artifactId>maven-android-plugin</artifactId>
                     <version>${tft.maven-android-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${tft.docker-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>${tft.dockerfile-maven-plugin.version}</version>
                 </plugin>
 
                 <plugin>
