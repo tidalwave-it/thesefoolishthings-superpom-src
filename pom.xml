@@ -232,7 +232,7 @@ to override those related to the development of this POM.
         <tft.maven-surefire-plugin.version>2.19.1</tft.maven-surefire-plugin.version>
         <tft.maven-war-plugin.version>3.0.0</tft.maven-war-plugin.version>
 
-        <tft.aspectj-maven-plugin.version>1.9</tft.aspectj-maven-plugin.version>
+        <tft.aspectj-maven-plugin.version>1.11</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>1.12</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.4</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.7</tft.clirr-maven-plugin.version>
@@ -1804,6 +1804,14 @@ to override those related to the development of this POM.
                                 <groupId>org.aspectj</groupId>
                                 <artifactId>aspectjtools</artifactId>
                                 <version>${tft.aspectjrt.version}</version>
+                            </dependency>
+                            <!-- Fix for JDK 9 and later - should be unnecessary when version 1.11.1 is releaded. -->
+                            <dependency>
+                                <groupId>com.sun</groupId>
+                                <artifactId>tools</artifactId>
+                                <version>${java.version}</version>
+                                <scope>system</scope>
+                                <systemPath>${project.basedir}/pom.xml</systemPath>
                             </dependency>
                         </dependencies>
                     </plugin>
