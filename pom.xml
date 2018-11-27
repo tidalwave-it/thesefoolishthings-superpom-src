@@ -152,8 +152,9 @@ to override those related to the development of this POM.
         <tft.aspectjrt.version>1.9.2</tft.aspectjrt.version>
         <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
         <tft.hamcrest-matchers.version>1.3</tft.hamcrest-matchers.version>
-        <tft.jsr305.version>3.0.1</tft.jsr305.version>
         <tft.jsr330.version>1</tft.jsr330.version>
+        <tft.javax-annotation.version>1.3.2</tft.javax-annotation.version>
+        <tft.findbugs-annotations.version>3.1.9</tft.findbugs-annotations.version>
         <tft.junit.version>4.12</tft.junit.version>
         <tft.logback.version>1.1.3</tft.logback.version>
         <tft.lombok.version>1.18.4</tft.lombok.version>
@@ -1087,14 +1088,19 @@ to override those related to the development of this POM.
             </dependency>
 
             <dependency>
-                <groupId>com.google.code.findbugs</groupId>
-                <artifactId>annotations</artifactId>
-                <version>${tft.jsr305.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>javax.inject</groupId>
                 <artifactId>javax.inject</artifactId>
                 <version>${tft.jsr330.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>${tft.javax-annotation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-annotations</artifactId>
+                <version>${tft.findbugs-annotations.version}</version>
             </dependency>
 
             <dependency>
