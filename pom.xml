@@ -141,7 +141,7 @@ to override those related to the development of this POM.
         <tft.stableAPIVersion>${stableAPIVersion}</tft.stableAPIVersion>
         <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
         <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
-        <tft.javadoc.doclint>-Xdoclint:none</tft.javadoc.doclint>
+        <tft.javadoc.doclint />
         <tft.release.localCheckout>true</tft.release.localCheckout>
         <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
         <tft.release.completionGoals />
@@ -193,72 +193,75 @@ to override those related to the development of this POM.
 
         <!-- tft.test.listeners></tft.test.listeners -->
         <tft.javadoc.excludePackageNames>*.impl:*.impl.*</tft.javadoc.excludePackageNames>
-        <tft.javadoc.doclet>org.umlgraph.doclet.UmlGraphDoc</tft.javadoc.doclet>
+        <tft.javadoc.doclet>nl.talsmasoftware.umldoclet.UMLDoclet</tft.javadoc.doclet>
+        <tft.javadoc.doclet.groupId>nl.talsmasoftware</tft.javadoc.doclet.groupId>
+        <tft.javadoc.doclet.artifactId>umldoclet</tft.javadoc.doclet.artifactId>
+        <tft.javadoc.doclet.version>2.0.0-rc.4</tft.javadoc.doclet.version>
+        <tft.javadoc.doclet.additionalParam>-verbose</tft.javadoc.doclet.additionalParam>
+
         <tft.clirr.skip>false</tft.clirr.skip>
         <tft.buildNumber.getRevisionOnlyOnce>false</tft.buildNumber.getRevisionOnlyOnce>
-        <tft.UmlGraphDoc.version>5.1</tft.UmlGraphDoc.version> <!-- the latest available at the Maven Central Repo -->
-        <tft.UmlGraphDoc.additionalParam>-views -attributes -operations -types -postfixpackage -nodefontpackagesize 6 -nodefontclasssize 8 -nodefontsize 7 -edgefontsize 7 -nodesep 0.05 -ranksep 0.1 -visibility -inferdep -inferrel -inferdepinpackage -hide java.*|javax.*</tft.UmlGraphDoc.additionalParam>
 
         <!--==== Plugin Versions ==================================================================================-->
 
         <tft.maven-android-plugin.version>4.0.0</tft.maven-android-plugin.version>
-        <tft.maven-antrun-plugin.version>1.7</tft.maven-antrun-plugin.version>
+        <tft.maven-antrun-plugin.version>1.8</tft.maven-antrun-plugin.version>
         <tft.maven-archetype-plugin.version>2.4</tft.maven-archetype-plugin.version>
-        <tft.maven-assembly-plugin.version>3.0.0</tft.maven-assembly-plugin.version>
-        <tft.maven-bundle-plugin.version>2.0.1</tft.maven-bundle-plugin.version> <!-- TODO 2.3.7 -->
-        <tft.maven-checkstyle-plugin.version>2.17</tft.maven-checkstyle-plugin.version>
-        <tft.maven-clean-plugin.version>3.0.0</tft.maven-clean-plugin.version>
-        <tft.maven-compiler-plugin.version>3.6.0</tft.maven-compiler-plugin.version>
-        <tft.maven-dependency-plugin.version>3.0.0</tft.maven-dependency-plugin.version>
-        <tft.maven-deploy-plugin.version>2.8.2</tft.maven-deploy-plugin.version>
-        <tft.maven-doap-plugin.version>1.1</tft.maven-doap-plugin.version>
+        <tft.maven-assembly-plugin.version>3.1.0</tft.maven-assembly-plugin.version>
+        <tft.maven-bundle-plugin.version>4.1.0</tft.maven-bundle-plugin.version>
+        <tft.maven-checkstyle-plugin.version>3.0.0</tft.maven-checkstyle-plugin.version>
+        <tft.maven-clean-plugin.version>3.1.0</tft.maven-clean-plugin.version>
+        <tft.maven-compiler-plugin.version>3.8.0</tft.maven-compiler-plugin.version>
+        <tft.maven-dependency-plugin.version>3.1.1</tft.maven-dependency-plugin.version>
+        <tft.maven-deploy-plugin.version>3.0.0-M1</tft.maven-deploy-plugin.version>
+        <tft.maven-doap-plugin.version>1.2</tft.maven-doap-plugin.version>
         <tft.maven-enforcer-plugin.version>1.4.1</tft.maven-enforcer-plugin.version>
         <tft.maven-gpg-plugin.version>1.6</tft.maven-gpg-plugin.version>
-        <tft.maven-graph-plugin.version>1.15</tft.maven-graph-plugin.version>
-        <tft.maven-install-plugin.version>2.5.2</tft.maven-install-plugin.version>
-        <tft.maven-jar-plugin.version>2.6</tft.maven-jar-plugin.version> <!-- TODO 3.0.2 doesn't support useDefaultManifestFile -->
-        <tft.maven-jarsigner-plugin.version>1.4</tft.maven-jarsigner-plugin.version>
-        <tft.maven-javadoc-plugin.version>2.10.4</tft.maven-javadoc-plugin.version>
-        <tft.maven-jdeb-plugin.version>1.5</tft.maven-jdeb-plugin.version>
-        <tft.maven-jetty-plugin.version>6.1.24</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
-        <tft.maven-license-plugin.version>1.9.0</tft.maven-license-plugin.version>
-        <tft.maven-pmd-plugin.version>3.7</tft.maven-pmd-plugin.version>
-        <tft.maven-project-info-reports-plugin.version>2.9</tft.maven-project-info-reports-plugin.version>
+        <tft.maven-graph-plugin.version>1.39</tft.maven-graph-plugin.version>
+        <tft.maven-install-plugin.version>3.0.0-M1</tft.maven-install-plugin.version>
+        <tft.maven-jar-plugin.version>3.1.0</tft.maven-jar-plugin.version>
+        <tft.maven-jarsigner-plugin.version>3.0.0</tft.maven-jarsigner-plugin.version>
+        <tft.maven-javadoc-plugin.version>3.0.1</tft.maven-javadoc-plugin.version>
+        <tft.maven-jdeb-plugin.version>1.7</tft.maven-jdeb-plugin.version>
+        <tft.maven-jetty-plugin.version>6.1.26</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
+        <tft.maven-license-plugin.version>1.10.b1</tft.maven-license-plugin.version>
+        <tft.maven-pmd-plugin.version>3.11.0</tft.maven-pmd-plugin.version>
+        <tft.maven-project-info-reports-plugin.version>3.0.0</tft.maven-project-info-reports-plugin.version>
         <tft.maven-release-plugin.version>2.5.3</tft.maven-release-plugin.version>
-        <tft.maven-replacer-plugin.version>1.3.9</tft.maven-replacer-plugin.version> <!-- TODO: 1.5.2 -->
-        <tft.maven-resources-plugin.version>3.0.2</tft.maven-resources-plugin.version>
-        <tft.maven-scm-plugin.version>1.9.5</tft.maven-scm-plugin.version>
-        <tft.maven-shade-plugin.version>2.4.3</tft.maven-shade-plugin.version>
-        <tft.maven-site-plugin.version>3.6</tft.maven-site-plugin.version>
+        <tft.maven-replacer-plugin.version>1.4.1</tft.maven-replacer-plugin.version>
+        <tft.maven-resources-plugin.version>3.1.0</tft.maven-resources-plugin.version>
+        <tft.maven-scm-plugin.version>1.11.1</tft.maven-scm-plugin.version>
+        <tft.maven-shade-plugin.version>3.2.1</tft.maven-shade-plugin.version>
+        <tft.maven-site-plugin.version>3.7.1</tft.maven-site-plugin.version>
         <tft.maven-source-plugin.version>3.0.1</tft.maven-source-plugin.version>
-        <tft.maven-surefire-plugin.version>3.0.0-M1</tft.maven-surefire-plugin.version>
-        <tft.maven-war-plugin.version>3.0.0</tft.maven-war-plugin.version>
+        <tft.maven-surefire-plugin.version>3.0.0-M2</tft.maven-surefire-plugin.version>
+        <tft.maven-war-plugin.version>3.2.2</tft.maven-war-plugin.version>
 
         <tft.aspectj-maven-plugin.version>1.11</tft.aspectj-maven-plugin.version>
-        <tft.build-helper-maven-plugin.version>1.12</tft.build-helper-maven-plugin.version>
+        <tft.build-helper-maven-plugin.version>3.0.0</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.4</tft.buildnumber-maven-plugin.version>
-        <tft.clirr-maven-plugin.version>2.7</tft.clirr-maven-plugin.version>
+        <tft.clirr-maven-plugin.version>2.8</tft.clirr-maven-plugin.version>
         <tft.dependency-check-maven-plugin.version>4.0.0</tft.dependency-check-maven-plugin.version>
         <tft.docker-maven-plugin.version>1.2.0</tft.docker-maven-plugin.version>
         <tft.dockerfile-maven-plugin.version>1.4.9</tft.dockerfile-maven-plugin.version>
-        <tft.exec-maven-plugin.version>1.5.0</tft.exec-maven-plugin.version>
-        <tft.findbugs-maven-plugin.version>3.0.3</tft.findbugs-maven-plugin.version>
+        <tft.exec-maven-plugin.version>1.6.0</tft.exec-maven-plugin.version>
+        <tft.findbugs-maven-plugin.version>3.0.5</tft.findbugs-maven-plugin.version>
         <tft.gmaven-plugin.version>2.0</tft.gmaven-plugin.version>
-        <tft.gwt-maven-plugin.version>2.8.0</tft.gwt-maven-plugin.version>
+        <tft.gwt-maven-plugin.version>2.8.2</tft.gwt-maven-plugin.version>
         <tft.jacoco-maven-plugin.version>0.7.8</tft.jacoco-maven-plugin.version>
         <tft.javancss-maven-plugin.version>2.1</tft.javancss-maven-plugin.version>
-        <tft.jaxb2-maven-plugin.version>1.3</tft.jaxb2-maven-plugin.version> <!-- TODO 1.5 -->
-        <tft.jaxws-maven-plugin.version>2.2</tft.jaxws-maven-plugin.version> <!-- TODO 2.2.1 -->
-        <tft.license-maven-plugin.version>1.4</tft.license-maven-plugin.version>
+        <tft.jaxb2-maven-plugin.version>2.4</tft.jaxb2-maven-plugin.version>
+        <tft.jaxws-maven-plugin.version>2.3</tft.jaxws-maven-plugin.version>
+        <tft.license-maven-plugin.version>1.16</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
-        <tft.nexus-staging-maven-plugin.version>1.1</tft.nexus-staging-maven-plugin.version>
+        <tft.nexus-staging-maven-plugin.version>1.6.8</tft.nexus-staging-maven-plugin.version>
         <tft.sonar-maven-plugin.version>3.5.0.1254</tft.sonar-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
-        <tft.vaadin-maven-plugin.version>7.7.6</tft.vaadin-maven-plugin.version>
-        <tft.versions-maven-plugin.version>2.3</tft.versions-maven-plugin.version>
-        <tft.wagon-maven-plugin.version>1.0</tft.wagon-maven-plugin.version>
+        <tft.vaadin-maven-plugin.version>12.0.2</tft.vaadin-maven-plugin.version>
+        <tft.versions-maven-plugin.version>2.7</tft.versions-maven-plugin.version>
+        <tft.wagon-maven-plugin.version>2.0.0</tft.wagon-maven-plugin.version>
         <tft.webdav-jackrabbit.version>2.10</tft.webdav-jackrabbit.version>
-        <tft.xml-maven-plugin.version>1.0.1</tft.xml-maven-plugin.version>
+        <tft.xml-maven-plugin.version>1.0.2</tft.xml-maven-plugin.version>
 
         <tft.archetype-packaging.version>${tft.maven-archetype-plugin.version}</tft.archetype-packaging.version>
     </properties>
@@ -267,7 +270,7 @@ to override those related to the development of this POM.
         <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-        <tag>HEAD</tag>
+        <tag>4.7</tag>
     </scm>
 
     <prerequisites>
@@ -787,7 +790,6 @@ to override those related to the development of this POM.
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <useDefaultManifestFile>true</useDefaultManifestFile> <!-- required since nbm-plugin 3.0-->
                     <archive>
                         <manifest>
                             <addClasspath>${tft.jar.classpathInManifest}</addClasspath>
@@ -802,14 +804,7 @@ to override those related to the development of this POM.
                 </configuration>
                 <executions>
                     <execution>
-                        <id>package-jar</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>package-test-jar</id>
+                        <id>default-test-jar</id>
                         <phase>package</phase>
                         <goals>
                             <goal>test-jar</goal>
@@ -1032,14 +1027,6 @@ to override those related to the development of this POM.
                     </tags>
                     <docfilessubdirs>true</docfilessubdirs>
                     <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
-                    <doclet>${tft.javadoc.doclet}</doclet>
-                    <docletArtifact>
-                        <groupId>org.umlgraph</groupId>
-                        <artifactId>doclet</artifactId>
-                        <version>${tft.UmlGraphDoc.version}</version>
-                    </docletArtifact>
-                    <additionalparam>${tft.UmlGraphDoc.additionalParam} ${tft.javadoc.doclint}</additionalparam>
-                    <useStandardDocletOptions>true</useStandardDocletOptions>
                     <skip>${tft.disableJavaDocs}</skip>
                     <failOnError>false</failOnError>
                 </configuration>
@@ -2899,6 +2886,51 @@ to override those related to the development of this POM.
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>umldoclet-jdk9plus</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <!-- Configuration must be replicated in reporting section -->
+                        <configuration>
+                            <doclet>${tft.javadoc.doclet}</doclet>
+                            <docletArtifact>
+                                <groupId>${tft.javadoc.doclet.groupId}</groupId>
+                                <artifactId>${tft.javadoc.doclet.artifactId}</artifactId>
+                                <version>${tft.javadoc.doclet.version}</version>
+                            </docletArtifact>
+                            <additionalparam>${tft.javadoc.doclet.additionalParam} ${tft.javadoc.doclint}</additionalparam>
+                            <useStandardDocletOptions>true</useStandardDocletOptions>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <!-- Configuration must be replicated in build section -->
+                        <configuration>
+                            <doclet>${tft.javadoc.doclet}</doclet>
+                            <docletArtifact>
+                                <groupId>${tft.javadoc.doclet.groupId}</groupId>
+                                <artifactId>${tft.javadoc.doclet.artifactId}</artifactId>
+                                <version>${tft.javadoc.doclet.version}</version>
+                            </docletArtifact>
+                            <additionalparam>${tft.javadoc.doclet.additionalParam} ${tft.javadoc.doclint}</additionalparam>
+                            <useStandardDocletOptions>true</useStandardDocletOptions>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </reporting>
+        </profile>
     </profiles>
 
     <reporting>
@@ -2944,14 +2976,6 @@ to override those related to the development of this POM.
                     </tags>
                     <docfilessubdirs>true</docfilessubdirs>
                     <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
-                    <doclet>${tft.javadoc.doclet}</doclet>
-                    <docletArtifact>
-                        <groupId>org.umlgraph</groupId>
-                        <artifactId>doclet</artifactId>
-                        <version>${tft.UmlGraphDoc.version}</version>
-                    </docletArtifact>
-                    <additionalparam>${tft.UmlGraphDoc.additionalParam} ${tft.javadoc.doclint}</additionalparam>
-                    <useStandardDocletOptions>true</useStandardDocletOptions>
                     <skip>${tft.disableJavaDocs}</skip>
                     <failOnError>false</failOnError>
                 </configuration>
