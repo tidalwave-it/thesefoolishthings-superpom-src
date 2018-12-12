@@ -123,6 +123,7 @@ to override those related to the development of this POM.
         <!-- Default compiler settings. -->
         <tft.javac.source>1.8</tft.javac.source>
         <tft.javac.target>1.8</tft.javac.target>
+        <!--<tft.javac.release>8</tft.javac.release>-->
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
         <tft.javac.debug>true</tft.javac.debug>
         <tft.javac.optimize>true</tft.javac.optimize>
@@ -2881,6 +2882,23 @@ to override those related to the development of this POM.
                                 </resource>
                             </resources>
                             <outputDirectory>.</outputDirectory>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>javac-jdk9plus</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <release>${tft.javac.release}</release>
                         </configuration>
                     </plugin>
                 </plugins>
