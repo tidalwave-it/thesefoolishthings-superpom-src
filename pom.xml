@@ -118,7 +118,7 @@ to override those related to the development of this POM.
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
         <tft.maven.requiredVersion>3.2.3</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.8.0,)</tft.maven.requiredJdk>
-        <tft.superpom.config.version>1.5</tft.superpom.config.version>
+        <tft.superpom.config.version>1.6</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.jar.classpathInManifest>false</tft.jar.classpathInManifest>
 
@@ -227,7 +227,7 @@ to override those related to the development of this POM.
         <tft.maven-jdeb-plugin.version>1.7</tft.maven-jdeb-plugin.version>
         <tft.maven-jetty-plugin.version>6.1.26</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
         <tft.maven-license-plugin.version>1.10.b1</tft.maven-license-plugin.version>
-        <tft.maven-pmd-plugin.version>3.11.0</tft.maven-pmd-plugin.version>
+        <tft.maven-pmd-plugin.version>3.12.0</tft.maven-pmd-plugin.version>
         <tft.maven-project-info-reports-plugin.version>3.0.0</tft.maven-project-info-reports-plugin.version>
         <tft.maven-release-plugin.version>2.5.3</tft.maven-release-plugin.version>
         <tft.maven-replacer-plugin.version>1.4.1</tft.maven-replacer-plugin.version>
