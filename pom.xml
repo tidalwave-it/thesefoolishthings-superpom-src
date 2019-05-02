@@ -6,7 +6,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>4.10-SNAPSHOT</version>
+    <version>4.11-SNAPSHOT</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -116,7 +116,7 @@ to override those related to the development of this POM.
         <findbugs.skip>${tft.findbugs.skip}</findbugs.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <tft.license.name>tidalwave_asf2</tft.license.name>
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
-        <tft.maven.requiredVersion>3.2.3</tft.maven.requiredVersion>
+        <tft.maven.requiredVersion>3.6.0</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.8.0,)</tft.maven.requiredJdk>
         <tft.superpom.config.version>1.6</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
