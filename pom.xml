@@ -6,7 +6,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>4.9-SNAPSHOT</version>
+    <version>4.9</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -100,7 +100,7 @@ to override those related to the development of this POM.
         <tft.defaultGoal>clean install</tft.defaultGoal>
 
         <tft.profile.metrics.checkstyleGoal>checkstyle:checkstyle</tft.profile.metrics.checkstyleGoal>
-        <tft.profile.metrics.findbugsGoal></tft.profile.metrics.findbugsGoal>
+        <tft.profile.metrics.findbugsGoal />
         <tft.profile.metrics.spotbugsGoal>com.github.spotbugs:spotbugs-maven-plugin:check</tft.profile.metrics.spotbugsGoal>
         <tft.profile.metrics.javancssGoal>javancss:report</tft.profile.metrics.javancssGoal>
         <tft.profile.metrics.pmdGoal>pmd:cpd pmd:pmd</tft.profile.metrics.pmdGoal>
@@ -273,7 +273,7 @@ to override those related to the development of this POM.
         <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-        <tag>4.7</tag>
+        <tag>4.9</tag>
     </scm>
 
     <prerequisites>
