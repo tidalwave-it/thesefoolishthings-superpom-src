@@ -6,7 +6,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>4.9-SNAPSHOT</version>
+    <version>4.10-SNAPSHOT</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -100,23 +100,25 @@ to override those related to the development of this POM.
         <tft.defaultGoal>clean install</tft.defaultGoal>
 
         <tft.profile.metrics.checkstyleGoal>checkstyle:checkstyle</tft.profile.metrics.checkstyleGoal>
-        <tft.profile.metrics.findbugsGoal>findbugs:findbugs</tft.profile.metrics.findbugsGoal>
+        <tft.profile.metrics.findbugsGoal />
+        <tft.profile.metrics.spotbugsGoal>com.github.spotbugs:spotbugs-maven-plugin:check</tft.profile.metrics.spotbugsGoal>
         <tft.profile.metrics.javancssGoal>javancss:report</tft.profile.metrics.javancssGoal>
         <tft.profile.metrics.pmdGoal>pmd:cpd pmd:pmd</tft.profile.metrics.pmdGoal>
         <tft.profile.metrics.sonarGoal>sonar:sonar</tft.profile.metrics.sonarGoal>
         <tft.profile.metrics.clirrGoal>clirr:clirr</tft.profile.metrics.clirrGoal>
         <tft.profile.metrics.dependencyCheckGoal>dependency-check:aggregate</tft.profile.metrics.dependencyCheckGoal>
-        <tft.profile.metrics.defaultGoal>clean install ${tft.profile.metrics.findbugsGoal} ${tft.profile.metrics.pmdGoal} ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} ${tft.profile.metrics.javancssGoal} dependency:analyze ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal}</tft.profile.metrics.defaultGoal>
+        <tft.profile.metrics.defaultGoal>clean install ${tft.profile.metrics.findbugsGoal} ${tft.profile.metrics.spotbugsGoal} ${tft.profile.metrics.pmdGoal} ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} ${tft.profile.metrics.javancssGoal} dependency:analyze ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal}</tft.profile.metrics.defaultGoal>
 
         <tft.checkstyle.skip>false</tft.checkstyle.skip>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.findbugs.skip>false</tft.findbugs.skip>
+        <tft.spotbugs.skip>${tft.findbugs.skip}</tft.spotbugs.skip>
         <findbugs.skip>${tft.findbugs.skip}</findbugs.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <tft.license.name>tidalwave_asf2</tft.license.name>
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
         <tft.maven.requiredVersion>3.2.3</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.8.0,)</tft.maven.requiredJdk>
-        <tft.superpom.config.version>1.5</tft.superpom.config.version>
+        <tft.superpom.config.version>1.6</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.jar.classpathInManifest>false</tft.jar.classpathInManifest>
 
@@ -226,7 +228,7 @@ to override those related to the development of this POM.
         <tft.maven-jdeb-plugin.version>1.7</tft.maven-jdeb-plugin.version>
         <tft.maven-jetty-plugin.version>6.1.26</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
         <tft.maven-license-plugin.version>1.10.b1</tft.maven-license-plugin.version>
-        <tft.maven-pmd-plugin.version>3.11.0</tft.maven-pmd-plugin.version>
+        <tft.maven-pmd-plugin.version>3.12.0</tft.maven-pmd-plugin.version>
         <tft.maven-project-info-reports-plugin.version>3.0.0</tft.maven-project-info-reports-plugin.version>
         <tft.maven-release-plugin.version>2.5.3</tft.maven-release-plugin.version>
         <tft.maven-replacer-plugin.version>1.4.1</tft.maven-replacer-plugin.version>
@@ -257,6 +259,7 @@ to override those related to the development of this POM.
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
         <tft.nexus-staging-maven-plugin.version>1.6.8</tft.nexus-staging-maven-plugin.version>
         <tft.sonar-maven-plugin.version>3.5.0.1254</tft.sonar-maven-plugin.version>
+        <tft.spotbugs-maven-plugin.version>3.1.11</tft.spotbugs-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>12.0.2</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>2.7</tft.versions-maven-plugin.version>
@@ -466,6 +469,11 @@ to override those related to the development of this POM.
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
                     <version>${tft.findbugs-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>${tft.spotbugs-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -1171,6 +1179,23 @@ to override those related to the development of this POM.
                             </execution>
                         </executions>
                     </plugin>
+
+                    <!-- SpotBugs -->
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                        <!-- version must be replicated here -->
+                        <version>${tft.spotbugs-maven-plugin.version}</version>
+                        <configuration>
+                            <xmlOutput>true</xmlOutput>
+                            <spotbugsXmlOutput>true</spotbugsXmlOutput>
+                            <spotbugsXmlWithMessages>true</spotbugsXmlWithMessages>
+                            <effort>Max</effort>
+                            <threshold>Low</threshold>
+                            <failOnError>false</failOnError>
+                            <skip>${tft.spotbugs.skip}</skip>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
 
@@ -1184,7 +1209,24 @@ to override those related to the development of this POM.
                         <version>${tft.jacoco-maven-plugin.version}</version>
                     </plugin>
 
-                    <!-- FindBugs -->
+                    <!-- SpotBugs -->
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                        <!-- version must be replicated here -->
+                        <version>${tft.spotbugs-maven-plugin.version}</version>
+                        <configuration>
+                            <xmlOutput>true</xmlOutput>
+                            <spotbugsXmlOutput>true</spotbugsXmlOutput>
+                            <spotbugsXmlWithMessages>true</spotbugsXmlWithMessages>
+                            <effort>Max</effort>
+                            <threshold>Low</threshold>
+                            <failOnError>false</failOnError>
+                            <skip>${tft.spotbugs.skip}</skip>
+                        </configuration>
+                    </plugin>
+
+                    <!-- FindBugs, now deprecated -->
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>findbugs-maven-plugin</artifactId>
