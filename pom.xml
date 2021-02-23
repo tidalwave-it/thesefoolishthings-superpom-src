@@ -1,5 +1,5 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -11,29 +11,30 @@
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
     <description>
-[![Build Status](https://drone.io/bitbucket.org/tidalwave/thesefoolishthings-superpom-src/status.png)](https://drone.io/bitbucket.org/tidalwave/thesefoolishthings-superpom-src/latest)
+        [![Build Status](https://drone.io/bitbucket.org/tidalwave/thesefoolishthings-superpom-src/status.png)]
+        (https://drone.io/bitbucket.org/tidalwave/thesefoolishthings-superpom-src/latest)
 
-A feature-rich SuperPOM for building Java projects. It features:
+        A feature-rich SuperPOM for building Java projects. It features:
 
-* explicit version configuration for a number of plugins;
-* easy configurability by means of pre-defined properties to avoid cut &amp; copy of plugin sections.
+        * explicit version configuration for a number of plugins;
+        * easy configurability by means of pre-defined properties to avoid cut &amp; copy of plugin sections.
 
-A number of profiles, easily activatable, are available for:
+        A number of profiles, easily activatable, are available for:
 
-* Spring-AOP configuration;
-* different kinds of Continous Integration tasks, including a full run of QA tools such as JaCoCo, FindBugs, PMD, etc...
-* deploying WARs and locally running them with Tomcat or Jetty;
-* creating a Mac OS X bundle for JavaFX applications;
-* creating .deb packages for both application and services;
-* a customized release cycle, including all requirements for the Maven Central such as signing, with a 'transactional' behaviour
-  (all artifacts, both the DSCM and the Maven artifacts are prepared on the local disk, so they can be uploaded in a second moment);
+        * Spring-AOP configuration;
+        * different kinds of Continous Integration tasks, including a full run of QA tools such as JaCoCo, FindBugs, PMD, etc...
+        * deploying WARs and locally running them with Tomcat or Jetty;
+        * creating a Mac OS X bundle for JavaFX applications;
+        * creating .deb packages for both application and services;
+        * a customized release cycle, including all requirements for the Maven Central such as signing, with a 'transactional' behaviour
+        (all artifacts, both the DSCM and the Maven artifacts are prepared on the local disk, so they can be uploaded in a second moment);
 
 
-Remember to customise it
-------------------------
+        Remember to customise it
+        ------------------------
 
-If you use it, please remember to change the ```description```,```url```, ```organization```, ```developers```, ```license```, etc...
-to override those related to the development of this POM.
+        If you use it, please remember to change the ```description```,```url```, ```organization```, ```developers```, ```license```, etc...
+        to override those related to the development of this POM.
     </description>
 
     <organization>
@@ -100,14 +101,18 @@ to override those related to the development of this POM.
         <tft.defaultGoal>clean install</tft.defaultGoal>
 
         <tft.profile.metrics.checkstyleGoal>checkstyle:checkstyle</tft.profile.metrics.checkstyleGoal>
-        <tft.profile.metrics.findbugsGoal />
+        <tft.profile.metrics.findbugsGoal/>
         <tft.profile.metrics.spotbugsGoal>com.github.spotbugs:spotbugs-maven-plugin:check</tft.profile.metrics.spotbugsGoal>
         <tft.profile.metrics.javancssGoal>javancss:report</tft.profile.metrics.javancssGoal>
         <tft.profile.metrics.pmdGoal>pmd:cpd pmd:pmd</tft.profile.metrics.pmdGoal>
         <tft.profile.metrics.sonarGoal>sonar:sonar</tft.profile.metrics.sonarGoal>
         <tft.profile.metrics.clirrGoal>clirr:clirr</tft.profile.metrics.clirrGoal>
         <tft.profile.metrics.dependencyCheckGoal>dependency-check:aggregate</tft.profile.metrics.dependencyCheckGoal>
-        <tft.profile.metrics.defaultGoal>clean install ${tft.profile.metrics.findbugsGoal} ${tft.profile.metrics.spotbugsGoal} ${tft.profile.metrics.pmdGoal} ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} ${tft.profile.metrics.javancssGoal} dependency:analyze ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal}</tft.profile.metrics.defaultGoal>
+        <tft.profile.metrics.defaultGoal>
+            clean install ${tft.profile.metrics.findbugsGoal} ${tft.profile.metrics.spotbugsGoal} ${tft.profile.metrics.pmdGoal}
+            ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} ${tft.profile.metrics.javancssGoal} dependency:analyze
+            ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal}
+        </tft.profile.metrics.defaultGoal>
 
         <tft.checkstyle.skip>false</tft.checkstyle.skip>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
@@ -144,10 +149,10 @@ to override those related to the development of this POM.
         <tft.stableAPIVersion>${stableAPIVersion}</tft.stableAPIVersion>
         <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
         <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
-        <tft.javadoc.doclint />
+        <tft.javadoc.doclint/>
         <tft.release.localCheckout>true</tft.release.localCheckout>
         <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
-        <tft.release.completionGoals />
+        <tft.release.completionGoals/>
         <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:single deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
 
@@ -172,8 +177,8 @@ to override those related to the development of this POM.
         <tft.test.maxMemory>768M</tft.test.maxMemory>
         <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/plain</tft.test.reportsDirectory>
         <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
-        <tft.test.excludedGroups />
-        <tft.test.vmOptions />
+        <tft.test.excludedGroups/>
+        <tft.test.vmOptions/>
 
         <tft.embedded-jdk-groupId>it.tidalwave.jdk</tft.embedded-jdk-groupId>
         <tft.embedded-jdk-artifactId>it-tidalwave-openjdk7</tft.embedded-jdk-artifactId>
@@ -263,7 +268,8 @@ to override those related to the development of this POM.
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>12.0.2</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>2.7</tft.versions-maven-plugin.version>
-        <tft.wagon-maven-plugin.version>1.0</tft.wagon-maven-plugin.version> <!-- 2.0 breaks the release cycle, it doesn't copy stuff from the local repo to remote -->
+        <!-- 2.0 breaks the release cycle, it doesn't copy stuff from the local repo to remote -->
+        <tft.wagon-maven-plugin.version>1.0</tft.wagon-maven-plugin.version>
         <tft.webdav-jackrabbit.version>2.10</tft.webdav-jackrabbit.version>
         <tft.xml-maven-plugin.version>1.0.2</tft.xml-maven-plugin.version>
 
@@ -506,9 +512,9 @@ to override those related to the development of this POM.
                     <version>${tft.jaxb2-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
-                     <groupId>org.codehaus.mojo</groupId>
-                     <artifactId>license-maven-plugin</artifactId>
-                     <version>${tft.license-maven-plugin.version}</version>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${tft.license-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
@@ -651,7 +657,7 @@ to override those related to the development of this POM.
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore />
+                                        <ignore/>
                                     </action>
                                 </pluginExecution>
                                 <pluginExecution>
@@ -726,7 +732,7 @@ to override those related to the development of this POM.
                 </executions>
                 <configuration>
                     <doCheck>false</doCheck>
-                     <doUpdate>false</doUpdate>
+                    <doUpdate>false</doUpdate>
                     <getRevisionOnlyOnce>${tft.buildNumber.getRevisionOnlyOnce}</getRevisionOnlyOnce>
                     <revisionOnScmFailure>unknown</revisionOnScmFailure>
                     <shortRevisionLength>12</shortRevisionLength>
@@ -914,7 +920,9 @@ to override those related to the development of this POM.
                                     <version>${tft.maven.requiredVersion}</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <message>To build this project JDK ${tft.maven.requiredJdk} is required. Please install it and properly set JAVA_HOME.</message>
+                                    <message>
+                                        To build this project JDK ${tft.maven.requiredJdk} is required. Please install it and properly set JAVA_HOME.
+                                    </message>
                                     <version>${tft.maven.requiredJdk}</version>
                                 </requireJavaVersion>
                                 <requirePluginVersions>
@@ -1115,11 +1123,11 @@ to override those related to the development of this POM.
     </dependencyManagement>
 
     <profiles>
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile is used in Continous Integration.
+        This profile is used in Continous Integration.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-ci-v1</id>
             <properties>
@@ -1128,11 +1136,11 @@ to override those related to the development of this POM.
             </properties>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile is used in Continous Integration to create QA metrics data.
+        This profile is used in Continous Integration to create QA metrics data.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-metrics-v2</id>
             <properties>
@@ -1263,11 +1271,11 @@ to override those related to the development of this POM.
             </reporting>
         </profile>
 
-   <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile is activated during a release.
+         This profile is activated during a release.
 
-    =================================================================================================================-->
+         =================================================================================================================-->
         <profile>
             <id>release</id>
 
@@ -1293,7 +1301,7 @@ to override those related to the development of this POM.
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <delete dir="${project.build.directory}/target-maven-repo" />
+                                        <delete dir="${project.build.directory}/target-maven-repo"/>
                                     </target>
                                 </configuration>
                             </execution>
@@ -1303,13 +1311,13 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile signs the build artifacts. It is automatically enabled during a release; signing requires that the
-    proper certificates have been locally set up with PGP. If you want to skip signing, set the property
-    tft.release.sign-artifacts.skip to true.
+        This profile signs the build artifacts. It is automatically enabled during a release; signing requires that the
+        proper certificates have been locally set up with PGP. If you want to skip signing, set the property
+        tft.release.sign-artifacts.skip to true.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>release-sign-artifacts</id>
             <activation>
@@ -1342,11 +1350,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile stores the current build description and Java version into a local file - used for Hudson builds.
+        This profile stores the current build description and Java version into a local file - used for Hudson builds.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>generate-revision-id</id>
             <build>
@@ -1363,8 +1371,10 @@ to override those related to the development of this POM.
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <echo file="${tft.descriptionStamp}">DESCRIPTION: ${env.GIT_BRANCH} ${project.version} ${buildNumber} ${line.separator}</echo>
-                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}" />
+                                        <echo file="${tft.descriptionStamp}">
+                                            DESCRIPTION: ${env.GIT_BRANCH} ${project.version} ${buildNumber} ${line.separator}
+                                        </echo>
+                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
                                         <echo>${tft.description}</echo>
                                         <echo>Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
                                     </target>
@@ -1376,11 +1386,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile prints the current build description and Java version - used for Hudson builds.
+        This profile prints the current build description and Java version - used for Hudson builds.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>show-revision-id</id>
             <build>
@@ -1397,7 +1407,7 @@ to override those related to the development of this POM.
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}" />
+                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
                                         <echo>${tft.description}</echo>
                                         <echo>Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
                                     </target>
@@ -1409,11 +1419,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile detects Mercurial, it's used by the release-commit profile.
+        This profile detects Mercurial, it's used by the release-commit profile.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>scm-detector-hg</id>
             <activation>
@@ -1426,11 +1436,11 @@ to override those related to the development of this POM.
             </properties>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile detects Git, it's used by the release-commit profile.
+        This profile detects Git, it's used by the release-commit profile.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>scm-detector-git</id>
             <activation>
@@ -1443,13 +1453,13 @@ to override those related to the development of this POM.
             </properties>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile deploys local artifacts to the remote repository and pushes SCM changes  after a successful staged
-    release.
-    Run as mvn -N -Prelease-commit
+        This profile deploys local artifacts to the remote repository and pushes SCM changes  after a successful staged
+        release.
+        Run as mvn -N -Prelease-commit
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>release-commit</id>
             <build>
@@ -1487,7 +1497,7 @@ to override those related to the development of this POM.
                                 <configuration>
                                     <target name="push-hg" if="tft.scm-detector.hg">
                                         <exec executable="hg" dir="${project.build.directory}">
-                                            <arg value="push" />
+                                            <arg value="push"/>
                                         </exec>
                                     </target>
                                 </configuration>
@@ -1501,10 +1511,10 @@ to override those related to the development of this POM.
                                 <configuration>
                                     <target name="push-git" if="tft.scm-detector.git">
                                         <exec executable="git" dir="${project.build.directory}">
-                                            <arg value="push" />
-                                            <arg value="origin" />
-                                            <arg value="master" />
-                                            <arg value="--tags" />
+                                            <arg value="push"/>
+                                            <arg value="origin"/>
+                                            <arg value="master"/>
+                                            <arg value="--tags"/>
                                         </exec>
                                     </target>
                                 </configuration>
@@ -1515,12 +1525,12 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile is executed when a staged release is canceled - it erases the local SCM repository. BEWARE: this has
-    been designed to work with Hudson, not on your local workarea.
+        This profile is executed when a staged release is canceled - it erases the local SCM repository. BEWARE: this has
+        been designed to work with Hudson, not on your local workarea.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>release-cancel</id>
             <build>
@@ -1539,7 +1549,7 @@ to override those related to the development of this POM.
                                 <configuration>
                                     <!-- FIXME: would be better to strip local changes -->
                                     <target name="strip-hg" if="tft.scm-detector.hg">
-                                        <delete dir="${project.build.directory}/.hg" />
+                                        <delete dir="${project.build.directory}/.hg"/>
                                     </target>
                                 </configuration>
                             </execution>
@@ -1552,7 +1562,7 @@ to override those related to the development of this POM.
                                 <configuration>
                                     <!-- FIXME: would be better to strip local changes -->
                                     <target name="strip-git" if="tft.scm-detector.git">
-                                        <delete dir="${project.build.directory}/.git" />
+                                        <delete dir="${project.build.directory}/.git"/>
                                     </target>
                                 </configuration>
                             </execution>
@@ -1562,11 +1572,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile deploys the extra artifacts that are created by the assembly plugin.
+        This profile deploys the extra artifacts that are created by the assembly plugin.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-deploy-extra-artifacts-v2</id>
 
@@ -1581,11 +1591,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profiles creates an assembly 'bin' artifact if its configuration file is present.
+        This profiles creates an assembly 'bin' artifact if its configuration file is present.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-assembly-bin-descriptor</id>
             <activation>
@@ -1620,11 +1630,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profiles creates an assembly 'project' artifact if its configuration file is present.
+        This profiles creates an assembly 'project' artifact if its configuration file is present.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-assembly-project-descriptor</id>
             <activation>
@@ -1659,12 +1669,12 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile configures Tomcat for the build. Create an empty file in src/config/activate-tomcat-profile to
-    activate it.
+        This profile configures Tomcat for the build. Create an empty file in src/config/activate-tomcat-profile to
+        activate it.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>tomcat</id>
             <activation>
@@ -1687,11 +1697,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile configures Jetty for the build. Create an empty file in src/config/activate-jetty-profile to activate it.
+        This profile configures Jetty for the build. Create an empty file in src/config/activate-jetty-profile to activate it.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>jetty</id>
             <activation>
@@ -1717,8 +1727,8 @@ to override those related to the development of this POM.
                             <webAppConfig>
                                 <contextPath>${tft.webapp.contextPath}</contextPath>
                                 <baseResource implementation="org.mortbay.resource.ResourceCollection">
-              <!-- Workaround for Maven/Jetty issue http://jira.codehaus.org/browse/JETTY-680 -->
-              <!-- <resources>src/main/webapp,${project.build.directory}/${project.build.finalName}</resources> -->
+                                    <!-- Workaround for Maven/Jetty issue http://jira.codehaus.org/browse/JETTY-680 -->
+                                    <!-- <resources>src/main/webapp,${project.build.directory}/${project.build.finalName}</resources> -->
                                     <resourcesAsCSV>src/main/webapp,${project.build.directory}/${project.build.finalName}</resourcesAsCSV>
                                 </baseResource>
                             </webAppConfig>
@@ -1728,16 +1738,16 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile configures AspectJ for Spring in the build. Create an empty file in
-    src/config/activate-it.tidalwave.aspectj-springaop-v1-profile
-    to activate it.
-    This profile arranges things so that AspectJ is compatibile with other tools that manipulate the bytecode, such as
-    annotation processors (e.g. Lombok). The original, unwoven classes are stored in target/unwoven-classes and
-    target/unwoven-test-classes.
+        This profile configures AspectJ for Spring in the build. Create an empty file in
+        src/config/activate-it.tidalwave.aspectj-springaop-v1-profile
+        to activate it.
+        This profile arranges things so that AspectJ is compatibile with other tools that manipulate the bytecode, such as
+        annotation processors (e.g. Lombok). The original, unwoven classes are stored in target/unwoven-classes and
+        target/unwoven-test-classes.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-aspectj-springaop-v1</id>
             <activation>
@@ -1780,8 +1790,8 @@ to override those related to the development of this POM.
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <mkdir dir="${tft.project.build.unwoven-classes.directory}" />
-                                        <mkdir dir="${tft.project.build.unwoven-test-classes.directory}" />
+                                        <mkdir dir="${tft.project.build.unwoven-classes.directory}"/>
+                                        <mkdir dir="${tft.project.build.unwoven-test-classes.directory}"/>
                                     </target>
                                 </configuration>
                             </execution>
@@ -1797,8 +1807,8 @@ to override those related to the development of this POM.
                             <complianceLevel>${tft.javac.source}</complianceLevel>
                             <target>${tft.javac.target}</target>
                             <!-- Prevent ajc from finding sources -->
-                            <sources />
-                            <testSources />
+                            <sources/>
+                            <testSources/>
                             <!-- This is important because sometimes the plugin decides that there's nothing to do
                                  because sources are not specified -->
                             <forceAjcCompile>true</forceAjcCompile>
@@ -1882,16 +1892,16 @@ to override those related to the development of this POM.
             </dependencies>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile compiles custom Vaadin widgets into GWT components.
+        This profile compiles custom Vaadin widgets into GWT components.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>vaadin-compile-widgetset</id>
             <build>
                 <plugins>
-              <!-- Compile custom GWT components or widget dependencies with the GWT compiler -->
+                    <!-- Compile custom GWT components or widget dependencies with the GWT compiler -->
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>gwt-maven-plugin</artifactId>
@@ -1925,12 +1935,12 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile configures the jarbundler for the build. Create an empty file in
-    activate-it.tidalwave-javafx-embedded-appbundle-v1-profile to activate it.
+        This profile configures the jarbundler for the build. Create an empty file in
+        activate-it.tidalwave-javafx-embedded-appbundle-v1-profile to activate it.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-javafx-appbundle-embedded-v1</id>
             <activation>
@@ -1992,52 +2002,62 @@ to override those related to the development of this POM.
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
+                                        <taskdef name="bundleapp"
+                                                 classname="com.oracle.appbundler.AppBundlerTask"
+                                                 classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar"/>
 
                                         <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
                                         <!-- FIXME: way to specify min Java version? -->
-                                        <bundleapp outputdirectory="${project.build.directory}" name="${tft.appbundle.name}" displayname="${tft.appbundle.name}" icon="src/main/app-resources/${tft.appbundle.name}.icns" identifier="${project.groupId}" shortversion="${project.version}" mainclassname="${tft.mainClass}" signature="${tft.appbundle.signature}">
-                                            <runtime dir="${project.build.directory}/jdk/${tft.embedded-jdk-name}/Contents/Home" />
+                                        <bundleapp outputdirectory="${project.build.directory}"
+                                                   name="${tft.appbundle.name}"
+                                                   displayname="${tft.appbundle.name}"
+                                                   icon="src/main/app-resources/${tft.appbundle.name}.icns"
+                                                   identifier="${project.groupId}"
+                                                   shortversion="${project.version}"
+                                                   mainclassname="${tft.mainClass}"
+                                                   signature="${tft.appbundle.signature}">
+                                            <runtime dir="${project.build.directory}/jdk/${tft.embedded-jdk-name}/Contents/Home"/>
                                             <classpath dir="${project.basedir}" casesensitive="yes">
-                                                <include name="target/application/*.jar" />
+                                                <include name="target/application/*.jar"/>
                                             </classpath>
-                                            <options value="${tft.javafx.vmargs}" />
-                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}" />
-                                            <option value="-Xdock:name=${tft.appbundle.name}" />
-                                            <option value="-Xbootclasspath/a:$APP_ROOT/Contents/PlugIns/${tft.embedded-jdk-name}/Contents/Home/jre/lib/jfxrt.jar" />
+                                            <options value="${tft.javafx.vmargs}"/>
+                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}"/>
+                                            <option value="-Xdock:name=${tft.appbundle.name}"/>
+                                            <option value="-Xbootclasspath/a:$APP_ROOT/Contents/PlugIns/${tft.embedded-jdk-name}/Contents/Home/jre/lib/jfxrt.jar"/>
                                         </bundleapp>
 
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
-                                            <arg value="create" />
-                                            <arg value="-noanyowners" />
-                                            <arg value="-imagekey" />
-                                            <arg value="zlib-level=1" />
-                                            <arg value="-srcfolder" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                            <arg value="${tft.appbundle.name}.dmg" />
+                                            <arg value="create"/>
+                                            <arg value="-noanyowners"/>
+                                            <arg value="-imagekey"/>
+                                            <arg value="zlib-level=1"/>
+                                            <arg value="-srcfolder"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
+                                            <arg value="${tft.appbundle.name}.dmg"/>
                                         </exec>
 
                                         <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}">
-                                            <arg value="-V" />
-                                            <arg value="${tft.appbundle.name}" />
-                                            <arg value="-U" />
-                                            <arg value="-f" />
-                                            <arg value="-D" />
-                                            <arg value="-l" />
-                                            <arg value="-L" />
-                                            <arg value="-allow-multidot" />
-                                            <arg value="-max-iso9660-filenames" />
-                                            <arg value="-relaxed-filenames" />
-                                            <arg value="-no-iso-translate" />
-                                            <arg value="-r" />
-                                            <arg value="-o" />
-                                            <arg value="${tft.appbundle.name}.dmg" />
-                                            <arg value="-root" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                            <arg value="${tft.appbundle.name}.app" />
+                                            <arg value="-V"/>
+                                            <arg value="${tft.appbundle.name}"/>
+                                            <arg value="-U"/>
+                                            <arg value="-f"/>
+                                            <arg value="-D"/>
+                                            <arg value="-l"/>
+                                            <arg value="-L"/>
+                                            <arg value="-allow-multidot"/>
+                                            <arg value="-max-iso9660-filenames"/>
+                                            <arg value="-relaxed-filenames"/>
+                                            <arg value="-no-iso-translate"/>
+                                            <arg value="-r"/>
+                                            <arg value="-o"/>
+                                            <arg value="${tft.appbundle.name}.dmg"/>
+                                            <arg value="-root"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
                                         </exec>
 
-                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg" destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz" />
+                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg"
+                                              destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz"/>
                                     </target>
                                 </configuration>
                             </execution>
@@ -2069,12 +2089,12 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile configures the jarbundler for the build. Create an empty file in
-    src/config/activate-it.tidalwave-javafx-appbundle-v1-profile to activate it.
+        This profile configures the jarbundler for the build. Create an empty file in
+        src/config/activate-it.tidalwave-javafx-appbundle-v1-profile to activate it.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-javafx-appbundle-v1</id>
             <activation>
@@ -2097,7 +2117,7 @@ to override those related to the development of this POM.
                                 <configuration>
                                     <excludeTransitive>false</excludeTransitive>
                                     <includeScope>runtime</includeScope>
-                                   <!-- FIXME: workaround until we're able to put it in bootclasspath -->
+                                    <!-- FIXME: workaround until we're able to put it in bootclasspath -->
                                     <!--<excludeArtifactIds>javafx-embedded</excludeArtifactIds>-->
                                     <outputDirectory>${project.build.directory}/application</outputDirectory>
                                 </configuration>
@@ -2117,50 +2137,60 @@ to override those related to the development of this POM.
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
+                                        <taskdef name="bundleapp"
+                                                 classname="com.oracle.appbundler.AppBundlerTask"
+                                                 classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar"/>
 
                                         <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
                                         <!-- FIXME: way to specify min Java version? -->
-                                        <bundleapp outputdirectory="${project.build.directory}" name="${tft.appbundle.name}" displayname="${tft.appbundle.name}" icon="src/main/app-resources/${tft.appbundle.name}.icns" identifier="${project.groupId}" shortversion="${project.version}" mainclassname="${tft.mainClass}" signature="${tft.appbundle.signature}">
+                                        <bundleapp outputdirectory="${project.build.directory}"
+                                                   name="${tft.appbundle.name}"
+                                                   displayname="${tft.appbundle.name}"
+                                                   icon="src/main/app-resources/${tft.appbundle.name}.icns"
+                                                   identifier="${project.groupId}"
+                                                   shortversion="${project.version}"
+                                                   mainclassname="${tft.mainClass}"
+                                                   signature="${tft.appbundle.signature}">
                                             <classpath dir="${project.basedir}" casesensitive="yes">
-                                                <include name="target/application/*.jar" />
+                                                <include name="target/application/*.jar"/>
                                             </classpath>
-                                            <options value="${tft.javafx.vmargs}" />
-                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}" />
-                                            <option value="-Xdock:name=${tft.appbundle.name}" />
+                                            <options value="${tft.javafx.vmargs}"/>
+                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}"/>
+                                            <option value="-Xdock:name=${tft.appbundle.name}"/>
                                         </bundleapp>
 
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
-                                            <arg value="create" />
-                                            <arg value="-noanyowners" />
-                                            <arg value="-imagekey" />
-                                            <arg value="zlib-level=1" />
-                                            <arg value="-srcfolder" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                            <arg value="${tft.appbundle.name}.dmg" />
+                                            <arg value="create"/>
+                                            <arg value="-noanyowners"/>
+                                            <arg value="-imagekey"/>
+                                            <arg value="zlib-level=1"/>
+                                            <arg value="-srcfolder"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
+                                            <arg value="${tft.appbundle.name}.dmg"/>
                                         </exec>
 
                                         <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}">
-                                            <arg value="-V" />
-                                            <arg value="${tft.appbundle.name}" />
-                                            <arg value="-U" />
-                                            <arg value="-f" />
-                                            <arg value="-D" />
-                                            <arg value="-l" />
-                                            <arg value="-L" />
-                                            <arg value="-allow-multidot" />
-                                            <arg value="-max-iso9660-filenames" />
-                                            <arg value="-relaxed-filenames" />
-                                            <arg value="-no-iso-translate" />
-                                            <arg value="-r" />
-                                            <arg value="-o" />
-                                            <arg value="${tft.appbundle.name}.dmg" />
-                                            <arg value="-root" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                            <arg value="${tft.appbundle.name}.app" />
+                                            <arg value="-V"/>
+                                            <arg value="${tft.appbundle.name}"/>
+                                            <arg value="-U"/>
+                                            <arg value="-f"/>
+                                            <arg value="-D"/>
+                                            <arg value="-l"/>
+                                            <arg value="-L"/>
+                                            <arg value="-allow-multidot"/>
+                                            <arg value="-max-iso9660-filenames"/>
+                                            <arg value="-relaxed-filenames"/>
+                                            <arg value="-no-iso-translate"/>
+                                            <arg value="-r"/>
+                                            <arg value="-o"/>
+                                            <arg value="${tft.appbundle.name}.dmg"/>
+                                            <arg value="-root"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
+                                            <arg value="${tft.appbundle.name}.app"/>
                                         </exec>
 
-                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg" destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz" />
+                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg"
+                                              destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz"/>
                                     </target>
                                 </configuration>
                             </execution>
@@ -2202,7 +2232,7 @@ to override those related to the development of this POM.
                             <reportSets>
                                 <reportSet>
                                     <reports>
-                                <report>aggregate</report>
+                                        <report>aggregate</report>
                                     </reports>
                                 </reportSet>
                             </reportSets>
@@ -2212,12 +2242,12 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile enables the management of web resources under src/main/webapp, used for applications with embedded
-    web servers.
+        This profile enables the management of web resources under src/main/webapp, used for applications with embedded
+        web servers.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-webresources-v1</id>
             <activation>
@@ -2239,11 +2269,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!-- ===============================================================================================================
+        <!-- ===============================================================================================================
 
-    This profile builds a tar.gz assembly if it founds it descriptor at src/main/assembly/tar.gz.xml.
+        This profile builds a tar.gz assembly if it founds it descriptor at src/main/assembly/tar.gz.xml.
 
-    ================================================================================================================ -->
+        ================================================================================================================ -->
         <profile>
             <id>it.tidalwave-assembly-tar.gz-v1</id>
             <activation>
@@ -2276,11 +2306,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!-- ===============================================================================================================
+        <!-- ===============================================================================================================
 
-    This profile builds a zip assembly if it founds it descriptor at src/main/assembly/zip.xml.
+        This profile builds a zip assembly if it founds it descriptor at src/main/assembly/zip.xml.
 
-    ================================================================================================================ -->
+        ================================================================================================================ -->
         <profile>
             <id>it.tidalwave-assembly-zip-v1</id>
             <activation>
@@ -2313,12 +2343,12 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!-- ===============================================================================================================
+        <!-- ===============================================================================================================
 
-    This profile prepares the files for an installer, by copying all the jar dependencies to 'dist/lib' and
-    the local resources to 'dist'.
+        This profile prepares the files for an installer, by copying all the jar dependencies to 'dist/lib' and
+        the local resources to 'dist'.
 
-    ================================================================================================================ -->
+        ================================================================================================================ -->
         <profile>
             <id>it.tidalwave-distribution-v1</id>
             <activation>
@@ -2371,36 +2401,36 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!-- ===============================================================================================================
+        <!-- ===============================================================================================================
 
-    This profile is the base configuration for creating a deb package It must be activated by creating the
-    file 'src/config/activate-it.tidalwave-deb-v1-profile'.
+        This profile is the base configuration for creating a deb package It must be activated by creating the
+        file 'src/config/activate-it.tidalwave-deb-v1-profile'.
 
-    The product name must be defined in
+        The product name must be defined in
 
-    * tft.deb.name
+        * tft.deb.name
 
-    and will be installed to ${tft.deb.binaryDirectory}/${tft.deb.name}.
+        and will be installed to ${tft.deb.binaryDirectory}/${tft.deb.name}.
 
-    The files to be placed in the installer are extracted from a tarball defined by:
+        The files to be placed in the installer are extracted from a tarball defined by:
 
-    * tft.deb.sourceTarball.groupId (defaults to ${project.id})
-    * tft.deb.sourceTarball.artifactId
-    * tft.deb.sourceTarball.version (defaults to ${project.version})
-    * tft.deb.sourceTarball.classifier (defaults to 'bin')
+        * tft.deb.sourceTarball.groupId (defaults to ${project.id})
+        * tft.deb.sourceTarball.artifactId
+        * tft.deb.sourceTarball.version (defaults to ${project.version})
+        * tft.deb.sourceTarball.classifier (defaults to 'bin')
 
-    The binaries directory is speficied by:
+        The binaries directory is speficied by:
 
-    * tft.deb.binaryDirectory (defaults to /usr/lib)
+        * tft.deb.binaryDirectory (defaults to /usr/lib)
 
-    Files are packaged with uid/gid defined by
+        Files are packaged with uid/gid defined by
 
-    * tft.deb.user (defaults to root)
-    * tft.deb.group (defaults to root)
+        * tft.deb.user (defaults to root)
+        * tft.deb.group (defaults to root)
 
-    This profile must be activated together with it.tidalwave-deb-service-v1 or it.tidalwave-deb-application-v1.
+        This profile must be activated together with it.tidalwave-deb-service-v1 or it.tidalwave-deb-application-v1.
 
-    ================================================================================================================ -->
+        ================================================================================================================ -->
         <profile>
             <id>it.tidalwave-deb-base-v1</id>
             <activation>
@@ -2466,7 +2496,9 @@ to override those related to the development of this POM.
                             <dataSet combine.children="append">
                                 <data>
                                     <type>archive</type>
-                                    <src>${project.build.directory}/${tft.deb.sourceTarball.artifactId}-${tft.deb.sourceTarball.version}-${tft.deb.sourceTarball.classifier}.tar.gz</src>
+                                    <src>
+                                        ${project.build.directory}/${tft.deb.sourceTarball.artifactId}-${tft.deb.sourceTarball.version}-${tft.deb.sourceTarball.classifier}.tar.gz
+                                    </src>
                                     <mapper>
                                         <type>perm</type>
                                         <prefix>${tft.deb.binaryDirectory}</prefix>
@@ -2493,22 +2525,22 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!-- ===============================================================================================================
+        <!-- ===============================================================================================================
 
-    This profile completes the configuration for creating a deb package for a service. It must be activated by
-    creating the file 'src/config/activate-it.tidalwave-deb-service-v1-profile'.
+        This profile completes the configuration for creating a deb package for a service. It must be activated by
+        creating the file 'src/config/activate-it.tidalwave-deb-service-v1-profile'.
 
-    The deb package will have all the required stuff under /etc/systemd/system to automatically start the service.
+        The deb package will have all the required stuff under /etc/systemd/system to automatically start the service.
 
-    Furthermore the following working directories will be created:
+        Furthermore the following working directories will be created:
 
-    * /var/lib/${tft.deb.directory}
-    * /var/log/${tft.deb.directory}
-    * /var/cache/${tft.deb.directory}
+        * /var/lib/${tft.deb.directory}
+        * /var/log/${tft.deb.directory}
+        * /var/cache/${tft.deb.directory}
 
-    The value of tft.deb.directory defaults to ${tft.deb.name}.
+        The value of tft.deb.directory defaults to ${tft.deb.name}.
 
-    ================================================================================================================ -->
+        ================================================================================================================ -->
         <profile>
             <id>it.tidalwave-deb-service-v1</id>
             <activation>
@@ -2568,14 +2600,14 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!-- ===============================================================================================================
+        <!-- ===============================================================================================================
 
-    This profile completes the configuration for creating a deb package for an application It must be activated by
-    creating the file 'src/config/activate-it.tidalwave-deb-application-v1-profile'.
+        This profile completes the configuration for creating a deb package for an application It must be activated by
+        creating the file 'src/config/activate-it.tidalwave-deb-application-v1-profile'.
 
-    The deb package will have an executable alias under /usr/bin.
+        The deb package will have an executable alias under /usr/bin.
 
-    ================================================================================================================ -->
+        ================================================================================================================ -->
         <profile>
             <id>it.tidalwave-deb-application-v1</id>
             <activation>
@@ -2610,11 +2642,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
 
 
-     =================================================================================================================-->
+         =================================================================================================================-->
         <profile>
             <activation>
                 <property>
@@ -2638,28 +2670,28 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
 
 
-     =================================================================================================================-->
-         <profile>
+         =================================================================================================================-->
+        <profile>
             <id>it.tidalwave.use-local-artifact-target-repo-v1</id>
             <properties>
                 <altDeploymentRepository>local-repo::default::${staging.mvn.repo.url}</altDeploymentRepository>
             </properties>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    Deploys to a public repo those artifacts that have been generated during a release process and stored in a local
-    repository. Run as:
+        Deploys to a public repo those artifacts that have been generated during a release process and stored in a local
+        repository. Run as:
 
-    mvn -N -Pit.tidalwave.publish-artifacts-v1
+        mvn -N -Pit.tidalwave.publish-artifacts-v1
 
-    Note: on Mac OS X you need to run this with -Djava.io.tmpdir=/tmp (or other directory).
+        Note: on Mac OS X you need to run this with -Djava.io.tmpdir=/tmp (or other directory).
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave.publish-artifacts-v1</id>
             <properties>
@@ -2672,14 +2704,14 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile updates all the dependencies to their latest release. The project must be structured in the standard
-    TheseFoolishThings layout. Run as:
+        This profile updates all the dependencies to their latest release. The project must be structured in the standard
+        TheseFoolishThings layout. Run as:
 
-    mvn -N -Pit.tidalwave-update-releases-v1
+        mvn -N -Pit.tidalwave-update-releases-v1
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-update-releases-v1</id>
             <build>
@@ -2704,14 +2736,14 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile updates all the dependencies to their latest snapshots. The project must be structured in the standard
-    TheseFoolishThings layout. Run as:
+        This profile updates all the dependencies to their latest snapshots. The project must be structured in the standard
+        TheseFoolishThings layout. Run as:
 
-    mvn -N -Pit.tidalwave-update-snapshots-v1
+        mvn -N -Pit.tidalwave-update-snapshots-v1
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-update-snapshots-v1</id>
             <build>
@@ -2736,11 +2768,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile updates the headers of files.
+        This profile updates the headers of files.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-update-headers</id>
             <properties>
@@ -2811,11 +2843,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile checks the headers of files.
+        This profile checks the headers of files.
 
-    =================================================================================================================-->
+        =================================================================================================================-->
         <profile>
             <id>it.tidalwave-check-headers</id>
             <properties>
@@ -2886,11 +2918,11 @@ to override those related to the development of this POM.
             </build>
         </profile>
 
-    <!--================================================================================================================
+        <!--================================================================================================================
 
-    This profile generates the README.md from the pom metadata.
+        This profile generates the README.md from the pom metadata.
 
-        =================================================================================================================-->
+            =================================================================================================================-->
         <profile>
             <id>it.tidalwave-generate-readme-md-v1</id>
             <build>
