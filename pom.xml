@@ -216,7 +216,7 @@
         <tft.maven-antrun-plugin.version>3.0.0</tft.maven-antrun-plugin.version>
         <tft.maven-archetype-plugin.version>2.4</tft.maven-archetype-plugin.version>
         <tft.maven-assembly-plugin.version>3.3.0</tft.maven-assembly-plugin.version>
-        <tft.maven-bundle-plugin.version>4.1.0</tft.maven-bundle-plugin.version>
+        <tft.maven-bundle-plugin.version>4.2.1</tft.maven-bundle-plugin.version>
         <tft.maven-checkstyle-plugin.version>3.0.0</tft.maven-checkstyle-plugin.version>
         <tft.maven-clean-plugin.version>3.1.0</tft.maven-clean-plugin.version>
         <tft.maven-compiler-plugin.version>3.8.1</tft.maven-compiler-plugin.version>
