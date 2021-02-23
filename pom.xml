@@ -229,7 +229,7 @@
         <tft.maven-install-plugin.version>3.0.0-M1</tft.maven-install-plugin.version>
         <tft.maven-jar-plugin.version>3.1.0</tft.maven-jar-plugin.version>
         <tft.maven-jarsigner-plugin.version>3.0.0</tft.maven-jarsigner-plugin.version>
-        <tft.maven-javadoc-plugin.version>3.0.1</tft.maven-javadoc-plugin.version>
+        <tft.maven-javadoc-plugin.version>3.2.0</tft.maven-javadoc-plugin.version>
         <tft.maven-jdeb-plugin.version>1.7</tft.maven-jdeb-plugin.version>
         <tft.maven-jetty-plugin.version>6.1.26</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
         <tft.maven-license-plugin.version>1.10.b1</tft.maven-license-plugin.version>
