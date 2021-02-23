@@ -892,7 +892,6 @@ to override those related to the development of this POM.
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>${tft.nexus-staging-maven-plugin.version}</version>
                 <configuration>
                     <serverId>${tft.staging-repo.id}</serverId>
                     <nexusUrl>${tft.staging-repo.url}</nexusUrl>
