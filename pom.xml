@@ -160,7 +160,6 @@
         <!-- Default dependency versions -->
         <tft.appbundler.version>1.0-patched</tft.appbundler.version>
         <tft.aspectjrt.version>1.9.6</tft.aspectjrt.version>
-        <tft.capecanaveral.version>2.0-ALPHA-1</tft.capecanaveral.version>
         <tft.hamcrest-matchers.version>1.3</tft.hamcrest-matchers.version>
         <tft.jsr330.version>1</tft.jsr330.version>
         <tft.javax-annotation.version>1.3.2</tft.javax-annotation.version>
