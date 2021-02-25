@@ -167,7 +167,7 @@
         <tft.findbugs-annotations.version>3.1.9</tft.findbugs-annotations.version>
         <tft.junit.version>4.12</tft.junit.version>
         <tft.logback.version>1.2.3</tft.logback.version>
-        <tft.lombok.version>1.18.4</tft.lombok.version>
+        <tft.lombok.version>1.18.18</tft.lombok.version>
         <tft.mockito.version>2.3.7</tft.mockito.version>
         <tft.slf4j.version>1.7.30</tft.slf4j.version>
         <tft.spring.version>4.3.0.RELEASE</tft.spring.version>
