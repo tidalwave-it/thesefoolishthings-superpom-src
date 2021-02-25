@@ -251,7 +251,7 @@
         <tft.maven-war-plugin.version>3.3.1</tft.maven-war-plugin.version>
 
         <tft.aspectj-maven-plugin.version>1.11</tft.aspectj-maven-plugin.version>
-        <tft.build-helper-maven-plugin.version>3.0.0</tft.build-helper-maven-plugin.version>
+        <tft.build-helper-maven-plugin.version>3.2.0</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.4</tft.buildnumber-maven-plugin.version>
         <tft.clirr-maven-plugin.version>2.8</tft.clirr-maven-plugin.version>
         <tft.dependency-check-maven-plugin.version>6.1.1</tft.dependency-check-maven-plugin.version>
