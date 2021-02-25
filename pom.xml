@@ -95,7 +95,7 @@
         <tft.staging-repo.url>https://oss.sonatype.org</tft.staging-repo.url>
         <tft.staging-repo.id>staging-oss.sonatype.org</tft.staging-repo.id>
 
-        <release.profiles>release</release.profiles>
+        <release.profiles>release-sign-artifacts</release.profiles>
 
         <tft.defaultGoal>clean install</tft.defaultGoal>
 
@@ -153,8 +153,9 @@
         <tft.release.localCheckout>true</tft.release.localCheckout>
         <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
         <tft.release.completionGoals />
-        <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:single deploy</tft.release.goals>
+        <tft.release.goals>clean install source:jar-no-fork source:test-jar-no-fork javadoc:jar assembly:single deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
+        <tft.release.pushChanges>false</tft.release.pushChanges>
 
         <!-- Default dependency versions -->
         <tft.appbundler.version>1.0-patched</tft.appbundler.version>
@@ -895,7 +896,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
                     <localCheckout>${tft.release.localCheckout}</localCheckout>
-                    <pushChanges>false</pushChanges>
+                    <pushChanges>${tft.release.pushChanges}</pushChanges>
                     <preparationGoals>${tft.release.preparationGoals}</preparationGoals>
                     <completionGoals>${tft.release.completionGoals}</completionGoals>
                     <goals>${tft.release.goals}</goals>
@@ -1326,12 +1327,6 @@
         =====================================================================================================================================================-->
         <profile>
             <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
