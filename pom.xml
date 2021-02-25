@@ -1,12 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>4.11-SNAPSHOT</version>
+    <version>4.11</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -101,7 +100,7 @@
         <tft.defaultGoal>clean install</tft.defaultGoal>
 
         <tft.profile.metrics.checkstyleGoal>checkstyle:checkstyle</tft.profile.metrics.checkstyleGoal>
-        <tft.profile.metrics.findbugsGoal/>
+        <tft.profile.metrics.findbugsGoal />
         <tft.profile.metrics.spotbugsGoal>com.github.spotbugs:spotbugs-maven-plugin:check</tft.profile.metrics.spotbugsGoal>
         <tft.profile.metrics.javancssGoal>javancss:report</tft.profile.metrics.javancssGoal>
         <tft.profile.metrics.pmdGoal>pmd:cpd pmd:pmd</tft.profile.metrics.pmdGoal>
@@ -113,7 +112,7 @@
             ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} ${tft.profile.metrics.javancssGoal} dependency:analyze
             ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal} ${tft.profile.metrics.siteGoal}
         </tft.profile.metrics.defaultGoal>
-        <tft.profile.metrics.siteGoal/>
+        <tft.profile.metrics.siteGoal />
 
         <tft.checkstyle.skip>false</tft.checkstyle.skip>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
@@ -150,10 +149,10 @@
         <tft.stableAPIVersion>${stableAPIVersion}</tft.stableAPIVersion>
         <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
         <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
-        <tft.javadoc.doclint/>
+        <tft.javadoc.doclint />
         <tft.release.localCheckout>true</tft.release.localCheckout>
         <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
-        <tft.release.completionGoals/>
+        <tft.release.completionGoals />
         <tft.release.goals>clean install source:test-jar javadoc:javadoc assembly:single deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
 
@@ -178,8 +177,8 @@
         <tft.test.maxMemory>768M</tft.test.maxMemory>
         <tft.test.reportsDirectory>${project.build.directory}/surefire-reports/plain</tft.test.reportsDirectory>
         <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
-        <tft.test.excludedGroups/>
-        <tft.test.vmOptions/>
+        <tft.test.excludedGroups />
+        <tft.test.vmOptions />
 
         <tft.test.report.aggregate>true</tft.test.report.aggregate>
         <tft.maven-surefire-report-plugin.skip>false</tft.maven-surefire-report-plugin.skip>
@@ -285,7 +284,7 @@
         <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-        <tag>4.7</tag>
+        <tag>4.11</tag>
     </scm>
 
     <prerequisites>
@@ -667,7 +666,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore/>
+                                        <ignore />
                                     </action>
                                 </pluginExecution>
                                 <pluginExecution>
@@ -1309,7 +1308,7 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <delete dir="${project.build.directory}/target-maven-repo"/>
+                                        <delete dir="${project.build.directory}/target-maven-repo" />
                                     </target>
                                 </configuration>
                             </execution>
@@ -1381,7 +1380,7 @@
                                         <echo file="${tft.descriptionStamp}">
                                             DESCRIPTION: ${env.GIT_BRANCH} ${project.version} ${buildNumber} ${line.separator}
                                         </echo>
-                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
+                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}" />
                                         <echo>${tft.description}</echo>
                                         <echo>Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
                                     </target>
@@ -1414,7 +1413,7 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
+                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}" />
                                         <echo>${tft.description}</echo>
                                         <echo>Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
                                     </target>
@@ -1503,7 +1502,7 @@
                                 <configuration>
                                     <target name="push-hg" if="tft.scm-detector.hg">
                                         <exec executable="hg" dir="${project.build.directory}">
-                                            <arg value="push"/>
+                                            <arg value="push" />
                                         </exec>
                                     </target>
                                 </configuration>
@@ -1517,10 +1516,10 @@
                                 <configuration>
                                     <target name="push-git" if="tft.scm-detector.git">
                                         <exec executable="git" dir="${project.build.directory}">
-                                            <arg value="push"/>
-                                            <arg value="origin"/>
-                                            <arg value="master"/>
-                                            <arg value="--tags"/>
+                                            <arg value="push" />
+                                            <arg value="origin" />
+                                            <arg value="master" />
+                                            <arg value="--tags" />
                                         </exec>
                                     </target>
                                 </configuration>
@@ -1555,7 +1554,7 @@
                                 <configuration>
                                     <!-- FIXME: would be better to strip local changes -->
                                     <target name="strip-hg" if="tft.scm-detector.hg">
-                                        <delete dir="${project.build.directory}/.hg"/>
+                                        <delete dir="${project.build.directory}/.hg" />
                                     </target>
                                 </configuration>
                             </execution>
@@ -1568,7 +1567,7 @@
                                 <configuration>
                                     <!-- FIXME: would be better to strip local changes -->
                                     <target name="strip-git" if="tft.scm-detector.git">
-                                        <delete dir="${project.build.directory}/.git"/>
+                                        <delete dir="${project.build.directory}/.git" />
                                     </target>
                                 </configuration>
                             </execution>
@@ -1791,8 +1790,8 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <mkdir dir="${tft.project.build.unwoven-classes.directory}"/>
-                                        <mkdir dir="${tft.project.build.unwoven-test-classes.directory}"/>
+                                        <mkdir dir="${tft.project.build.unwoven-classes.directory}" />
+                                        <mkdir dir="${tft.project.build.unwoven-test-classes.directory}" />
                                     </target>
                                 </configuration>
                             </execution>
@@ -1808,8 +1807,8 @@
                             <complianceLevel>${tft.javac.source}</complianceLevel>
                             <target>${tft.javac.target}</target>
                             <!-- Prevent ajc from finding sources -->
-                            <sources/>
-                            <testSources/>
+                            <sources />
+                            <testSources />
                             <!-- This is important because sometimes the plugin decides that there's nothing to do
                                  because sources are not specified -->
                             <forceAjcCompile>true</forceAjcCompile>
@@ -2002,62 +2001,52 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <taskdef name="bundleapp"
-                                                 classname="com.oracle.appbundler.AppBundlerTask"
-                                                 classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar"/>
+                                        <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
 
                                         <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
                                         <!-- FIXME: way to specify min Java version? -->
-                                        <bundleapp outputdirectory="${project.build.directory}"
-                                                   name="${tft.appbundle.name}"
-                                                   displayname="${tft.appbundle.name}"
-                                                   icon="src/main/app-resources/${tft.appbundle.name}.icns"
-                                                   identifier="${project.groupId}"
-                                                   shortversion="${project.version}"
-                                                   mainclassname="${tft.mainClass}"
-                                                   signature="${tft.appbundle.signature}">
-                                            <runtime dir="${project.build.directory}/jdk/${tft.embedded-jdk-name}/Contents/Home"/>
+                                        <bundleapp outputdirectory="${project.build.directory}" name="${tft.appbundle.name}" displayname="${tft.appbundle.name}" icon="src/main/app-resources/${tft.appbundle.name}.icns" identifier="${project.groupId}" shortversion="${project.version}" mainclassname="${tft.mainClass}" signature="${tft.appbundle.signature}">
+                                            <runtime dir="${project.build.directory}/jdk/${tft.embedded-jdk-name}/Contents/Home" />
                                             <classpath dir="${project.basedir}" casesensitive="yes">
-                                                <include name="target/application/*.jar"/>
+                                                <include name="target/application/*.jar" />
                                             </classpath>
-                                            <options value="${tft.javafx.vmargs}"/>
-                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}"/>
-                                            <option value="-Xdock:name=${tft.appbundle.name}"/>
-                                            <option value="-Xbootclasspath/a:$APP_ROOT/Contents/PlugIns/${tft.embedded-jdk-name}/Contents/Home/jre/lib/jfxrt.jar"/>
+                                            <options value="${tft.javafx.vmargs}" />
+                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}" />
+                                            <option value="-Xdock:name=${tft.appbundle.name}" />
+                                            <option value="-Xbootclasspath/a:$APP_ROOT/Contents/PlugIns/${tft.embedded-jdk-name}/Contents/Home/jre/lib/jfxrt.jar" />
                                         </bundleapp>
 
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
-                                            <arg value="create"/>
-                                            <arg value="-noanyowners"/>
-                                            <arg value="-imagekey"/>
-                                            <arg value="zlib-level=1"/>
-                                            <arg value="-srcfolder"/>
-                                            <arg value="${tft.appbundle.name}.app"/>
-                                            <arg value="${tft.appbundle.name}.dmg"/>
+                                            <arg value="create" />
+                                            <arg value="-noanyowners" />
+                                            <arg value="-imagekey" />
+                                            <arg value="zlib-level=1" />
+                                            <arg value="-srcfolder" />
+                                            <arg value="${tft.appbundle.name}.app" />
+                                            <arg value="${tft.appbundle.name}.dmg" />
                                         </exec>
 
                                         <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}">
-                                            <arg value="-V"/>
-                                            <arg value="${tft.appbundle.name}"/>
-                                            <arg value="-U"/>
-                                            <arg value="-f"/>
-                                            <arg value="-D"/>
-                                            <arg value="-l"/>
-                                            <arg value="-L"/>
-                                            <arg value="-allow-multidot"/>
-                                            <arg value="-max-iso9660-filenames"/>
-                                            <arg value="-relaxed-filenames"/>
-                                            <arg value="-no-iso-translate"/>
-                                            <arg value="-r"/>
-                                            <arg value="-o"/>
-                                            <arg value="${tft.appbundle.name}.dmg"/>
-                                            <arg value="-root"/>
-                                            <arg value="${tft.appbundle.name}.app"/>
-                                            <arg value="${tft.appbundle.name}.app"/>
+                                            <arg value="-V" />
+                                            <arg value="${tft.appbundle.name}" />
+                                            <arg value="-U" />
+                                            <arg value="-f" />
+                                            <arg value="-D" />
+                                            <arg value="-l" />
+                                            <arg value="-L" />
+                                            <arg value="-allow-multidot" />
+                                            <arg value="-max-iso9660-filenames" />
+                                            <arg value="-relaxed-filenames" />
+                                            <arg value="-no-iso-translate" />
+                                            <arg value="-r" />
+                                            <arg value="-o" />
+                                            <arg value="${tft.appbundle.name}.dmg" />
+                                            <arg value="-root" />
+                                            <arg value="${tft.appbundle.name}.app" />
+                                            <arg value="${tft.appbundle.name}.app" />
                                         </exec>
 
-                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg"
-                                              destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz"/>
+                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg" destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz" />
                                     </target>
                                 </configuration>
                             </execution>
@@ -2137,60 +2126,50 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <taskdef name="bundleapp"
-                                                 classname="com.oracle.appbundler.AppBundlerTask"
-                                                 classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar"/>
+                                        <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask" classpath="src/main/app-resources/appbundler-${tft.appbundler.version}.jar" />
 
                                         <!-- FIXME applicationCategory="public.app-category.developer-tools"-->
                                         <!-- FIXME: way to specify min Java version? -->
-                                        <bundleapp outputdirectory="${project.build.directory}"
-                                                   name="${tft.appbundle.name}"
-                                                   displayname="${tft.appbundle.name}"
-                                                   icon="src/main/app-resources/${tft.appbundle.name}.icns"
-                                                   identifier="${project.groupId}"
-                                                   shortversion="${project.version}"
-                                                   mainclassname="${tft.mainClass}"
-                                                   signature="${tft.appbundle.signature}">
+                                        <bundleapp outputdirectory="${project.build.directory}" name="${tft.appbundle.name}" displayname="${tft.appbundle.name}" icon="src/main/app-resources/${tft.appbundle.name}.icns" identifier="${project.groupId}" shortversion="${project.version}" mainclassname="${tft.mainClass}" signature="${tft.appbundle.signature}">
                                             <classpath dir="${project.basedir}" casesensitive="yes">
-                                                <include name="target/application/*.jar"/>
+                                                <include name="target/application/*.jar" />
                                             </classpath>
-                                            <options value="${tft.javafx.vmargs}"/>
-                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}"/>
-                                            <option value="-Xdock:name=${tft.appbundle.name}"/>
+                                            <options value="${tft.javafx.vmargs}" />
+                                            <option value="-Dcom.apple.mrj.application.apple.menu.about.name=${tft.appbundle.name}" />
+                                            <option value="-Xdock:name=${tft.appbundle.name}" />
                                         </bundleapp>
 
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
-                                            <arg value="create"/>
-                                            <arg value="-noanyowners"/>
-                                            <arg value="-imagekey"/>
-                                            <arg value="zlib-level=1"/>
-                                            <arg value="-srcfolder"/>
-                                            <arg value="${tft.appbundle.name}.app"/>
-                                            <arg value="${tft.appbundle.name}.dmg"/>
+                                            <arg value="create" />
+                                            <arg value="-noanyowners" />
+                                            <arg value="-imagekey" />
+                                            <arg value="zlib-level=1" />
+                                            <arg value="-srcfolder" />
+                                            <arg value="${tft.appbundle.name}.app" />
+                                            <arg value="${tft.appbundle.name}.dmg" />
                                         </exec>
 
                                         <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}">
-                                            <arg value="-V"/>
-                                            <arg value="${tft.appbundle.name}"/>
-                                            <arg value="-U"/>
-                                            <arg value="-f"/>
-                                            <arg value="-D"/>
-                                            <arg value="-l"/>
-                                            <arg value="-L"/>
-                                            <arg value="-allow-multidot"/>
-                                            <arg value="-max-iso9660-filenames"/>
-                                            <arg value="-relaxed-filenames"/>
-                                            <arg value="-no-iso-translate"/>
-                                            <arg value="-r"/>
-                                            <arg value="-o"/>
-                                            <arg value="${tft.appbundle.name}.dmg"/>
-                                            <arg value="-root"/>
-                                            <arg value="${tft.appbundle.name}.app"/>
-                                            <arg value="${tft.appbundle.name}.app"/>
+                                            <arg value="-V" />
+                                            <arg value="${tft.appbundle.name}" />
+                                            <arg value="-U" />
+                                            <arg value="-f" />
+                                            <arg value="-D" />
+                                            <arg value="-l" />
+                                            <arg value="-L" />
+                                            <arg value="-allow-multidot" />
+                                            <arg value="-max-iso9660-filenames" />
+                                            <arg value="-relaxed-filenames" />
+                                            <arg value="-no-iso-translate" />
+                                            <arg value="-r" />
+                                            <arg value="-o" />
+                                            <arg value="${tft.appbundle.name}.dmg" />
+                                            <arg value="-root" />
+                                            <arg value="${tft.appbundle.name}.app" />
+                                            <arg value="${tft.appbundle.name}.app" />
                                         </exec>
 
-                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg"
-                                              destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz"/>
+                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg" destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz" />
                                     </target>
                                 </configuration>
                             </execution>
