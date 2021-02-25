@@ -273,8 +273,7 @@
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>12.0.2</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>2.8.1</tft.versions-maven-plugin.version>
-        <!-- 2.0 breaks the release cycle, it doesn't copy stuff from the local repo to remote -->
-        <tft.wagon-maven-plugin.version>1.0</tft.wagon-maven-plugin.version>
+        <tft.wagon-maven-plugin.version>2.0.2</tft.wagon-maven-plugin.version>
         <tft.webdav-jackrabbit.version>3.4.3</tft.webdav-jackrabbit.version>
         <tft.xml-maven-plugin.version>1.0.2</tft.xml-maven-plugin.version>
 
@@ -1472,6 +1471,7 @@
                             <source>${staging.mvn.repo.url}</source>
                             <target>${project.distributionManagement.repository.url}</target>
                             <targetId>${project.distributionManagement.repository.id}</targetId>
+                            <includes>*/**</includes>
                         </configuration>
                         <executions>
                             <execution>
