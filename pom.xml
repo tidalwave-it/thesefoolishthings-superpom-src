@@ -111,8 +111,9 @@
         <tft.profile.metrics.defaultGoal>
             clean install ${tft.profile.metrics.findbugsGoal} ${tft.profile.metrics.spotbugsGoal} ${tft.profile.metrics.pmdGoal}
             ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} ${tft.profile.metrics.javancssGoal} dependency:analyze
-            ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal}
+            ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal} ${tft.profile.metrics.siteGoal}
         </tft.profile.metrics.defaultGoal>
+        <tft.profile.metrics.siteGoal/>
 
         <tft.checkstyle.skip>false</tft.checkstyle.skip>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
@@ -3032,13 +3033,22 @@
             </reporting>
         </profile>
 
+        <!--====================================================================================================================================================
+
+        This profile generates a Surefire report for the site.
+        When used together with the it.tidalwave-metrics-v2 profile it automatically adds 'site' at the end of the default goal.
+        Properties:
+
+        + tft.test.report.aggregate: to activate an aggregate report.
+
+        =====================================================================================================================================================-->
         <profile>
             <id>it-tidalwave-test-report-v1</id>
             <properties>
-                <tft.test.reportsDirectory>${project.build.directory}/surefire-reports</tft.test.reportsDirectory>
+                <tft.test.reportsDirectory>${project.build.directory}/surefire-reports</tft.test.reportsDirectory> <!-- See SUP-235 -->
+                <tft.profile.metrics.siteGoal>site</tft.profile.metrics.siteGoal>
             </properties>
             <build>
-                <defaultGoal>clean install site</defaultGoal>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
