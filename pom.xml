@@ -207,7 +207,7 @@
         <tft.javadoc.doclet>nl.talsmasoftware.umldoclet.UMLDoclet</tft.javadoc.doclet>
         <tft.javadoc.doclet.groupId>nl.talsmasoftware</tft.javadoc.doclet.groupId>
         <tft.javadoc.doclet.artifactId>umldoclet</tft.javadoc.doclet.artifactId>
-        <tft.javadoc.doclet.version>2.0.0-rc.4</tft.javadoc.doclet.version>
+        <tft.javadoc.doclet.version>2.0.12</tft.javadoc.doclet.version>
         <tft.javadoc.doclet.additionalParam>-verbose</tft.javadoc.doclet.additionalParam>
 
         <tft.clirr.skip>false</tft.clirr.skip>
