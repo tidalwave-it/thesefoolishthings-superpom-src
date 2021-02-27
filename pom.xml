@@ -530,8 +530,8 @@
                     <version>${tft.sonar-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>tomcat-maven-plugin</artifactId>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
                     <version>${tft.tomcat-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
@@ -1681,8 +1681,8 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>tomcat-maven-plugin</artifactId>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
                         <configuration>
                             <server>${tft.webapp.deployServerId}</server>
                             <url>${tft.webapp.deployServerUrl}</url>
