@@ -1024,38 +1024,6 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <!-- Configuration must be replicated in reporting section -->
                 <configuration>
-                    <tags>
-                        <tag>
-                            <name>stable</name>
-                            <placement>t</placement>
-                            <head>Status: stable API</head>
-                        </tag>
-                        <tag>
-                            <name>it.tidalwave.javadoc.stable</name>
-                            <placement>t</placement>
-                            <head>Status: stable API</head>
-                        </tag>
-                        <tag>
-                            <name>draft</name>
-                            <placement>t</placement>
-                            <head>Status: draft API</head>
-                        </tag>
-                        <tag>
-                            <name>it.tidalwave.javadoc.draft</name>
-                            <placement>t</placement>
-                            <head>Status: draft API</head>
-                        </tag>
-                        <tag>
-                            <name>experimental</name>
-                            <placement>t</placement>
-                            <head>Status: experimental API</head>
-                        </tag>
-                        <tag>
-                            <name>it.tidalwave.javadoc.experimental</name>
-                            <placement>t</placement>
-                            <head>Status: experimental API</head>
-                        </tag>
-                    </tags>
                     <docfilessubdirs>true</docfilessubdirs>
                     <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
                     <skip>${tft.disableJavaDocs}</skip>
@@ -3164,38 +3132,6 @@
                 <version>${tft.maven-javadoc-plugin.version}</version>
                 <!-- Configuration must be replicated in build section -->
                 <configuration>
-                    <tags>
-                        <tag>
-                            <name>stable</name>
-                            <placement>t</placement>
-                            <head>Status: stable API</head>
-                        </tag>
-                        <tag>
-                            <name>it.tidalwave.javadoc.stable</name>
-                            <placement>t</placement>
-                            <head>Status: stable API</head>
-                        </tag>
-                        <tag>
-                            <name>draft</name>
-                            <placement>t</placement>
-                            <head>Status: draft API</head>
-                        </tag>
-                        <tag>
-                            <name>it.tidalwave.javadoc.draft</name>
-                            <placement>t</placement>
-                            <head>Status: draft API</head>
-                        </tag>
-                        <tag>
-                            <name>experimental</name>
-                            <placement>t</placement>
-                            <head>Status: experimental API</head>
-                        </tag>
-                        <tag>
-                            <name>it.tidalwave.javadoc.experimental</name>
-                            <placement>t</placement>
-                            <head>Status: experimental API</head>
-                        </tag>
-                    </tags>
                     <docfilessubdirs>true</docfilessubdirs>
                     <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
                     <skip>${tft.disableJavaDocs}</skip>
