@@ -1659,6 +1659,36 @@
 
         <!--====================================================================================================================================================
 
+        This profiles enables the registration of the main class in the manifest (from the property tft.mainClass).
+        To activate the profile create an empty file in src/config/it.tidalwave-manifest-with-main-v1.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-manifest-with-main-v1</id>
+            <activation>
+                <file>
+                    <exists>src/config/it.tidalwave-manifest-with-main-v1</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>${tft.mainClass}</mainClass>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--====================================================================================================================================================
+
         This profile configures Tomcat for the build. Create an empty file in src/config/activate-tomcat-profile to activate it.
 
         =====================================================================================================================================================-->
