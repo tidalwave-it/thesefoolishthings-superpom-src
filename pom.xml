@@ -126,11 +126,13 @@
         <tft.maven.requiredJdk>[1.8.0,)</tft.maven.requiredJdk>
         <tft.superpom.config.version>1.6</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
+        <tft.mainPackage>please-set-the-tft.mainPackage-property-to-specify-the-package-with-the-main-class</tft.mainPackage>
         <tft.jar.classpathInManifest>false</tft.jar.classpathInManifest>
 
         <!-- Default compiler settings. -->
         <tft.javac.source>1.8</tft.javac.source>
         <tft.javac.target>1.8</tft.javac.target>
+        <tft.javac.release/>
         <!--<tft.javac.release>8</tft.javac.release>-->
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
         <tft.javac.debug>true</tft.javac.debug>
@@ -157,6 +159,12 @@
         <tft.release.goals>clean install source:jar-no-fork source:test-jar-no-fork javadoc:jar assembly:single deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
         <tft.release.pushChanges>false</tft.release.pushChanges>
+
+        <tft.description/>
+
+        <scm.repo.url/>
+        <scm.repo.readonly.url/>
+        <scm.repo.browse.url/>
 
         <!-- Default dependency versions -->
         <tft.appbundler.version>1.0-patched</tft.appbundler.version>
@@ -186,19 +194,29 @@
 
         <tft.embedded-jdk.groupId>it.tidalwave.jdk</tft.embedded-jdk.groupId>
         <tft.embedded-jdk.artifactId>adoptopenjdk-jre</tft.embedded-jdk.artifactId>
-        <tft.embedded-jdk.version></tft.embedded-jdk.version>
+        <tft.embedded-jdk.version/>
         <tft.embedded-jdk.type>tgz</tft.embedded-jdk.type>
-        <tft.embedded-jdk.name></tft.embedded-jdk.name>
-        <tft.embedded-jdk.prefix></tft.embedded-jdk.prefix>
+        <tft.embedded-jdk.name/>
+        <tft.embedded-jdk.prefix/>
         <tft.embedded-jdk.classifier.macos.x64>macosx-x64-hotspot</tft.embedded-jdk.classifier.macos.x64>
 
         <tft.appbundle.modules>javafx.base,javafx.controls,javafx.fxml,javafx.graphics</tft.appbundle.modules>
-        <tft.appbundle.vmoptions></tft.appbundle.vmoptions>
-        <tft.javafx.vmargs></tft.javafx.vmargs> <!-- deprecated -->
+        <tft.appbundle.vmoptions/>
+        <tft.javafx.vmargs/> <!-- deprecated -->
+        <tft.appbundle.name/>
         <tft.appbundle.args>${tft.javafx.vmargs}</tft.appbundle.args>
         <tft.tool.jpackager>jpackager</tft.tool.jpackager>
 
+        <tft.deb.sourceTarball.artifactId/>
+        <tft.deb.name/>
+        <tft.deb.user/>
+        <tft.deb.group/>
+
         <tft.aspectj.ajc.verbose>false</tft.aspectj.ajc.verbose>
+
+        <tft.webapp.deployServerId/>
+        <tft.webapp.deployServerUrl/>
+        <tft.webapp.contextPath/>
 
         <tft.jetty.port>8080</tft.jetty.port>
         <tft.jetty.stopPort>9966</tft.jetty.stopPort>
@@ -2425,6 +2443,7 @@
                 <tft.embedded-jdk.name>11.0.10_9</tft.embedded-jdk.name>
                 <tft.embedded-jdk.prefix>jdk-11.0.10+9-jre</tft.embedded-jdk.prefix>
                 <tft.appbundle.build.logLevel>info</tft.appbundle.build.logLevel>
+                <tft.bundle.build.version/>
             </properties>
             <build>
                 <plugins>
