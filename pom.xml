@@ -1380,12 +1380,12 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <echo file="${tft.descriptionStamp}">
+                                        <echo level="info" file="${tft.descriptionStamp}">
                                             DESCRIPTION: ${env.GIT_BRANCH} ${project.version} ${buildNumber} ${line.separator}
                                         </echo>
                                         <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
-                                        <echo>${tft.description}</echo>
-                                        <echo>Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
+                                        <echo level="info">${tft.description}</echo>
+                                        <echo level="info">Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
                                     </target>
                                 </configuration>
                             </execution>
@@ -1417,8 +1417,8 @@
                                 <configuration>
                                     <target>
                                         <loadfile property="tft.description" srcFile="${tft.descriptionStamp}"/>
-                                        <echo>${tft.description}</echo>
-                                        <echo>Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
+                                        <echo level="info">${tft.description}</echo>
+                                        <echo level="info">Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
                                     </target>
                                 </configuration>
                             </execution>
