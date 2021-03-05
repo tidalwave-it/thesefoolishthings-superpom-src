@@ -205,6 +205,7 @@
         <tft.appbundle.name />
         <tft.appbundle.args>${tft.javafx.vmargs}</tft.appbundle.args>
         <tft.tool.jpackager>jpackager</tft.tool.jpackager>
+        <tft.tool.jpackager.downloadUrl.macOS>http://download2.gluonhq.com/jpackager/11/jdk.packager-osx.zip</tft.tool.jpackager.downloadUrl.macOS>
 
         <tft.deb.sourceTarball.artifactId />
         <tft.deb.name />
@@ -2349,7 +2350,7 @@
                                     <goal>run</goal>
                                 </goals>
                                 <configuration>
-                                    <target>
+                                    <target xmlns:if="ant:if" xmlns:unless="ant:unless">
                                         <echo level="${tft.appbundle.build.logLevel}">Creating dmg...</echo>
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
                                             <arg value="create" />
@@ -2414,8 +2415,9 @@
         <!--====================================================================================================================================================
 
         This profile creates a macOS application bundle using the jpackager utility backported to JDK 11
-        (https://github.com/johanvos/openjdk-mobile11/tree/packager). Use the property tft.tool.jpackager to specify the path of the tool. A different profile
-        is automatically activated with JDK 15+ (see it.tidalwave-javafx-appbundle-embedded-v2-jdk15).
+        (https://github.com/johanvos/openjdk-mobile11/tree/packager). Use the property tft.tool.jpackager to specify the path of the tool. If the tool is not
+        found, an attempt to download it is performed from the URL defined by the property tft.tool.jpackager.downloadUrl.macOS.
+        A different profile is automatically activated with JDK 15+ (see it.tidalwave-javafx-appbundle-embedded-v2-jdk15).
         See the documentation of profile it.tidalwave-javafx-appbundle-embedded-v2-prepare for more information.
 
         Create an empty file src/config/activate-it.tidalwave-javafx-embedded-appbundle-v2-profile to activate this profile.
@@ -2449,7 +2451,16 @@
                                     <goal>run</goal>
                                 </goals>
                                 <configuration>
-                                    <target>
+                                    <target xmlns:if="ant:if" xmlns:unless="ant:unless">
+                                        <available file="${tft.tool.jpackager}" type="file" property="tft.jpackager.present"/>
+                                        <echo unless:set="tft.jpackager.present" level="warning">JDK 11 backport of jpackager not found - trying to download it...</echo>
+                                        <echo unless:set="tft.jpackager.present" level="warning">To avoid download, please manually install the tool and set the property tft.tool.jpackager</echo>
+                                        <get unless:set="tft.jpackager.present" src="${tft.tool.jpackager.downloadUrl.macOS}" dest="${project.build.directory}"/>
+                                        <unzip unless:set="tft.jpackager.present" src="${project.build.directory}/jdk.packager-osx.zip" dest="${project.build.directory}/jpackager"/>
+                                        <chmod unless:set="tft.jpackager.present" file="${project.build.directory}/jpackager/jpackager" perm="ugo+rx"/>
+                                        <property unless:set="tft.jpackager.present"  name="tft.tool.jpackager-actual" value="${project.build.directory}/jpackager/jpackager"/>
+                                        <property if:set="tft.jpackager.present"  name="tft.tool.jpackager-actual" value="${tft.tool.jpackager}"/>
+
                                         <loadresource property="tft.bundle.build.version">
                                             <propertyresource name="project.version" />
                                             <filterchain>
@@ -2464,8 +2475,8 @@
                                         </loadresource>
                                         <echo level="${tft.appbundle.build.logLevel}">CFBundleVersion: ${tft.bundle.build.version}</echo>
 
-                                        <echo level="${tft.appbundle.build.logLevel}">Invoking ${tft.tool.jpackager}...</echo>
-                                        <exec dir="${pom.basedir}" executable="${tft.tool.jpackager}">
+                                        <echo level="${tft.appbundle.build.logLevel}">Invoking ${tft.tool.jpackager-actual}...</echo>
+                                        <exec dir="${pom.basedir}" executable="${tft.tool.jpackager-actual}">
                                             <arg value="create-image" />
                                             <arg value="--output" />
                                             <arg value="${project.build.directory}" />
