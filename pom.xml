@@ -5,7 +5,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>4.18-SNAPSHOT</version>
+    <version>4.18</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -311,7 +311,7 @@
         <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-        <tag>4.17</tag>
+        <tag>4.18</tag>
     </scm>
 
     <prerequisites>
@@ -2452,14 +2452,14 @@
                                 </goals>
                                 <configuration>
                                     <target xmlns:if="ant:if" xmlns:unless="ant:unless">
-                                        <available file="${tft.tool.jpackager}" type="file" property="tft.jpackager.present"/>
+                                        <available file="${tft.tool.jpackager}" type="file" property="tft.jpackager.present" />
                                         <echo unless:set="tft.jpackager.present" level="warning">JDK 11 backport of jpackager not found - trying to download it...</echo>
                                         <echo unless:set="tft.jpackager.present" level="warning">To avoid download, please manually install the tool and set the property tft.tool.jpackager</echo>
-                                        <get unless:set="tft.jpackager.present" src="${tft.tool.jpackager.downloadUrl.macOS}" dest="${project.build.directory}"/>
-                                        <unzip unless:set="tft.jpackager.present" src="${project.build.directory}/jdk.packager-osx.zip" dest="${project.build.directory}/jpackager"/>
-                                        <chmod unless:set="tft.jpackager.present" file="${project.build.directory}/jpackager/jpackager" perm="ugo+rx"/>
-                                        <property unless:set="tft.jpackager.present"  name="tft.tool.jpackager-actual" value="${project.build.directory}/jpackager/jpackager"/>
-                                        <property if:set="tft.jpackager.present"  name="tft.tool.jpackager-actual" value="${tft.tool.jpackager}"/>
+                                        <get unless:set="tft.jpackager.present" src="${tft.tool.jpackager.downloadUrl.macOS}" dest="${project.build.directory}" />
+                                        <unzip unless:set="tft.jpackager.present" src="${project.build.directory}/jdk.packager-osx.zip" dest="${project.build.directory}/jpackager" />
+                                        <chmod unless:set="tft.jpackager.present" file="${project.build.directory}/jpackager/jpackager" perm="ugo+rx" />
+                                        <property unless:set="tft.jpackager.present" name="tft.tool.jpackager-actual" value="${project.build.directory}/jpackager/jpackager" />
+                                        <property if:set="tft.jpackager.present" name="tft.tool.jpackager-actual" value="${tft.tool.jpackager}" />
 
                                         <loadresource property="tft.bundle.build.version">
                                             <propertyresource name="project.version" />
