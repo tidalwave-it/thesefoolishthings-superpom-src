@@ -1365,6 +1365,9 @@
         =====================================================================================================================================================-->
         <profile>
             <id>generate-revision-id</id>
+            <properties>  
+                <tft.description>DESCRIPTION: ${env.GIT_BRANCH} ${project.version} ${buildNumber}</tft.description>
+            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -1379,12 +1382,9 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <echo level="info" file="${tft.descriptionStamp}">
-                                            DESCRIPTION: ${env.GIT_BRANCH} ${project.version} ${buildNumber} ${line.separator}
-                                        </echo>
-                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}" />
+                                        <echo file="${tft.descriptionStamp}">${tft.description}${line.separator}</echo>
                                         <echo level="info">${tft.description}</echo>
-                                        <echo level="info">Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
+                                        <echo level="info">Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source} -release ${tft.javac.release}</echo>
                                     </target>
                                 </configuration>
                             </execution>
@@ -1415,9 +1415,10 @@
                                 </goals>
                                 <configuration>
                                     <target>
-                                        <loadfile property="tft.description" srcFile="${tft.descriptionStamp}" />
-                                        <echo level="info">${tft.description}</echo>
-                                        <echo level="info">Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source}</echo>
+                                        <!-- Use a different property since the main one is read-only. -->
+                                        <loadfile property="tft.description2" srcFile="${tft.descriptionStamp}" />
+                                        <echo level="info">${tft.description2}</echo>
+                                        <echo level="info">Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source} -release ${tft.javac.release}</echo>
                                     </target>
                                 </configuration>
                             </execution>
