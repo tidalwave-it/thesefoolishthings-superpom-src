@@ -187,6 +187,7 @@
         <tft.test.failureIgnore>${testFailureIgnore}</tft.test.failureIgnore>
         <tft.test.excludedGroups />
         <tft.test.vmOptions />
+        <tft.test.jacoco.argLine/>
 
         <tft.test.report.aggregate>true</tft.test.report.aggregate>
         <tft.maven-surefire-report-plugin.skip>false</tft.maven-surefire-report-plugin.skip>
@@ -211,6 +212,7 @@
         <tft.deb.name />
         <tft.deb.user />
         <tft.deb.group />
+        <tft.deb.binaryDirectory/>
 
         <tft.aspectj.ajc.verbose>false</tft.aspectj.ajc.verbose>
 
@@ -1183,7 +1185,7 @@
                         <version>${tft.jacoco-maven-plugin.version}</version>
                         <configuration>
                             <propertyName>tft.test.jacoco.argLine</propertyName>
-                            <skipTests>${tft.test.skip}</skipTests>
+                            <skip>${tft.test.skip}</skip>
                             <!--<destfile>${project.build.directory}/coverage-reports/jacoco-unit.exec</destfile>-->
                             <!--<datafile>${project.build.directory}/target/coverage-reports/jacoco-unit.exec</datafile>-->
                         </configuration>
@@ -1214,7 +1216,6 @@
                         <configuration>
                             <xmlOutput>true</xmlOutput>
                             <spotbugsXmlOutput>true</spotbugsXmlOutput>
-                            <spotbugsXmlWithMessages>true</spotbugsXmlWithMessages>
                             <effort>Max</effort>
                             <threshold>Low</threshold>
                             <failOnError>false</failOnError>
@@ -1243,7 +1244,6 @@
                         <configuration>
                             <xmlOutput>true</xmlOutput>
                             <spotbugsXmlOutput>true</spotbugsXmlOutput>
-                            <spotbugsXmlWithMessages>true</spotbugsXmlWithMessages>
                             <effort>Max</effort>
                             <threshold>Low</threshold>
                             <failOnError>false</failOnError>
@@ -1260,7 +1260,6 @@
                         <configuration>
                             <xmlOutput>true</xmlOutput>
                             <findbugsXmlOutput>true</findbugsXmlOutput>
-                            <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
                             <effort>Max</effort>
                             <threshold>Low</threshold>
                             <failOnError>false</failOnError>
@@ -1275,7 +1274,6 @@
                         <!-- version must be replicated here -->
                         <version>${tft.maven-pmd-plugin.version}</version>
                         <configuration>
-                            <linkXref>true</linkXref>
                             <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
                             <minimumTokens>100</minimumTokens>
                             <targetJdk>${tft.javac.source}</targetJdk>
@@ -2756,7 +2754,7 @@
                                 </goals>
                                 <configuration>
                                     <includeScope>runtime</includeScope>
-                                    <overWrite>true</overWrite>
+                                    <!-- overWrite>true</overWrite -->
                                     <outputDirectory>${project.build.directory}/dist/lib</outputDirectory>
                                 </configuration>
                             </execution>
@@ -3369,7 +3367,7 @@
                                 <artifactId>${tft.javadoc.doclet.artifactId}</artifactId>
                                 <version>${tft.javadoc.doclet.version}</version>
                             </docletArtifact>
-                            <additionalparam>${tft.javadoc.doclet.additionalParam} ${tft.javadoc.doclint}</additionalparam>
+                            <additionalOptions>${tft.javadoc.doclet.additionalParam} ${tft.javadoc.doclint}</additionalOptions>
                             <useStandardDocletOptions>true</useStandardDocletOptions>
                         </configuration>
                     </plugin>
@@ -3388,7 +3386,7 @@
                                 <artifactId>${tft.javadoc.doclet.artifactId}</artifactId>
                                 <version>${tft.javadoc.doclet.version}</version>
                             </docletArtifact>
-                            <additionalparam>${tft.javadoc.doclet.additionalParam} ${tft.javadoc.doclint}</additionalparam>
+                            <additionalOptions>${tft.javadoc.doclet.additionalParam} ${tft.javadoc.doclint}</additionalOptions>
                             <useStandardDocletOptions>true</useStandardDocletOptions>
                         </configuration>
                     </plugin>
