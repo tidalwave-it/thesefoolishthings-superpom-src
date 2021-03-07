@@ -193,6 +193,9 @@
         <tft.test.report.aggregate>true</tft.test.report.aggregate>
         <tft.maven-surefire-report-plugin.skip>false</tft.maven-surefire-report-plugin.skip>
 
+        <tft.owasp.reportType>aggregate</tft.owasp.reportType>
+        <tft.owasp.skip>false</tft.owasp.skip>
+
         <tft.embedded-jdk.groupId>it.tidalwave.jdk</tft.embedded-jdk.groupId>
         <tft.embedded-jdk.artifactId>adoptopenjdk-jre</tft.embedded-jdk.artifactId>
         <tft.embedded-jdk.version/>
@@ -925,6 +928,31 @@
                 </configuration>
             </plugin>
 
+            <!-- OWASP -->
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <!-- Configuration must be replicated in reporting section -->
+                <configuration>
+                    <skip>${tft.owasp.skip}</skip>
+                    <format>xml, html</format>
+                    <reportSets>
+                        <reportSet>
+                            <reports>
+                                <report>${tft.owasp.reportType}</report>
+                            </reports>
+                        </reportSet>
+                    </reportSets>
+                </configuration>
+            </plugin>
+
             <!-- Configures the release process, calling the assembly to include extra artifacts in deploy -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -1282,6 +1310,31 @@
                             <rulesets>
                                 <ruleset>/it/tidalwave/pmd/pmd.xml</ruleset>
                             </rulesets>
+                        </configuration>
+                    </plugin>
+
+                    <!-- OWASP -->
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <!-- Configuration must be replicated in build section -->
+                        <configuration>
+                            <skip>${tft.owasp.skip}</skip>
+                            <format>xml, html</format>
+                            <reportSets>
+                                <reportSet>
+                                    <reports>
+                                        <report>${tft.owasp.reportType}</report>
+                                    </reports>
+                                </reportSet>
+                            </reportSets>
                         </configuration>
                     </plugin>
                 </plugins>
