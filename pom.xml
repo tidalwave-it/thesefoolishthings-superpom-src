@@ -3578,15 +3578,6 @@
                         <artifactId>javafx-graphics</artifactId>
                         <version>${tft.javafx.version}</version>
                     </dependency>
-
-
-                    <dependency>
-                        <groupId>quilt</groupId>
-                        <artifactId>quilt</artifactId>
-                        <version>0.6-a-5</version>
-                    </dependency>
-
-
                     <dependency>
                         <groupId>org.openjfx</groupId>
                         <artifactId>javafx-swing</artifactId>
