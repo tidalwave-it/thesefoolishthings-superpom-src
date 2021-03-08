@@ -3396,6 +3396,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${tft.maven-javadoc-plugin.version}</version>
                         <!-- Configuration must be replicated in build section -->
                         <configuration>
                             <doclet>${tft.javadoc.doclet}</doclet>
@@ -3417,7 +3418,7 @@
         This profile generates a Surefire report for the site. Must be separately run after a build (plain or with metrics). Some reports, such as Surefire
         or Jacoco, are collected from the previous build; others are re-created. For this reasons configurations of latter plugins need to be replicated here.
 
-        Please note that plugin versions must be always replicated, otherwise the latest ones are used.
+        Please note that plugin versions must be always replicated, otherwise the latest ones are used - see https://issues.apache.org/jira/browse/MSITE-443.
 
         =====================================================================================================================================================-->
         <profile>
@@ -3426,6 +3427,7 @@
                 <tft.defaultGoal>site</tft.defaultGoal>
             </properties>
             <reporting>
+                <excludeDefaults>true</excludeDefaults> <!-- FIXME: needed? -->
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -3550,7 +3552,7 @@
                         <groupId>org.owasp</groupId>
                         <artifactId>dependency-check-maven</artifactId>
                         <version>${tft.dependency-check-maven-plugin.version}</version>
-                        <!-- Configuration must be replicated in build section -->
+                        <!-- Configuration must be replicated from build section. -->
                         <configuration>
                             <skip>${tft.owasp.skip}</skip>
                         </configuration>
@@ -3558,6 +3560,41 @@
                             <reportSet>
                                 <reports>
                                     <report>aggregate</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- JavaDoc -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${tft.maven-javadoc-plugin.version}</version>
+                        <!-- Configuration must be replicated from build section. -->
+                        <configuration>
+                            <!-- FIXME -->
+                            <!-- https://stackoverflow.com/questions/27935661/how-to-avoid-duplicate-forking-when-generating-aggregated-javadoc-in-a-multimodu -->
+                            <!-- inherited>false</inherited -->
+
+                            <docfilessubdirs>true</docfilessubdirs>
+                            <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
+                            <skip>${tft.disableJavaDocs}</skip>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <id>default</id>
+                                <reports>
+                                    <report>javadoc-no-fork</report>
+                                    <report>test-javadoc-no-fork</report>
+                                </reports>
+                            </reportSet>
+                            <reportSet><!-- aggregate reportSet, to define in poms having modules -->
+                                <id>aggregate</id>
+                                <inherited>false</inherited><!-- don't run aggregate in child modules -->
+                                <reports>
+                                    <report>aggregate-no-fork</report>
+                                    <report>test-aggregate-no-fork</report>
                                 </reports>
                             </reportSet>
                         </reportSets>
@@ -3661,45 +3698,5 @@
             </dependencyManagement>
         </profile>
     </profiles>
-
-    <!-- Global reporting section FIXME: move to profile -->
-    <reporting>
-        <excludeDefaults>true</excludeDefaults>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
-                <version>${tft.maven-javadoc-plugin.version}</version>
-                <!-- Configuration must be replicated in build section -->
-                <reportSets>
-                    <reportSet>
-                        <id>default</id>
-                        <reports>
-                            <report>javadoc-no-fork</report>
-                            <report>test-javadoc-no-fork</report>
-                        </reports>
-                    </reportSet>
-                    <reportSet><!-- aggregate reportSet, to define in poms having modules -->
-                        <id>aggregate</id>
-                        <inherited>false</inherited><!-- don't run aggregate in child modules -->
-                        <reports>
-                            <report>aggregate-no-fork</report>
-                            <report>test-aggregate-no-fork</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-                <configuration>
-                    <!-- https://stackoverflow.com/questions/27935661/how-to-avoid-duplicate-forking-when-generating-aggregated-javadoc-in-a-multimodu -->
-                    <!-- inherited>false</inherited -->
-
-                    <docfilessubdirs>true</docfilessubdirs>
-                    <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
-                    <skip>${tft.disableJavaDocs}</skip>
-                    <failOnError>false</failOnError>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
 
 </project>
