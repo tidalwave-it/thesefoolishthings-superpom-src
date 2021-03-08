@@ -6,7 +6,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>4.19-SNAPSHOT</version>
+    <version>5.0-ALPHA-1-SNAPSHOT</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -111,14 +111,19 @@
         <tft.profile.metrics.defaultGoal>
             clean install ${tft.profile.metrics.findbugsGoal} ${tft.profile.metrics.spotbugsGoal} ${tft.profile.metrics.pmdGoal}
             ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} ${tft.profile.metrics.javancssGoal} dependency:analyze
-            ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal} ${tft.profile.metrics.siteGoal}
+            ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal}
         </tft.profile.metrics.defaultGoal>
-        <tft.profile.metrics.siteGoal/>
 
         <tft.checkstyle.skip>false</tft.checkstyle.skip>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.findbugs.skip>false</tft.findbugs.skip>
         <tft.spotbugs.skip>${tft.findbugs.skip}</tft.spotbugs.skip>
+        
+        <tft.pmd.ruleset>/it/tidalwave/pmd/basic.xml</tft.pmd.ruleset>
+        <tft.pmd.ruleset.groupId>it.tidalwave.thesefoolishthings</tft.pmd.ruleset.groupId>
+        <tft.pmd.ruleset.artifactId>superpom-config</tft.pmd.ruleset.artifactId>
+        <tft.pmd.ruleset.version>${tft.superpom.config.version}</tft.pmd.ruleset.version>
+
         <findbugs.skip>${tft.findbugs.skip}</findbugs.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <tft.license.name>tidalwave_asf2</tft.license.name>
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
@@ -190,11 +195,12 @@
         <tft.test.vmOptions/>
         <tft.test.jacoco.argLine/>
 
-        <tft.test.report.aggregate>true</tft.test.report.aggregate>
+        <tft.report.test.aggregate>true</tft.report.test.aggregate>
         <tft.maven-surefire-report-plugin.skip>false</tft.maven-surefire-report-plugin.skip>
 
-        <tft.owasp.reportType>aggregate</tft.owasp.reportType>
         <tft.owasp.skip>false</tft.owasp.skip>
+
+        <tft.site.skip>false</tft.site.skip>
 
         <tft.embedded-jdk.groupId>it.tidalwave.jdk</tft.embedded-jdk.groupId>
         <tft.embedded-jdk.artifactId>adoptopenjdk-jre</tft.embedded-jdk.artifactId>
@@ -519,7 +525,7 @@
                     <version>${tft.findbugs-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
+                    <groupId>com.github.spotbugs</groupId>
                     <artifactId>spotbugs-maven-plugin</artifactId>
                     <version>${tft.spotbugs-maven-plugin.version}</version>
                 </plugin>
@@ -887,11 +893,27 @@
                 </configuration>
             </plugin>
 
-            <!-- CheckStyle (not in a profile, to be used by NetBeans editor) -->
+            <!-- SpotBugs (not in a profile, to be used by IDEs) -->
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <!-- Configuration must be replicated to reporting section. -->
+                <configuration>
+                    <xmlOutput>true</xmlOutput>
+                    <spotbugsXmlOutput>true</spotbugsXmlOutput>
+                    <spotbugsXmlOutputDirectory>target/site</spotbugsXmlOutputDirectory> <!-- FIXME: needed? -->
+                    <skipEmptyReport>false</skipEmptyReport>
+                    <effort>Max</effort>
+                    <threshold>Low</threshold>
+                    <failOnError>false</failOnError>
+                    <skip>${tft.spotbugs.skip}</skip>
+                </configuration>
+            </plugin>
+
+            <!-- CheckStyle (not in a profile, to be used by IDEs) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${tft.maven-checkstyle-plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>it.tidalwave.thesefoolishthings</groupId>
@@ -899,31 +921,33 @@
                         <version>${tft.superpom.config.version}</version>
                     </dependency>
                 </dependencies>
+                <!-- Configuration must be replicated to reporting section. -->
                 <configuration>
                     <configLocation>it/tidalwave/checkstyle/checkstyle.xml</configLocation>
                     <skip>${tft.checkstyle.skip}</skip>
                 </configuration>
             </plugin>
 
+            <!-- PMD (not in a profile, to be used by IDEs) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>${tft.maven-pmd-plugin.version}</version>
                 <dependencies>
                     <dependency>
-                        <groupId>it.tidalwave.thesefoolishthings</groupId>
-                        <artifactId>superpom-config</artifactId>
-                        <version>${tft.superpom.config.version}</version>
+                        <groupId>${tft.pmd.ruleset.groupId}</groupId>
+                        <artifactId>${tft.pmd.ruleset.artifactId}</artifactId>
+                        <version>${tft.pmd.ruleset.version}</version>
                     </dependency>
                 </dependencies>
+                <!-- Configuration must be replicated to reporting section. -->
                 <configuration>
-                    <linkXref>true</linkXref>
                     <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>${tft.javac.source}</targetJdk>
                     <skip>${tft.pmd.skip}</skip>
+                    <skipEmptyReport>false</skipEmptyReport>
                     <rulesets>
-                        <ruleset>/it/tidalwave/pmd/basic.xml</ruleset>
+                        <ruleset>${tft.pmd.ruleset}</ruleset>
                     </rulesets>
                 </configuration>
             </plugin>
@@ -932,24 +956,13 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <!-- Configuration must be replicated in reporting section -->
                 <configuration>
                     <skip>${tft.owasp.skip}</skip>
-                    <format>xml, html</format>
-                    <reportSets>
-                        <reportSet>
-                            <reports>
-                                <report>${tft.owasp.reportType}</report>
-                            </reports>
-                        </reportSet>
-                    </reportSets>
+                    <formats>
+                        <format>xml</format>
+                        <format>html</format>
+                    </formats>
                 </configuration>
             </plugin>
 
@@ -1033,6 +1046,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <configuration>
+                    <skip>${tft.site.skip}</skip>
                     <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
                     <outputEncoding>${project.build.sourceEncoding}</outputEncoding>
                 </configuration>
@@ -1237,108 +1251,38 @@
                     </plugin>
 
                     <!-- SpotBugs -->
+
+                    <!-- PMD is configured in the default build section -->
+
+                    <!-- CLIRR -->
                     <plugin>
-                        <groupId>com.github.spotbugs</groupId>
-                        <artifactId>spotbugs-maven-plugin</artifactId>
-                        <!-- version must be replicated here -->
-                        <version>${tft.spotbugs-maven-plugin.version}</version>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>clirr-maven-plugin</artifactId>
+                        <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
+                        <version>${tft.clirr-maven-plugin.version}</version>
+                        <!-- Configuration must be replicated to reporting section. -->
                         <configuration>
-                            <xmlOutput>true</xmlOutput>
-                            <spotbugsXmlOutput>true</spotbugsXmlOutput>
-                            <effort>Max</effort>
-                            <threshold>Low</threshold>
-                            <failOnError>false</failOnError>
-                            <skip>${tft.spotbugs.skip}</skip>
+                            <skip>${tft.clirr.skip}</skip>
+                            <failOnError>${tft.stableAPI}</failOnError>
+                            <comparisonVersion>${tft.stableAPIVersion}</comparisonVersion>
+                            <logResults>true</logResults>
+                            <minSeverity>info</minSeverity>
+                        </configuration>
+                    </plugin>
+
+                    <!-- JavaNCSS -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>javancss-maven-plugin</artifactId>
+                        <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
+                        <version>${tft.javancss-maven-plugin.version}</version>
+                        <!-- Configuration must be replicated to reporting section. -->
+                        <configuration>
+                            <skip>${tft.javancss.skip}</skip>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
-
-            <reporting>
-                <plugins>
-                    <!-- Jacoco -->
-                    <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <!-- version must be replicated here -->
-                        <version>${tft.jacoco-maven-plugin.version}</version>
-                    </plugin>
-
-                    <!-- SpotBugs -->
-                    <plugin>
-                        <groupId>com.github.spotbugs</groupId>
-                        <artifactId>spotbugs-maven-plugin</artifactId>
-                        <!-- version must be replicated here -->
-                        <version>${tft.spotbugs-maven-plugin.version}</version>
-                        <configuration>
-                            <xmlOutput>true</xmlOutput>
-                            <spotbugsXmlOutput>true</spotbugsXmlOutput>
-                            <effort>Max</effort>
-                            <threshold>Low</threshold>
-                            <failOnError>false</failOnError>
-                            <skip>${tft.spotbugs.skip}</skip>
-                        </configuration>
-                    </plugin>
-
-                    <!-- FindBugs, now deprecated -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>findbugs-maven-plugin</artifactId>
-                        <!-- version must be replicated here -->
-                        <version>${tft.findbugs-maven-plugin.version}</version>
-                        <configuration>
-                            <xmlOutput>true</xmlOutput>
-                            <findbugsXmlOutput>true</findbugsXmlOutput>
-                            <effort>Max</effort>
-                            <threshold>Low</threshold>
-                            <failOnError>false</failOnError>
-                            <skip>${tft.findbugs.skip}</skip>
-                        </configuration>
-                    </plugin>
-
-                    <!-- PMD -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-pmd-plugin</artifactId>
-                        <!-- version must be replicated here -->
-                        <version>${tft.maven-pmd-plugin.version}</version>
-                        <configuration>
-                            <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                            <minimumTokens>100</minimumTokens>
-                            <targetJdk>${tft.javac.source}</targetJdk>
-                            <skip>${tft.pmd.skip}</skip>
-                            <rulesets>
-                                <ruleset>/it/tidalwave/pmd/pmd.xml</ruleset>
-                            </rulesets>
-                        </configuration>
-                    </plugin>
-
-                    <!-- OWASP -->
-                    <plugin>
-                        <groupId>org.owasp</groupId>
-                        <artifactId>dependency-check-maven</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <!-- Configuration must be replicated in build section -->
-                        <configuration>
-                            <skip>${tft.owasp.skip}</skip>
-                            <format>xml, html</format>
-                            <reportSets>
-                                <reportSet>
-                                    <reports>
-                                        <report>${tft.owasp.reportType}</report>
-                                    </reports>
-                                </reportSet>
-                            </reportSets>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </reporting>
         </profile>
 
         <!--====================================================================================================================================================
@@ -3470,45 +3414,153 @@
 
         <!--====================================================================================================================================================
 
-        This profile generates a Surefire report for the site. When used together with the it.tidalwave-metrics-v2 profile it automatically adds 'site' at
-        the end of the default goal.
-        Properties:
+        This profile generates a Surefire report for the site. Must be separately run after a build (plain or with metrics). Some reports, such as Surefire
+        or Jacoco, are collected from the previous build; others are re-created. For this reasons configurations of latter plugins need to be replicated here.
 
-        + tft.test.report.aggregate: to activate an aggregate report.
+        Please note that plugin versions must be always replicated, otherwise the latest ones are used.
 
         =====================================================================================================================================================-->
         <profile>
-            <id>it-tidalwave-test-report-v1</id>
+            <id>it-tidalwave-site-v1</id>
             <properties>
-                <tft.test.reportsDirectory>${project.build.directory}/surefire-reports</tft.test.reportsDirectory> <!-- See SUP-235 -->
-                <tft.profile.metrics.siteGoal>site</tft.profile.metrics.siteGoal>
+                <tft.defaultGoal>site</tft.defaultGoal>
             </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-report-plugin</artifactId>
-                        <configuration>
-                            <skipSurefireReport>${tft.maven-surefire-report-plugin.skip}</skipSurefireReport>
-                            <aggregate>${tft.test.report.aggregate}</aggregate>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
             <reporting>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-project-info-reports-plugin</artifactId>
+                        <version>${tft.maven-project-info-reports-plugin.version}</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>ci-management</report>
+                                    <report>dependencies</report>
+                                    <report>dependency-convergence</report>
+                                    <report>dependency-info</report>
+                                    <report>dependency-management</report>
+                                    <report>distribution-management</report>
+                                    <report>index</report>
+                                    <report>issue-management</report>
+                                    <report>licenses</report>
+                                    <report>mailing-lists</report>
+                                    <report>modules</report>
+                                    <report>plugin-management</report>
+                                    <report>plugins</report>
+                                    <report>scm</report>
+                                    <report>summary</report>
+                                    <report>team</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- Surefire -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-report-plugin</artifactId>
+                        <version>${tft.maven-surefire-report-plugin.version}</version>
                         <configuration>
                             <skipSurefireReport>${tft.maven-surefire-report-plugin.skip}</skipSurefireReport>
-                            <aggregate>${tft.test.report.aggregate}</aggregate>
-                            <!--
-                                <reportsDirectories>
-                                    <reportDirectory>target/surefire-reports/plain</reportDirectory>
-                                </reportsDirectories>
-                            -->
+                            <aggregate>${tft.report.test.aggregate}</aggregate>
+                            <reportsDirectories>
+                                <reportDirectory>${project.build.directory}/surefire-reports/plain</reportDirectory>
+                                <reportDirectory>${project.build.directory}/surefire-reports/jacoco</reportDirectory>
+                            </reportsDirectories>
                         </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <!-- Just collects reports generated in a previous run. -->
+                                    <report>report-only</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- Jacoco -->
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${tft.jacoco-maven-plugin.version}</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>report-aggregate</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- SpotBugs -->
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                        <version>${tft.spotbugs-maven-plugin.version}</version>
+                        <!-- Configuration must be replicated from build section. -->
+                        <!-- No aggregate reports for SpotBugs: https://spotbugs.github.io/spotbugs-maven-plugin/faq.html#Aggregate_Reporting -->
+                        <configuration>
+                            <xmlOutput>true</xmlOutput>
+                            <spotbugsXmlOutput>true</spotbugsXmlOutput>
+                            <spotbugsXmlOutputDirectory>target/site</spotbugsXmlOutputDirectory> <!-- FIXME: needed? -->
+                            <skipEmptyReport>false</skipEmptyReport>
+                            <effort>Max</effort>
+                            <threshold>Low</threshold>
+                            <failOnError>false</failOnError>
+                            <skip>${tft.spotbugs.skip}</skip>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>spotbugs</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- PMD -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <version>${tft.maven-pmd-plugin.version}</version>
+                        <!-- Configuration must be replicated from build section. -->
+                        <configuration>
+                            <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+                            <minimumTokens>100</minimumTokens>
+                            <targetJdk>${tft.javac.source}</targetJdk>
+                            <skip>${tft.pmd.skip}</skip>
+                            <skipEmptyReport>false</skipEmptyReport>
+                            <rulesets>
+                                <ruleset>${tft.pmd.ruleset}</ruleset>
+                            </rulesets>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <!-- FIXME: can't reuse tft.profile.metrics.pmdGoal -->
+                                    <report>pmd</report>
+                                    <report>cpd</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- OWASP -->
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>${tft.dependency-check-maven-plugin.version}</version>
+                        <!-- Configuration must be replicated in build section -->
+                        <configuration>
+                            <skip>${tft.owasp.skip}</skip>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>aggregate</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
                     </plugin>
                 </plugins>
             </reporting>
@@ -3610,7 +3662,9 @@
         </profile>
     </profiles>
 
+    <!-- Global reporting section FIXME: move to profile -->
     <reporting>
+        <excludeDefaults>true</excludeDefaults>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -3618,38 +3672,32 @@
                 <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
                 <version>${tft.maven-javadoc-plugin.version}</version>
                 <!-- Configuration must be replicated in build section -->
+                <reportSets>
+                    <reportSet>
+                        <id>default</id>
+                        <reports>
+                            <report>javadoc-no-fork</report>
+                            <report>test-javadoc-no-fork</report>
+                        </reports>
+                    </reportSet>
+                    <reportSet><!-- aggregate reportSet, to define in poms having modules -->
+                        <id>aggregate</id>
+                        <inherited>false</inherited><!-- don't run aggregate in child modules -->
+                        <reports>
+                            <report>aggregate-no-fork</report>
+                            <report>test-aggregate-no-fork</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
                 <configuration>
+                    <!-- https://stackoverflow.com/questions/27935661/how-to-avoid-duplicate-forking-when-generating-aggregated-javadoc-in-a-multimodu -->
+                    <!-- inherited>false</inherited -->
+
                     <docfilessubdirs>true</docfilessubdirs>
                     <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
                     <skip>${tft.disableJavaDocs}</skip>
                     <failOnError>false</failOnError>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>clirr-maven-plugin</artifactId>
-                <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
-                <version>${tft.clirr-maven-plugin.version}</version>
-                <!-- Configuration must be replicated in build section -->
-                <configuration>
-                    <skip>${tft.clirr.skip}</skip>
-                    <failOnError>${tft.stableAPI}</failOnError>
-                    <comparisonVersion>${tft.stableAPIVersion}</comparisonVersion>
-                    <logResults>true</logResults>
-                    <minSeverity>info</minSeverity>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>javancss-maven-plugin</artifactId>
-                <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
-                <version>${tft.javancss-maven-plugin.version}</version>
-                <configuration>
-                    <skip>${tft.javancss.skip}</skip>
-                </configuration>
-                <!-- Configuration must be replicated in build section -->
             </plugin>
         </plugins>
     </reporting>
