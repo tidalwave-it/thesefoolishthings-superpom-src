@@ -1210,6 +1210,198 @@
 
         <!--====================================================================================================================================================
 
+        This profile generates a Surefire report for the site. Must be separately run after a build (plain or with metrics). Some reports, such as Surefire
+        or Jacoco, are collected from the previous build; others are re-created. For this reasons configurations of latter plugins need to be replicated here.
+
+        Please note that plugin versions must be always replicated, otherwise the latest ones are used - see https://issues.apache.org/jira/browse/MSITE-443.
+
+        See also it.tidalwave-metrics-pre-site-v1.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it-tidalwave-site-v1</id>
+            <properties>
+                <tft.defaultGoal>site</tft.defaultGoal>
+            </properties>
+            <reporting>
+                <excludeDefaults>true</excludeDefaults> <!-- FIXME: needed? -->
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-project-info-reports-plugin</artifactId>
+                        <version>${tft.maven-project-info-reports-plugin.version}</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>ci-management</report>
+                                    <report>dependencies</report>
+                                    <report>dependency-convergence</report>
+                                    <report>dependency-info</report>
+                                    <report>dependency-management</report>
+                                    <report>distribution-management</report>
+                                    <report>index</report>
+                                    <report>issue-management</report>
+                                    <report>licenses</report>
+                                    <report>mailing-lists</report>
+                                    <report>modules</report>
+                                    <report>plugin-management</report>
+                                    <report>plugins</report>
+                                    <report>scm</report>
+                                    <report>summary</report>
+                                    <report>team</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- Surefire -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-report-plugin</artifactId>
+                        <version>${tft.maven-surefire-report-plugin.version}</version>
+                        <configuration>
+                            <skipSurefireReport>${tft.maven-surefire-report-plugin.skip}</skipSurefireReport>
+                            <aggregate>${tft.report.test.aggregate}</aggregate>
+                            <reportsDirectories>
+                                <reportDirectory>${project.build.directory}/surefire-reports/plain</reportDirectory>
+                                <reportDirectory>${project.build.directory}/surefire-reports/jacoco</reportDirectory>
+                            </reportsDirectories>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <!-- Just collects reports generated in a previous run. -->
+                                    <report>report-only</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- Jacoco -->
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${tft.jacoco-maven-plugin.version}</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>report-aggregate</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- SpotBugs -->
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                        <version>${tft.spotbugs-maven-plugin.version}</version>
+                        <!-- Configuration must be replicated from build section. -->
+                        <!-- No aggregate reports for SpotBugs: https://spotbugs.github.io/spotbugs-maven-plugin/faq.html#Aggregate_Reporting -->
+                        <configuration>
+                            <xmlOutput>true</xmlOutput>
+                            <spotbugsXmlOutput>true</spotbugsXmlOutput>
+                            <spotbugsXmlOutputDirectory>target/site</spotbugsXmlOutputDirectory> <!-- FIXME: needed? -->
+                            <skipEmptyReport>false</skipEmptyReport>
+                            <effort>Max</effort>
+                            <threshold>Low</threshold>
+                            <failOnError>false</failOnError>
+                            <skip>${tft.spotbugs.skip}</skip>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>spotbugs</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- PMD -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-pmd-plugin</artifactId>
+                        <version>${tft.maven-pmd-plugin.version}</version>
+                        <!-- Configuration must be replicated from build section. -->
+                        <configuration>
+                            <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+                            <minimumTokens>100</minimumTokens>
+                            <targetJdk>${tft.javac.source}</targetJdk>
+                            <skip>${tft.pmd.skip}</skip>
+                            <skipEmptyReport>false</skipEmptyReport>
+                            <rulesets>
+                                <ruleset>${tft.pmd.ruleset}</ruleset>
+                            </rulesets>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <!-- FIXME: can't reuse tft.profile.metrics.pmdGoal -->
+                                    <report>pmd</report>
+                                    <report>cpd</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- OWASP -->
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>${tft.dependency-check-maven-plugin.version}</version>
+                        <!-- Configuration must be replicated from build section. -->
+                        <configuration>
+                            <skip>${tft.owasp.skip}</skip>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>aggregate</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- JavaDoc -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${tft.maven-javadoc-plugin.version}</version>
+                        <!-- Configuration must be replicated from build section. -->
+                        <configuration>
+                            <!-- FIXME -->
+                            <!-- https://stackoverflow.com/questions/27935661/how-to-avoid-duplicate-forking-when-generating-aggregated-javadoc-in-a-multimodu -->
+                            <!-- inherited>false</inherited -->
+
+                            <docfilessubdirs>true</docfilessubdirs>
+                            <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
+                            <skip>${tft.disableJavaDocs}</skip>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <id>default</id>
+                                <reports>
+                                    <report>javadoc-no-fork</report>
+                                    <report>test-javadoc-no-fork</report>
+                                </reports>
+                            </reportSet>
+                            <reportSet><!-- aggregate reportSet, to define in poms having modules -->
+                                <id>aggregate</id>
+                                <inherited>false</inherited><!-- don't run aggregate in child modules -->
+                                <reports>
+                                    <report>aggregate-no-fork</report>
+                                    <report>test-aggregate-no-fork</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+                </plugins>
+            </reporting>
+        </profile>
+
+        <!--====================================================================================================================================================
+
          This profile is activated during a release.
 
         =====================================================================================================================================================-->
@@ -3319,198 +3511,6 @@
                             <additionalOptions>${tft.javadoc.doclet.additionalParam} ${tft.javadoc.doclint}</additionalOptions>
                             <useStandardDocletOptions>true</useStandardDocletOptions>
                         </configuration>
-                    </plugin>
-                </plugins>
-            </reporting>
-        </profile>
-
-        <!--====================================================================================================================================================
-
-        This profile generates a Surefire report for the site. Must be separately run after a build (plain or with metrics). Some reports, such as Surefire
-        or Jacoco, are collected from the previous build; others are re-created. For this reasons configurations of latter plugins need to be replicated here.
-
-        Please note that plugin versions must be always replicated, otherwise the latest ones are used - see https://issues.apache.org/jira/browse/MSITE-443.
-
-        See also it.tidalwave-metrics-pre-site-v1.
-
-        =====================================================================================================================================================-->
-        <profile>
-            <id>it-tidalwave-site-v1</id>
-            <properties>
-                <tft.defaultGoal>site</tft.defaultGoal>
-            </properties>
-            <reporting>
-                <excludeDefaults>true</excludeDefaults> <!-- FIXME: needed? -->
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-project-info-reports-plugin</artifactId>
-                        <version>${tft.maven-project-info-reports-plugin.version}</version>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <report>ci-management</report>
-                                    <report>dependencies</report>
-                                    <report>dependency-convergence</report>
-                                    <report>dependency-info</report>
-                                    <report>dependency-management</report>
-                                    <report>distribution-management</report>
-                                    <report>index</report>
-                                    <report>issue-management</report>
-                                    <report>licenses</report>
-                                    <report>mailing-lists</report>
-                                    <report>modules</report>
-                                    <report>plugin-management</report>
-                                    <report>plugins</report>
-                                    <report>scm</report>
-                                    <report>summary</report>
-                                    <report>team</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                    </plugin>
-
-                    <!-- Surefire -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-report-plugin</artifactId>
-                        <version>${tft.maven-surefire-report-plugin.version}</version>
-                        <configuration>
-                            <skipSurefireReport>${tft.maven-surefire-report-plugin.skip}</skipSurefireReport>
-                            <aggregate>${tft.report.test.aggregate}</aggregate>
-                            <reportsDirectories>
-                                <reportDirectory>${project.build.directory}/surefire-reports/plain</reportDirectory>
-                                <reportDirectory>${project.build.directory}/surefire-reports/jacoco</reportDirectory>
-                            </reportsDirectories>
-                        </configuration>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <!-- Just collects reports generated in a previous run. -->
-                                    <report>report-only</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                    </plugin>
-
-                    <!-- Jacoco -->
-                    <plugin>
-                        <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId>
-                        <version>${tft.jacoco-maven-plugin.version}</version>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <report>report-aggregate</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                    </plugin>
-
-                    <!-- SpotBugs -->
-                    <plugin>
-                        <groupId>com.github.spotbugs</groupId>
-                        <artifactId>spotbugs-maven-plugin</artifactId>
-                        <version>${tft.spotbugs-maven-plugin.version}</version>
-                        <!-- Configuration must be replicated from build section. -->
-                        <!-- No aggregate reports for SpotBugs: https://spotbugs.github.io/spotbugs-maven-plugin/faq.html#Aggregate_Reporting -->
-                        <configuration>
-                            <xmlOutput>true</xmlOutput>
-                            <spotbugsXmlOutput>true</spotbugsXmlOutput>
-                            <spotbugsXmlOutputDirectory>target/site</spotbugsXmlOutputDirectory> <!-- FIXME: needed? -->
-                            <skipEmptyReport>false</skipEmptyReport>
-                            <effort>Max</effort>
-                            <threshold>Low</threshold>
-                            <failOnError>false</failOnError>
-                            <skip>${tft.spotbugs.skip}</skip>
-                        </configuration>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <report>spotbugs</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                    </plugin>
-
-                    <!-- PMD -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-pmd-plugin</artifactId>
-                        <version>${tft.maven-pmd-plugin.version}</version>
-                        <!-- Configuration must be replicated from build section. -->
-                        <configuration>
-                            <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                            <minimumTokens>100</minimumTokens>
-                            <targetJdk>${tft.javac.source}</targetJdk>
-                            <skip>${tft.pmd.skip}</skip>
-                            <skipEmptyReport>false</skipEmptyReport>
-                            <rulesets>
-                                <ruleset>${tft.pmd.ruleset}</ruleset>
-                            </rulesets>
-                        </configuration>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <!-- FIXME: can't reuse tft.profile.metrics.pmdGoal -->
-                                    <report>pmd</report>
-                                    <report>cpd</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                    </plugin>
-
-                    <!-- OWASP -->
-                    <plugin>
-                        <groupId>org.owasp</groupId>
-                        <artifactId>dependency-check-maven</artifactId>
-                        <version>${tft.dependency-check-maven-plugin.version}</version>
-                        <!-- Configuration must be replicated from build section. -->
-                        <configuration>
-                            <skip>${tft.owasp.skip}</skip>
-                        </configuration>
-                        <reportSets>
-                            <reportSet>
-                                <reports>
-                                    <report>aggregate</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
-                    </plugin>
-
-                    <!-- JavaDoc -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>${tft.maven-javadoc-plugin.version}</version>
-                        <!-- Configuration must be replicated from build section. -->
-                        <configuration>
-                            <!-- FIXME -->
-                            <!-- https://stackoverflow.com/questions/27935661/how-to-avoid-duplicate-forking-when-generating-aggregated-javadoc-in-a-multimodu -->
-                            <!-- inherited>false</inherited -->
-
-                            <docfilessubdirs>true</docfilessubdirs>
-                            <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
-                            <skip>${tft.disableJavaDocs}</skip>
-                            <failOnError>false</failOnError>
-                        </configuration>
-                        <reportSets>
-                            <reportSet>
-                                <id>default</id>
-                                <reports>
-                                    <report>javadoc-no-fork</report>
-                                    <report>test-javadoc-no-fork</report>
-                                </reports>
-                            </reportSet>
-                            <reportSet><!-- aggregate reportSet, to define in poms having modules -->
-                                <id>aggregate</id>
-                                <inherited>false</inherited><!-- don't run aggregate in child modules -->
-                                <reports>
-                                    <report>aggregate-no-fork</report>
-                                    <report>test-aggregate-no-fork</report>
-                                </reports>
-                            </reportSet>
-                        </reportSets>
                     </plugin>
                 </plugins>
             </reporting>
