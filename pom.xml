@@ -1238,18 +1238,36 @@
                                 </goals>
                                 <!-- Here it comes the tricky part. We need to execute something only at the master pom level after the build lifecycle has
                                 been completed. Unfortunately we can't use <inherited>false</inherited> in the <execution> section because the whole POM is
-                                always inherited. So we use conditionals in the antrun plugin, cheching for relativePath. -->
+                                always inherited. So we use conditionals in the antrun plugin, checking for relativePath. Maven is invoked by explicit path
+                                to eventually bypass a wrapper. -->
                                 <configuration>
                                     <target xmlns:if="ant:if" xmlns:unless="ant:unless">
                                         <available file="${project.parent.relativePath}" type="file" property="tft.isNotMasterPom" />
-                                        <echo level="info" if:set="tft.isNotMasterPom">Skipping in child module...</echo>
+                                        <!-- It's necessary to specify the same settings file of the invoker. Unfortunately there's no property containin its
+                                        path, so we must extract if by scraping the debugging output of Maven. -->
+                                        <exec unless:set="tft.isNotMasterPom" dir="${project.basedir}" executable="${maven.home}/bin/mvn" failonerror="true">
+                                            <arg value="-X" />
+                                            <arg value="-N" />
+                                            <arg value="initialize" />
+                                            <redirector outputproperty="tft.maven.settings" >
+                                                <outputfilterchain>
+                                                    <filterreader classname="org.apache.tools.ant.filters.LineContainsRegExp">
+                                                        <param type="regexp" value=".*user settings from .*"/>
+                                                    </filterreader>
+                                                    <tokenfilter>
+                                                        <replaceregex pattern=".*user settings from " replace="" flags="g"/>
+                                                    </tokenfilter>
+                                                </outputfilterchain>
+                                            </redirector>
+                                        </exec>
+                                        <echo level="info" if:set="tft.isNotMasterPom">Skipping site in child module...</echo>
                                         <echo level="info" unless:set="tft.isNotMasterPom">Launching a forked Maven for creating site...</echo>
-                                        <echo level="info" unless:set="tft.isNotMasterPom">    -Pit-tidalwave-site-v1</echo>
-                                        <echo level="info" unless:set="tft.isNotMasterPom">    -Dtft.disableJavaDocs=${tft.disableJavaDocs}</echo>
-                                        <!-- Directly run Maven bypassing an eventual wrapper. -->
+                                        <echo level="info" unless:set="tft.isNotMasterPom">    ${maven.home}/bin/mvn -s ${tft.maven.settings} -Dtft.disableJavaDocs=${tft.disableJavaDocs} -Pit-tidalwave-site-v1</echo>
                                         <exec unless:set="tft.isNotMasterPom" dir="${project.basedir}" executable="${maven.home}/bin/mvn">
-                                            <arg value="-Pit-tidalwave-site-v1" />
+                                            <arg value="-s"/>
+                                            <arg value="${tft.maven.settings}" />
                                             <arg value="-Dtft.disableJavaDocs=${tft.disableJavaDocs}" />
+                                            <arg value="-Pit-tidalwave-site-v1" />
                                         </exec>
                                     </target>
                                 </configuration>
