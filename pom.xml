@@ -67,7 +67,8 @@
 
     <issueManagement>
         <system>Jira</system>
-        <url>http://services.tidalwave.it/jira/browse/SUP</url>
+        <!-- url>http://services.tidalwave.it/jira/browse/SUP</url -->
+        <url>https://tidalwave.atlassian.net/browse/SUP</url>
     </issueManagement>
 
     <ciManagement>
@@ -165,6 +166,9 @@
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
         <tft.release.pushChanges>false</tft.release.pushChanges>
 
+        <tft.changes.skip>true</tft.changes.skip>
+        <tft.changes.report>changes-report</tft.changes.report>
+
         <tft.description/>
 
         <scm.repo.url/>
@@ -259,6 +263,7 @@
         <tft.maven-archetype-plugin.version>2.4</tft.maven-archetype-plugin.version>
         <tft.maven-assembly-plugin.version>3.3.0</tft.maven-assembly-plugin.version>
         <tft.maven-bundle-plugin.version>4.2.1</tft.maven-bundle-plugin.version>
+        <tft.maven-changes-plugin.version>2.12.1</tft.maven-changes-plugin.version>
         <tft.maven-checkstyle-plugin.version>3.0.0</tft.maven-checkstyle-plugin.version>
         <tft.maven-clean-plugin.version>3.1.0</tft.maven-clean-plugin.version>
         <tft.maven-compiler-plugin.version>3.8.1</tft.maven-compiler-plugin.version>
@@ -503,6 +508,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>${tft.maven-project-info-reports-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-changes-plugin</artifactId>
+                    <version>${tft.maven-changes-plugin.version}</version>
                 </plugin>
 
                 <plugin>
@@ -1466,6 +1476,26 @@
                                 <reports>
                                     <report>aggregate-no-fork</report>
                                     <report>test-aggregate-no-fork</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- JIRA reporting -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-changes-plugin</artifactId>
+                        <version>${tft.maven-changes-plugin.version}</version>
+                        <configuration>
+                            <skip>${tft.changes.skip}</skip>
+                            <useJql>true</useJql>
+                            <onlyCurrentVersion>true</onlyCurrentVersion>
+                            <issueLinkTemplate>%URL%/../%ISSUE%</issueLinkTemplate>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>${tft.changes.report}</report>
                                 </reports>
                             </reportSet>
                         </reportSets>
