@@ -1127,7 +1127,8 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
-                            <argLine>-Xmx${tft.test.maxMemory} ${tft.test.vmOptions} ${tft.test.jacoco.argLine}</argLine>
+                            <!-- Note the @ for late property evaluation. -->
+                            <argLine>-Xmx${tft.test.maxMemory} ${tft.test.vmOptions} @{tft.test.jacoco.argLine}</argLine>
                         </configuration>
                     </plugin>
 
