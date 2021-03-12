@@ -1267,7 +1267,7 @@
                                         <echo level="info" unless:set="tft.isNotMasterPom">${maven.home}/bin/mvn -s ${tft.maven.settings}
                                             -Dtft.disableJavaDocs=${tft.disableJavaDocs} -Pit-tidalwave-site-v1
                                         </echo>
-                                        <exec unless:set="tft.isNotMasterPom" dir="${project.basedir}" executable="${maven.home}/bin/mvn">
+                                        <exec unless:set="tft.isNotMasterPom" dir="${project.basedir}" executable="${maven.home}/bin/mvn" failonerror="true">
                                             <arg value="-s"/>
                                             <arg value="${tft.maven.settings}"/>
                                             <arg value="-Dtft.disableJavaDocs=${tft.disableJavaDocs}"/>
