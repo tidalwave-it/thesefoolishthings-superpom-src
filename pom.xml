@@ -1695,7 +1695,7 @@
                                 </goals>
                                 <configuration>
                                     <target name="push-hg" if="tft.scm-detector.hg">
-                                        <exec executable="hg" dir="${project.build.directory}">
+                                        <exec executable="hg" dir="${project.build.directory}" failonerror="true">
                                             <arg value="push" />
                                         </exec>
                                     </target>
@@ -1709,7 +1709,7 @@
                                 </goals>
                                 <configuration>
                                     <target name="push-git" if="tft.scm-detector.git">
-                                        <exec executable="git" dir="${project.build.directory}">
+                                        <exec executable="git" dir="${project.build.directory}" failonerror="true">
                                             <arg value="push" />
                                             <arg value="origin" />
                                             <arg value="master" />
@@ -2242,7 +2242,7 @@
                                             <option value="-Xbootclasspath/a:$APP_ROOT/Contents/PlugIns/${tft.embedded-jdk.name}/Contents/Home/jre/lib/jfxrt.jar" />
                                         </bundleapp>
 
-                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
+                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil" failonerror="true">
                                             <arg value="create" />
                                             <arg value="-noanyowners" />
                                             <arg value="-imagekey" />
@@ -2252,7 +2252,7 @@
                                             <arg value="${tft.appbundle.name}.dmg" />
                                         </exec>
 
-                                        <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}">
+                                        <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}" failonerror="true">
                                             <arg value="-V" />
                                             <arg value="${tft.appbundle.name}" />
                                             <arg value="-U" />
@@ -2367,7 +2367,7 @@
                                             <option value="-Xdock:name=${tft.appbundle.name}" />
                                         </bundleapp>
 
-                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
+                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil" failonerror="true">
                                             <arg value="create" />
                                             <arg value="-noanyowners" />
                                             <arg value="-imagekey" />
@@ -2377,7 +2377,7 @@
                                             <arg value="${tft.appbundle.name}.dmg" />
                                         </exec>
 
-                                        <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}">
+                                        <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}" failonerror="true">
                                             <arg value="-V" />
                                             <arg value="${tft.appbundle.name}" />
                                             <arg value="-U" />
@@ -2541,7 +2541,7 @@
                                 <configuration>
                                     <target xmlns:if="ant:if" xmlns:unless="ant:unless">
                                         <echo level="${tft.appbundle.build.logLevel}">Creating dmg...</echo>
-                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil">
+                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil" failonerror="true">
                                             <arg value="create" />
                                             <arg value="-noanyowners" />
                                             <arg value="-imagekey" />
@@ -2550,7 +2550,7 @@
                                             <arg value="${tft.appbundle.name}.app" />
                                             <arg value="${tft.appbundle.name}.dmg" />
                                         </exec>
-                                        <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}">
+                                        <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}" failonerror="true">
                                             <arg value="-V" />
                                             <arg value="${tft.appbundle.name}" />
                                             <arg value="-U" />
@@ -2669,7 +2669,7 @@
                                         <echo level="${tft.appbundle.build.logLevel}">CFBundleVersion: ${tft.bundle.build.version}</echo>
 
                                         <echo level="${tft.appbundle.build.logLevel}">Invoking ${tft.tool.jpackager-actual}...</echo>
-                                        <exec dir="${pom.basedir}" executable="${tft.tool.jpackager-actual}">
+                                        <exec dir="${pom.basedir}" executable="${tft.tool.jpackager-actual}" failonerror="true">
                                             <arg value="create-image" />
                                             <arg value="--output" />
                                             <arg value="${project.build.directory}" />
@@ -2764,7 +2764,7 @@
                                         <echo level="${tft.appbundle.build.logLevel}">CFBundleVersion: ${tft.bundle.build.version}</echo>
 
                                         <echo level="${tft.appbundle.build.logLevel}">Invoking jpackage...</echo>
-                                        <exec dir="${pom.basedir}" executable="jpackage">
+                                        <exec dir="${pom.basedir}" executable="jpackage" failonerror="true">
                                             <arg value="--dest" />
                                             <arg value="${project.build.directory}" />
                                             <arg value="--type" />
