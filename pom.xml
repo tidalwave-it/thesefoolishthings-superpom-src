@@ -104,11 +104,10 @@
         <tft.profile.metrics.spotbugsGoal>com.github.spotbugs:spotbugs-maven-plugin:check</tft.profile.metrics.spotbugsGoal>
         <tft.profile.metrics.pmdGoal>pmd:cpd pmd:pmd</tft.profile.metrics.pmdGoal>
         <tft.profile.metrics.sonarGoal>sonar:sonar</tft.profile.metrics.sonarGoal>
-        <tft.profile.metrics.clirrGoal>clirr:clirr</tft.profile.metrics.clirrGoal>
         <tft.profile.metrics.dependencyCheckGoal>dependency-check:aggregate</tft.profile.metrics.dependencyCheckGoal>
         <tft.profile.metrics.defaultGoal>
             clean install ${tft.profile.metrics.findbugsGoal} ${tft.profile.metrics.spotbugsGoal} ${tft.profile.metrics.pmdGoal}
-            ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} dependency:analyze
+            ${tft.profile.metrics.checkstyleGoal} dependency:analyze
             ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal}
         </tft.profile.metrics.defaultGoal>
 
@@ -245,7 +244,6 @@
         <tft.javadoc.doclet.version>2.0.12</tft.javadoc.doclet.version>
         <tft.javadoc.doclet.additionalParam>-verbose</tft.javadoc.doclet.additionalParam>
 
-        <tft.clirr.skip>false</tft.clirr.skip>
         <tft.buildNumber.getRevisionOnlyOnce>false</tft.buildNumber.getRevisionOnlyOnce>
 
         <!--==== Plugin Versions ==================================================================================-->
@@ -287,7 +285,6 @@
         <tft.aspectj-maven-plugin.version>1.11</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>3.2.0</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.4</tft.buildnumber-maven-plugin.version>
-        <tft.clirr-maven-plugin.version>2.8</tft.clirr-maven-plugin.version>
         <!-- Beware of 6.1.2, with a performance regression: https://github.com/jeremylong/DependencyCheck/issues/3183 -->
         <tft.dependency-check-maven-plugin.version>6.1.1</tft.dependency-check-maven-plugin.version>
         <tft.docker-maven-plugin.version>1.2.2</tft.docker-maven-plugin.version>
@@ -529,11 +526,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>${tft.build-helper-maven-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>clirr-maven-plugin</artifactId>
-                    <version>${tft.clirr-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.gmaven</groupId>
@@ -929,19 +921,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>clirr-maven-plugin</artifactId>
-                <!-- Configuration must be replicated in reporting section -->
-                <configuration>
-                    <skip>${tft.clirr.skip}</skip>
-                    <failOnError>${tft.stableAPI}</failOnError>
-                    <comparisonVersion>${tft.stableAPIVersion}</comparisonVersion>
-                    <logResults>true</logResults>
-                    <minSeverity>info</minSeverity>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <configuration>
@@ -1154,22 +1133,6 @@
                     <!-- SpotBugs -->
 
                     <!-- PMD is configured in the default build section -->
-
-                    <!-- CLIRR -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>clirr-maven-plugin</artifactId>
-                        <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
-                        <version>${tft.clirr-maven-plugin.version}</version>
-                        <!-- Configuration must be replicated to reporting section. -->
-                        <configuration>
-                            <skip>${tft.clirr.skip}</skip>
-                            <failOnError>${tft.stableAPI}</failOnError>
-                            <comparisonVersion>${tft.stableAPIVersion}</comparisonVersion>
-                            <logResults>true</logResults>
-                            <minSeverity>info</minSeverity>
-                        </configuration>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
