@@ -153,6 +153,8 @@
         <tft.disableJavaDocs>${disableJavaDocs}</tft.disableJavaDocs>
         <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
         <tft.javadoc.doclint />
+        <tft.javadoc.detectJavaApiLink>false</tft.javadoc.detectJavaApiLink>
+
         <tft.release.localCheckout>true</tft.release.localCheckout>
         <tft.release.preparationGoals>clean install verify</tft.release.preparationGoals>
         <tft.release.completionGoals />
@@ -978,6 +980,7 @@
                     <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
                     <skip>${tft.disableJavaDocs}</skip>
                     <failOnError>false</failOnError>
+                    <detectJavaApiLink>${tft.javadoc.detectJavaApiLink}</detectJavaApiLink>
                 </configuration>
             </plugin>
 
@@ -1322,6 +1325,7 @@
                             <excludePackageNames>${tft.javadoc.excludePackageNames}</excludePackageNames>
                             <skip>${tft.disableJavaDocs}</skip>
                             <failOnError>false</failOnError>
+                            <detectJavaApiLink>${tft.javadoc.detectJavaApiLink}</detectJavaApiLink>
                         </configuration>
                         <reportSets>
                             <reportSet>
@@ -3460,6 +3464,7 @@
                 </plugins>
             </reporting>
         </profile>
+
 
         <!--====================================================================================================================================================
 
