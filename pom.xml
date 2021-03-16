@@ -340,6 +340,10 @@
     </repositories>
 
     <distributionManagement>
+        <site>
+            <id>thesefoolishthings-superpom-site</id>
+            <url>http://tidalwave.it/projects/superpom</url>
+        </site>
         <repository>
             <id>staging-oss.sonatype.org</id>
             <name>Sonatype Release Repository</name>
