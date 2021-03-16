@@ -1146,7 +1146,10 @@
         <profile>
             <id>it.tidalwave-metrics-pre-site-v1</id>
             <properties>
-                <tft.defaultGoal>clean install</tft.defaultGoal>
+                <tft.profile.metrics.checkstyleGoal/>
+                <tft.profile.metrics.spotbugsGoal/>
+                <tft.profile.metrics.pmdGoal/>
+                <tft.profile.metrics.dependencyCheckGoal/>
             </properties>
         </profile>
 
