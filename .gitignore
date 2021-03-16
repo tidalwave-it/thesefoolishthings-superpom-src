@@ -11,4 +11,5 @@ release.properties
 .rej
 .DS_Store
 .idea/
-superpom.iml
+*.iml
+Maven__*.xml
