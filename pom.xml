@@ -1204,9 +1204,7 @@
         <profile>
             <id>it.tidalwave-metrics-pre-site-v1</id>
             <properties>
-                <tft.profile.metrics.defaultGoal>
-                    clean install dependency:analyze ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal}
-                </tft.profile.metrics.defaultGoal>
+                <tft.defaultGoal>clean install</tft.defaultGoal>
             </properties>
         </profile>
 
