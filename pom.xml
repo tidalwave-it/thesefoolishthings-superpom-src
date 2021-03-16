@@ -102,14 +102,13 @@
         <tft.profile.metrics.checkstyleGoal>checkstyle:checkstyle</tft.profile.metrics.checkstyleGoal>
         <tft.profile.metrics.findbugsGoal />
         <tft.profile.metrics.spotbugsGoal>com.github.spotbugs:spotbugs-maven-plugin:check</tft.profile.metrics.spotbugsGoal>
-        <tft.profile.metrics.javancssGoal>javancss:report</tft.profile.metrics.javancssGoal>
         <tft.profile.metrics.pmdGoal>pmd:cpd pmd:pmd</tft.profile.metrics.pmdGoal>
         <tft.profile.metrics.sonarGoal>sonar:sonar</tft.profile.metrics.sonarGoal>
         <tft.profile.metrics.clirrGoal>clirr:clirr</tft.profile.metrics.clirrGoal>
         <tft.profile.metrics.dependencyCheckGoal>dependency-check:aggregate</tft.profile.metrics.dependencyCheckGoal>
         <tft.profile.metrics.defaultGoal>
             clean install ${tft.profile.metrics.findbugsGoal} ${tft.profile.metrics.spotbugsGoal} ${tft.profile.metrics.pmdGoal}
-            ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} ${tft.profile.metrics.javancssGoal} dependency:analyze
+            ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.clirrGoal} dependency:analyze
             ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal}
         </tft.profile.metrics.defaultGoal>
 
@@ -148,8 +147,6 @@
         <tft.pmd.skip>false</tft.pmd.skip>
         <pmd.skip>${tft.pmd.skip}</pmd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <cpd.skip>${tft.pmd.skip}</cpd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
-        <tft.javancss.skip>true</tft.javancss.skip> <!-- FIXME: breaks with JDK 1.7+ -->
-        <ncss.skip>${tft.javancss.skip}</ncss.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <tft.project.build.unwoven-classes.directory>${project.build.directory}/unwoven-classes</tft.project.build.unwoven-classes.directory>
         <tft.project.build.unwoven-test-classes.directory>${project.build.directory}/unwoven-test-classes</tft.project.build.unwoven-test-classes.directory>
         <tft.stableAPI>${stableAPI}</tft.stableAPI>
@@ -301,7 +298,6 @@
         <tft.gwt-maven-plugin.version>2.8.2</tft.gwt-maven-plugin.version>
         <tft.jacoco-maven-plugin.version>0.8.6</tft.jacoco-maven-plugin.version>
         <tft.javafx-maven-plugin.version>0.0.5</tft.javafx-maven-plugin.version>
-        <tft.javancss-maven-plugin.version>2.1</tft.javancss-maven-plugin.version>
         <tft.jaxb2-maven-plugin.version>2.4</tft.jaxb2-maven-plugin.version>
         <tft.jaxws-maven-plugin.version>2.3</tft.jaxws-maven-plugin.version>
         <tft.license-maven-plugin.version>1.16</tft.license-maven-plugin.version>
@@ -548,11 +544,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>gwt-maven-plugin</artifactId>
                     <version>${tft.gwt-maven-plugin.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>javancss-maven-plugin</artifactId>
-                    <version>${tft.javancss-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -1177,18 +1168,6 @@
                             <comparisonVersion>${tft.stableAPIVersion}</comparisonVersion>
                             <logResults>true</logResults>
                             <minSeverity>info</minSeverity>
-                        </configuration>
-                    </plugin>
-
-                    <!-- JavaNCSS -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>javancss-maven-plugin</artifactId>
-                        <!-- Version must be copied here because of http://jira.codehaus.org/browse/MSITE-443 -->
-                        <version>${tft.javancss-maven-plugin.version}</version>
-                        <!-- Configuration must be replicated to reporting section. -->
-                        <configuration>
-                            <skip>${tft.javancss.skip}</skip>
                         </configuration>
                     </plugin>
                 </plugins>
