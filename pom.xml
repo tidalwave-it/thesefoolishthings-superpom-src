@@ -1169,7 +1169,7 @@
         <profile>
             <id>it-tidalwave-site-v1</id>
             <properties>
-                <tft.defaultGoal>site</tft.defaultGoal>
+                <tft.defaultGoal>site site:stage</tft.defaultGoal>
             </properties>
             <reporting>
                 <excludeDefaults>true</excludeDefaults> <!-- FIXME: needed? -->
