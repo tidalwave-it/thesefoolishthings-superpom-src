@@ -18,10 +18,10 @@
         * explicit version configuration for a number of plugins;
         * easy configurability by means of pre-defined properties to avoid cut &amp; copy of plugin sections.
 
-        A number of profiles, easily activatable, are available for:
+        A number of profiles, that can be easily activated, are available for:
 
         * Spring-AOP configuration;
-        * different kinds of Continous Integration tasks, including a full run of QA tools such as JaCoCo, FindBugs, PMD, etc...
+        * different kinds of Continuous Integration tasks, including a full run of QA tools such as JaCoCo, FindBugs, PMD, etc...
         * deploying WARs and locally running them with Tomcat or Jetty;
         * creating a Mac OS X bundle for JavaFX applications;
         * creating .deb packages for both application and services;
