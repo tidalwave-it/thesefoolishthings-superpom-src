@@ -5,7 +5,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>5.0-ALPHA-5-SNAPSHOT</version>
+    <version>5.0-ALPHA-6-SNAPSHOT</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -345,6 +345,10 @@
     </repositories>
 
     <distributionManagement>
+        <site>
+            <id>thesefoolishthings-superpom-site</id>
+            <url>http://tidalwave.it/projects/superpom</url>
+        </site>
         <repository>
             <id>staging-oss.sonatype.org</id>
             <name>Sonatype Release Repository</name>
@@ -1159,10 +1163,10 @@
         <profile>
             <id>it.tidalwave-metrics-pre-site-v1</id>
             <properties>
-                <tft.profile.metrics.checkstyleGoal/>
-                <tft.profile.metrics.spotbugsGoal/>
-                <tft.profile.metrics.pmdGoal/>
-                <tft.profile.metrics.dependencyCheckGoal/>
+                <tft.profile.metrics.checkstyleGoal />
+                <tft.profile.metrics.spotbugsGoal />
+                <tft.profile.metrics.pmdGoal />
+                <tft.profile.metrics.dependencyCheckGoal />
             </properties>
         </profile>
 
