@@ -1449,8 +1449,8 @@
                                     <target>
                                         <echo file="${tft.descriptionStamp}">${tft.description}${line.separator}</echo>
                                         <echo level="info">${tft.description}</echo>
-                                        <echo level="info">Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source} -release
-                                            ${tft.javac.release}
+                                        <echo level="info">
+                                            Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source} -release ${tft.javac.release}
                                         </echo>
                                     </target>
                                 </configuration>
@@ -2368,8 +2368,7 @@
                                 <configuration>
                                     <excludeTransitive>false</excludeTransitive>
                                     <excludeGroupIds>org.openjfx</excludeGroupIds>
-                                    <!-- FIXME: too many things, test included -->
-                                    <!-- includeScope>runtime</includeScope -->
+                                    <includeScope>runtime</includeScope>
                                     <outputDirectory>${project.build.directory}/app/lib</outputDirectory>
                                 </configuration>
                             </execution>
