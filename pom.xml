@@ -2419,6 +2419,8 @@
                                 <configuration>
                                     <target xmlns:if="ant:if" xmlns:unless="ant:unless">
                                         <echo level="${tft.appbundle.build.logLevel}">Creating dmg...</echo>
+                                        <delete dir="${tft.appbundle.name}.dmg" verbose="false" failonerror="true" />
+                                        <delete dir="${tft.appbundle.name}.dmg.gz" verbose="false" failonerror="true" />
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil" failonerror="true">
                                             <arg value="create" />
                                             <arg value="-noanyowners" />
