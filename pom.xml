@@ -704,9 +704,9 @@
                     <showDeprecation>${tft.javac.showDeprecation}</showDeprecation>
                     <showWarnings>${tft.javac.showWarnings}</showWarnings>
                     <fork>${tft.javac.fork}</fork>
-                    <compilerArgument>
-                        ${tft.javac.xlint}
-                    </compilerArgument>
+                    <compilerArgs>
+                        <arg>${tft.javac.xlint}</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
 
