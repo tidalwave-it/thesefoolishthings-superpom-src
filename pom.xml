@@ -161,6 +161,7 @@
         <tft.release.goals>clean install source:jar-no-fork source:test-jar-no-fork javadoc:jar assembly:single deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
         <tft.release.pushChanges>false</tft.release.pushChanges>
+        <tft.release.tagNameFormat>@{project.version}</tft.release.tagNameFormat>
 
         <tft.description />
 
@@ -876,7 +877,7 @@
                     <completionGoals>${tft.release.completionGoals}</completionGoals>
                     <goals>${tft.release.goals}</goals>
                     <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}" -DdryRun=${dryRun}</arguments>
-                    <tagNameFormat>@{project.version}</tagNameFormat>
+                    <tagNameFormat>${tft.release.tagNameFormat}</tagNameFormat>
                 </configuration>
             </plugin>
 
