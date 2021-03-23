@@ -5,7 +5,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>5.0-ALPHA-6-SNAPSHOT</version>
+    <version>5.0-ALPHA-8-SNAPSHOT</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -161,6 +161,7 @@
         <tft.release.goals>clean install source:jar-no-fork source:test-jar-no-fork javadoc:jar assembly:single deploy</tft.release.goals>
         <tft.release.sign-artifacts.skip>false</tft.release.sign-artifacts.skip>
         <tft.release.pushChanges>false</tft.release.pushChanges>
+        <tft.release.tagNameFormat>@{project.version}</tft.release.tagNameFormat>
 
         <tft.maven-jxr-plugin.skip>false</tft.maven-jxr-plugin.skip>
 
@@ -227,12 +228,14 @@
 
         <tft.webapp.deployServerId />
         <tft.webapp.deployServerUrl />
-        <tft.webapp.contextPath />
+        <tft.webapp.contextPath>/</tft.webapp.contextPath>
 
+        <tft.jetty.host>0.0.0.0</tft.jetty.host>
         <tft.jetty.port>8080</tft.jetty.port>
         <tft.jetty.stopPort>9966</tft.jetty.stopPort>
         <tft.jetty.scanIntervalSeconds>4</tft.jetty.scanIntervalSeconds>
         <tft.jetty.stopKey>${project.groupId}:${project.artifactId}</tft.jetty.stopKey>
+        <tft.jetty.tmpDir>${project.build.directory}/jetty-work</tft.jetty.tmpDir>
 
         <tft.genisoimage>genisoimage</tft.genisoimage>
 
@@ -271,9 +274,9 @@
         <tft.maven-jarsigner-plugin.version>3.0.0</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>3.2.0</tft.maven-javadoc-plugin.version>
         <tft.maven-jdeb-plugin.version>1.7</tft.maven-jdeb-plugin.version>
-        <tft.maven-jetty-plugin.version>6.1.26</tft.maven-jetty-plugin.version> <!-- FIXME: 7.0.0.pre5 breaks current projects -->
         <tft.maven-jxr-plugin.version>3.1.0</tft.maven-jxr-plugin.version>
         <tft.maven-license-plugin.version>1.10.b1</tft.maven-license-plugin.version>
+        <tft.jetty-maven-plugin.version>10.0.1</tft.jetty-maven-plugin.version>
         <tft.maven-pmd-plugin.version>3.14.0</tft.maven-pmd-plugin.version>
         <tft.maven-project-info-reports-plugin.version>3.1.1</tft.maven-project-info-reports-plugin.version>
         <tft.maven-release-plugin.version>3.0.0-M1</tft.maven-release-plugin.version>
@@ -635,9 +638,9 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>maven-jetty-plugin</artifactId>
-                    <version>${tft.maven-jetty-plugin.version}</version>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-maven-plugin</artifactId>
+                    <version>${tft.jetty-maven-plugin.version}</version>
                 </plugin>
 
                 <plugin>
@@ -709,9 +712,9 @@
                     <showDeprecation>${tft.javac.showDeprecation}</showDeprecation>
                     <showWarnings>${tft.javac.showWarnings}</showWarnings>
                     <fork>${tft.javac.fork}</fork>
-                    <compilerArgument>
-                        ${tft.javac.xlint}
-                    </compilerArgument>
+                    <compilerArgs>
+                        <arg>${tft.javac.xlint}</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
 
@@ -882,7 +885,7 @@
                     <completionGoals>${tft.release.completionGoals}</completionGoals>
                     <goals>${tft.release.goals}</goals>
                     <arguments>-P${release.profiles} -DaltDeploymentRepository="${altDeploymentRepository}" -DdryRun=${dryRun}</arguments>
-                    <tagNameFormat>@{project.version}</tagNameFormat>
+                    <tagNameFormat>${tft.release.tagNameFormat}</tagNameFormat>
                 </configuration>
             </plugin>
 
@@ -1476,8 +1479,8 @@
                                     <target>
                                         <echo file="${tft.descriptionStamp}">${tft.description}${line.separator}</echo>
                                         <echo level="info">${tft.description}</echo>
-                                        <echo level="info">Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source} -release
-                                            ${tft.javac.release}
+                                        <echo level="info">
+                                            Java Version: ${java.version} -source ${tft.javac.source} -target ${tft.javac.source} -release ${tft.javac.release}
                                         </echo>
                                     </target>
                                 </configuration>
@@ -1831,39 +1834,46 @@
 
         <!--====================================================================================================================================================
 
-        This profile configures Jetty for the build. Create an empty file in src/config/activate-jetty-profile to activate it.
+        This profile configures Jetty for the build. Create an empty file in src/config/activate-it.tidalwave-jetty-v2-profile to activate it.
 
         =====================================================================================================================================================-->
         <profile>
-            <id>jetty</id>
+            <id>it.tidalwave-jetty-v2</id>
             <activation>
                 <file>
-                    <exists>src/config/activate-jetty-profile</exists>
+                    <exists>src/config/activate-it.tidalwave-jetty-v2-profile</exists>
                 </file>
             </activation>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.mortbay.jetty</groupId>
-                        <artifactId>maven-jetty-plugin</artifactId>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>create-jetty-tmpdir</id>
+                                <configuration>
+                                    <target>
+                                        <mkdir dir="${tft.jetty.tmpDir}" />
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
                         <configuration>
-                            <connectors>
-                                <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                                    <port>${tft.jetty.port}</port>
-                                    <maxIdleTime>60000</maxIdleTime>
-                                </connector>
-                            </connectors>
+                            <httpConnector>
+                                <host>${tft.jetty.host}</host>
+                                <port>${tft.jetty.port}</port>
+                            </httpConnector>
+                            <tmpDirectory>${tft.jetty.tmpDir}</tmpDirectory>
                             <stopPort>${tft.jetty.stopPort}</stopPort>
                             <stopKey>${tft.jetty.stopKey}</stopKey>
                             <scanIntervalSeconds>${tft.jetty.scanIntervalSeconds}</scanIntervalSeconds>
-                            <webAppConfig>
-                                <contextPath>${tft.webapp.contextPath}</contextPath>
-                                <baseResource implementation="org.mortbay.resource.ResourceCollection">
-                                    <!-- Workaround for Maven/Jetty issue http://jira.codehaus.org/browse/JETTY-680 -->
-                                    <!-- <resources>src/main/webapp,${project.build.directory}/${project.build.finalName}</resources> -->
-                                    <resourcesAsCSV>src/main/webapp,${project.build.directory}/${project.build.finalName}</resourcesAsCSV>
-                                </baseResource>
-                            </webAppConfig>
+                            <war>${settings.localRepository}/it/tidalwave/northernwind/${nw.webApp}/${nw.version}/${nw.webApp}-${nw.version}.war</war>
+                            <contextPath>${tft.webapp.contextPath}</contextPath>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -2395,8 +2405,7 @@
                                 <configuration>
                                     <excludeTransitive>false</excludeTransitive>
                                     <excludeGroupIds>org.openjfx</excludeGroupIds>
-                                    <!-- FIXME: too many things, test included -->
-                                    <!-- includeScope>runtime</includeScope -->
+                                    <includeScope>runtime</includeScope>
                                     <outputDirectory>${project.build.directory}/app/lib</outputDirectory>
                                 </configuration>
                             </execution>
@@ -2447,6 +2456,8 @@
                                 <configuration>
                                     <target xmlns:if="ant:if" xmlns:unless="ant:unless">
                                         <echo level="${tft.appbundle.build.logLevel}">Creating dmg...</echo>
+                                        <delete file="${project.build.directory}/${tft.appbundle.name}.dmg" verbose="false" failonerror="true" />
+                                        <delete file="${project.build.directory}/${tft.appbundle.name}.dmg.gz" verbose="false" failonerror="true" />
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil" failonerror="true">
                                             <arg value="create" />
                                             <arg value="-noanyowners" />
