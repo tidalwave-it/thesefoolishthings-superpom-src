@@ -1299,6 +1299,18 @@
                         </reportSets>
                     </plugin>
 
+                    <!-- CheckStyle (not in a profile, to be used by IDEs) -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <version>${tft.maven-checkstyle-plugin.version}</version>
+                        <!-- Configuration must be replicated from build section. -->
+                        <configuration>
+                            <configLocation>it/tidalwave/checkstyle/checkstyle.xml</configLocation>
+                            <skip>${tft.checkstyle.skip}</skip>
+                        </configuration>
+                    </plugin>
+
                     <!-- OWASP -->
                     <plugin>
                         <groupId>org.owasp</groupId>
