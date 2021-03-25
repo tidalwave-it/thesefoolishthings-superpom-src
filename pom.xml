@@ -922,7 +922,6 @@
                                     <message>The reactor is not valid</message>
                                     <ignoreModuleDependencies>false</ignoreModuleDependencies>
                                 </reactorModuleConvergence>
-                                <!--<dependencyConvergence />-->
                             </rules>
                         </configuration>
                     </execution>
