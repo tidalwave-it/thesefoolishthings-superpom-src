@@ -5,7 +5,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>5.0-ALPHA-10-SNAPSHOT</version>
+    <version>5.0-ALPHA-11-SNAPSHOT</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -37,7 +37,7 @@
     </description>
 
     <organization>
-        <name>Tidalwave s.a.s. (http://tidalwave.it)</name>
+        <name>Tidalwave s.a.s.</name>
         <url>http://tidalwave.it</url>
     </organization>
 
@@ -45,7 +45,7 @@
         <developer>
             <name>Fabrizio Giudici</name>
             <email>fabrizio.giudici@tidalwave.it</email>
-            <url>http://tidalwave.it/people/fabrizio/</url>
+            <url>http://tidalwave.it/fabrizio/</url>
             <organization>Tidalwave s.a.s.</organization>
             <organizationUrl>http://tidalwave.it</organizationUrl>
             <roles>
@@ -127,7 +127,7 @@
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
         <tft.maven.requiredVersion>3.6.0</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.8.0,)</tft.maven.requiredJdk>
-        <tft.superpom.config.version>1.6</tft.superpom.config.version>
+        <tft.superpom.config.version>1.7</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.mainPackage>please-set-the-tft.mainPackage-property-to-specify-the-package-with-the-main-class</tft.mainPackage>
         <tft.jar.classpathInManifest>false</tft.jar.classpathInManifest>
@@ -277,7 +277,7 @@
         <tft.maven-jarsigner-plugin.version>3.0.0</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>3.2.0</tft.maven-javadoc-plugin.version>
         <tft.maven-jdeb-plugin.version>1.7</tft.maven-jdeb-plugin.version>
-        <tft.maven-license-plugin.version>1.10.b1</tft.maven-license-plugin.version>
+        <tft.mycila-license-maven-plugin.version>4.0.rc2</tft.mycila-license-maven-plugin.version>
         <tft.jetty-maven-plugin.version>10.0.1</tft.jetty-maven-plugin.version>
         <tft.maven-pmd-plugin.version>3.14.0</tft.maven-pmd-plugin.version>
         <tft.maven-project-info-reports-plugin.version>3.1.1</tft.maven-project-info-reports-plugin.version>
@@ -628,9 +628,9 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>com.mycila.maven-license-plugin</groupId>
-                    <artifactId>maven-license-plugin</artifactId>
-                    <version>${tft.maven-license-plugin.version}</version>
+                    <groupId>com.mycila</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>${tft.mycila-license-maven-plugin.version}</version>
                 </plugin>
 
                 <plugin>
