@@ -37,7 +37,7 @@
     </description>
 
     <organization>
-        <name>Tidalwave s.a.s. (http://tidalwave.it)</name>
+        <name>Tidalwave s.a.s.</name>
         <url>http://tidalwave.it</url>
     </organization>
 
@@ -45,7 +45,7 @@
         <developer>
             <name>Fabrizio Giudici</name>
             <email>fabrizio.giudici@tidalwave.it</email>
-            <url>http://tidalwave.it/people/fabrizio/</url>
+            <url>http://tidalwave.it/fabrizio/</url>
             <organization>Tidalwave s.a.s.</organization>
             <organizationUrl>http://tidalwave.it</organizationUrl>
             <roles>
