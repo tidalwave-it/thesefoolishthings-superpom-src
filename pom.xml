@@ -267,7 +267,6 @@
 
         <!--==== Plugin Versions ==================================================================================-->
 
-        <tft.maven-android-plugin.version>4.0.0</tft.maven-android-plugin.version>
         <tft.maven-antrun-plugin.version>3.0.0</tft.maven-antrun-plugin.version>
         <tft.maven-archetype-plugin.version>2.4</tft.maven-archetype-plugin.version>
         <tft.maven-assembly-plugin.version>3.3.0</tft.maven-assembly-plugin.version>
@@ -301,6 +300,7 @@
         <tft.maven-surefire-report-plugin.version>3.0.0-M5</tft.maven-surefire-report-plugin.version>
         <tft.maven-war-plugin.version>3.3.1</tft.maven-war-plugin.version>
 
+        <tft.android-maven-plugin.version>4.6.0</tft.android-maven-plugin.version>
         <tft.aspectj-maven-plugin.version>1.11</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>3.2.0</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.4</tft.buildnumber-maven-plugin.version>
@@ -597,9 +597,9 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                    <artifactId>maven-android-plugin</artifactId>
-                    <version>${tft.maven-android-plugin.version}</version>
+                    <groupId>com.simpligility.maven.plugins</groupId>
+                    <artifactId>android-maven-plugin</artifactId>
+                    <version>${tft.android-maven-plugin.version}</version>
                 </plugin>
 
                 <plugin>
