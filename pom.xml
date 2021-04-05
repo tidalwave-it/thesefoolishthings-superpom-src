@@ -151,6 +151,13 @@
         <tft.javac.fork>true</tft.javac.fork>
 
         <tft.pmd.skip>false</tft.pmd.skip>
+        <tft.pmd.aggregate>false</tft.pmd.aggregate>
+        <tft.pmd.minimumTokens>100</tft.pmd.minimumTokens>
+        <tft.pmd.minimumPriority>5</tft.pmd.minimumPriority>
+        <tft.pmd.skipEmptyReport>false</tft.pmd.skipEmptyReport>
+        <tft.pmd.showPmdLog>false</tft.pmd.showPmdLog>
+        <tft.pmd.includeXmlInSite>true</tft.pmd.includeXmlInSite>
+
         <pmd.skip>${tft.pmd.skip}</pmd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <cpd.skip>${tft.pmd.skip}</cpd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <tft.project.build.unwoven-classes.directory>${project.build.directory}/unwoven-classes</tft.project.build.unwoven-classes.directory>
@@ -851,11 +858,15 @@
                 </dependencies>
                 <!-- Configuration must be replicated to reporting section. -->
                 <configuration>
+                    <aggregate>${tft.pmd.aggregate}</aggregate>
                     <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                    <minimumTokens>100</minimumTokens>
+                    <minimumTokens>${tft.pmd.minimumTokens}</minimumTokens>
+                    <minimumPriority>${tft.pmd.minimumPriority}</minimumPriority>
                     <targetJdk>${tft.javac.source}</targetJdk>
                     <skip>${tft.pmd.skip}</skip>
-                    <skipEmptyReport>false</skipEmptyReport>
+                    <skipEmptyReport>${tft.pmd.skipEmptyReport}</skipEmptyReport>
+                    <showPmdLog>${tft.pmd.showPmdLog}</showPmdLog>
+                    <includeXmlInSite>${tft.pmd.includeXmlInSite}</includeXmlInSite>
                     <rulesets>
                         <ruleset>${tft.pmd.ruleset}</ruleset>
                     </rulesets>
@@ -1291,11 +1302,15 @@
                         <version>${tft.maven-pmd-plugin.version}</version>
                         <!-- Configuration must be replicated from build section. -->
                         <configuration>
+                            <aggregate>${tft.pmd.aggregate}</aggregate>
                             <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                            <minimumTokens>100</minimumTokens>
+                            <minimumTokens>${tft.pmd.minimumTokens}</minimumTokens>
+                            <minimumPriority>${tft.pmd.minimumPriority}</minimumPriority>
                             <targetJdk>${tft.javac.source}</targetJdk>
                             <skip>${tft.pmd.skip}</skip>
-                            <skipEmptyReport>false</skipEmptyReport>
+                            <skipEmptyReport>${tft.pmd.skipEmptyReport}</skipEmptyReport>
+                            <showPmdLog>${tft.pmd.showPmdLog}</showPmdLog>
+                            <includeXmlInSite>${tft.pmd.includeXmlInSite}</includeXmlInSite>
                             <rulesets>
                                 <ruleset>${tft.pmd.ruleset}</ruleset>
                             </rulesets>
