@@ -867,6 +867,8 @@
                 <!-- Configuration must be replicated in reporting section -->
                 <configuration>
                     <skip>${tft.owasp.skip}</skip>
+                    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <msbuildAnalyzerEnabled>false</msbuildAnalyzerEnabled>
                     <formats>
                         <format>xml</format>
                         <format>html</format>
@@ -1334,6 +1336,8 @@
                         <!-- Configuration must be replicated from build section. -->
                         <configuration>
                             <skip>${tft.owasp.skip}</skip>
+                            <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                            <msbuildAnalyzerEnabled>false</msbuildAnalyzerEnabled>
                         </configuration>
                         <reportSets>
                             <reportSet>
