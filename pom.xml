@@ -114,7 +114,14 @@
         <tft.checkstyle.skip>false</tft.checkstyle.skip>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.findbugs.skip>false</tft.findbugs.skip>
+
         <tft.spotbugs.skip>${tft.findbugs.skip}</tft.spotbugs.skip>
+        <tft.spotbugs.effort>Max</tft.spotbugs.effort>
+        <tft.spotbugs.threshold>Low</tft.spotbugs.threshold>
+        <tft.spotbugs.failOnError>false</tft.spotbugs.failOnError>
+        <tft.spotbugs.relaxed>false</tft.spotbugs.relaxed>
+        <tft.spotbugs.maxHeap>512</tft.spotbugs.maxHeap>
+        <tft.spotbugs.maxAllowedViolations>0</tft.spotbugs.maxAllowedViolations>
 
         <tft.pmd.ruleset>/it/tidalwave/pmd/basic.xml</tft.pmd.ruleset>
         <tft.pmd.ruleset.groupId>it.tidalwave.thesefoolishthings</tft.pmd.ruleset.groupId>
@@ -803,9 +810,12 @@
                     <spotbugsXmlOutput>true</spotbugsXmlOutput>
                     <spotbugsXmlOutputDirectory>target/site</spotbugsXmlOutputDirectory> <!-- FIXME: needed? -->
                     <skipEmptyReport>false</skipEmptyReport>
-                    <effort>Max</effort>
-                    <threshold>Low</threshold>
-                    <failOnError>false</failOnError>
+                    <effort>${tft.spotbugs.effort}</effort>
+                    <threshold>${tft.spotbugs.threshold}</threshold>
+                    <relaxed>${tft.spotbugs.relaxed}</relaxed>
+                    <failOnError>${tft.spotbugs.failOnError}</failOnError>
+                    <maxHeap>${tft.spotbugs.maxHeap}</maxHeap>
+                    <maxAllowedViolations>${tft.spotbugs.maxAllowedViolations}</maxAllowedViolations>
                     <skip>${tft.spotbugs.skip}</skip>
                 </configuration>
             </plugin>
@@ -1257,9 +1267,12 @@
                             <spotbugsXmlOutput>true</spotbugsXmlOutput>
                             <spotbugsXmlOutputDirectory>target/site</spotbugsXmlOutputDirectory> <!-- FIXME: needed? -->
                             <skipEmptyReport>false</skipEmptyReport>
-                            <effort>Max</effort>
-                            <threshold>Low</threshold>
-                            <failOnError>false</failOnError>
+                            <effort>${tft.spotbugs.effort}</effort>
+                            <threshold>${tft.spotbugs.threshold}</threshold>
+                            <relaxed>${tft.spotbugs.relaxed}</relaxed>
+                            <failOnError>${tft.spotbugs.failOnError}</failOnError>
+                            <maxHeap>${tft.spotbugs.maxHeap}</maxHeap>
+                            <maxAllowedViolations>${tft.spotbugs.maxAllowedViolations}</maxAllowedViolations>
                             <skip>${tft.spotbugs.skip}</skip>
                         </configuration>
                         <reportSets>
