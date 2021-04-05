@@ -114,7 +114,14 @@
         <tft.checkstyle.skip>false</tft.checkstyle.skip>
         <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.findbugs.skip>false</tft.findbugs.skip>
+
         <tft.spotbugs.skip>${tft.findbugs.skip}</tft.spotbugs.skip>
+        <tft.spotbugs.effort>Max</tft.spotbugs.effort>
+        <tft.spotbugs.threshold>Low</tft.spotbugs.threshold>
+        <tft.spotbugs.failOnError>false</tft.spotbugs.failOnError>
+        <tft.spotbugs.relaxed>false</tft.spotbugs.relaxed>
+        <tft.spotbugs.maxHeap>512</tft.spotbugs.maxHeap>
+        <tft.spotbugs.maxAllowedViolations>0</tft.spotbugs.maxAllowedViolations>
 
         <tft.pmd.ruleset>/it/tidalwave/pmd/basic.xml</tft.pmd.ruleset>
         <tft.pmd.ruleset.groupId>it.tidalwave.thesefoolishthings</tft.pmd.ruleset.groupId>
@@ -126,7 +133,7 @@
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
         <tft.maven.requiredVersion>3.6.0</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.8.0,)</tft.maven.requiredJdk>
-        <tft.superpom.config.version>1.7</tft.superpom.config.version>
+        <tft.superpom.config.version>1.8</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.mainPackage>please-set-the-tft.mainPackage-property-to-specify-the-package-with-the-main-class</tft.mainPackage>
         <tft.jar.classpathInManifest>false</tft.jar.classpathInManifest>
@@ -144,6 +151,13 @@
         <tft.javac.fork>true</tft.javac.fork>
 
         <tft.pmd.skip>false</tft.pmd.skip>
+        <tft.pmd.aggregate>false</tft.pmd.aggregate>
+        <tft.pmd.minimumTokens>100</tft.pmd.minimumTokens>
+        <tft.pmd.minimumPriority>5</tft.pmd.minimumPriority>
+        <tft.pmd.skipEmptyReport>false</tft.pmd.skipEmptyReport>
+        <tft.pmd.showPmdLog>false</tft.pmd.showPmdLog>
+        <tft.pmd.includeXmlInSite>true</tft.pmd.includeXmlInSite>
+
         <pmd.skip>${tft.pmd.skip}</pmd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <cpd.skip>${tft.pmd.skip}</cpd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <tft.project.build.unwoven-classes.directory>${project.build.directory}/unwoven-classes</tft.project.build.unwoven-classes.directory>
@@ -255,7 +269,6 @@
 
         <!--==== Plugin Versions ==================================================================================-->
 
-        <tft.maven-android-plugin.version>4.0.0</tft.maven-android-plugin.version>
         <tft.maven-antrun-plugin.version>3.0.0</tft.maven-antrun-plugin.version>
         <tft.maven-archetype-plugin.version>2.4</tft.maven-archetype-plugin.version>
         <tft.maven-assembly-plugin.version>3.3.0</tft.maven-assembly-plugin.version>
@@ -280,7 +293,6 @@
         <tft.maven-pmd-plugin.version>3.14.0</tft.maven-pmd-plugin.version>
         <tft.maven-project-info-reports-plugin.version>3.1.1</tft.maven-project-info-reports-plugin.version>
         <tft.maven-release-plugin.version>3.0.0-M1</tft.maven-release-plugin.version>
-        <tft.maven-replacer-plugin.version>1.5.3</tft.maven-replacer-plugin.version>
         <tft.maven-resources-plugin.version>3.2.0</tft.maven-resources-plugin.version>
         <tft.maven-scm-plugin.version>1.11.2</tft.maven-scm-plugin.version>
         <tft.maven-shade-plugin.version>3.2.4</tft.maven-shade-plugin.version>
@@ -290,6 +302,7 @@
         <tft.maven-surefire-report-plugin.version>3.0.0-M5</tft.maven-surefire-report-plugin.version>
         <tft.maven-war-plugin.version>3.3.1</tft.maven-war-plugin.version>
 
+        <tft.android-maven-plugin.version>4.6.0</tft.android-maven-plugin.version>
         <tft.aspectj-maven-plugin.version>1.11</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>3.2.0</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>1.4</tft.buildnumber-maven-plugin.version>
@@ -299,7 +312,6 @@
         <tft.dockerfile-maven-plugin.version>1.4.9</tft.dockerfile-maven-plugin.version>
         <tft.exec-maven-plugin.version>3.0.0</tft.exec-maven-plugin.version>
         <tft.findbugs-maven-plugin.version>3.0.5</tft.findbugs-maven-plugin.version>
-        <tft.gmaven-plugin.version>2.1.1</tft.gmaven-plugin.version>
         <tft.gwt-maven-plugin.version>2.8.2</tft.gwt-maven-plugin.version>
         <tft.jacoco-maven-plugin.version>0.8.6</tft.jacoco-maven-plugin.version>
         <tft.javafx-maven-plugin.version>0.0.5</tft.javafx-maven-plugin.version>
@@ -308,7 +320,7 @@
         <tft.license-maven-plugin.version>1.16</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
         <tft.nexus-staging-maven-plugin.version>1.6.8</tft.nexus-staging-maven-plugin.version>
-        <tft.sonar-maven-plugin.version>3.8</tft.sonar-maven-plugin.version>
+        <tft.sonar-maven-plugin.version>3.8.0.2131</tft.sonar-maven-plugin.version>
         <tft.spotbugs-maven-plugin.version>3.1.11</tft.spotbugs-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>12.0.2</tft.vaadin-maven-plugin.version>
@@ -335,7 +347,7 @@
         <repository>
             <id>snapshots-oss.sonatype.org</id>
             <name>Sonatype Snapshots Repository</name>
-            <url>http://oss.sonatype.org/content/repositories/snapshots/</url>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
             <releases>
                 <enabled>false</enabled>
             </releases>
@@ -545,11 +557,6 @@
                     <version>${tft.build-helper-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.gmaven</groupId>
-                    <artifactId>gmaven-plugin</artifactId>
-                    <version>${tft.gmaven-plugin.version}</version>
-                </plugin>
-                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>gwt-maven-plugin</artifactId>
                     <version>${tft.gwt-maven-plugin.version}</version>
@@ -597,9 +604,9 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                    <artifactId>maven-android-plugin</artifactId>
-                    <version>${tft.maven-android-plugin.version}</version>
+                    <groupId>com.simpligility.maven.plugins</groupId>
+                    <artifactId>android-maven-plugin</artifactId>
+                    <version>${tft.android-maven-plugin.version}</version>
                 </plugin>
 
                 <plugin>
@@ -617,12 +624,6 @@
                     <groupId>org.fusesource.mvnplugins</groupId>
                     <artifactId>maven-graph-plugin</artifactId>
                     <version>${tft.maven-graph-plugin.version}</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>com.google.code.maven-replacer-plugin</groupId>
-                    <artifactId>maven-replacer-plugin</artifactId>
-                    <version>${tft.maven-replacer-plugin.version}</version>
                 </plugin>
 
                 <plugin>
@@ -811,9 +812,12 @@
                     <spotbugsXmlOutput>true</spotbugsXmlOutput>
                     <spotbugsXmlOutputDirectory>target/site</spotbugsXmlOutputDirectory> <!-- FIXME: needed? -->
                     <skipEmptyReport>false</skipEmptyReport>
-                    <effort>Max</effort>
-                    <threshold>Low</threshold>
-                    <failOnError>false</failOnError>
+                    <effort>${tft.spotbugs.effort}</effort>
+                    <threshold>${tft.spotbugs.threshold}</threshold>
+                    <relaxed>${tft.spotbugs.relaxed}</relaxed>
+                    <failOnError>${tft.spotbugs.failOnError}</failOnError>
+                    <maxHeap>${tft.spotbugs.maxHeap}</maxHeap>
+                    <maxAllowedViolations>${tft.spotbugs.maxAllowedViolations}</maxAllowedViolations>
                     <skip>${tft.spotbugs.skip}</skip>
                 </configuration>
             </plugin>
@@ -849,11 +853,15 @@
                 </dependencies>
                 <!-- Configuration must be replicated to reporting section. -->
                 <configuration>
+                    <aggregate>${tft.pmd.aggregate}</aggregate>
                     <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                    <minimumTokens>100</minimumTokens>
+                    <minimumTokens>${tft.pmd.minimumTokens}</minimumTokens>
+                    <minimumPriority>${tft.pmd.minimumPriority}</minimumPriority>
                     <targetJdk>${tft.javac.source}</targetJdk>
                     <skip>${tft.pmd.skip}</skip>
-                    <skipEmptyReport>false</skipEmptyReport>
+                    <skipEmptyReport>${tft.pmd.skipEmptyReport}</skipEmptyReport>
+                    <showPmdLog>${tft.pmd.showPmdLog}</showPmdLog>
+                    <includeXmlInSite>${tft.pmd.includeXmlInSite}</includeXmlInSite>
                     <rulesets>
                         <ruleset>${tft.pmd.ruleset}</ruleset>
                     </rulesets>
@@ -867,6 +875,8 @@
                 <!-- Configuration must be replicated in reporting section -->
                 <configuration>
                     <skip>${tft.owasp.skip}</skip>
+                    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <msbuildAnalyzerEnabled>false</msbuildAnalyzerEnabled>
                     <formats>
                         <format>xml</format>
                         <format>html</format>
@@ -1183,6 +1193,7 @@
         <profile>
             <id>it-tidalwave-site-v1</id>
             <properties>
+                <tft.pmd.aggregate>true</tft.pmd.aggregate>
                 <tft.defaultGoal>site site:stage</tft.defaultGoal>
             </properties>
             <reporting>
@@ -1265,9 +1276,12 @@
                             <spotbugsXmlOutput>true</spotbugsXmlOutput>
                             <spotbugsXmlOutputDirectory>target/site</spotbugsXmlOutputDirectory> <!-- FIXME: needed? -->
                             <skipEmptyReport>false</skipEmptyReport>
-                            <effort>Max</effort>
-                            <threshold>Low</threshold>
-                            <failOnError>false</failOnError>
+                            <effort>${tft.spotbugs.effort}</effort>
+                            <threshold>${tft.spotbugs.threshold}</threshold>
+                            <relaxed>${tft.spotbugs.relaxed}</relaxed>
+                            <failOnError>${tft.spotbugs.failOnError}</failOnError>
+                            <maxHeap>${tft.spotbugs.maxHeap}</maxHeap>
+                            <maxAllowedViolations>${tft.spotbugs.maxAllowedViolations}</maxAllowedViolations>
                             <skip>${tft.spotbugs.skip}</skip>
                         </configuration>
                         <reportSets>
@@ -1286,11 +1300,15 @@
                         <version>${tft.maven-pmd-plugin.version}</version>
                         <!-- Configuration must be replicated from build section. -->
                         <configuration>
+                            <aggregate>${tft.pmd.aggregate}</aggregate>
                             <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                            <minimumTokens>100</minimumTokens>
+                            <minimumTokens>${tft.pmd.minimumTokens}</minimumTokens>
+                            <minimumPriority>${tft.pmd.minimumPriority}</minimumPriority>
                             <targetJdk>${tft.javac.source}</targetJdk>
                             <skip>${tft.pmd.skip}</skip>
-                            <skipEmptyReport>false</skipEmptyReport>
+                            <skipEmptyReport>${tft.pmd.skipEmptyReport}</skipEmptyReport>
+                            <showPmdLog>${tft.pmd.showPmdLog}</showPmdLog>
+                            <includeXmlInSite>${tft.pmd.includeXmlInSite}</includeXmlInSite>
                             <rulesets>
                                 <ruleset>${tft.pmd.ruleset}</ruleset>
                             </rulesets>
@@ -1326,6 +1344,8 @@
                         <!-- Configuration must be replicated from build section. -->
                         <configuration>
                             <skip>${tft.owasp.skip}</skip>
+                            <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                            <msbuildAnalyzerEnabled>false</msbuildAnalyzerEnabled>
                         </configuration>
                         <reportSets>
                             <reportSet>
