@@ -3290,60 +3290,6 @@
 
         <!--====================================================================================================================================================
 
-        This profile adds OpenJavaFX artifacts to dependency management when JDK 11 or above is used.
-
-        =====================================================================================================================================================-->
-        <profile>
-            <id>it.tidalwave-javafx-v1</id>
-            <activation>
-                <jdk>[11,)</jdk>
-            </activation>
-            <properties>
-                <tft.javafx.version>11.0.1</tft.javafx.version>
-            </properties>
-            <dependencyManagement>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.openjfx</groupId>
-                        <artifactId>javafx-base</artifactId>
-                        <version>${tft.javafx.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.openjfx</groupId>
-                        <artifactId>javafx-controls</artifactId>
-                        <version>${tft.javafx.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.openjfx</groupId>
-                        <artifactId>javafx-fxml</artifactId>
-                        <version>${tft.javafx.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.openjfx</groupId>
-                        <artifactId>javafx-graphics</artifactId>
-                        <version>${tft.javafx.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.openjfx</groupId>
-                        <artifactId>javafx-swing</artifactId>
-                        <version>${tft.javafx.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.openjfx</groupId>
-                        <artifactId>javafx-swt</artifactId>
-                        <version>${tft.javafx.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.openjfx</groupId>
-                        <artifactId>javafx-web</artifactId>
-                        <version>${tft.javafx.version}</version>
-                    </dependency>
-                </dependencies>
-            </dependencyManagement>
-        </profile>
-
-        <!--====================================================================================================================================================
-
         This profile handles some m2e in Eclipse.
         This profile is automatically activated when building with Eclipse and m2e.
 
