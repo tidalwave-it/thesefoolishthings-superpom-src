@@ -2593,15 +2593,29 @@
                         <artifactId>maven-dependency-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>copy-dependencies</id>
+                                <id>copy-jars</id>
                                 <phase>generate-resources</phase>
                                 <goals>
                                     <goal>copy-dependencies</goal>
                                 </goals>
                                 <configuration>
+                                    <excludeTransitive>false</excludeTransitive>
+                                    <excludeGroupIds>org.openjfx</excludeGroupIds>
                                     <includeScope>runtime</includeScope>
-                                    <!-- overWrite>true</overWrite -->
                                     <outputDirectory>${project.build.directory}/dist/lib</outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-modules</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <excludeTransitive>false</excludeTransitive>
+                                    <includeGroupIds>org.openjfx</includeGroupIds>
+                                    <includeScope>runtime</includeScope>
+                                    <outputDirectory>${project.build.directory}/dist/mods</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
