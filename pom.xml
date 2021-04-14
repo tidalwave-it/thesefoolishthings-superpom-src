@@ -1158,7 +1158,7 @@
 
         <!--====================================================================================================================================================
 
-        This profile suppresses all plugins configured in it.tidalwave-metrics-v2 that are going to be run in it-tidalwave-site-v1. You might want to
+        This profile suppresses all plugins configured in it.tidalwave-metrics-v2 that are going to be run in it.tidalwave-site-v1. You might want to
         activate it in CI to prevent duplicate work when both profiles are used.
 
         =====================================================================================================================================================-->
@@ -1183,7 +1183,7 @@
 
         =====================================================================================================================================================-->
         <profile>
-            <id>it-tidalwave-site-v1</id>
+            <id>it.tidalwave-site-v1</id>
             <properties>
                 <tft.pmd.aggregate>true</tft.pmd.aggregate>
                 <tft.defaultGoal>site site:stage</tft.defaultGoal>
