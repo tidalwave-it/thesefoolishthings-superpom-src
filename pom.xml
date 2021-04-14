@@ -312,7 +312,7 @@
         <tft.gwt-maven-plugin.version>2.8.2</tft.gwt-maven-plugin.version>
         <tft.jacoco-maven-plugin.version>0.8.6</tft.jacoco-maven-plugin.version>
         <tft.javafx-maven-plugin.version>0.0.5</tft.javafx-maven-plugin.version>
-        <tft.jaxb2-maven-plugin.version>2.4</tft.jaxb2-maven-plugin.version>
+        <tft.jaxb2-maven-plugin.version>2.5.0</tft.jaxb2-maven-plugin.version>
         <tft.jaxws-maven-plugin.version>2.3</tft.jaxws-maven-plugin.version>
         <tft.license-maven-plugin.version>1.16</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
