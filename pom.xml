@@ -303,7 +303,7 @@
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
         <tft.nexus-staging-maven-plugin.version>1.6.8</tft.nexus-staging-maven-plugin.version>
         <tft.sonar-maven-plugin.version>3.8.0.2131</tft.sonar-maven-plugin.version>
-        <tft.spotbugs-maven-plugin.version>3.1.11</tft.spotbugs-maven-plugin.version>
+        <tft.spotbugs-maven-plugin.version>4.5.0.0</tft.spotbugs-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>12.0.2</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>2.8.1</tft.versions-maven-plugin.version>
