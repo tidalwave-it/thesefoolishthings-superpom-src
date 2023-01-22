@@ -133,7 +133,7 @@
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
         <tft.maven.requiredVersion>3.6.0</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[1.8.0,)</tft.maven.requiredJdk>
-        <tft.superpom.config.version>1.8</tft.superpom.config.version>
+        <tft.superpom.config.version>1.9</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.mainPackage>please-set-the-tft.mainPackage-property-to-specify-the-package-with-the-main-class</tft.mainPackage>
         <tft.jar.classpathInManifest>false</tft.jar.classpathInManifest>
