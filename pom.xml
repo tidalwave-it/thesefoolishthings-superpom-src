@@ -294,8 +294,7 @@
         <tft.aspectj-maven-plugin.version>1.14.0</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>3.2.0</tft.build-helper-maven-plugin.version>
         <tft.buildnumber-maven-plugin.version>3.0.0</tft.buildnumber-maven-plugin.version>
-        <!-- Beware of 6.1.2, with a performance regression: https://github.com/jeremylong/DependencyCheck/issues/3183 -->
-        <tft.dependency-check-maven-plugin.version>6.1.1</tft.dependency-check-maven-plugin.version>
+        <tft.dependency-check-maven-plugin.version>8.2.1</tft.dependency-check-maven-plugin.version>
         <tft.docker-maven-plugin.version>1.2.2</tft.docker-maven-plugin.version>
         <tft.dockerfile-maven-plugin.version>1.4.9</tft.dockerfile-maven-plugin.version>
         <tft.exec-maven-plugin.version>3.1.0</tft.exec-maven-plugin.version>
