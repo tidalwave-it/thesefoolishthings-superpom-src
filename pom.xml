@@ -272,7 +272,7 @@
         <tft.maven-enforcer-plugin.version>3.0.0-M3</tft.maven-enforcer-plugin.version>
         <tft.maven-gpg-plugin.version>1.6</tft.maven-gpg-plugin.version>
         <tft.maven-graph-plugin.version>1.39</tft.maven-graph-plugin.version>
-        <tft.maven-install-plugin.version>3.0.0-M1</tft.maven-install-plugin.version>
+        <tft.maven-install-plugin.version>3.1.1</tft.maven-install-plugin.version>
         <tft.maven-jar-plugin.version>3.2.0</tft.maven-jar-plugin.version>
         <tft.maven-jarsigner-plugin.version>3.0.0</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>3.4.1</tft.maven-javadoc-plugin.version>
