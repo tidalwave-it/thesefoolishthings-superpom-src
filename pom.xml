@@ -282,7 +282,7 @@
         <tft.maven-pmd-plugin.version>3.14.0</tft.maven-pmd-plugin.version>
         <tft.maven-project-info-reports-plugin.version>3.1.1</tft.maven-project-info-reports-plugin.version>
         <tft.maven-release-plugin.version>3.0.0-M1</tft.maven-release-plugin.version>
-        <tft.maven-resources-plugin.version>3.2.0</tft.maven-resources-plugin.version>
+        <tft.maven-resources-plugin.version>3.3.1</tft.maven-resources-plugin.version>
         <tft.maven-scm-plugin.version>1.11.2</tft.maven-scm-plugin.version>
         <tft.maven-shade-plugin.version>3.2.4</tft.maven-shade-plugin.version>
         <tft.maven-site-plugin.version>3.9.1</tft.maven-site-plugin.version>
