@@ -259,7 +259,7 @@
 
         <!--==== Plugin Versions ==================================================================================-->
 
-        <tft.maven-antrun-plugin.version>3.0.0</tft.maven-antrun-plugin.version>
+        <tft.maven-antrun-plugin.version>3.1.0</tft.maven-antrun-plugin.version>
         <tft.maven-archetype-plugin.version>2.4</tft.maven-archetype-plugin.version>
         <tft.maven-assembly-plugin.version>3.3.0</tft.maven-assembly-plugin.version>
         <tft.maven-bundle-plugin.version>4.2.1</tft.maven-bundle-plugin.version>
