@@ -158,6 +158,9 @@
         <tft.pmd.showPmdLog>false</tft.pmd.showPmdLog>
         <tft.pmd.includeXmlInSite>true</tft.pmd.includeXmlInSite>
 
+        <tft.spring-boot.skip>false</tft.spring-boot.skip>
+        <tft.spring-boot.repackage-classifier>exec</tft.spring-boot.repackage-classifier>
+
         <pmd.skip>${tft.pmd.skip}</pmd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <cpd.skip>${tft.pmd.skip}</cpd.skip> <!-- TODO: <skip> in the plugin doesn't work -->
         <tft.project.build.unwoven-classes.directory>${project.build.directory}/unwoven-classes</tft.project.build.unwoven-classes.directory>
@@ -198,6 +201,10 @@
         <tft.owasp.skip>false</tft.owasp.skip>
 
         <tft.site.skip>false</tft.site.skip>
+
+        <tft.native.name>${project.groupId}-${project.artifactId}-${project.version}</tft.native.name>
+        <tft.native.buildArgs>--no-fallback</tft.native.buildArgs>
+        <tft.native.skip>false</tft.native.skip>
 
         <tft.embedded-jdk.groupId>it.tidalwave.jdk</tft.embedded-jdk.groupId>
         <tft.embedded-jdk.artifactId>adoptopenjdk-jre</tft.embedded-jdk.artifactId>
@@ -301,9 +308,11 @@
         <tft.jaxws-maven-plugin.version>2.3</tft.jaxws-maven-plugin.version>
         <tft.license-maven-plugin.version>1.16</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
+        <tft.native-maven-plugin.version>0.9.21</tft.native-maven-plugin.version>
         <tft.nexus-staging-maven-plugin.version>1.6.8</tft.nexus-staging-maven-plugin.version>
         <tft.sonar-maven-plugin.version>3.8.0.2131</tft.sonar-maven-plugin.version>
         <tft.spotbugs-maven-plugin.version>4.5.0.0</tft.spotbugs-maven-plugin.version>
+        <tft.spring-boot-maven-plugin.version>3.1.0-M2</tft.spring-boot-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>12.0.2</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>2.8.1</tft.versions-maven-plugin.version>
@@ -649,6 +658,16 @@
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-maven-plugin</artifactId>
                     <version>${tft.javafx-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${tft.spring-boot-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.graalvm.buildtools</groupId>
+                    <artifactId>native-maven-plugin</artifactId>
+                    <version>${tft.native-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -3307,6 +3326,96 @@
                     </plugins>
                 </pluginManagement>
             </build>
+        </profile>
+
+        <!--====================================================================================================================================================
+
+        This profile repackage a spring-boot application in a single executable jar.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-spring-boot-single-v1</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-it.tidalwave-spring-boot-single-v1</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <skip>${tft.spring-boot.skip}</skip>
+                            <mainClass>${tft.mainClass}</mainClass>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>repackage</goal>
+                                </goals>
+                                <configuration>
+                                    <classifier>${tft.spring-boot.repackage-classifier}</classifier>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--====================================================================================================================================================
+
+        This profile repackage a spring-boot application in a single native executable with GraalVM.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-spring-boot-native-v1</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-it.tidalwave-spring-boot-native-v1</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <configuration>
+                            <skip>${tft.native.skip}</skip>
+                            <mainClass>${tft.mainClass}</mainClass>
+                            <imageName>${tft.native.name}</imageName>
+                            <buildArgs>${tft.native.buildArgs}</buildArgs>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>compile-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--====================================================================================================================================================
+
+        This profile disables the native plugin when the JVM is not GraalVM.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-spring-boot-native-disabler</id>
+            <activation>
+                <file>
+                    <missing>${env.JAVA_HOME}/bin/native-image</missing>
+                </file>
+            </activation>
+            <properties>
+                <tft.native.skip>true</tft.native.skip>
+            </properties>
         </profile>
     </profiles>
 
