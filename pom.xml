@@ -132,17 +132,16 @@
         <tft.license.name>tidalwave_asf2</tft.license.name>
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
         <tft.maven.requiredVersion>3.6.0</tft.maven.requiredVersion>
-        <tft.maven.requiredJdk>[1.8.0,)</tft.maven.requiredJdk>
+        <tft.maven.requiredJdk>[11,)</tft.maven.requiredJdk>
         <tft.superpom.config.version>1.9</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.mainPackage>please-set-the-tft.mainPackage-property-to-specify-the-package-with-the-main-class</tft.mainPackage>
         <tft.jar.classpathInManifest>false</tft.jar.classpathInManifest>
 
         <!-- Default compiler settings. -->
-        <tft.javac.source>1.8</tft.javac.source>
-        <tft.javac.target>1.8</tft.javac.target>
-        <tft.javac.release />
-        <!--<tft.javac.release>8</tft.javac.release>-->
+        <tft.javac.source>11</tft.javac.source>
+        <tft.javac.target>11</tft.javac.target>
+        <tft.javac.release>11</tft.javac.release>
         <tft.javac.xlint>-Xlint:all</tft.javac.xlint>
         <tft.javac.debug>true</tft.javac.debug>
         <tft.javac.showDeprecation>true</tft.javac.showDeprecation>
