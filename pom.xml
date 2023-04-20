@@ -293,7 +293,7 @@
         <tft.android-maven-plugin.version>4.6.0</tft.android-maven-plugin.version>
         <tft.aspectj-maven-plugin.version>1.14.0</tft.aspectj-maven-plugin.version>
         <tft.build-helper-maven-plugin.version>3.2.0</tft.build-helper-maven-plugin.version>
-        <tft.buildnumber-maven-plugin.version>1.4</tft.buildnumber-maven-plugin.version>
+        <tft.buildnumber-maven-plugin.version>3.0.0</tft.buildnumber-maven-plugin.version>
         <!-- Beware of 6.1.2, with a performance regression: https://github.com/jeremylong/DependencyCheck/issues/3183 -->
         <tft.dependency-check-maven-plugin.version>6.1.1</tft.dependency-check-maven-plugin.version>
         <tft.docker-maven-plugin.version>1.2.2</tft.docker-maven-plugin.version>
@@ -1395,7 +1395,7 @@
         <profile>
             <id>generate-revision-id</id>
             <properties>
-                <tft.description>DESCRIPTION: ${env.GIT_BRANCH} ${project.version} ${buildNumber}</tft.description>
+                <tft.description>DESCRIPTION: ${scmBranch} ${project.version} ${buildNumber}</tft.description>
             </properties>
             <build>
                 <plugins>
