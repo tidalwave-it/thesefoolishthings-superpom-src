@@ -1393,7 +1393,7 @@
         <profile>
             <id>generate-revision-id</id>
             <properties>
-                <tft.description>DESCRIPTION: ${scmBranch} ${project.version} ${buildNumber}</tft.description>
+                <tft.description>DESCRIPTION: ${env.GIT_BRANCH} ${project.version} ${buildNumber}</tft.description>
             </properties>
             <build>
                 <plugins>
