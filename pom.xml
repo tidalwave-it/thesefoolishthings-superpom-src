@@ -274,7 +274,7 @@
         <tft.maven-jar-plugin.version>3.3.0</tft.maven-jar-plugin.version>
         <tft.maven-jarsigner-plugin.version>3.0.0</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>3.5.0</tft.maven-javadoc-plugin.version>
-        <tft.maven-jdeb-plugin.version>1.7</tft.maven-jdeb-plugin.version>
+        <tft.maven-jdeb-plugin.version>1.10</tft.maven-jdeb-plugin.version>
         <tft.mycila-license-maven-plugin.version>4.0.rc2</tft.mycila-license-maven-plugin.version>
         <tft.jetty-maven-plugin.version>10.0.1</tft.jetty-maven-plugin.version>
         <tft.maven-pmd-plugin.version>3.20.0</tft.maven-pmd-plugin.version>
