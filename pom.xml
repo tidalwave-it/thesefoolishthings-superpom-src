@@ -801,7 +801,6 @@
                 <!-- Configuration must be replicated to reporting section. -->
                 <configuration>
                     <xmlOutput>true</xmlOutput>
-                    <spotbugsXmlOutput>true</spotbugsXmlOutput>
                     <spotbugsXmlOutputDirectory>target/site</spotbugsXmlOutputDirectory> <!-- FIXME: needed? -->
                     <skipEmptyReport>false</skipEmptyReport>
                     <effort>${tft.spotbugs.effort}</effort>
