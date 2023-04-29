@@ -706,6 +706,7 @@
                     <showWarnings>${tft.javac.showWarnings}</showWarnings>
                     <fork>${tft.javac.fork}</fork>
                     <compilerArgs>
+                        <arg>-Xlint:-processing</arg>
                         <arg>${tft.javac.xlint}</arg>
                     </compilerArgs>
                 </configuration>
