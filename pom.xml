@@ -846,7 +846,6 @@
                 <!-- Configuration must be replicated to reporting section. -->
                 <configuration>
                     <aggregate>${tft.pmd.aggregate}</aggregate>
-                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
                     <minimumTokens>${tft.pmd.minimumTokens}</minimumTokens>
                     <minimumPriority>${tft.pmd.minimumPriority}</minimumPriority>
                     <targetJdk>${tft.javac.source}</targetJdk>
@@ -1221,7 +1220,6 @@
                         <!-- Configuration must be replicated from build section. -->
                         <configuration>
                             <aggregate>${tft.pmd.aggregate}</aggregate>
-                            <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
                             <minimumTokens>${tft.pmd.minimumTokens}</minimumTokens>
                             <minimumPriority>${tft.pmd.minimumPriority}</minimumPriority>
                             <targetJdk>${tft.javac.source}</targetJdk>
