@@ -1812,6 +1812,86 @@
 
         <!--====================================================================================================================================================
 
+        This profile configures AspectJ in the build. Create an empty file in src/config/activate-it.tidalwave-aspectj-v2-profile to  activate it.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-aspectj-v2</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-it.tidalwave-aspectj-v2-profile</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>aspectj-maven-plugin</artifactId>
+                        <configuration>
+                            <Xlint>ignore</Xlint>
+                            <source>${tft.javac.source}</source>
+                            <complianceLevel>${tft.javac.source}</complianceLevel>
+                            <target>${tft.javac.target}</target>
+                            <!-- Prevent ajc from finding sources -->
+                            <sources />
+                            <testSources />
+                            <!-- This is important because sometimes the plugin decides that there's nothing to do
+                                 because sources are not specified -->
+                            <forceAjcCompile>true</forceAjcCompile>
+                            <showWeaveInfo>${tft.aspectj.ajc.verbose}</showWeaveInfo>
+                            <verbose>${tft.aspectj.ajc.verbose}</verbose>
+                            <aspectLibraries>
+                                <dependency>
+                                    <groupId>org.springframework</groupId>
+                                    <artifactId>spring-aspects</artifactId>
+                                </dependency>
+                            </aspectLibraries>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>weave-classes</id>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                                <configuration>
+                                    <weaveDirectories>
+                                        <weaveDirectory>${project.build.outputDirectory}</weaveDirectory>
+                                    </weaveDirectories>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>weave-test-classes</id>
+                                <phase>process-test-classes</phase>
+                                <goals>
+                                    <goal>test-compile</goal>
+                                </goals>
+                                <configuration>
+                                    <weaveDirectories>
+                                        <weaveDirectory>${project.build.testOutputDirectory}</weaveDirectory>
+                                    </weaveDirectories>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjrt</artifactId>
+                                <version>${tft.aspectjrt.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjtools</artifactId>
+                                <version>${tft.aspectjrt.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--====================================================================================================================================================
+
         This profile configures AspectJ for Spring in the build. Create an empty file in src/config/activate-it.tidalwave.aspectj-springaop-v1-profile to
         activate it.
         This profile arranges things so that AspectJ is compatible with other tools that manipulate the bytecode, such as annotation processors (e.g. Lombok).
