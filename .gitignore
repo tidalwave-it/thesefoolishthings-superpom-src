@@ -11,5 +11,5 @@ release.properties
 .rej
 .DS_Store
 *.iml
-Maven__*.xml
+.idea
 .maven-local-env
