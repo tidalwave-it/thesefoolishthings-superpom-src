@@ -298,7 +298,7 @@
         <tft.dockerfile-maven-plugin.version>1.4.9</tft.dockerfile-maven-plugin.version>
         <tft.exec-maven-plugin.version>3.5.0</tft.exec-maven-plugin.version>
         <tft.findbugs-maven-plugin.version>3.0.5</tft.findbugs-maven-plugin.version>
-        <tft.gwt-maven-plugin.version>2.8.2</tft.gwt-maven-plugin.version>
+        <tft.gwt-maven-plugin.version>2.2.0</tft.gwt-maven-plugin.version>
         <tft.jacoco-maven-plugin.version>0.8.9</tft.jacoco-maven-plugin.version>
         <tft.javafx-maven-plugin.version>0.0.5</tft.javafx-maven-plugin.version>
         <tft.jaxb2-maven-plugin.version>2.5.0</tft.jaxb2-maven-plugin.version>
