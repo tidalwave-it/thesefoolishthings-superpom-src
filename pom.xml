@@ -299,7 +299,7 @@
         <tft.exec-maven-plugin.version>3.5.0</tft.exec-maven-plugin.version>
         <tft.findbugs-maven-plugin.version>3.0.5</tft.findbugs-maven-plugin.version>
         <tft.gwt-maven-plugin.version>2.2.0</tft.gwt-maven-plugin.version>
-        <tft.jacoco-maven-plugin.version>0.8.9</tft.jacoco-maven-plugin.version>
+        <tft.jacoco-maven-plugin.version>0.8.12</tft.jacoco-maven-plugin.version>
         <tft.javafx-maven-plugin.version>0.0.5</tft.javafx-maven-plugin.version>
         <tft.jaxb2-maven-plugin.version>2.5.0</tft.jaxb2-maven-plugin.version>
         <tft.jaxws-maven-plugin.version>2.3</tft.jaxws-maven-plugin.version>
