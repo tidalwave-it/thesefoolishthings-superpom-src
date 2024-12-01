@@ -262,7 +262,7 @@
         <tft.maven-assembly-plugin.version>3.7.1</tft.maven-assembly-plugin.version>
         <tft.maven-bundle-plugin.version>6.0.0</tft.maven-bundle-plugin.version>
         <tft.maven-checkstyle-plugin.version>3.0.0</tft.maven-checkstyle-plugin.version>
-        <tft.maven-clean-plugin.version>3.2.0</tft.maven-clean-plugin.version>
+        <tft.maven-clean-plugin.version>3.4.0</tft.maven-clean-plugin.version>
         <tft.maven-compiler-plugin.version>3.11.0</tft.maven-compiler-plugin.version>
         <tft.maven-dependency-plugin.version>3.5.0</tft.maven-dependency-plugin.version>
         <tft.maven-deploy-plugin.version>3.1.1</tft.maven-deploy-plugin.version>
