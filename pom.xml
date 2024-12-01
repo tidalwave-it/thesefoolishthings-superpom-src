@@ -305,7 +305,7 @@
         <tft.jaxws-maven-plugin.version>2.6</tft.jaxws-maven-plugin.version>
         <tft.license-maven-plugin.version>2.5.0</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
-        <tft.native-maven-plugin.version>0.9.21</tft.native-maven-plugin.version>
+        <tft.native-maven-plugin.version>0.10.3</tft.native-maven-plugin.version>
         <tft.nexus-staging-maven-plugin.version>1.6.13</tft.nexus-staging-maven-plugin.version>
         <tft.sonar-maven-plugin.version>3.9.1.2184</tft.sonar-maven-plugin.version>
         <tft.spotbugs-maven-plugin.version>4.7.3.4</tft.spotbugs-maven-plugin.version>
