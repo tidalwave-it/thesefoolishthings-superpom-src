@@ -309,7 +309,7 @@
         <tft.nexus-staging-maven-plugin.version>1.7.0</tft.nexus-staging-maven-plugin.version>
         <tft.sonar-maven-plugin.version>5.0.0.4389</tft.sonar-maven-plugin.version>
         <tft.spotbugs-maven-plugin.version>4.8.6.6</tft.spotbugs-maven-plugin.version>
-        <tft.spring-boot-maven-plugin.version>3.1.0-M2</tft.spring-boot-maven-plugin.version>
+        <tft.spring-boot-maven-plugin.version>3.4.0</tft.spring-boot-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
         <tft.vaadin-maven-plugin.version>24.5.6</tft.vaadin-maven-plugin.version>
         <tft.versions-maven-plugin.version>2.18.0</tft.versions-maven-plugin.version>
