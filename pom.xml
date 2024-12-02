@@ -278,7 +278,7 @@
         <tft.mycila-license-maven-plugin.version>4.0.rc2</tft.mycila-license-maven-plugin.version>
         <tft.jetty-maven-plugin.version>11.0.24</tft.jetty-maven-plugin.version>
         <tft.maven-pmd-plugin.version>3.20.0</tft.maven-pmd-plugin.version>
-        <tft.maven-project-info-reports-plugin.version>3.4.3</tft.maven-project-info-reports-plugin.version>
+        <tft.maven-project-info-reports-plugin.version>3.8.0</tft.maven-project-info-reports-plugin.version>
         <tft.maven-release-plugin.version>3.1.1</tft.maven-release-plugin.version>
         <tft.maven-resources-plugin.version>3.3.1</tft.maven-resources-plugin.version>
         <tft.maven-scm-plugin.version>2.1.0</tft.maven-scm-plugin.version>
