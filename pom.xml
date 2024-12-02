@@ -3491,6 +3491,32 @@
                 <tft.native.skip>true</tft.native.skip>
             </properties>
         </profile>
+
+        <!--====================================================================================================================================================
+
+        This profile produces a report about plugins that could be updated.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-display-plugin-updates</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>versions-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>display-plugin-updates</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
 
 </project>
