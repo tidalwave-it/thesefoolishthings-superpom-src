@@ -102,7 +102,7 @@
         <tft.profile.metrics.checkstyleGoal>checkstyle:checkstyle</tft.profile.metrics.checkstyleGoal>
         <tft.profile.metrics.findbugsGoal />
         <tft.profile.metrics.spotbugsGoal>com.github.spotbugs:spotbugs-maven-plugin:check</tft.profile.metrics.spotbugsGoal>
-        <tft.profile.metrics.pmdGoal>pmd:cpd pmd:pmd</tft.profile.metrics.pmdGoal>
+        <tft.profile.metrics.pmdGoal>pmd:aggregate-cpd pmd:aggregate-pmd</tft.profile.metrics.pmdGoal>
         <tft.profile.metrics.sonarGoal>sonar:sonar</tft.profile.metrics.sonarGoal>
         <tft.profile.metrics.dependencyCheckGoal>dependency-check:aggregate</tft.profile.metrics.dependencyCheckGoal>
         <tft.profile.metrics.defaultGoal>
@@ -149,7 +149,6 @@
         <tft.javac.fork>true</tft.javac.fork>
 
         <tft.pmd.skip>false</tft.pmd.skip>
-        <tft.pmd.aggregate>false</tft.pmd.aggregate>
         <tft.pmd.minimumTokens>100</tft.pmd.minimumTokens>
         <tft.pmd.minimumPriority>5</tft.pmd.minimumPriority>
         <tft.pmd.skipEmptyReport>false</tft.pmd.skipEmptyReport>
@@ -847,7 +846,6 @@
                 </dependencies>
                 <!-- Configuration must be replicated to reporting section. -->
                 <configuration>
-                    <aggregate>${tft.pmd.aggregate}</aggregate>
                     <minimumTokens>${tft.pmd.minimumTokens}</minimumTokens>
                     <minimumPriority>${tft.pmd.minimumPriority}</minimumPriority>
                     <targetJdk>${tft.javac.source}</targetJdk>
@@ -1115,7 +1113,6 @@
         <profile>
             <id>it.tidalwave-site-v1</id>
             <properties>
-                <tft.pmd.aggregate>true</tft.pmd.aggregate>
                 <tft.defaultGoal>site site:stage</tft.defaultGoal>
             </properties>
             <reporting>
@@ -1222,7 +1219,6 @@
                         <version>${tft.maven-pmd-plugin.version}</version>
                         <!-- Configuration must be replicated from build section. -->
                         <configuration>
-                            <aggregate>${tft.pmd.aggregate}</aggregate>
                             <minimumTokens>${tft.pmd.minimumTokens}</minimumTokens>
                             <minimumPriority>${tft.pmd.minimumPriority}</minimumPriority>
                             <targetJdk>${tft.javac.source}</targetJdk>
@@ -1237,8 +1233,8 @@
                             <reportSet>
                                 <reports>
                                     <!-- FIXME: can't reuse tft.profile.metrics.pmdGoal -->
-                                    <report>pmd</report>
-                                    <report>cpd</report>
+                                    <report>aggregate-pmd</report>
+                                    <report>aggregate-cpd</report>
                                 </reports>
                             </reportSet>
                         </reportSets>
