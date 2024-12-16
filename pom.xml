@@ -192,6 +192,7 @@
         <tft.test.excludedGroups />
         <tft.test.vmOptions />
         <tft.test.jacoco.argLine />
+        <tft.test.allowAttachSelf>-Djdk.attach.allowAttachSelf=true</tft.test.allowAttachSelf>
 
         <tft.report.test.aggregate>true</tft.report.test.aggregate>
         <tft.maven-surefire-report-plugin.skip>false</tft.maven-surefire-report-plugin.skip>
@@ -737,7 +738,7 @@
                         <property>
                         </property>
                     </systemProperties -->
-                    <argLine>-Xmx${tft.test.maxMemory} ${tft.test.vmOptions}</argLine>
+                    <argLine>-Xmx${tft.test.maxMemory} ${tft.test.vmOptions} ${tft.test.allowAttachSelf}</argLine>
                     <testFailureIgnore>${tft.test.failureIgnore}</testFailureIgnore>
                     <runOrder>alphabetical</runOrder>
                     <!-- properties> FIXME: doesn't work if left empty -> crashes surefire
@@ -1043,7 +1044,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <!-- Note the @ for late property evaluation. -->
-                            <argLine>-Xmx${tft.test.maxMemory} ${tft.test.vmOptions} @{tft.test.jacoco.argLine}</argLine>
+                            <argLine>-Xmx${tft.test.maxMemory} ${tft.test.vmOptions} @{tft.test.jacoco.argLine} ${tft.test.allowAttachSelf}</argLine>
                         </configuration>
                     </plugin>
 
