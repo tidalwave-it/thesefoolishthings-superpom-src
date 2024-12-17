@@ -2045,6 +2045,154 @@
 
         <!--====================================================================================================================================================
 
+        This profile configures AspectJ for Spring in the build. Create an empty file in src/config/activate-it.tidalwave.aspectj-springaop-v2-profile to
+        activate it.
+        This profile arranges things so that AspectJ is compatible with other tools that manipulate the bytecode, such as annotation processors (e.g. Lombok).
+        The original, unwoven classes are stored in target/unwoven-classes and target/unwoven-test-classes.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-aspectj-springaop-v2</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-it.tidalwave-aspectj-springaop-v2-profile</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>default-compile</id>
+                                <phase>compile</phase>
+                                <configuration>
+                                    <outputDirectory>${tft.project.build.unwoven-classes.directory}</outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>default-testCompile</id>
+                                <phase>test-compile</phase>
+                                <configuration>
+                                    <outputDirectory>${tft.project.build.unwoven-test-classes.directory}</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- Create the target directories for unwoven classes -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>create-unwoven-classes-dirs</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target>
+                                        <mkdir dir="${tft.project.build.unwoven-classes.directory}" />
+                                        <mkdir dir="${tft.project.build.unwoven-test-classes.directory}" />
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>aspectj-maven-plugin</artifactId>
+                        <configuration>
+                            <Xlint>ignore</Xlint>
+                            <source>${tft.javac.source}</source>
+                            <complianceLevel>${tft.javac.source}</complianceLevel>
+                            <target>${tft.javac.target}</target>
+                            <!-- Prevent ajc from finding sources -->
+                            <sources />
+                            <testSources />
+                            <!-- This is important because sometimes the plugin decides that there's nothing to do
+                                 because sources are not specified -->
+                            <forceAjcCompile>true</forceAjcCompile>
+                            <showWeaveInfo>${tft.aspectj.ajc.verbose}</showWeaveInfo>
+                            <verbose>${tft.aspectj.ajc.verbose}</verbose>
+                            <aspectLibraries>
+                                <dependency>
+                                    <groupId>org.springframework</groupId>
+                                    <artifactId>spring-aspects</artifactId>
+                                </dependency>
+                            </aspectLibraries>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>weave-classes</id>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>compile</goal>
+                                </goals>
+                                <configuration>
+                                    <weaveDirectories>
+                                        <weaveDirectory>${tft.project.build.unwoven-classes.directory}</weaveDirectory>
+                                    </weaveDirectories>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>weave-test-classes</id>
+                                <phase>process-test-classes</phase>
+                                <goals>
+                                    <goal>test-compile</goal>
+                                </goals>
+                                <configuration>
+                                    <weaveDirectories>
+                                        <weaveDirectory>${tft.project.build.unwoven-test-classes.directory}</weaveDirectory>
+                                    </weaveDirectories>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjrt</artifactId>
+                                <version>${tft.aspectjrt.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.aspectj</groupId>
+                                <artifactId>aspectjtools</artifactId>
+                                <version>${tft.aspectjrt.version}</version>
+                            </dependency>
+                            <!-- Fix for JDK 9 and later - should be unnecessary when version 1.11.1 is released. -->
+<!--                            <dependency>-->
+<!--                                <groupId>com.sun</groupId>-->
+<!--                                <artifactId>tools</artifactId>-->
+<!--                                <version>${java.version}</version>-->
+<!--                                <scope>system</scope>-->
+<!--                                <systemPath>${project.basedir}/pom.xml</systemPath>-->
+<!--                            </dependency>-->
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aspects</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>spring-test</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjrt</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!--====================================================================================================================================================
+
         This profile compiles custom Vaadin widgets into GWT components.
 
         =====================================================================================================================================================-->
