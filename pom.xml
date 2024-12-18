@@ -251,7 +251,6 @@
         <tft.javadoc.doclet>nl.talsmasoftware.umldoclet.UMLDoclet</tft.javadoc.doclet>
         <tft.javadoc.doclet.groupId>nl.talsmasoftware</tft.javadoc.doclet.groupId>
         <tft.javadoc.doclet.artifactId>umldoclet</tft.javadoc.doclet.artifactId>
-        <tft.javadoc.doclet.version>2.0.12</tft.javadoc.doclet.version>
         <tft.javadoc.doclet.additionalParam>-verbose</tft.javadoc.doclet.additionalParam>
 
         <tft.buildNumber.getRevisionOnlyOnce>false</tft.buildNumber.getRevisionOnlyOnce>
@@ -319,6 +318,7 @@
         <tft.xml-maven-plugin.version>1.1.0</tft.xml-maven-plugin.version>
 
         <tft.archetype-packaging.version>${tft.maven-archetype-plugin.version}</tft.archetype-packaging.version>
+        <tft.javadoc.doclet.version>2.2.1</tft.javadoc.doclet.version>
     </properties>
 
     <scm>
