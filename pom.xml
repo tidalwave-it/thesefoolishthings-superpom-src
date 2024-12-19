@@ -123,7 +123,7 @@
         <tft.spotbugs.maxHeap>512</tft.spotbugs.maxHeap>
         <tft.spotbugs.maxAllowedViolations>0</tft.spotbugs.maxAllowedViolations>
 
-        <tft.pmd.ruleset>/it/tidalwave/pmd/basic.xml</tft.pmd.ruleset>
+        <tft.pmd.ruleset>/it/tidalwave/pmd/standard.xml</tft.pmd.ruleset>
         <tft.pmd.ruleset.groupId>it.tidalwave.thesefoolishthings</tft.pmd.ruleset.groupId>
         <tft.pmd.ruleset.artifactId>superpom-config</tft.pmd.ruleset.artifactId>
         <tft.pmd.ruleset.version>${tft.superpom.config.version}</tft.pmd.ruleset.version>
@@ -133,7 +133,7 @@
         <tft.license.template>/it/tidalwave/license/tidalwave-header-description.ftl</tft.license.template>
         <tft.maven.requiredVersion>3.9.0</tft.maven.requiredVersion>
         <tft.maven.requiredJdk>[11,)</tft.maven.requiredJdk>
-        <tft.superpom.config.version>1.9</tft.superpom.config.version>
+        <tft.superpom.config.version>1.11</tft.superpom.config.version>
         <tft.mainClass>please-set-the-tft.mainClass-property-to-specify-the-main-class</tft.mainClass>
         <tft.mainPackage>please-set-the-tft.mainPackage-property-to-specify-the-package-with-the-main-class</tft.mainPackage>
         <tft.jar.classpathInManifest>false</tft.jar.classpathInManifest>
@@ -153,7 +153,6 @@
         <tft.pmd.minimumTokens>100</tft.pmd.minimumTokens>
         <tft.pmd.minimumPriority>5</tft.pmd.minimumPriority>
         <tft.pmd.skipEmptyReport>false</tft.pmd.skipEmptyReport>
-        <tft.pmd.showPmdLog>false</tft.pmd.showPmdLog>
         <tft.pmd.includeXmlInSite>true</tft.pmd.includeXmlInSite>
 
         <tft.spring-boot.skip>false</tft.spring-boot.skip>
@@ -275,7 +274,7 @@
         <tft.maven-jarsigner-plugin.version>3.1.0</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>3.11.2</tft.maven-javadoc-plugin.version>
         <tft.maven-jdeb-plugin.version>1.12</tft.maven-jdeb-plugin.version>
-        <tft.maven-pmd-plugin.version>3.20.0</tft.maven-pmd-plugin.version>
+        <tft.maven-pmd-plugin.version>3.26.0</tft.maven-pmd-plugin.version>
         <tft.maven-project-info-reports-plugin.version>3.8.0</tft.maven-project-info-reports-plugin.version>
         <tft.maven-release-plugin.version>3.1.1</tft.maven-release-plugin.version>
         <tft.maven-resources-plugin.version>3.3.1</tft.maven-resources-plugin.version>
@@ -852,7 +851,6 @@
                     <targetJdk>${tft.javac.source}</targetJdk>
                     <skip>${tft.pmd.skip}</skip>
                     <skipEmptyReport>${tft.pmd.skipEmptyReport}</skipEmptyReport>
-                    <showPmdLog>${tft.pmd.showPmdLog}</showPmdLog>
                     <includeXmlInSite>${tft.pmd.includeXmlInSite}</includeXmlInSite>
                     <rulesets>
                         <ruleset>${tft.pmd.ruleset}</ruleset>
@@ -1226,7 +1224,6 @@
                             <targetJdk>${tft.javac.source}</targetJdk>
                             <skip>${tft.pmd.skip}</skip>
                             <skipEmptyReport>${tft.pmd.skipEmptyReport}</skipEmptyReport>
-                            <showPmdLog>${tft.pmd.showPmdLog}</showPmdLog>
                             <includeXmlInSite>${tft.pmd.includeXmlInSite}</includeXmlInSite>
                             <rulesets>
                                 <ruleset>${tft.pmd.ruleset}</ruleset>
