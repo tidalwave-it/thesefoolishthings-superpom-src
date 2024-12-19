@@ -299,7 +299,7 @@
         <tft.jacoco-maven-plugin.version>0.8.12</tft.jacoco-maven-plugin.version>
         <tft.javafx-maven-plugin.version>0.0.8</tft.javafx-maven-plugin.version>
         <tft.jaxb2-maven-plugin.version>3.2.0</tft.jaxb2-maven-plugin.version>
-        <tft.jaxws-maven-plugin.version>2.6</tft.jaxws-maven-plugin.version>
+        <tft.jaxws-maven-plugin.version>3.0.0</tft.jaxws-maven-plugin.version>
         <tft.jetty-maven-plugin.version>11.0.24</tft.jetty-maven-plugin.version>
         <tft.license-maven-plugin.version>2.5.0</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
@@ -634,7 +634,7 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.jvnet.jax-ws-commons</groupId>
+                    <groupId>com.sun.xml.ws</groupId>
                     <artifactId>jaxws-maven-plugin</artifactId>
                     <version>${tft.jaxws-maven-plugin.version}</version>
                 </plugin>
