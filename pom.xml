@@ -103,6 +103,7 @@
         <tft.profile.metrics.findbugsGoal />
         <tft.profile.metrics.spotbugsGoal>com.github.spotbugs:spotbugs-maven-plugin:check</tft.profile.metrics.spotbugsGoal>
         <tft.profile.metrics.pmdGoal>pmd:aggregate-cpd pmd:aggregate-pmd</tft.profile.metrics.pmdGoal>
+        <tft.profile.metrics.jxrGoal>jxr:aggregate</tft.profile.metrics.jxrGoal>
         <tft.profile.metrics.sonarGoal>sonar:sonar</tft.profile.metrics.sonarGoal>
         <tft.profile.metrics.dependencyCheckGoal>dependency-check:aggregate</tft.profile.metrics.dependencyCheckGoal>
         <tft.profile.metrics.defaultGoal>
@@ -275,6 +276,7 @@
         <tft.maven-jarsigner-plugin.version>3.1.0</tft.maven-jarsigner-plugin.version>
         <tft.maven-javadoc-plugin.version>3.11.2</tft.maven-javadoc-plugin.version>
         <tft.maven-jdeb-plugin.version>1.12</tft.maven-jdeb-plugin.version>
+        <tft.maven-jxr-plugin.version>3.6.0</tft.maven-jxr-plugin.version>
         <tft.maven-pmd-plugin.version>3.26.0</tft.maven-pmd-plugin.version>
         <tft.maven-project-info-reports-plugin.version>3.8.0</tft.maven-project-info-reports-plugin.version>
         <tft.maven-release-plugin.version>3.1.1</tft.maven-release-plugin.version>
@@ -508,6 +510,11 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>${tft.maven-project-info-reports-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jxr-plugin</artifactId>
+                    <version>${tft.maven-jxr-plugin.version}</version>
                 </plugin>
 
                 <plugin>
@@ -1251,6 +1258,20 @@
                             <skip>${tft.checkstyle.skip}</skip>
                         </configuration>
                     </plugin>
+
+                    <!-- JXR -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jxr-plugin</artifactId>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>jxr-no-fork</report>
+                                    <report>test-jxr-no-fork</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                        </plugin>
 
                     <!-- OWASP -->
                     <plugin>
