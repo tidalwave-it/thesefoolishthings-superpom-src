@@ -3411,6 +3411,20 @@
             </reporting>
         </profile>
 
+        <!--====================================================================================================================================================
+
+        This profile applies a warning suppressor for Java 21 and later.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>javac-jdk21plus</id>
+            <activation>
+                <jdk>[21,)</jdk>
+            </activation>
+            <properties>
+                <tft.test.allowAttachSelf>-Djdk.attach.allowAttachSelf=true -XX:+EnableDynamicAgentLoading</tft.test.allowAttachSelf>
+            </properties>
+        </profile>
 
         <!--====================================================================================================================================================
 
