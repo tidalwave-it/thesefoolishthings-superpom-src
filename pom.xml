@@ -168,6 +168,7 @@
         <tft.disableDeploy>${disableDeploy}</tft.disableDeploy>
         <tft.javadoc.doclint />
         <tft.javadoc.quiet>true</tft.javadoc.quiet>
+        <tft.javadoc.legacyMode>false</tft.javadoc.legacyMode>
         <tft.javadoc.detectJavaApiLink>false</tft.javadoc.detectJavaApiLink>
 
         <tft.release.localCheckout>true</tft.release.localCheckout>
@@ -997,6 +998,7 @@
                     <failOnError>false</failOnError>
                     <detectJavaApiLink>${tft.javadoc.detectJavaApiLink}</detectJavaApiLink>
                     <quiet>${tft.javadoc.quiet}</quiet>
+                    <legacyMode>${tft.javadoc.legacyMode}</legacyMode>
                 </configuration>
             </plugin>
 
@@ -1291,6 +1293,7 @@
                             <failOnError>false</failOnError>
                             <detectJavaApiLink>${tft.javadoc.detectJavaApiLink}</detectJavaApiLink>
                             <quiet>${tft.javadoc.quiet}</quiet>
+                            <legacyMode>${tft.javadoc.legacyMode}</legacyMode>
                         </configuration>
                         <reportSets>
                             <reportSet>
@@ -3404,6 +3407,7 @@
                             </docletArtifact>
                             <additionalOptions>${tft.javadoc.doclet.additionalParam} ${tft.javadoc.doclint}</additionalOptions>
                             <quiet>${tft.javadoc.quiet}</quiet>
+                            <legacyMode>${tft.javadoc.legacyMode}</legacyMode>
                             <useStandardDocletOptions>true</useStandardDocletOptions>
                         </configuration>
                     </plugin>
