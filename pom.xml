@@ -5,7 +5,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>5.7-SNAPSHOT</version>
+    <version>5.7</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -252,7 +252,7 @@
         <tft.javadoc.doclet>nl.talsmasoftware.umldoclet.UMLDoclet</tft.javadoc.doclet>
         <tft.javadoc.doclet.groupId>nl.talsmasoftware</tft.javadoc.doclet.groupId>
         <tft.javadoc.doclet.artifactId>umldoclet</tft.javadoc.doclet.artifactId>
-        <tft.javadoc.doclet.additionalParam/>
+        <tft.javadoc.doclet.additionalParam />
 
         <tft.buildNumber.getRevisionOnlyOnce>false</tft.buildNumber.getRevisionOnlyOnce>
 
@@ -327,7 +327,7 @@
         <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-      <tag>HEAD</tag>
+      <tag>5.7</tag>
   </scm>
 
     <prerequisites>
