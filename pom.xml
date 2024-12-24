@@ -206,15 +206,28 @@
         <tft.native.buildArgs>--no-fallback</tft.native.buildArgs>
         <tft.native.skip>false</tft.native.skip>
 
-        <tft.embedded-jdk.groupId>it.tidalwave.jdk</tft.embedded-jdk.groupId>
-        <tft.embedded-jdk.artifactId>adoptopenjdk-jre</tft.embedded-jdk.artifactId>
-        <tft.embedded-jdk.version />
-        <tft.embedded-jdk.type>tgz</tft.embedded-jdk.type>
-        <tft.embedded-jdk.name />
-        <tft.embedded-jdk.prefix />
-        <tft.embedded-jdk.classifier.macos.x64>macosx-x64-hotspot</tft.embedded-jdk.classifier.macos.x64>
+        <tft.embedded-jre.groupId>it.tidalwave.jre</tft.embedded-jre.groupId>
+        <tft.embedded-jre.artifactId>adoptium-jre</tft.embedded-jre.artifactId>
+        <tft.embedded-jre.version />
+        <tft.embedded-jre.type>tgz</tft.embedded-jre.type>
+        <tft.embedded-jre.name />
+        <tft.embedded-jre.prefix />
+        <tft.embedded-jre.classifier.macos.x64>macosx-x64-hotspot</tft.embedded-jre.classifier.macos.x64>
+        <tft.embedded-jre.classifier.macos.aarch64>macosx-aarch64-hotspot</tft.embedded-jre.classifier.macos.aarch64>
 
-        <tft.appbundle.modules>javafx.base,javafx.controls,javafx.fxml,javafx.graphics</tft.appbundle.modules>
+        <tft.embedded-jre11.version>11.0.10_9</tft.embedded-jre11.version>
+        <tft.embedded-jre11.name>11.0.10_9</tft.embedded-jre11.name>
+        <tft.embedded-jre11.prefix>jdk-11.0.10+9-jre</tft.embedded-jre11.prefix>
+
+        <tft.embedded-jre17.version>17.0.13_11</tft.embedded-jre17.version>
+        <tft.embedded-jre17.name>17.0.13_11</tft.embedded-jre17.name>
+        <tft.embedded-jre17.prefix>jdk-17.0.13+11-jre</tft.embedded-jre17.prefix>
+
+        <tft.embedded-jre21.version>21.0.5_11</tft.embedded-jre21.version>
+        <tft.embedded-jre21.name>21.0.5_11</tft.embedded-jre21.name>
+        <tft.embedded-jre21.prefix>jdk-21.0.5+11-jre</tft.embedded-jre21.prefix>
+
+        <tft.javafx.modules>javafx.base,javafx.controls,javafx.fxml,javafx.graphics</tft.javafx.modules>
         <tft.appbundle.vmoptions />
         <tft.javafx.vmargs /> <!-- deprecated -->
         <tft.appbundle.name />
@@ -2260,11 +2273,12 @@
         It copies all dependent libraries in target/app/lib and modules in target/app/mods and downloads a Java runtime to embed. The coordinates of the
         artifact are defined in the following properties:
 
-            + tft.embedded-jdk.groupId
-            + tft.embedded-jdk.artifactId
-            + tft.embedded-jdk.version
-            + tft.embedded-jdk.type
-            + tft.embedded-jdk.classifier.macos.x64
+            + tft.embedded-jre.groupId
+            + tft.embedded-jre.artifactId
+            + tft.embedded-jre.version
+            + tft.embedded-jre.type
+            + tft.embedded-jre.classifier.macos.x64
+            + tft.embedded-jre.classifier.macos.aarch64
 
         The properties are properly populated when running with JDK 11 and JDK 15, but can be overridden.
 
@@ -2279,6 +2293,28 @@
             <properties>
                 <tft.appbundle.build.logLevel>info</tft.appbundle.build.logLevel>
             </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-base</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-graphics</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-controls</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-fxml</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -2286,7 +2322,7 @@
                         <artifactId>maven-dependency-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>unpack-embedded-jdk</id>
+                                <id>unpack-embedded-jre-intel</id>
                                 <phase>generate-resources</phase>
                                 <goals>
                                     <goal>unpack</goal>
@@ -2294,13 +2330,33 @@
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>
-                                            <groupId>${tft.embedded-jdk.groupId}</groupId>
-                                            <artifactId>${tft.embedded-jdk.artifactId}</artifactId>
-                                            <version>${tft.embedded-jdk.version}</version>
-                                            <type>${tft.embedded-jdk.type}</type>
-                                            <classifier>${tft.embedded-jdk.classifier.macos.x64}</classifier>
+                                            <groupId>${tft.embedded-jre.groupId}</groupId>
+                                            <artifactId>${tft.embedded-jre.artifactId}</artifactId>
+                                            <version>${tft.embedded-jre.version}</version>
+                                            <type>${tft.embedded-jre.type}</type>
+                                            <classifier>${tft.embedded-jre.classifier.macos.x64}</classifier>
                                             <overWrite>true</overWrite>
-                                            <outputDirectory>${project.build.directory}/jdk/${tft.embedded-jdk.name}</outputDirectory>
+                                            <outputDirectory>${project.build.directory}/jre/intel/${tft.embedded-jre.name}</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>unpack-embedded-jre-arm</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>${tft.embedded-jre.groupId}</groupId>
+                                            <artifactId>${tft.embedded-jre.artifactId}</artifactId>
+                                            <version>${tft.embedded-jre.version}</version>
+                                            <type>${tft.embedded-jre.type}</type>
+                                            <classifier>${tft.embedded-jre.classifier.macos.aarch64}</classifier>
+                                            <overWrite>true</overWrite>
+                                            <outputDirectory>${project.build.directory}/jre/arm/${tft.embedded-jre.name}</outputDirectory>
                                         </artifactItem>
                                     </artifactItems>
                                 </configuration>
@@ -2319,7 +2375,7 @@
                                 </configuration>
                             </execution>
                             <execution>
-                                <id>copy-modules</id>
+                                <id>copy-javafx-modules</id>
                                 <phase>generate-resources</phase>
                                 <goals>
                                     <goal>copy-dependencies</goal>
@@ -2364,18 +2420,32 @@
                                 </goals>
                                 <configuration>
                                     <target xmlns:if="ant:if" xmlns:unless="ant:unless">
-                                        <echo level="${tft.appbundle.build.logLevel}">Creating dmg...</echo>
-                                        <delete file="${project.build.directory}/${tft.appbundle.name}.dmg" verbose="false" failonerror="true" />
-                                        <delete file="${project.build.directory}/${tft.appbundle.name}.dmg.gz" verbose="false" failonerror="true" />
+                                        <echo level="${tft.appbundle.build.logLevel}">Cleaning...</echo>
+                                        <delete file="${project.build.directory}/${tft.appbundle.name}-intel.dmg" verbose="false" failonerror="true" />
+                                        <delete file="${project.build.directory}/${tft.appbundle.name}-intel.dmg.gz" verbose="false" failonerror="true" />
+                                        <delete file="${project.build.directory}/${tft.appbundle.name}-arm.dmg" verbose="false" failonerror="true" />
+                                        <delete file="${project.build.directory}/${tft.appbundle.name}-arm.dmg.gz" verbose="false" failonerror="true" />
+                                        <echo level="${tft.appbundle.build.logLevel}">Creating Intel image...</echo>
                                         <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil" failonerror="true">
                                             <arg value="create" />
                                             <arg value="-noanyowners" />
                                             <arg value="-imagekey" />
                                             <arg value="zlib-level=1" />
                                             <arg value="-srcfolder" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                            <arg value="${tft.appbundle.name}.dmg" />
+                                            <arg value="${tft.appbundle.name}-intel.app" />
+                                            <arg value="${tft.appbundle.name}-intel.dmg" />
                                         </exec>
+                                        <echo level="${tft.appbundle.build.logLevel}">Creating ARM image...</echo>
+                                        <exec dir="${project.build.directory}" os="Mac OS X" executable="hdiutil" failonerror="true">
+                                            <arg value="create" />
+                                            <arg value="-noanyowners" />
+                                            <arg value="-imagekey" />
+                                            <arg value="zlib-level=1" />
+                                            <arg value="-srcfolder" />
+                                            <arg value="${tft.appbundle.name}-arm.app" />
+                                            <arg value="${tft.appbundle.name}-arm.dmg" />
+                                        </exec>
+                                        <echo level="${tft.appbundle.build.logLevel}">Creating Intel dmg...</echo>
                                         <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}" failonerror="true">
                                             <arg value="-V" />
                                             <arg value="${tft.appbundle.name}" />
@@ -2390,12 +2460,35 @@
                                             <arg value="-no-iso-translate" />
                                             <arg value="-r" />
                                             <arg value="-o" />
-                                            <arg value="${tft.appbundle.name}.dmg" />
+                                            <arg value="${tft.appbundle.name}-intel.dmg" />
                                             <arg value="-root" />
-                                            <arg value="${tft.appbundle.name}.app" />
-                                            <arg value="${tft.appbundle.name}.app" />
+                                            <arg value="${tft.appbundle.name}-intel.app" />
+                                            <arg value="${tft.appbundle.name}-intel.app" />
                                         </exec>
-                                        <gzip src="${project.build.directory}/${tft.appbundle.name}.dmg" destfile="${project.build.directory}/${tft.appbundle.name}.dmg.gz" />
+                                        <echo level="${tft.appbundle.build.logLevel}">Creating ARM dmg...</echo>
+                                        <exec dir="${project.build.directory}" os="Linux" executable="${tft.genisoimage}" failonerror="true">
+                                            <arg value="-V" />
+                                            <arg value="${tft.appbundle.name}" />
+                                            <arg value="-U" />
+                                            <arg value="-f" />
+                                            <arg value="-D" />
+                                            <arg value="-l" />
+                                            <arg value="-L" />
+                                            <arg value="-allow-multidot" />
+                                            <arg value="-max-iso9660-filenames" />
+                                            <arg value="-relaxed-filenames" />
+                                            <arg value="-no-iso-translate" />
+                                            <arg value="-r" />
+                                            <arg value="-o" />
+                                            <arg value="${tft.appbundle.name}-arm.dmg" />
+                                            <arg value="-root" />
+                                            <arg value="${tft.appbundle.name}-arm.app" />
+                                            <arg value="${tft.appbundle.name}-arm.app" />
+                                        </exec>
+                                        <echo level="${tft.appbundle.build.logLevel}">Compressing Intel dmg...</echo>
+                                        <gzip src="${project.build.directory}/${tft.appbundle.name}-intel.dmg" destfile="${project.build.directory}/${tft.appbundle.name}-intel.dmg.gz" />
+                                        <echo level="${tft.appbundle.build.logLevel}">Compressing ARM dmg...</echo>
+                                        <gzip src="${project.build.directory}/${tft.appbundle.name}-arm.dmg" destfile="${project.build.directory}/${tft.appbundle.name}-arm.dmg.gz" />
                                     </target>
                                 </configuration>
                             </execution>
@@ -2414,8 +2507,13 @@
                                 <configuration>
                                     <artifacts>
                                         <artifact>
-                                            <file>${project.build.directory}/${tft.appbundle.name}.dmg.gz</file>
-                                            <type>dmg.gz</type>
+                                            <file>${project.build.directory}/${tft.appbundle.name}-intel.dmg.gz</file>
+                                            <type>intel.dmg.gz</type>
+                                            <classifier>executable</classifier>
+                                        </artifact>
+                                        <artifact>
+                                            <file>${project.build.directory}/${tft.appbundle.name}-arm.dmg.gz</file>
+                                            <type>arm.dmg.gz</type>
                                             <classifier>executable</classifier>
                                         </artifact>
                                     </artifacts>
@@ -2429,10 +2527,7 @@
 
         <!--====================================================================================================================================================
 
-        This profile creates a macOS application bundle using the jpackager utility backported to JDK 11
-        (https://github.com/johanvos/openjdk-mobile11/tree/packager). Use the property tft.tool.jpackager to specify the path of the tool. If the tool is not
-        found, an attempt to download it is performed from the URL defined by the property tft.tool.jpackager.downloadUrl.macOS.
-        A different profile is automatically activated with JDK 15+ (see it.tidalwave-javafx-appbundle-embedded-v2-jdk15).
+        This profile creates a macOS application bundle using the jpackage utility in OpenJDK 17.
         See the documentation of profile it.tidalwave-javafx-appbundle-embedded-v2-prepare for more information.
 
         Create an empty file src/config/activate-it.tidalwave-javafx-embedded-appbundle-v2-profile to activate this profile.
@@ -2441,124 +2536,81 @@
         <profile>
             <id>it.tidalwave-javafx-appbundle-embedded-v2-jdk11</id>
             <activation>
-                <jdk>[11,12)</jdk>
                 <file>
                     <exists>src/config/activate-it.tidalwave-javafx-appbundle-embedded-v2-profile</exists>
                 </file>
+                <jdk>[11,12)</jdk>
             </activation>
             <properties>
-                <tft.embedded-jdk.version>11.0.10_9</tft.embedded-jdk.version>
-                <tft.embedded-jdk.name>11.0.10_9</tft.embedded-jdk.name>
-                <tft.embedded-jdk.prefix>jdk-11.0.10+9-jre</tft.embedded-jdk.prefix>
-                <tft.appbundle.build.logLevel>info</tft.appbundle.build.logLevel>
-                <tft.bundle.build.version />
+                <tft.embedded-jre.version>${tft.embedded-jre11.version}</tft.embedded-jre.version>
+                <tft.embedded-jre.name>${tft.embedded-jre11.name}</tft.embedded-jre.name>
+                <tft.embedded-jre.prefix>${tft.embedded-jre11.prefix}</tft.embedded-jre.prefix>
             </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>create-app-bundle</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target xmlns:if="ant:if" xmlns:unless="ant:unless">
-                                        <available file="${tft.tool.jpackager}" type="file" property="tft.jpackager.present" />
-                                        <echo unless:set="tft.jpackager.present" level="warning">JDK 11 backport of jpackager not found - trying to download
-                                            it...
-                                        </echo>
-                                        <echo unless:set="tft.jpackager.present" level="warning">To avoid download, please manually install the tool and set the
-                                            property tft.tool.jpackager
-                                        </echo>
-                                        <get unless:set="tft.jpackager.present" src="${tft.tool.jpackager.downloadUrl.macOS}" dest="${project.build.directory}" />
-                                        <unzip unless:set="tft.jpackager.present" src="${project.build.directory}/jdk.packager-osx.zip" dest="${project.build.directory}/jpackager" />
-                                        <chmod unless:set="tft.jpackager.present" file="${project.build.directory}/jpackager/jpackager" perm="ugo+rx" />
-                                        <property unless:set="tft.jpackager.present" name="tft.tool.jpackager-actual" value="${project.build.directory}/jpackager/jpackager" />
-                                        <property if:set="tft.jpackager.present" name="tft.tool.jpackager-actual" value="${tft.tool.jpackager}" />
-
-                                        <loadresource property="tft.bundle.build.version">
-                                            <propertyresource name="project.version" />
-                                            <filterchain>
-                                                <tokenfilter>
-                                                    <filetokenizer />
-                                                    <replaceregex pattern="[A-Z]+" replace="" flags="g" />
-                                                    <replaceregex pattern="-+" replace="-" flags="g" />
-                                                    <replaceregex pattern="-$" replace="" flags="g" />
-                                                    <replaceregex pattern="-" replace="." flags="g" />
-                                                </tokenfilter>
-                                            </filterchain>
-                                        </loadresource>
-                                        <echo level="${tft.appbundle.build.logLevel}">CFBundleVersion: ${tft.bundle.build.version}</echo>
-
-                                        <echo level="${tft.appbundle.build.logLevel}">Invoking ${tft.tool.jpackager-actual}...</echo>
-                                        <exec dir="${pom.basedir}" executable="${tft.tool.jpackager-actual}" failonerror="true">
-                                            <arg value="create-image" />
-                                            <arg value="--output" />
-                                            <arg value="${project.build.directory}" />
-                                            <arg value="--runtime-image" />
-                                            <arg value="${project.build.directory}/jdk/${tft.embedded-jdk.name}/${tft.embedded-jdk.prefix}/Contents/Home" />
-                                            <arg value="--input" />
-                                            <arg value="${project.build.directory}/app/lib" />
-                                            <arg value="--name" />
-                                            <arg value="${tft.appbundle.name}" />
-                                            <arg value="--icon" />
-                                            <arg value="src/main/app-resources/${tft.appbundle.name}.icns" />
-                                            <arg value="--jvm-args" />
-                                            <arg value="--module-path mods --add-modules ${tft.appbundle.modules}" />
-                                            <arg value="--version" />
-                                            <arg value="${tft.bundle.build.version}" />
-                                            <arg value="--identifier" />
-                                            <arg value="${project.groupId}.${project.artifactId}" />
-                                            <arg value="--copyright" />
-                                            <arg value="Copyright (C) by ${project.organization.name}" />
-                                            <arg value="--vendor" />
-                                            <arg value="${project.organization.name}" />
-                                            <arg value="--main-jar" />
-                                            <arg value="${tft.mainPackage}" />
-                                            <arg value="--class" />
-                                            <arg value="${tft.mainClass}" />
-                                            <arg value="--verbose" />
-                                        </exec>
-                                        <!-- signature="${tft.appbundle.signature}" ? -->
-
-                                        <echo level="${tft.appbundle.build.logLevel}">Copying modules...</echo>
-                                        <copy todir="${project.build.directory}/${tft.appbundle.name}.app/Contents/Java/mods">
-                                            <fileset dir="${project.build.directory}/app/mods" />
-                                        </copy>
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
 
         <!--====================================================================================================================================================
 
-        This profile creates a macOS application bundle using the jpackage utility in OpenJDK 15+. A different profile is activated with OpenJDK 11+ (see
-        it.tidalwave-javafx-appbundle-embedded-v2-jdk11).
+        This profile creates a macOS application bundle using the jpackage utility in OpenJDK 17.
         See the documentation of profile it.tidalwave-javafx-appbundle-embedded-v2-prepare for more information.
 
         Create an empty file src/config/activate-it.tidalwave-javafx-embedded-appbundle-v2-profile to activate this profile.
 
         =====================================================================================================================================================-->
         <profile>
-            <id>it.tidalwave-javafx-appbundle-embedded-v2-jdk15</id>
+            <id>it.tidalwave-javafx-appbundle-embedded-v2-jdk17</id>
             <activation>
                 <file>
                     <exists>src/config/activate-it.tidalwave-javafx-appbundle-embedded-v2-profile</exists>
                 </file>
-                <jdk>[15,)</jdk>
+                <jdk>[17,18)</jdk>
             </activation>
             <properties>
-                <tft.embedded-jdk.version>15.0.2_7</tft.embedded-jdk.version>
-                <tft.embedded-jdk.name>15.0.2_7</tft.embedded-jdk.name>
-                <tft.embedded-jdk.prefix>jdk-15.0.2+7-jre</tft.embedded-jdk.prefix>
+                <tft.embedded-jre.version>${tft.embedded-jre17.version}</tft.embedded-jre.version>
+                <tft.embedded-jre.name>${tft.embedded-jre17.name}</tft.embedded-jre.name>
+                <tft.embedded-jre.prefix>${tft.embedded-jre17.prefix}</tft.embedded-jre.prefix>
+            </properties>
+        </profile>
+
+        <!--====================================================================================================================================================
+
+        This profile creates a macOS application bundle using the jpackage utility in OpenJDK 21.
+        See the documentation of profile it.tidalwave-javafx-appbundle-embedded-v2-prepare for more information.
+
+        Create an empty file src/config/activate-it.tidalwave-javafx-embedded-appbundle-v2-profile to activate this profile.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-javafx-appbundle-embedded-v2-jdk21</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-it.tidalwave-javafx-appbundle-embedded-v2-profile</exists>
+                </file>
+                <jdk>[21,22)</jdk>
+            </activation>
+            <properties>
+                <tft.embedded-jre.version>${tft.embedded-jre21.version}</tft.embedded-jre.version>
+                <tft.embedded-jre.name>${tft.embedded-jre21.name}</tft.embedded-jre.name>
+                <tft.embedded-jre.prefix>${tft.embedded-jre21.prefix}</tft.embedded-jre.prefix>
+            </properties>
+        </profile>
+
+        <!--====================================================================================================================================================
+
+        This profile creates a macOS application bundle using the jpackage utility in OpenJDK 11, 17 and 21.
+        See the documentation of profile it.tidalwave-javafx-appbundle-embedded-v2-prepare for more information.
+
+        Create an empty file src/config/activate-it.tidalwave-javafx-embedded-appbundle-v2-profile to activate this profile.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-javafx-appbundle-embedded-v2-jdk11-17-21</id>
+            <activation>
+                <file>
+                    <exists>src/config/activate-it.tidalwave-javafx-appbundle-embedded-v2-profile</exists>
+                </file>
+                <jdk>[11,22)</jdk>
+            </activation>
+            <properties>
                 <tft.appbundle.build.logLevel>info</tft.appbundle.build.logLevel>
             </properties>
             <build>
@@ -2588,23 +2640,12 @@
                                             </filterchain>
                                         </loadresource>
                                         <echo level="${tft.appbundle.build.logLevel}">CFBundleVersion: ${tft.bundle.build.version}</echo>
-
-                                        <echo level="${tft.appbundle.build.logLevel}">Invoking jpackage...</echo>
+                                        <echo level="${tft.appbundle.build.logLevel}">Creating Intel app bundle...</echo>
                                         <exec dir="${pom.basedir}" executable="jpackage" failonerror="true">
-                                            <arg value="--dest" />
-                                            <arg value="${project.build.directory}" />
-                                            <arg value="--type" />
-                                            <arg value="app-image" />
-                                            <arg value="--runtime-image" />
-                                            <arg value="${project.build.directory}/jdk/${tft.embedded-jdk.name}/${tft.embedded-jdk.prefix}/Contents/Home" />
-                                            <arg value="--input" />
-                                            <arg value="${project.build.directory}/app" />
                                             <arg value="--name" />
-                                            <arg value="${tft.appbundle.name}" />
+                                            <arg value="${tft.appbundle.name}-intel" />
                                             <arg value="--icon" />
                                             <arg value="src/main/app-resources/${tft.appbundle.name}.icns" />
-                                            <arg value="--java-options" />
-                                            <arg value="--add-modules ${tft.appbundle.modules}" />
                                             <arg value="--app-version" />
                                             <arg value="${tft.bundle.build.version}" />
                                             <arg value="--mac-package-identifier" />
@@ -2613,10 +2654,53 @@
                                             <arg value="Copyright (C) by ${project.organization.name}" />
                                             <arg value="--vendor" />
                                             <arg value="${project.organization.name}" />
+                                            <arg value="--dest" />
+                                            <arg value="${project.build.directory}" />
+                                            <arg value="--type" />
+                                            <arg value="app-image" />
+                                            <arg value="--runtime-image" />
+                                            <arg value="${project.build.directory}/jre/intel/${tft.embedded-jre.name}/${tft.embedded-jre.prefix}/Contents/Home" />
+                                            <arg value="--input" />
+                                            <arg value="${project.build.directory}/app" />
                                             <arg value="--main-jar" />
                                             <arg value="lib/${tft.mainPackage}" />
                                             <arg value="--main-class" />
                                             <arg value="${tft.mainClass}" />
+                                            <arg value="--java-options" />
+                                            <arg value="--module-path $APPDIR/mods" /> <!-- $APPDIR will be resolved at runtime -->
+                                            <arg value="--java-options" />
+                                            <arg value="--add-modules ${tft.javafx.modules}" />
+                                        </exec>
+                                        <echo level="${tft.appbundle.build.logLevel}">Creating ARM app bundle...</echo>
+                                        <exec dir="${pom.basedir}" executable="jpackage" failonerror="true">
+                                            <arg value="--name" />
+                                            <arg value="${tft.appbundle.name}-arm" />
+                                            <arg value="--icon" />
+                                            <arg value="src/main/app-resources/${tft.appbundle.name}.icns" />
+                                            <arg value="--app-version" />
+                                            <arg value="${tft.bundle.build.version}" />
+                                            <arg value="--mac-package-identifier" />
+                                            <arg value="${project.groupId}.${project.artifactId}.${project.version}" />
+                                            <arg value="--copyright" />
+                                            <arg value="Copyright (C) by ${project.organization.name}" />
+                                            <arg value="--vendor" />
+                                            <arg value="${project.organization.name}" />
+                                            <arg value="--dest" />
+                                            <arg value="${project.build.directory}" />
+                                            <arg value="--type" />
+                                            <arg value="app-image" />
+                                            <arg value="--runtime-image" />
+                                            <arg value="${project.build.directory}/jre/arm/${tft.embedded-jre.name}/${tft.embedded-jre.prefix}/Contents/Home" />
+                                            <arg value="--input" />
+                                            <arg value="${project.build.directory}/app" />
+                                            <arg value="--main-jar" />
+                                            <arg value="lib/${tft.mainPackage}" />
+                                            <arg value="--main-class" />
+                                            <arg value="${tft.mainClass}" />
+                                            <arg value="--java-options" />
+                                            <arg value="--module-path $APPDIR/mods" /> <!-- $APPDIR will be resolved at runtime -->
+                                            <arg value="--java-options" />
+                                            <arg value="--add-modules ${tft.javafx.modules}" />
                                         </exec>
                                         <!-- signature="${tft.appbundle.signature}" ? -->
                                     </target>
