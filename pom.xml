@@ -5,7 +5,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>5.8-SNAPSHOT</version>
+    <version>5.8</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -340,7 +340,7 @@
         <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-      <tag>HEAD</tag>
+      <tag>5.8</tag>
   </scm>
 
     <prerequisites>
@@ -2301,7 +2301,7 @@
                             <executable>java</executable>
                             <arguments>
                                 <argument>--class-path</argument>
-                                <classpath/>
+                                <classpath />
                                 <argument>--module-path</argument>
                                 <argument>ignored</argument> <!-- FIXME: it seems the plugin "eats" this argument -->
                                 <argument>${project.build.directory}/mods</argument>
