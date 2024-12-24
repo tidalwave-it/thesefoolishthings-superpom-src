@@ -2688,7 +2688,8 @@
                                             </filterchain>
                                         </loadresource>
                                         <echo level="${tft.appbundle.build.logLevel}">CFBundleVersion: ${tft.bundle.build.version}</echo>
-                                        <echo level="${tft.appbundle.build.logLevel}">Creating Intel app bundle...</echo>
+                                        <delete dir="${project.build.directory}/intel" verbose="false" failonerror="true" />
+                                        <echo level="${tft.appbundle.build.logLevel}">Creating Intel app bundle in ${project.build.directory}/intel ...</echo>
                                         <exec dir="${pom.basedir}" executable="${tft.tool.jpackage}" failonerror="true">
                                             <arg value="--name" />
                                             <arg value="${tft.appbundle.name}-intel" />
@@ -2719,7 +2720,8 @@
                                             <arg value="--java-options" />
                                             <arg value="--add-modules ${tft.javafx.modules}" />
                                         </exec>
-                                        <echo level="${tft.appbundle.build.logLevel}">Creating ARM app bundle...</echo>
+                                        <delete dir="${project.build.directory}/arm" verbose="false" failonerror="true" />
+                                        <echo level="${tft.appbundle.build.logLevel}">Creating ARM app bundle in ${project.build.directory}/arm ...</echo>
                                         <exec dir="${pom.basedir}" executable="${tft.tool.jpackage}" failonerror="true">
                                             <arg value="--name" />
                                             <arg value="${tft.appbundle.name}-arm" />
