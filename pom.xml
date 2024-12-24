@@ -233,7 +233,6 @@
         <tft.appbundle.name />
         <tft.appbundle.args>${tft.javafx.vmargs}</tft.appbundle.args>
         <tft.tool.jpackager>jpackager</tft.tool.jpackager>
-        <tft.tool.jpackager.downloadUrl.macOS>http://download2.gluonhq.com/jpackager/11/jdk.packager-osx.zip</tft.tool.jpackager.downloadUrl.macOS>
 
         <tft.deb.sourceTarball.artifactId />
         <tft.deb.name />
@@ -313,7 +312,6 @@
         <tft.findbugs-maven-plugin.version>3.0.5</tft.findbugs-maven-plugin.version>
         <tft.gwt-maven-plugin.version>2.10.0</tft.gwt-maven-plugin.version>
         <tft.jacoco-maven-plugin.version>0.8.12</tft.jacoco-maven-plugin.version>
-        <tft.javafx-maven-plugin.version>0.0.8</tft.javafx-maven-plugin.version>
         <tft.jaxb2-maven-plugin.version>3.2.0</tft.jaxb2-maven-plugin.version>
         <tft.jaxws-maven-plugin.version>3.0.0</tft.jaxws-maven-plugin.version>
         <tft.jetty-maven-plugin.version>11.0.24</tft.jetty-maven-plugin.version>
@@ -673,11 +671,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-maven-plugin</artifactId>
-                    <version>${tft.javafx-maven-plugin.version}</version>
-                </plugin>
-                <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${tft.spring-boot-maven-plugin.version}</version>
@@ -1017,14 +1010,6 @@
                     <detectJavaApiLink>${tft.javadoc.detectJavaApiLink}</detectJavaApiLink>
                     <quiet>${tft.javadoc.quiet}</quiet>
                     <legacyMode>${tft.javadoc.legacyMode}</legacyMode>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>${tft.mainClass}</mainClass>
                 </configuration>
             </plugin>
         </plugins>
