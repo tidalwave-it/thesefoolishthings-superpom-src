@@ -227,7 +227,7 @@
         <tft.embedded-jre21.name>21.0.5_11</tft.embedded-jre21.name>
         <tft.embedded-jre21.prefix>jdk-21.0.5+11-jre</tft.embedded-jre21.prefix>
 
-        <tft.javafx.modules>javafx.base,javafx.controls,javafx.fxml,javafx.graphics</tft.javafx.modules>
+        <tft.javafx.modules>javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.web</tft.javafx.modules>
         <tft.appbundle.vmoptions />
         <tft.javafx.vmargs /> <!-- deprecated -->
         <tft.appbundle.name />
@@ -2350,16 +2350,31 @@
                 <dependency>
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-graphics</artifactId>
+                    <version>${tft.javafx.version}</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-controls</artifactId>
+                    <version>${tft.javafx.version}</version>
                     <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.openjfx</groupId>
                     <artifactId>javafx-fxml</artifactId>
+                    <version>${tft.javafx.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-media</artifactId>
+                    <version>${tft.javafx.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-web</artifactId>
+                    <version>${tft.javafx.version}</version>
                     <scope>provided</scope>
                 </dependency>
             </dependencies>
