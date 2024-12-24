@@ -232,7 +232,7 @@
         <tft.javafx.vmargs /> <!-- deprecated -->
         <tft.appbundle.name />
         <tft.appbundle.args>${tft.javafx.vmargs}</tft.appbundle.args>
-        <tft.tool.jpackager>jpackager</tft.tool.jpackager>
+        <tft.tool.jpackage>${env.JAVA_HOME}/bin/jpackage</tft.tool.jpackage>
 
         <tft.deb.sourceTarball.artifactId />
         <tft.deb.name />
@@ -2689,7 +2689,7 @@
                                         </loadresource>
                                         <echo level="${tft.appbundle.build.logLevel}">CFBundleVersion: ${tft.bundle.build.version}</echo>
                                         <echo level="${tft.appbundle.build.logLevel}">Creating Intel app bundle...</echo>
-                                        <exec dir="${pom.basedir}" executable="jpackage" failonerror="true">
+                                        <exec dir="${pom.basedir}" executable="${tft.tool.jpackage}" failonerror="true">
                                             <arg value="--name" />
                                             <arg value="${tft.appbundle.name}-intel" />
                                             <arg value="--icon" />
@@ -2720,7 +2720,7 @@
                                             <arg value="--add-modules ${tft.javafx.modules}" />
                                         </exec>
                                         <echo level="${tft.appbundle.build.logLevel}">Creating ARM app bundle...</echo>
-                                        <exec dir="${pom.basedir}" executable="jpackage" failonerror="true">
+                                        <exec dir="${pom.basedir}" executable="${tft.tool.jpackage}" failonerror="true">
                                             <arg value="--name" />
                                             <arg value="${tft.appbundle.name}-arm" />
                                             <arg value="--icon" />
