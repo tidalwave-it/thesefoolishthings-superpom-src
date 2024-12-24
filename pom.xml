@@ -2269,6 +2269,54 @@
 
         <!--====================================================================================================================================================
 
+        This profile runs an application with the JavaFX runtime properly configured as Java9 modules.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>javafx-run</id>
+            <build>
+                <defaultGoal>dependency:copy-dependencies@copy-javafx-modules exec:exec</defaultGoal>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-javafx-modules</id>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <excludeTransitive>false</excludeTransitive>
+                                    <includeGroupIds>org.openjfx</includeGroupIds>
+                                    <outputDirectory>${project.build.directory}/mods</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>--class-path</argument>
+                                <classpath/>
+                                <argument>--module-path</argument>
+                                <argument>ignored</argument> <!-- FIXME: it seems the plugin "eats" this argument -->
+                                <argument>${project.build.directory}/mods</argument>
+                                <argument>--add-modules</argument>
+                                <argument>${tft.javafx.modules}</argument>
+                                <argument>${tft.mainClass}</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--====================================================================================================================================================
+
         This profile prepares some stuff for the profiles it.tidalwave-javafx-appbundle-embedded-v2-jdk11 and it.tidalwave-javafx-appbundle-embedded-v2-jdk15.
         It copies all dependent libraries in target/app/lib and modules in target/app/mods and downloads a Java runtime to embed. The coordinates of the
         artifact are defined in the following properties:
