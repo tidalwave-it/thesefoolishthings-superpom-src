@@ -2480,7 +2480,7 @@
                                             <arg value="-imagekey" />
                                             <arg value="zlib-level=1" />
                                             <arg value="-srcfolder" />
-                                            <arg value="${tft.appbundle.name}-intel.app" />
+                                            <arg value="intel/${tft.appbundle.name}.app" />
                                             <arg value="${tft.appbundle.name}-intel.dmg" />
                                         </exec>
                                         <echo level="${tft.appbundle.build.logLevel}">Creating ARM image...</echo>
@@ -2490,7 +2490,7 @@
                                             <arg value="-imagekey" />
                                             <arg value="zlib-level=1" />
                                             <arg value="-srcfolder" />
-                                            <arg value="${tft.appbundle.name}-arm.app" />
+                                            <arg value="arm/${tft.appbundle.name}.app" />
                                             <arg value="${tft.appbundle.name}-arm.dmg" />
                                         </exec>
                                         <echo level="${tft.appbundle.build.logLevel}">Creating Intel dmg...</echo>
@@ -2692,7 +2692,7 @@
                                         <echo level="${tft.appbundle.build.logLevel}">Creating Intel app bundle in ${project.build.directory}/intel ...</echo>
                                         <exec dir="${pom.basedir}" executable="${tft.tool.jpackage}" failonerror="true">
                                             <arg value="--name" />
-                                            <arg value="${tft.appbundle.name}-intel" />
+                                            <arg value="${tft.appbundle.name}" />
                                             <arg value="--icon" />
                                             <arg value="src/main/app-resources/${tft.appbundle.name}.icns" />
                                             <arg value="--app-version" />
@@ -2704,7 +2704,7 @@
                                             <arg value="--vendor" />
                                             <arg value="${project.organization.name}" />
                                             <arg value="--dest" />
-                                            <arg value="${project.build.directory}" />
+                                            <arg value="${project.build.directory}/intel" />
                                             <arg value="--type" />
                                             <arg value="app-image" />
                                             <arg value="--runtime-image" />
@@ -2724,7 +2724,7 @@
                                         <echo level="${tft.appbundle.build.logLevel}">Creating ARM app bundle in ${project.build.directory}/arm ...</echo>
                                         <exec dir="${pom.basedir}" executable="${tft.tool.jpackage}" failonerror="true">
                                             <arg value="--name" />
-                                            <arg value="${tft.appbundle.name}-arm" />
+                                            <arg value="${tft.appbundle.name}" />
                                             <arg value="--icon" />
                                             <arg value="src/main/app-resources/${tft.appbundle.name}.icns" />
                                             <arg value="--app-version" />
@@ -2736,7 +2736,7 @@
                                             <arg value="--vendor" />
                                             <arg value="${project.organization.name}" />
                                             <arg value="--dest" />
-                                            <arg value="${project.build.directory}" />
+                                            <arg value="${project.build.directory}/arm" />
                                             <arg value="--type" />
                                             <arg value="app-image" />
                                             <arg value="--runtime-image" />
