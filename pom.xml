@@ -106,9 +106,10 @@
         <tft.profile.metrics.jxrGoal>jxr:aggregate</tft.profile.metrics.jxrGoal>
         <tft.profile.metrics.sonarGoal>sonar:sonar</tft.profile.metrics.sonarGoal>
         <tft.profile.metrics.dependencyCheckGoal>dependency-check:aggregate</tft.profile.metrics.dependencyCheckGoal>
+        <tft.profile.metrics.dependencyGoal>dependency:analyze</tft.profile.metrics.dependencyGoal>
         <tft.profile.metrics.defaultGoal>
             clean install ${tft.profile.metrics.findbugsGoal} ${tft.profile.metrics.spotbugsGoal} ${tft.profile.metrics.pmdGoal}
-            ${tft.profile.metrics.checkstyleGoal} dependency:analyze
+            ${tft.profile.metrics.checkstyleGoal} ${tft.profile.metrics.dependencyGoal}
             ${tft.profile.metrics.sonarGoal} ${tft.profile.metrics.dependencyCheckGoal}
         </tft.profile.metrics.defaultGoal>
 
