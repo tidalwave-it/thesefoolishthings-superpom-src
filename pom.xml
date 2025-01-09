@@ -116,6 +116,8 @@
         <tft.descriptionStamp>.description</tft.descriptionStamp>
         <tft.findbugs.skip>false</tft.findbugs.skip>
 
+        <tft.revapi.skip>true</tft.revapi.skip>
+
         <tft.spotbugs.skip>${tft.findbugs.skip}</tft.spotbugs.skip>
         <tft.spotbugs.effort>Max</tft.spotbugs.effort>
         <tft.spotbugs.threshold>Low</tft.spotbugs.threshold>
@@ -320,6 +322,8 @@
         <tft.mycila-license-maven-plugin.version>4.6</tft.mycila-license-maven-plugin.version>
         <tft.native-maven-plugin.version>0.10.4</tft.native-maven-plugin.version>
         <tft.nexus-staging-maven-plugin.version>1.7.0</tft.nexus-staging-maven-plugin.version>
+        <tft.revapi-maven-plugin.version>0.15.0</tft.revapi-maven-plugin.version>
+        <tft.revapi-java.version>0.28.1</tft.revapi-java.version>
         <tft.sonar-maven-plugin.version>5.0.0.4389</tft.sonar-maven-plugin.version>
         <tft.spotbugs-maven-plugin.version>4.8.6.6</tft.spotbugs-maven-plugin.version>
         <tft.spring-boot-maven-plugin.version>3.4.0</tft.spring-boot-maven-plugin.version>
@@ -572,6 +576,11 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>license-maven-plugin</artifactId>
                     <version>${tft.license-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.revapi</groupId>
+                    <artifactId>revapi-maven-plugin</artifactId>
+                    <version>${tft.revapi-maven-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
@@ -885,6 +894,30 @@
                         <format>html</format>
                     </formats>
                 </configuration>
+            </plugin>
+
+            <!-- RevAPI -->
+            <plugin>
+                <groupId>org.revapi</groupId>
+                <artifactId>revapi-maven-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.revapi</groupId>
+                        <artifactId>revapi-java</artifactId>
+                        <version>${tft.revapi-java.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <skip>${tft.revapi.skip}</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>api-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- Configures the release process, calling the assembly to include extra artifacts in deploy -->
@@ -1286,6 +1319,22 @@
                             <reportSet>
                                 <reports>
                                     <report>aggregate</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <!-- RevAPI -->
+                    <plugin>
+                        <groupId>org.revapi</groupId>
+                        <artifactId>revapi-maven-plugin</artifactId>
+                        <configuration>
+                            <skip>${tft.revapi.skip}</skip>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <reports>
+                                    <report>report-aggregate</report>
                                 </reports>
                             </reportSet>
                         </reportSets>
