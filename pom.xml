@@ -156,7 +156,6 @@
         <tft.pmd.minimumTokens>100</tft.pmd.minimumTokens>
         <tft.pmd.minimumPriority>5</tft.pmd.minimumPriority>
         <tft.pmd.skipEmptyReport>false</tft.pmd.skipEmptyReport>
-        <tft.pmd.includeXmlInSite>true</tft.pmd.includeXmlInSite>
 
         <tft.spring-boot.skip>false</tft.spring-boot.skip>
         <tft.spring-boot.repackage-classifier>exec</tft.spring-boot.repackage-classifier>
@@ -874,7 +873,6 @@
                     <targetJdk>${tft.javac.source}</targetJdk>
                     <skip>${tft.pmd.skip}</skip>
                     <skipEmptyReport>${tft.pmd.skipEmptyReport}</skipEmptyReport>
-                    <includeXmlInSite>${tft.pmd.includeXmlInSite}</includeXmlInSite>
                     <rulesets>
                         <ruleset>${tft.pmd.ruleset}</ruleset>
                     </rulesets>
