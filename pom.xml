@@ -1142,7 +1142,7 @@
         <!--====================================================================================================================================================
 
         This profile generates a Surefire report for the site. Must be separately run after a build (plain or with metrics). Some reports, such as Surefire
-        or Jacoco, are collected from the previous build; others are re-created. For this reasons configurations of latter plugins need to be replicated here.
+        or Jacoco, are collected from the previous build; others are re-created. For these reasons configurations of latter plugins need to be replicated here.
 
         Please note that plugin versions must be always replicated, otherwise the latest ones are used - see https://issues.apache.org/jira/browse/MSITE-443.
 
