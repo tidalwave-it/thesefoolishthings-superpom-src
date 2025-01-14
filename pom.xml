@@ -3894,6 +3894,7 @@
         <profile>
             <id>it.tidalwave-monocle-profile-v1</id>
             <properties>
+                <tft.openjfx-monocle.version>11.0.2</tft.openjfx-monocle.version>
                 <tft.testfx-monocle.vmOptions>-Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw</tft.testfx-monocle.vmOptions>
                 <tft.test.vmOptions>${tft.testfx-monocle.vmOptions}</tft.test.vmOptions>
             </properties>
