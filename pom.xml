@@ -1295,6 +1295,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-jxr-plugin</artifactId>
+                        <version>${tft.maven-jxr-plugin.version}</version>
                         <reportSets>
                             <reportSet>
                                 <reports>
@@ -1329,6 +1330,7 @@
                     <plugin>
                         <groupId>org.revapi</groupId>
                         <artifactId>revapi-maven-plugin</artifactId>
+                        <version>${tft.revapi-maven-plugin.version}</version>
                         <configuration>
                             <skip>${tft.revapi.skip}</skip>
                         </configuration>
