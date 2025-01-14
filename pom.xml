@@ -3888,6 +3888,26 @@
             </build>
         </profile>
 
+        <!--====================================================================================================================================================
+
+        This profile adds OpenJFX Monocle to test dependencies and sets a few VM properties for Surefire so headless testing for OpenJFX is possible.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-monocle-profile-v1</id>
+            <properties>
+                <tft.testfx-monocle.vmOptions>-Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw</tft.testfx-monocle.vmOptions>
+                <tft.test.vmOptions>${tft.testfx-monocle.vmOptions}</tft.test.vmOptions>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.testfx</groupId>
+                    <artifactId>openjfx-monocle</artifactId>
+                    <version>${tft.openjfx-monocle.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
     </profiles>
 
 </project>
