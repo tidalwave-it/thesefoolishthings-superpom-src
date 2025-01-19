@@ -1944,7 +1944,7 @@
                         <dependencies>
                             <dependency>
                                 <groupId>org.aspectj</groupId>
-                                <artifactId>aspectjrt</artifactId>
+                                <artifactId>aspectjweaver</artifactId>
                                 <version>${tft.aspectjrt.version}</version>
                             </dependency>
                             <dependency>
@@ -2068,7 +2068,7 @@
                         <dependencies>
                             <dependency>
                                 <groupId>org.aspectj</groupId>
-                                <artifactId>aspectjrt</artifactId>
+                                <artifactId>aspectjweaver</artifactId>
                                 <version>${tft.aspectjrt.version}</version>
                             </dependency>
                             <dependency>
@@ -2105,7 +2105,7 @@
                 </dependency>
                 <dependency>
                     <groupId>org.aspectj</groupId>
-                    <artifactId>aspectjrt</artifactId>
+                    <artifactId>aspectjweaver</artifactId>
                 </dependency>
             </dependencies>
         </profile>
@@ -2220,7 +2220,7 @@
                         <dependencies>
                             <dependency>
                                 <groupId>org.aspectj</groupId>
-                                <artifactId>aspectjrt</artifactId>
+                                <artifactId>aspectjweaver</artifactId>
                                 <version>${tft.aspectjrt.version}</version>
                             </dependency>
                             <dependency>
@@ -2253,7 +2253,7 @@
                 </dependency>
                 <dependency>
                     <groupId>org.aspectj</groupId>
-                    <artifactId>aspectjrt</artifactId>
+                    <artifactId>aspectjweaver</artifactId>
                     <scope>runtime</scope>
                 </dependency>
             </dependencies>
