@@ -2333,9 +2333,9 @@
 
         <!--====================================================================================================================================================
 
-        This profile prepares some stuff for the profiles it.tidalwave-javafx-appbundle-embedded-v2-jdk11 and it.tidalwave-javafx-appbundle-embedded-v2-jdk15.
-        It copies all dependent libraries in target/app/lib and modules in target/app/mods and downloads a Java runtime to embed. The coordinates of the
-        artifact are defined in the following properties:
+        This profile prepares some stuff for the profiles it.tidalwave-javafx-appbundle-embedded-v2-jdk11, it.tidalwave-javafx-appbundle-embedded-v2-jdk17
+        and it.tidalwave-javafx-appbundle-embedded-v2-jdk21. It copies all dependent libraries in target/app/lib  and downloads a Java runtime to embed. The
+        coordinates of the artifact are defined in the following properties:
 
             + tft.embedded-jre.groupId
             + tft.embedded-jre.artifactId
@@ -2344,7 +2344,7 @@
             + tft.embedded-jre.classifier.macos.x64
             + tft.embedded-jre.classifier.macos.aarch64
 
-        The properties are properly populated when running with JDK 11 and JDK 15, but can be overridden.
+        The properties are pre-populated, but can be overridden.
 
         =====================================================================================================================================================-->
         <profile>
@@ -2357,43 +2357,6 @@
             <properties>
                 <tft.appbundle.build.logLevel>info</tft.appbundle.build.logLevel>
             </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-base</artifactId>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-graphics</artifactId>
-                    <version>${tft.javafx.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-controls</artifactId>
-                    <version>${tft.javafx.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-fxml</artifactId>
-                    <version>${tft.javafx.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-media</artifactId>
-                    <version>${tft.javafx.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>javafx-web</artifactId>
-                    <version>${tft.javafx.version}</version>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -2448,21 +2411,8 @@
                                 </goals>
                                 <configuration>
                                     <excludeTransitive>false</excludeTransitive>
-                                    <excludeGroupIds>org.openjfx</excludeGroupIds>
                                     <includeScope>runtime</includeScope>
                                     <outputDirectory>${project.build.directory}/app/lib</outputDirectory>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>copy-javafx-modules</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>copy-dependencies</goal>
-                                </goals>
-                                <configuration>
-                                    <excludeTransitive>false</excludeTransitive>
-                                    <includeGroupIds>org.openjfx</includeGroupIds>
-                                    <outputDirectory>${project.build.directory}/app/mods</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
@@ -2742,14 +2692,14 @@
                                             <arg value="${project.build.directory}/jre/intel/${tft.embedded-jre.name}/${tft.embedded-jre.prefix}/Contents/Home" />
                                             <arg value="--input" />
                                             <arg value="${project.build.directory}/app" />
-                                            <arg value="--main-jar" />
-                                            <arg value="lib/${tft.mainPackage}" />
-                                            <arg value="--main-class" />
-                                            <arg value="${tft.mainClass}" />
+                                            <arg value="--module-path" />
+                                            <arg value="${project.build.directory}/app/lib" />
+                                            <arg value="--module" />
+                                            <arg value="${tft.mainModule}/${tft.mainClass}" />
                                             <arg value="--java-options" />
-                                            <arg value="--module-path $APPDIR/mods" /> <!-- $APPDIR will be resolved at runtime -->
+                                            <arg value="--module-path $APPDIR/lib" />
                                             <arg value="--java-options" />
-                                            <arg value="--add-modules ${tft.javafx.modules}" />
+                                            <arg value="--add-modules ALL-MODULE-PATH" />
                                         </exec>
                                         <delete dir="${project.build.directory}/arm" verbose="false" failonerror="true" />
                                         <echo level="${tft.appbundle.build.logLevel}">Creating ARM app bundle in ${project.build.directory}/arm ...</echo>
@@ -2774,14 +2724,14 @@
                                             <arg value="${project.build.directory}/jre/arm/${tft.embedded-jre.name}/${tft.embedded-jre.prefix}/Contents/Home" />
                                             <arg value="--input" />
                                             <arg value="${project.build.directory}/app" />
-                                            <arg value="--main-jar" />
-                                            <arg value="lib/${tft.mainPackage}" />
-                                            <arg value="--main-class" />
-                                            <arg value="${tft.mainClass}" />
+                                            <arg value="--module-path" />
+                                            <arg value="${project.build.directory}/app/lib" />
+                                            <arg value="--module" />
+                                            <arg value="${tft.mainModule}/${tft.mainClass}" />
                                             <arg value="--java-options" />
-                                            <arg value="--module-path $APPDIR/mods" /> <!-- $APPDIR will be resolved at runtime -->
+                                            <arg value="--module-path $APPDIR/lib" />
                                             <arg value="--java-options" />
-                                            <arg value="--add-modules ${tft.javafx.modules}" />
+                                            <arg value="--add-modules ALL-MODULE-PATH" />
                                         </exec>
                                         <!-- signature="${tft.appbundle.signature}" ? -->
                                     </target>
