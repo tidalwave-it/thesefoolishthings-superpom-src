@@ -99,7 +99,7 @@
 
         <tft.defaultGoal>clean install</tft.defaultGoal>
 
-        <tft.modulePathInTests>false</tft.modulePathInTests>
+        <tft.modulePathInTests>true</tft.modulePathInTests>
 
         <tft.profile.metrics.checkstyleGoal>checkstyle:checkstyle</tft.profile.metrics.checkstyleGoal>
         <tft.profile.metrics.findbugsGoal />
@@ -734,6 +734,15 @@
                         <arg>${tft.javac.xlint}</arg>
                     </compilerArgs>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>test-compile</phase>
+                        <configuration>
+                            <useModulePath>${tft.modulePathInTests}</useModulePath>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- Assembler to produce final artifacts. -->
@@ -1992,7 +2001,6 @@
                                 <id>default-testCompile</id>
                                 <phase>test-compile</phase>
                                 <configuration>
-                                    <useModulePath>${tft.modulePathInTests}</useModulePath>
                                     <outputDirectory>${tft.project.build.unwoven-test-classes.directory}</outputDirectory>
                                 </configuration>
                             </execution>
