@@ -99,6 +99,8 @@
 
         <tft.defaultGoal>clean install</tft.defaultGoal>
 
+        <tft.modulePathInTests>false</tft.modulePathInTests>
+
         <tft.profile.metrics.checkstyleGoal>checkstyle:checkstyle</tft.profile.metrics.checkstyleGoal>
         <tft.profile.metrics.findbugsGoal />
         <tft.profile.metrics.spotbugsGoal>com.github.spotbugs:spotbugs-maven-plugin:check</tft.profile.metrics.spotbugsGoal>
@@ -750,6 +752,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skipTests>${tft.test.skip}</skipTests>
+                    <useModulePath>${tft.modulePathInTests}</useModulePath>
                     <excludedGroups>${tft.test.excludedGroups}</excludedGroups>
                     <reportsDirectory>${tft.test.reportsDirectory}</reportsDirectory>
                     <includes>
@@ -1989,6 +1992,7 @@
                                 <id>default-testCompile</id>
                                 <phase>test-compile</phase>
                                 <configuration>
+                                    <useModulePath>${tft.modulePathInTests}</useModulePath>
                                     <outputDirectory>${tft.project.build.unwoven-test-classes.directory}</outputDirectory>
                                 </configuration>
                             </execution>
