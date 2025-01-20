@@ -2321,23 +2321,28 @@
         <profile>
             <id>javafx-run</id>
             <build>
-                <defaultGoal>exec:exec</defaultGoal>
+                <defaultGoal>exec:exec@javafx-run</defaultGoal>
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-                        <configuration>
-                            <executable>java</executable>
-                            <arguments>
-                                <argument>--module-path</argument>
-                                <argument>ignored</argument> <!-- FIXME: it seems the plugin "eats" this argument -->
-                                <classpath />
-                                <argument>--add-modules</argument>
-                                <argument>ALL-MODULE-PATH</argument>
-                                <argument>-m</argument>
-                                <argument>${tft.mainClass}</argument>
-                            </arguments>
-                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>javafx-run</id>
+                                <configuration>
+                                    <executable>java</executable>
+                                    <arguments>
+                                        <argument>--module-path</argument>
+                                        <argument>ignored</argument> <!-- FIXME: it seems the plugin "eats" this argument -->
+                                        <classpath />
+                                        <argument>--add-modules</argument>
+                                        <argument>ALL-MODULE-PATH</argument>
+                                        <argument>-m</argument>
+                                        <argument>${tft.mainClass}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
