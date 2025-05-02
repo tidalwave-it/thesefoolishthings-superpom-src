@@ -323,8 +323,8 @@
         <tft.mycila-license-maven-plugin.version>4.6</tft.mycila-license-maven-plugin.version>
         <tft.native-maven-plugin.version>0.10.4</tft.native-maven-plugin.version>
         <tft.nexus-staging-maven-plugin.version>1.7.0</tft.nexus-staging-maven-plugin.version>
-        <tft.revapi-maven-plugin.version>0.15.0</tft.revapi-maven-plugin.version>
-        <tft.revapi-java.version>0.28.1</tft.revapi-java.version>
+        <tft.revapi-maven-plugin.version>0.15.1</tft.revapi-maven-plugin.version>
+        <tft.revapi-java.version>0.28.4</tft.revapi-java.version>
         <tft.sonar-maven-plugin.version>5.1.0.4751</tft.sonar-maven-plugin.version>
         <tft.spotbugs-maven-plugin.version>4.8.6.6</tft.spotbugs-maven-plugin.version>
         <tft.spring-boot-maven-plugin.version>3.4.0</tft.spring-boot-maven-plugin.version>
