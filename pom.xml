@@ -315,7 +315,7 @@
         <tft.findbugs-maven-plugin.version>3.0.5</tft.findbugs-maven-plugin.version>
         <tft.gwt-maven-plugin.version>2.10.0</tft.gwt-maven-plugin.version>
         <tft.jacoco-maven-plugin.version>0.8.12</tft.jacoco-maven-plugin.version>
-        <tft.jaxb2-maven-plugin.version>3.2.0</tft.jaxb2-maven-plugin.version>
+        <tft.jaxb2-maven-plugin.version>3.3.0</tft.jaxb2-maven-plugin.version>
         <tft.jaxws-maven-plugin.version>3.0.0</tft.jaxws-maven-plugin.version>
         <tft.jetty-maven-plugin.version>11.0.24</tft.jetty-maven-plugin.version>
         <tft.license-maven-plugin.version>2.5.0</tft.license-maven-plugin.version>
