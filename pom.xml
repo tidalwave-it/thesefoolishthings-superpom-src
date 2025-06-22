@@ -321,7 +321,7 @@
         <tft.license-maven-plugin.version>2.6.0</tft.license-maven-plugin.version>
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
         <tft.mycila-license-maven-plugin.version>4.6</tft.mycila-license-maven-plugin.version>
-        <tft.native-maven-plugin.version>0.10.4</tft.native-maven-plugin.version>
+        <tft.native-maven-plugin.version>0.11.0</tft.native-maven-plugin.version>
         <tft.nexus-staging-maven-plugin.version>1.7.0</tft.nexus-staging-maven-plugin.version>
         <tft.revapi-maven-plugin.version>0.15.1</tft.revapi-maven-plugin.version>
         <tft.revapi-java.version>0.28.4</tft.revapi-java.version>
