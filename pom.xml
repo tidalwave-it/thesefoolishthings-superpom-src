@@ -292,7 +292,7 @@
         <tft.maven-javadoc-plugin.version>3.11.2</tft.maven-javadoc-plugin.version>
         <tft.maven-jdeb-plugin.version>1.12</tft.maven-jdeb-plugin.version>
         <tft.maven-jxr-plugin.version>3.6.0</tft.maven-jxr-plugin.version>
-        <tft.maven-pmd-plugin.version>3.26.0</tft.maven-pmd-plugin.version>
+        <tft.maven-pmd-plugin.version>3.27.0</tft.maven-pmd-plugin.version>
         <tft.maven-project-info-reports-plugin.version>3.9.0</tft.maven-project-info-reports-plugin.version>
         <tft.maven-release-plugin.version>3.1.1</tft.maven-release-plugin.version>
         <tft.maven-resources-plugin.version>3.3.1</tft.maven-resources-plugin.version>
