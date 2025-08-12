@@ -1007,8 +1007,6 @@
                         <exclude>**/*.form</exclude>
                         <exclude>**/*.mf</exclude>
                         <exclude>**/.description</exclude>
-                        <exclude>.hgtags</exclude>
-                        <exclude>.hgignore</exclude>
                         <exclude>.gitignore</exclude>
                         <exclude>.svnignore</exclude>
                         <exclude>**/.classpath</exclude>
@@ -1527,23 +1525,6 @@
 
         <!--====================================================================================================================================================
 
-        This profile detects Mercurial, it's used by the release-commit profile.
-
-        =====================================================================================================================================================-->
-        <profile>
-            <id>scm-detector-hg</id>
-            <activation>
-                <file>
-                    <exists>.hg</exists>
-                </file>
-            </activation>
-            <properties>
-                <tft.scm-detector.hg>true</tft.scm-detector.hg>
-            </properties>
-        </profile>
-
-        <!--====================================================================================================================================================
-
         This profile detects Git, it's used by the release-commit profile.
 
         =====================================================================================================================================================-->
@@ -1594,20 +1575,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
-                            <execution>
-                                <id>push-hg</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target name="push-hg" if="tft.scm-detector.hg">
-                                        <exec executable="hg" dir="${project.build.directory}" failonerror="true">
-                                            <arg value="push" />
-                                        </exec>
-                                    </target>
-                                </configuration>
-                            </execution>
                             <execution>
                                 <id>push-git</id>
                                 <phase>initialize</phase>
@@ -1707,20 +1674,6 @@
                         <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>push-hg</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target name="push-hg" if="tft.scm-detector.hg">
-                                        <exec executable="hg" dir="${project.build.directory}" failonerror="true">
-                                            <arg value="push" />
-                                        </exec>
-                                    </target>
-                                </configuration>
-                            </execution>
-                            <execution>
                                 <id>push-git</id>
                                 <phase>initialize</phase>
                                 <goals>
@@ -1758,19 +1711,6 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
                         <executions>
-                            <execution>
-                                <id>strip-hg</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <!-- FIXME: would be better to strip local changes -->
-                                    <target name="strip-hg" if="tft.scm-detector.hg">
-                                        <delete dir="${project.build.directory}/.hg" />
-                                    </target>
-                                </configuration>
-                            </execution>
                             <execution>
                                 <id>strip-git</id>
                                 <phase>initialize</phase>
