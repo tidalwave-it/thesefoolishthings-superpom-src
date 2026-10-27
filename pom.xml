@@ -328,7 +328,7 @@
         <tft.central-publishing-maven-plugin.version>0.8.0</tft.central-publishing-maven-plugin.version>
         <tft.revapi-maven-plugin.version>0.15.1</tft.revapi-maven-plugin.version>
         <tft.revapi-java.version>0.28.4</tft.revapi-java.version>
-        <tft.sonar-maven-plugin.version>5.1.0.4751</tft.sonar-maven-plugin.version>
+        <tft.sonar-maven-plugin.version>5.8.0.7211</tft.sonar-maven-plugin.version>
         <tft.spotbugs-maven-plugin.version>4.10.5.0</tft.spotbugs-maven-plugin.version>
         <tft.spring-boot-maven-plugin.version>3.4.0</tft.spring-boot-maven-plugin.version>
         <tft.tomcat-maven-plugin.version>2.2</tft.tomcat-maven-plugin.version>
