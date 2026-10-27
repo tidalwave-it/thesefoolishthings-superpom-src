@@ -340,7 +340,7 @@
         <tft.xml-maven-plugin.version>1.2.2</tft.xml-maven-plugin.version>
 
         <tft.archetype-packaging.version>${tft.maven-archetype-plugin.version}</tft.archetype-packaging.version>
-        <tft.javadoc.doclet.version>2.2.2</tft.javadoc.doclet.version>
+        <tft.javadoc.doclet.version>2.3.2</tft.javadoc.doclet.version>
     </properties>
 
     <scm>
