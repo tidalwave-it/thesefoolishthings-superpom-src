@@ -300,7 +300,7 @@
         <tft.maven-release-plugin.version>3.3.1</tft.maven-release-plugin.version>
         <tft.maven-resources-plugin.version>3.5.0</tft.maven-resources-plugin.version>
         <tft.maven-scm-plugin.version>2.2.1</tft.maven-scm-plugin.version>
-        <tft.maven-shade-plugin.version>3.6.0</tft.maven-shade-plugin.version>
+        <tft.maven-shade-plugin.version>3.6.2</tft.maven-shade-plugin.version>
         <tft.maven-site-plugin.version>3.21.0</tft.maven-site-plugin.version>
         <tft.maven-source-plugin.version>3.3.1</tft.maven-source-plugin.version>
         <tft.maven-surefire-plugin.version>3.5.3</tft.maven-surefire-plugin.version>
