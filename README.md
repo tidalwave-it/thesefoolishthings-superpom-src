@@ -41,10 +41,10 @@ In order to build the project, run from the command line:
 The project can be opened and built by a recent version of the NetBeans, Eclipse or Idea IDEs.
 
 
-Documentation
--------------
+Manual
+------
 
-More information can be found on the [homepage](http://tidalwave.it) of the project.
+See [here]((MANUAL.md)
 
 
 Where can I get the latest release?
