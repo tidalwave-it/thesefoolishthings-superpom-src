@@ -301,7 +301,7 @@ During the release:
 * `release-sign-artifacts` signs all artifacts with GPG at `verify`, using `gpg.keyname` and `gpg.passphrase`. Set
   `tft.release.sign-artifacts.skip=true` to skip signing;
 * the Sonatype Central Publishing Plugin (registered as a build extension) takes over the `deploy` phase and creates the
-  bundle `target/central-publishing/central-bundle.zip`. Since `tft.central-publishing.skipPublishing` is `true`, the
+  bundle `target/central-publishing/central-bundle.zip`. Since `tft.central-publishing.skipUpload` is `true`, the
   bundle is **not** uploaded. The deployment is named `${project.name} ${project.version}` and is published
   automatically once uploaded (`tft.central-publishing.autoPublish`).
 
@@ -640,7 +640,8 @@ Defaults are shown as defined in the POM; an empty value means the property is d
 | `release.profiles`                      | `release-sign-artifacts`                                                                      | Profiles activated in the forked release builds                       |
 | `tft.release.sign-artifacts.skip`       | `false`                                                                                       | Skip GPG signing                                                      |
 | `tft.central-publishing.autoPublish`    | `true`                                                                                        | Publish automatically once the bundle is uploaded to Central          |
-| `tft.central-publishing.skipPublishing` | `true`                                                                                        | Only create the bundle; upload it later with `release-commit-central` |
+| `tft.central-publishing.skipPublishing` | `false`                                                                                       | Exclude the module from the bundle                                    |
+| `tft.central-publishing.skipUpload`     | `true`                                                                                        | Only create the bundle; upload it later with `release-commit-central` |
 
 **macOS application bundles**
 

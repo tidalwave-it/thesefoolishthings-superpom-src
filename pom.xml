@@ -160,7 +160,8 @@
         <tft.pmd.skipEmptyReport>false</tft.pmd.skipEmptyReport>
 
         <tft.central-publishing.autoPublish>true</tft.central-publishing.autoPublish>
-        <tft.central-publishing.skipPublishing>true</tft.central-publishing.skipPublishing>
+        <tft.central-publishing.skipPublishing>false</tft.central-publishing.skipPublishing>
+        <tft.central-publishing.skipUpload>true</tft.central-publishing.skipUpload>
 
         <tft.spring-boot.skip>false</tft.spring-boot.skip>
         <tft.spring-boot.repackage-classifier>exec</tft.spring-boot.repackage-classifier>
@@ -325,7 +326,7 @@
         <tft.m2e-lifecycle-mapping.version>1.0.0</tft.m2e-lifecycle-mapping.version>
         <tft.mycila-license-maven-plugin.version>5.1.2</tft.mycila-license-maven-plugin.version>
         <tft.native-maven-plugin.version>1.1.17</tft.native-maven-plugin.version>
-        <tft.central-publishing-maven-plugin.version>0.8.0</tft.central-publishing-maven-plugin.version>
+        <tft.central-publishing-maven-plugin.version>0.12.0</tft.central-publishing-maven-plugin.version>
         <tft.revapi-maven-plugin.version>0.15.1</tft.revapi-maven-plugin.version>
         <tft.revapi-java.version>0.28.4</tft.revapi-java.version>
         <tft.sonar-maven-plugin.version>5.8.0.7211</tft.sonar-maven-plugin.version>
@@ -938,6 +939,7 @@
                     <centralBaseUrl>${tft.staging-repo.url}</centralBaseUrl>
                     <autoPublish>${tft.central-publishing.autoPublish}</autoPublish>
                     <skipPublishing>${tft.central-publishing.skipPublishing}</skipPublishing>
+                    <skipUpload>${tft.central-publishing.skipUpload}</skipUpload>
                     <deploymentName>${project.name} ${project.version}</deploymentName>
                 </configuration>
             </plugin>
