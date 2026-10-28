@@ -1364,6 +1364,14 @@
                                 <id>default</id>
                                 <reports>
                                     <report>javadoc-no-fork</report>
+                                </reports>
+                            </reportSet>
+                            <reportSet>
+                                <id>test</id>
+                                <configuration>
+                                    <doclint>none</doclint>
+                                </configuration>
+                                <reports>
                                     <report>test-javadoc-no-fork</report>
                                 </reports>
                             </reportSet>
@@ -1372,6 +1380,15 @@
                                 <inherited>false</inherited><!-- don't run aggregate in child modules -->
                                 <reports>
                                     <report>aggregate-no-fork</report>
+                                </reports>
+                            </reportSet>
+                            <reportSet>
+                                <id>test-aggregate</id>
+                                <inherited>false</inherited>
+                                <configuration>
+                                    <doclint>none</doclint>
+                                </configuration>
+                                <reports>
                                     <report>test-aggregate-no-fork</report>
                                 </reports>
                             </reportSet>
