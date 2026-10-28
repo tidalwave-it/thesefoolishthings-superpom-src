@@ -209,6 +209,8 @@
         <tft.owasp.skip>false</tft.owasp.skip>
 
         <tft.site.skip>false</tft.site.skip>
+        <!-- The directory, relative to the root of a project, that contains all the modules. -->
+        <tft.modules.directory>modules</tft.modules.directory>
 
         <tft.native.name>${project.groupId}-${project.artifactId}-${project.version}</tft.native.name>
         <tft.native.buildArgs>--no-fallback</tft.native.buildArgs>
@@ -1213,7 +1215,7 @@
                         <reportSets>
                             <reportSet>
                                 <reports>
-                                    <report>report-aggregate</report>
+                                    <report>report</report>
                                 </reports>
                             </reportSet>
                         </reportSets>
@@ -1390,6 +1392,94 @@
                                 </configuration>
                                 <reports>
                                     <report>test-aggregate-no-fork</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+                </plugins>
+                </reporting>
+        </profile>
+
+        <!--====================================================================================================================================================
+
+        This profile is only active in the root of a multi-module project, detected by the presence of the directory containing the modules, and creates
+        a JaCoCo report aggregating the data of all the modules. Data are collected from a previous build, as with it.tidalwave-site-v1.
+
+        The report-aggregate goal can't be used for this purpose, since it only aggregates the dependencies of a project and the root doesn't depend on the
+        modules (they are reached through the intermediate modules POM). It's only declared to have the "JaCoCo Aggregate" entry in Project Reports: its
+        (empty) output is overwritten by the Ant task, which runs later in the site phase.
+
+        Note that file activation can't use the tft.modules.directory property, since Maven doesn't interpolate model properties there.
+
+        =====================================================================================================================================================-->
+        <profile>
+            <id>it.tidalwave-jacoco-aggregate-v1</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/modules</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.jacoco</groupId>
+                                <artifactId>org.jacoco.ant</artifactId>
+                                <version>${tft.jacoco-maven-plugin.version}</version>
+                                <classifier>nodeps</classifier>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>jacoco-aggregate-report</id>
+                                <phase>site</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                    <target xmlns:jacoco="antlib:org.jacoco.ant">
+                                        <property name="tft.jacoco.modulesDirectory" location="${project.basedir}/${tft.modules.directory}"/>
+                                        <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" classpathref="maven.plugin.classpath"/>
+                                        <dirset id="tft.jacoco.srcdirs" dir="${tft.jacoco.modulesDirectory}" includes="*/src/main/java,examples/*/src/main/java"/>
+                                        <pathconvert property="tft.jacoco.srcdirs" refid="tft.jacoco.srcdirs" pathsep=","/>
+                                        <jacoco:report>
+                                            <executiondata>
+                                                <fileset dir="${tft.jacoco.modulesDirectory}" includes="**/target/jacoco.exec"/>
+                                            </executiondata>
+                                            <structure name="${project.name}">
+                                                <classfiles>
+                                                    <fileset dir="${tft.jacoco.modulesDirectory}" includes="*/target/classes/**/*.class,examples/*/target/classes/**/*.class"/>
+                                                </classfiles>
+                                                <sourcefiles encoding="${project.build.sourceEncoding}">
+                                                    <multirootfileset basedirs="${tft.jacoco.srcdirs}" includes="**/*.java"/>
+                                                </sourcefiles>
+                                            </structure>
+                                            <html destdir="${project.reporting.outputDirectory}/jacoco-aggregate"/>
+                                            <xml destfile="${project.reporting.outputDirectory}/jacoco-aggregate/jacoco.xml"/>
+                                        </jacoco:report>
+                                    </target>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <reporting>
+                <plugins>
+                    <!-- This would produce an empty aggregate report, that will be overwritten by the Ant task, but it does create the menu item. -->
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${tft.jacoco-maven-plugin.version}</version>
+                        <reportSets>
+                            <!-- A distinct id, so it's not merged with the reportSet of it.tidalwave-site-v1. -->
+                            <reportSet>
+                                <id>aggregate</id>
+                                <reports>
+                                    <report>report-aggregate</report>
                                 </reports>
                             </reportSet>
                         </reportSets>

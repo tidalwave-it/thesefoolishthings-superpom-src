@@ -172,6 +172,7 @@ all of them; the following sections describe each one in detail.
 | `it.tidalwave-metrics-pre-site-v1`               | `-P`                                                                                 | Skip in metrics the tools that the site will run again              |
 | `it.tidalwave-site-v1`                           | `-P`                                                                                 | Generate and stage the Maven site with all reports                  |
 | `it.tidalwave-site-docs-maven-skin-v1`           | file `src/config/activate-it.tidalwave-site-docs-maven-skin-v1-profile`              | Use the Docs Maven Skin for the site                                |
+| `it.tidalwave-jacoco-aggregate-v1`               | directory `modules` exists                                                           | JaCoCo report aggregating all the modules, in the site of the root  |
 | `generate-revision-id`                           | `-P`                                                                                 | Write the build description to `.description`                       |
 | `show-revision-id`                               | `-P`                                                                                 | Print the build description stored in `.description`                |
 | `release`                                        | `-P`                                                                                 | Release build, staging artifacts in a local repository              |
@@ -255,7 +256,7 @@ created again. The site contains:
   licenses, mailing lists, modules, plugins, SCM, summary, team);
 * aggregated Surefire report from both `surefire-reports/plain` and `surefire-reports/jacoco` (`tft.report.test.aggregate`,
   disable with `tft.maven-surefire-report-plugin.skip`);
-* aggregated JaCoCo coverage;
+* JaCoCo coverage of the module (for the root of a multi-module project, see `it.tidalwave-jacoco-aggregate-v1` below);
 * SpotBugs, aggregated PMD and CPD, Checkstyle, OWASP Dependency-Check and RevAPI reports;
 * JXR cross-referenced sources;
 * Javadoc for main and test code, with an `aggregate` report set that runs only at the root of a multi-module project.
@@ -263,6 +264,18 @@ created again. The site contains:
 The site can be disabled with `tft.site.skip=true`. **`it.tidalwave-site-docs-maven-skin-v1`** adds the
 [Docs Maven Skin](https://github.com/Bernardo-MG/docs-maven-skin) (`tft.site.skin.version`, default `2.1.0`) as a
 dependency of the Site Plugin; this project activates it and configures it in `src/site/site.xml`.
+
+**`it.tidalwave-jacoco-aggregate-v1`** is activated automatically in the root of a multi-module project, recognised by
+the presence of a `modules` directory. When the site is generated it creates a JaCoCo report covering all the modules,
+listed as *JaCoCo Aggregate* in *Project Reports* and written to `jacoco-aggregate` in the site output directory (HTML
+and `jacoco.xml`). As for the other coverage reports, data come from a previous build with `it.tidalwave-metrics-v2`:
+the profile reads every `target/jacoco.exec` under the modules directory, together with the classes and sources of the
+modules placed directly in it (`modules/*`) or in its `examples` subdirectory (`modules/examples/*`); modules at other
+depths are not included in the report. The `report-aggregate` goal of JaCoCo isn't used for this, because it only
+aggregates the dependencies of a project and the root doesn't depend on its modules: the goal only creates the menu
+entry, and its empty output is replaced by an Ant task of `org.jacoco.ant`. The directory scanned for the data can be
+changed with `tft.modules.directory`, but the activation always looks for `modules`, because Maven doesn't interpolate
+properties in file activation.
 
 **`generate-revision-id`** writes a description of the build (`DESCRIPTION: <GIT_BRANCH> <version> <buildNumber>`) to
 the file named by `tft.descriptionStamp` (default `.description`) and prints it together with the Java version.
@@ -510,8 +523,8 @@ command `/usr/bin/<name>`, a symlink to `${tft.deb.binaryDirectory}/<name>/bin/<
 * **`javac-jdk21plus`** (JDK 21+): adds `-XX:+EnableDynamicAgentLoading` to the test JVM.
 * **`it.tidalwave-m2e-lifecycle-mapping`** (Eclipse m2e): maps the AspectJ (`compile`, `test-compile`), JAXB2 (`xjc`),
   XML (`transform`) and Dependency (`unpack`) goals to run on incremental builds, and ignores the Enforcer.
-* **`scm-detector-git`**, **`scm-detector-hg`**, **`it.tidalwave-spring-boot-native-disabler`** and
-  **`it.tidalwave.deb-sign`** are described above.
+* **`scm-detector-git`**, **`scm-detector-hg`**, **`it.tidalwave-jacoco-aggregate-v1`**,
+  **`it.tidalwave-spring-boot-native-disabler`** and **`it.tidalwave.deb-sign`** are described above.
 
 
 ### Properties reference
@@ -707,9 +720,10 @@ The defaults of the `sourceTarball` properties (except `artifactId`), `binaryDir
 
 **Site**
 
-| Property                | Default | Description                                                      |
-|-------------------------|---------|------------------------------------------------------------------|
-| `tft.site.skin.version` | `2.1.0` | Docs Maven Skin version (`it.tidalwave-site-docs-maven-skin-v1`) |
+| Property                | Default   | Description                                                                         |
+|-------------------------|-----------|-------------------------------------------------------------------------------------|
+| `tft.site.skin.version` | `2.1.0`   | Docs Maven Skin version (`it.tidalwave-site-docs-maven-skin-v1`)                    |
+| `tft.modules.directory` | `modules` | Directory of the modules, relative to the root (`it.tidalwave-jacoco-aggregate-v1`) |
 
 
 ### Managed plugin versions
