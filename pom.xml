@@ -1132,7 +1132,7 @@
             <id>it.tidalwave-metrics-pre-site-v1</id>
             <properties>
                 <tft.profile.metrics.checkstyleGoal />
-                <tft.profile.metrics.spotbugsGoal />
+                <!-- SpotBugs is not suppressed: its XML results are needed by the aggregate report in it.tidalwave-aggregate-reports-v1. -->
                 <tft.profile.metrics.pmdGoal />
                 <tft.profile.metrics.dependencyCheckGoal />
             </properties>
@@ -1227,7 +1227,7 @@
                         <artifactId>spotbugs-maven-plugin</artifactId>
                         <version>${tft.spotbugs-maven-plugin.version}</version>
                         <!-- Configuration must be replicated from build section. -->
-                        <!-- No aggregate reports for SpotBugs: https://spotbugs.github.io/spotbugs-maven-plugin/faq.html#Aggregate_Reporting -->
+                        <!-- The aggregate report is in it.tidalwave-aggregate-reports-v1. -->
                         <configuration>
                             <xmlOutput>true</xmlOutput>
                             <spotbugsXmlOutput>true</spotbugsXmlOutput>
@@ -1403,17 +1403,23 @@
         <!--====================================================================================================================================================
 
         This profile is only active in the root of a multi-module project, detected by the presence of the directory containing the modules, and creates
-        a JaCoCo report aggregating the data of all the modules. Data are collected from a previous build, as with it.tidalwave-site-v1.
+        reports aggregating the data of all the modules. Data are collected from a previous build, as with it.tidalwave-site-v1: the root is the first
+        project in the reactor, so its site is generated before the modules are analysed.
 
-        The report-aggregate goal can't be used for this purpose, since it only aggregates the dependencies of a project and the root doesn't depend on the
-        modules (they are reached through the intermediate modules POM). It's only declared to have the "JaCoCo Aggregate" entry in Project Reports: its
-        (empty) output is overwritten by the Ant task, which runs later in the site phase.
+        JaCoCo: the report-aggregate goal can't be used for this purpose, since it only aggregates the dependencies of a project and the root doesn't
+        depend on the modules (they are reached through the intermediate modules POM). It's only declared to have the "JaCoCo Aggregate" entry in Project
+        Reports: its (empty) output is overwritten by the Ant task, which runs later in the site phase. Data come from the jacoco.exec files produced by
+        it.tidalwave-metrics-v2.
+
+        SpotBugs: spotbugs-aggregate collects the spotbugsXml.xml files of all the reactor projects, produced by spotbugs:check in it.tidalwave-metrics-v2.
+        It looks for them in ${project.build.directory}/${spotbugsXmlOutputFilename}, while they are written to spotbugsXmlOutputDirectory, so the
+        relative path is part of the file name.
 
         Note that file activation can't use the tft.modules.directory property, since Maven doesn't interpolate model properties there.
 
         =====================================================================================================================================================-->
         <profile>
-            <id>it.tidalwave-jacoco-aggregate-v1</id>
+            <id>it.tidalwave-aggregate-reports-v1</id>
             <activation>
                 <file>
                     <exists>${basedir}/modules</exists>
@@ -1480,6 +1486,24 @@
                                 <id>aggregate</id>
                                 <reports>
                                     <report>report-aggregate</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.spotbugs</groupId>
+                        <artifactId>spotbugs-maven-plugin</artifactId>
+                        <version>${tft.spotbugs-maven-plugin.version}</version>
+                        <reportSets>
+                            <!-- A distinct id, so it's not merged with the reportSet of it.tidalwave-site-v1. -->
+                            <reportSet>
+                                <id>aggregate</id>
+                                <configuration>
+                                    <!-- Relative to ${project.build.directory}: must match spotbugsXmlOutputDirectory. -->
+                                    <spotbugsXmlOutputFilename>site/spotbugsXml.xml</spotbugsXmlOutputFilename>
+                                </configuration>
+                                <reports>
+                                    <report>spotbugs-aggregate</report>
                                 </reports>
                             </reportSet>
                         </reportSets>
