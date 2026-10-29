@@ -257,7 +257,9 @@ created again. The site contains:
 * aggregated Surefire report from both `surefire-reports/plain` and `surefire-reports/jacoco` (`tft.report.test.aggregate`,
   disable with `tft.maven-surefire-report-plugin.skip`);
 * JaCoCo coverage of the module (for the root of a multi-module project, see `it.tidalwave-jacoco-aggregate-v1` below);
-* SpotBugs, aggregated PMD and CPD, Checkstyle, OWASP Dependency-Check and RevAPI reports;
+* SpotBugs, aggregated PMD and CPD, Checkstyle and OWASP Dependency-Check reports;
+* RevAPI report of the module (`report-fork`, which runs the lifecycle up to `package` in a fork); for the root of a
+  multi-module project, see `it.tidalwave-aggregate-reports-v1` below;
 * JXR cross-referenced sources;
 * Javadoc for main and test code, with an `aggregate` report set that runs only at the root of a multi-module project.
 
@@ -276,6 +278,12 @@ aggregates the dependencies of a project and the root doesn't depend on its modu
 entry, and its empty output is replaced by an Ant task of `org.jacoco.ant`. The directory scanned for the data can be
 changed with `tft.modules.directory`, but the activation always looks for `modules`, because Maven doesn't interpolate
 properties in file activation.
+
+The same profile adds the RevAPI aggregate report (`report-aggregate`), listed as *API Change Analysis* and written to
+`revapi-aggregate-report.html` in the site of the root: it compares the artifacts of all the modules, using the RevAPI
+configuration of the root. It runs only if `tft.revapi.skip=false`. The archives to analyse can be restricted with
+`tft.revapi.aggregate.includedArtifacts` and `tft.revapi.aggregate.excludedArtifacts`, regular expressions matched
+against the whole archive name (`groupId:artifactId:jar:version`, e.g. `it\.tidalwave\..*:.*-examples:.*`).
 
 **`generate-revision-id`** writes a description of the build (`DESCRIPTION: <GIT_BRANCH> <version> <buildNumber>`) to
 the file named by `tft.descriptionStamp` (default `.description`) and prints it together with the Java version.
@@ -583,27 +591,30 @@ Defaults are shown as defined in the POM; an empty value means the property is d
 
 **Quality tools**
 
-| Property                            | Default                           | Description                                            |
-|-------------------------------------|-----------------------------------|--------------------------------------------------------|
-| `tft.spotbugs.skip`                 | `${tft.findbugs.skip}` (`false`)  | Skip SpotBugs                                          |
-| `tft.spotbugs.effort`               | `Max`                             | Analysis effort                                        |
-| `tft.spotbugs.threshold`            | `Low`                             | Minimum confidence of reported bugs                    |
-| `tft.spotbugs.failOnError`          | `false`                           | Fail the build when bugs are found                     |
-| `tft.spotbugs.relaxed`              | `false`                           | Relaxed reporting mode                                 |
-| `tft.spotbugs.maxHeap`              | `512`                             | Heap of the SpotBugs JVM, in MB                        |
-| `tft.spotbugs.maxAllowedViolations` | `0`                               | Violations tolerated before failing                    |
-| `tft.findbugs.skip`                 | `false`                           | Legacy switch; also the default of `tft.spotbugs.skip` |
-| `tft.checkstyle.skip`               | `false`                           | Skip Checkstyle                                        |
-| `tft.pmd.skip`                      | `false`                           | Skip PMD and CPD                                       |
-| `tft.pmd.ruleset`                   | `/it/tidalwave/pmd/standard.xml`  | PMD ruleset resource                                   |
-| `tft.pmd.ruleset.groupId`           | `it.tidalwave.thesefoolishthings` | Group id of the artifact containing the ruleset        |
-| `tft.pmd.ruleset.artifactId`        | `superpom-config`                 | Artifact id of the artifact containing the ruleset     |
-| `tft.pmd.ruleset.version`           | `${tft.superpom.config.version}`  | Version of the artifact containing the ruleset         |
-| `tft.pmd.minimumTokens`             | `100`                             | CPD duplication threshold                              |
-| `tft.pmd.minimumPriority`           | `5`                               | Lowest PMD rule priority reported                      |
-| `tft.pmd.skipEmptyReport`           | `false`                           | Skip the PMD report when there are no violations       |
-| `tft.owasp.skip`                    | `false`                           | Skip OWASP Dependency-Check                            |
-| `tft.revapi.skip`                   | `true`                            | Skip the RevAPI compatibility check                    |
+| Property                                 | Default                           | Description                                                |
+|------------------------------------------|-----------------------------------|------------------------------------------------------------|
+| `tft.spotbugs.skip`                      | `${tft.findbugs.skip}` (`false`)  | Skip SpotBugs                                              |
+| `tft.spotbugs.effort`                    | `Max`                             | Analysis effort                                            |
+| `tft.spotbugs.threshold`                 | `Low`                             | Minimum confidence of reported bugs                        |
+| `tft.spotbugs.failOnError`               | `false`                           | Fail the build when bugs are found                         |
+| `tft.spotbugs.relaxed`                   | `false`                           | Relaxed reporting mode                                     |
+| `tft.spotbugs.maxHeap`                   | `512`                             | Heap of the SpotBugs JVM, in MB                            |
+| `tft.spotbugs.maxAllowedViolations`      | `0`                               | Violations tolerated before failing                        |
+| `tft.findbugs.skip`                      | `false`                           | Legacy switch; also the default of `tft.spotbugs.skip`     |
+| `tft.checkstyle.skip`                    | `false`                           | Skip Checkstyle                                            |
+| `tft.pmd.skip`                           | `false`                           | Skip PMD and CPD                                           |
+| `tft.pmd.ruleset`                        | `/it/tidalwave/pmd/standard.xml`  | PMD ruleset resource                                       |
+| `tft.pmd.ruleset.groupId`                | `it.tidalwave.thesefoolishthings` | Group id of the artifact containing the ruleset            |
+| `tft.pmd.ruleset.artifactId`             | `superpom-config`                 | Artifact id of the artifact containing the ruleset         |
+| `tft.pmd.ruleset.version`                | `${tft.superpom.config.version}`  | Version of the artifact containing the ruleset             |
+| `tft.pmd.minimumTokens`                  | `100`                             | CPD duplication threshold                                  |
+| `tft.pmd.minimumPriority`                | `5`                               | Lowest PMD rule priority reported                          |
+| `tft.pmd.skipEmptyReport`                | `false`                           | Skip the PMD report when there are no violations           |
+| `tft.owasp.skip`                         | `false`                           | Skip OWASP Dependency-Check                                |
+| `tft.revapi.skip`                        | `true`                            | Skip the RevAPI compatibility check                        |
+| `tft.revapi.failBuildOnProblemsFound`    | `false`                           | Fail the build when RevAPI finds problems                  |
+| `tft.revapi.aggregate.includedArtifacts` | `.*`                              | Archives included in the RevAPI aggregate report (regex)   |
+| `tft.revapi.aggregate.excludedArtifacts` | empty                             | Archives excluded from the RevAPI aggregate report (regex) |
 
 **Metrics profile goals** (`it.tidalwave-metrics-v2`; set a property empty to drop that step)
 

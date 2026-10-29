@@ -120,6 +120,9 @@
         <tft.findbugs.skip>false</tft.findbugs.skip>
 
         <tft.revapi.skip>true</tft.revapi.skip>
+        <tft.revapi.aggregate.includedArtifact/>
+        <tft.revapi.aggregate.excludedArtifact/>
+        <tft.revapi.failBuildOnProblemsFound>false</tft.revapi.failBuildOnProblemsFound>
 
         <tft.spotbugs.skip>${tft.findbugs.skip}</tft.spotbugs.skip>
         <tft.spotbugs.effort>Max</tft.spotbugs.effort>
@@ -904,8 +907,23 @@
                         <version>${tft.revapi-java.version}</version>
                     </dependency>
                 </dependencies>
+                <!-- Configuration must be replicated in reporting section -->
                 <configuration>
                     <skip>${tft.revapi.skip}</skip>
+                    <failBuildOnProblemsFound>${tft.revapi.failBuildOnProblemsFound}</failBuildOnProblemsFound>
+                    <analysisConfiguration>
+                        <revapi.differences>
+                            <ignore>true</ignore>
+                            <differences>
+                                <item>
+                                    <regex>true</regex>
+                                    <code>java\.annotation\..*</code>
+                                    <annotationType>lombok\.Generated|edu\.umd\.cs\.findbugs\.annotations\.SuppressFBWarnings</annotationType>
+                                    <justification>Annotations added by Lombok are not part of the API.</justification>
+                                </item>
+                            </differences>
+                        </revapi.differences>
+                    </analysisConfiguration>
                 </configuration>
                 <executions>
                     <execution>
@@ -1332,11 +1350,25 @@
                         <version>${tft.revapi-maven-plugin.version}</version>
                         <configuration>
                             <skip>${tft.revapi.skip}</skip>
+                            <failBuildOnProblemsFound>${tft.revapi.failBuildOnProblemsFound}</failBuildOnProblemsFound>
+                            <analysisConfiguration>
+                                <revapi.differences>
+                                    <ignore>true</ignore>
+                                    <differences>
+                                        <item>
+                                            <regex>true</regex>
+                                            <code>java\.annotation\..*</code>
+                                            <annotationType>lombok\.Generated|edu\.umd\.cs\.findbugs\.annotations\.SuppressFBWarnings</annotationType>
+                                            <justification>Annotations added by Lombok are not part of the API.</justification>
+                                        </item>
+                                    </differences>
+                                </revapi.differences>
+                            </analysisConfiguration>
                         </configuration>
                         <reportSets>
                             <reportSet>
                                 <reports>
-                                    <report>report-aggregate</report>
+                                    <report>report-fork</report>
                                 </reports>
                             </reportSet>
                         </reportSets>
@@ -1504,6 +1536,37 @@
                                 </configuration>
                                 <reports>
                                     <report>spotbugs-aggregate</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.revapi</groupId>
+                        <artifactId>revapi-maven-plugin</artifactId>
+                        <version>${tft.revapi-maven-plugin.version}</version>
+                        <configuration>
+                            <analysisConfiguration>
+                                <revapi.filter>
+                                    <archives>
+                                        <include>
+                                            <item>${tft.revapi.aggregate.includedArtifacts}</item>
+                                        </include>
+                                        <exclude>
+                                            <item>${tft.revapi.aggregate.excludedArtifacts}</item>
+                                        </exclude>
+                                    </archives>
+                                </revapi.filter>
+                            </analysisConfiguration>
+                        </configuration>
+                        <reportSets>
+                            <reportSet>
+                                <id>aggregate</id>
+                                <configuration>
+                                    <skip>${tft.revapi.skip}</skip>
+                                </configuration>
+                                <reports>
+                                    <report>report-aggregate</report>
                                 </reports>
                             </reportSet>
                         </reportSets>
