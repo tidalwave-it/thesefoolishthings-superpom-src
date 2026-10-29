@@ -1409,23 +1409,6 @@
                                     <report>test-javadoc-no-fork</report>
                                 </reports>
                             </reportSet>
-                            <reportSet><!-- aggregate reportSet, to define in poms having modules -->
-                                <id>aggregate</id>
-                                <inherited>false</inherited><!-- don't run aggregate in child modules -->
-                                <reports>
-                                    <report>aggregate-no-fork</report>
-                                </reports>
-                            </reportSet>
-                            <reportSet>
-                                <id>test-aggregate</id>
-                                <inherited>false</inherited>
-                                <configuration>
-                                    <doclint>none</doclint>
-                                </configuration>
-                                <reports>
-                                    <report>test-aggregate-no-fork</report>
-                                </reports>
-                            </reportSet>
                         </reportSets>
                     </plugin>
                 </plugins>
@@ -1507,6 +1490,28 @@
             </build>
             <reporting>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${tft.maven-javadoc-plugin.version}</version>
+                        <reportSets>
+                            <reportSet>
+                                <id>aggregate</id>
+                                <reports>
+                                    <report>aggregate-no-fork</report>
+                                </reports>
+                            </reportSet>
+                            <reportSet>
+                                <id>test-aggregate</id>
+                                <configuration>
+                                    <doclint>none</doclint>
+                                </configuration>
+                                <reports>
+                                    <report>test-aggregate-no-fork</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>
                     <!-- This would produce an empty aggregate report, that will be overwritten by the Ant task, but it does create the menu item. -->
                     <plugin>
                         <groupId>org.jacoco</groupId>
