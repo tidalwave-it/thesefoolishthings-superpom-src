@@ -5,7 +5,7 @@
     <groupId>it.tidalwave.thesefoolishthings</groupId>
     <artifactId>superpom</artifactId>
     <packaging>pom</packaging>
-    <version>5.20-SNAPSHOT</version>
+    <version>5.20</version>
     <name>TheseFoolishThings - SuperPOM</name>
     <url>http://tidalwave.it</url>
     <inceptionYear>2010</inceptionYear>
@@ -120,8 +120,8 @@
         <tft.findbugs.skip>false</tft.findbugs.skip>
 
         <tft.revapi.skip>true</tft.revapi.skip>
-        <tft.revapi.aggregate.includedArtifact/>
-        <tft.revapi.aggregate.excludedArtifact/>
+        <tft.revapi.aggregate.includedArtifact />
+        <tft.revapi.aggregate.excludedArtifact />
         <tft.revapi.failBuildOnProblemsFound>false</tft.revapi.failBuildOnProblemsFound>
 
         <tft.spotbugs.skip>${tft.findbugs.skip}</tft.spotbugs.skip>
@@ -352,7 +352,7 @@
         <connection>scm:${tft.scm}:${scm.repo.readonly.url}</connection>
         <developerConnection>scm:${tft.scm}:${scm.repo.effective.url}</developerConnection>
         <url>${scm.repo.browse.url}</url>
-      <tag>HEAD</tag>
+      <tag>5.20</tag>
   </scm>
 
     <prerequisites>
@@ -1462,24 +1462,24 @@
                                 </goals>
                                 <configuration>
                                     <target xmlns:jacoco="antlib:org.jacoco.ant">
-                                        <property name="tft.jacoco.modulesDirectory" location="${project.basedir}/${tft.modules.directory}"/>
-                                        <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" classpathref="maven.plugin.classpath"/>
-                                        <dirset id="tft.jacoco.srcdirs" dir="${tft.jacoco.modulesDirectory}" includes="*/src/main/java,examples/*/src/main/java"/>
-                                        <pathconvert property="tft.jacoco.srcdirs" refid="tft.jacoco.srcdirs" pathsep=","/>
+                                        <property name="tft.jacoco.modulesDirectory" location="${project.basedir}/${tft.modules.directory}" />
+                                        <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" classpathref="maven.plugin.classpath" />
+                                        <dirset id="tft.jacoco.srcdirs" dir="${tft.jacoco.modulesDirectory}" includes="*/src/main/java,examples/*/src/main/java" />
+                                        <pathconvert property="tft.jacoco.srcdirs" refid="tft.jacoco.srcdirs" pathsep="," />
                                         <jacoco:report>
                                             <executiondata>
-                                                <fileset dir="${tft.jacoco.modulesDirectory}" includes="**/target/jacoco.exec"/>
+                                                <fileset dir="${tft.jacoco.modulesDirectory}" includes="**/target/jacoco.exec" />
                                             </executiondata>
                                             <structure name="${project.name}">
                                                 <classfiles>
-                                                    <fileset dir="${tft.jacoco.modulesDirectory}" includes="*/target/classes/**/*.class,examples/*/target/classes/**/*.class"/>
+                                                    <fileset dir="${tft.jacoco.modulesDirectory}" includes="*/target/classes/**/*.class,examples/*/target/classes/**/*.class" />
                                                 </classfiles>
                                                 <sourcefiles encoding="${project.build.sourceEncoding}">
-                                                    <multirootfileset basedirs="${tft.jacoco.srcdirs}" includes="**/*.java"/>
+                                                    <multirootfileset basedirs="${tft.jacoco.srcdirs}" includes="**/*.java" />
                                                 </sourcefiles>
                                             </structure>
-                                            <html destdir="${project.reporting.outputDirectory}/jacoco-aggregate"/>
-                                            <xml destfile="${project.reporting.outputDirectory}/jacoco-aggregate/jacoco.xml"/>
+                                            <html destdir="${project.reporting.outputDirectory}/jacoco-aggregate" />
+                                            <xml destfile="${project.reporting.outputDirectory}/jacoco-aggregate/jacoco.xml" />
                                         </jacoco:report>
                                     </target>
                                 </configuration>
