@@ -913,6 +913,14 @@
                     <failBuildOnProblemsFound>${tft.revapi.failBuildOnProblemsFound}</failBuildOnProblemsFound>
                     <analysisConfiguration>
                         <revapi.filter>
+                            <elements>
+                                <exclude>
+                                    <item>
+                                        <matcher>java-package</matcher>
+                                        <match>/(.*\.)?impl(\..*)?/</match>
+                                    </item>
+                                </exclude>
+                            </elements>
                             <archives>
                                 <include>
                                     <item>${tft.revapi.aggregate.includedArtifacts}</item>
@@ -1361,6 +1369,14 @@
                             <failBuildOnProblemsFound>${tft.revapi.failBuildOnProblemsFound}</failBuildOnProblemsFound>
                             <analysisConfiguration>
                                 <revapi.filter>
+                                    <elements>
+                                        <exclude>
+                                            <item>
+                                                <matcher>java-package</matcher>
+                                                <match>/(.*\.)?impl(\..*)?/</match>
+                                            </item>
+                                        </exclude>
+                                    </elements>
                                     <archives>
                                         <include>
                                             <item>${tft.revapi.aggregate.includedArtifacts}</item>
@@ -1571,6 +1587,14 @@
                         <configuration>
                             <analysisConfiguration>
                                 <revapi.filter>
+                                    <elements>
+                                        <exclude>
+                                            <item>
+                                                <matcher>java-package</matcher>
+                                                <match>/(.*\.)?impl(\..*)?/</match>
+                                            </item>
+                                        </exclude>
+                                    </elements>
                                     <archives>
                                         <include>
                                             <item>${tft.revapi.aggregate.includedArtifacts}</item>
