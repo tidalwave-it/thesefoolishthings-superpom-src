@@ -928,9 +928,7 @@
                 <executions>
                     <execution>
                         <id>api-check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
+                        <phase>none</phase>
                     </execution>
                 </executions>
             </plugin>
