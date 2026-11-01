@@ -120,8 +120,8 @@
         <tft.findbugs.skip>false</tft.findbugs.skip>
 
         <tft.revapi.skip>true</tft.revapi.skip>
-        <tft.revapi.aggregate.includedArtifact />
-        <tft.revapi.aggregate.excludedArtifact />
+        <tft.revapi.aggregate.includedArtifacts>.*</tft.revapi.aggregate.includedArtifacts>
+        <tft.revapi.aggregate.excludedArtifacts />
         <tft.revapi.failBuildOnProblemsFound>false</tft.revapi.failBuildOnProblemsFound>
 
         <tft.spotbugs.skip>${tft.findbugs.skip}</tft.spotbugs.skip>
