@@ -912,6 +912,16 @@
                     <skip>${tft.revapi.skip}</skip>
                     <failBuildOnProblemsFound>${tft.revapi.failBuildOnProblemsFound}</failBuildOnProblemsFound>
                     <analysisConfiguration>
+                        <revapi.filter>
+                            <archives>
+                                <include>
+                                    <item>${tft.revapi.aggregate.includedArtifacts}</item>
+                                </include>
+                                <exclude>
+                                    <item>${tft.revapi.aggregate.excludedArtifacts}</item>
+                                </exclude>
+                            </archives>
+                        </revapi.filter>
                         <revapi.differences>
                             <ignore>true</ignore>
                             <differences>
@@ -1350,6 +1360,16 @@
                             <skip>${tft.revapi.skip}</skip>
                             <failBuildOnProblemsFound>${tft.revapi.failBuildOnProblemsFound}</failBuildOnProblemsFound>
                             <analysisConfiguration>
+                                <revapi.filter>
+                                    <archives>
+                                        <include>
+                                            <item>${tft.revapi.aggregate.includedArtifacts}</item>
+                                        </include>
+                                        <exclude>
+                                            <item>${tft.revapi.aggregate.excludedArtifacts}</item>
+                                        </exclude>
+                                    </archives>
+                                </revapi.filter>
                                 <revapi.differences>
                                     <ignore>true</ignore>
                                     <differences>
@@ -1560,6 +1580,17 @@
                                         </exclude>
                                     </archives>
                                 </revapi.filter>
+                                <revapi.differences>
+                                    <ignore>true</ignore>
+                                    <differences>
+                                        <item>
+                                            <regex>true</regex>
+                                            <code>java\.annotation\..*</code>
+                                            <annotationType>lombok\.Generated|edu\.umd\.cs\.findbugs\.annotations\.SuppressFBWarnings</annotationType>
+                                            <justification>Annotations added by Lombok are not part of the API.</justification>
+                                        </item>
+                                    </differences>
+                                </revapi.differences>
                             </analysisConfiguration>
                         </configuration>
                         <reportSets>
